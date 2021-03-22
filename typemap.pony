@@ -28,12 +28,25 @@ class ref CastTYPE
       var ttypeptr: XmlnodePTR = nodearray(0)?
       recordtype = String.copy_cstring(ttypeptr.apply()?.pname)
 
-      Debug.out(recordtype)
       match recordtype
       | let x: String ref if recordtype == "Struct" =>
                 id = LibXML2.xmlGetProp(ttypeptr, "id")
                 dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-                ponytype = "Somestruct"
+                ponytype = LibXML2.xmlGetProp(ttypeptr, "name")
+                if (ponytype == "") then ponytype = "OpaqueStruct" end
+      | let x: String ref if recordtype == "Enumeration" =>
+                id = LibXML2.xmlGetProp(ttypeptr, "id")
+                dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+                ponytype = LibXML2.xmlGetProp(ttypeptr, "name")
+                if (ponytype == "") then ponytype = "OpaqueEnumeration" end
+      | let x: String ref if recordtype == "FunctionType" =>
+                id = LibXML2.xmlGetProp(ttypeptr, "id")
+                dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+                ponytype = "CallbackFn"
+      | let x: String ref if recordtype == "Union" =>
+                id = LibXML2.xmlGetProp(ttypeptr, "id")
+                dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+                ponytype = "Union"
       | let x: String ref if recordtype == "FundamentalType" =>
                 id = LibXML2.xmlGetProp(ttypeptr, "id")
                 dstype = LibXML2.xmlGetProp(ttypeptr, "name")
@@ -70,7 +83,32 @@ class ref CastTYPE
     end
 
 
-//class TypeMap
-//  var tm: Map[String, CastTYPE] = Map[String, CastTYPE].create()
+primitive TypeLogic
+  fun resolveChain(chain: Array[CastTYPE]): String =>
+    var acc: String = ""
+    for foo in chain.values() do
+      if (foo.recordtype == "Struct") then acc = foo.ponytype end
+      if (foo.recordtype == "FundamentalType") then acc = foo.ponytype end
+      if (foo.recordtype == "PointerType")     then acc = "NullablePointer[" + acc + "]" end
+      if (foo.recordtype == "Union")     then acc = "UnionType" end
+      if (foo.recordtype == "Enumeration")     then acc = foo.ponytype end
+      if (foo.recordtype == "FunctionType")     then acc = foo.ponytype end
 
-//  new create(ctxptr) =>
+      if (acc == "NullablePointer[U8]") then acc = "String" end
+      if (acc == "NullablePointer[I8]") then acc = "String" end
+      if (acc == "NullablePointer[String]") then acc = "Array[String]" end
+
+    end
+    acc
+
+
+  fun recurseType(ctxptr: XmlxpathcontextPTR, ttype: String, acc: Array[CastTYPE]): Array[CastTYPE] =>
+    var ct: CastTYPE = CastTYPE(ctxptr, ttype)
+    if (ct.ponytype == "") then
+      acc.unshift(ct)
+      recurseType(ctxptr, ct.dstype, acc)
+    else
+      acc.unshift(ct)
+    end
+    acc
+

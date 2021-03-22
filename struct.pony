@@ -34,13 +34,11 @@ class StructMap
       let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
       var nodecount: I32 val = xmlnodeset.pnodeNr
       var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-      Debug.err("pnodeNr:  " + nodecount.string())
 
       for element in nodearray.values() do
         let m: Struct = Struct(element)
         fm.insert(m.id, m)
       end
-      Debug.err("StructMap size: " + fm.size().string())
 
     end
 
@@ -79,13 +77,11 @@ class MemberMap
       let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
       var nodecount: I32 val = xmlnodeset.pnodeNr
       var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-      Debug.err("pnodeNr:  " + nodecount.string())
 
       for element in nodearray.values() do
         let m: Member = Member(element)
         fm.insert(m.id, m)
       end
-      Debug.err("MemberMap size: " + fm.size().string())
 
     end
 

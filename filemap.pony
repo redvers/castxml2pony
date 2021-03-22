@@ -15,7 +15,6 @@ class FileMap
       let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
       var nodecount: I32 val = xmlnodeset.pnodeNr
       var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-      Debug.err("pnodeNr:  " + nodecount.string())
 
       for element in nodearray.values() do
         let xmlnode: Xmlnode = element.apply()?
@@ -24,7 +23,14 @@ class FileMap
         fm.insert(id, name)
       end
     end
-    Debug.err("FileMap size: " + fm.size().string())
 
-  fun lookupByID(id: String): None ? =>
+  fun lookupByID(id: String): String ? =>
     fm.apply("_323")?
+
+  fun lookupFIDsBySubstring(substring: String): Array[String] =>
+    var results: Array[String] = Array[String].create()
+
+    for (fid, fname) in fm.pairs() do
+      if (fname.contains(substring)) then results.push(fid) end
+    end
+    results
