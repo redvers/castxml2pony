@@ -20,7 +20,7 @@ actor Main
 //    let fids: Array[String] = filemap.lookupFIDsBySubstring("libxml2")
     let examplefid: String = "f15"
     for stru in structmap.iterByFID(examplefid) do
-      Debug.out(stru.ponyDefinition(membermap, ctxptr))
+      stru.ponyDefinition(membermap, ctxptr)
     end
 
 

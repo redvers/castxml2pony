@@ -22,22 +22,31 @@ class Struct
     align = LibXML2.xmlGetProp(element, "align")
 
   fun ponyDefinition(membermap: MemberMap, ctxptr: XmlxpathcontextPTR): String =>
-    let stitle: String = "struct " + name + "\n"
+    let stitle: String = "struct " + ponyStruct(name)
 
+    Debug.out(stitle)
     for member in members.values() do
       try
         var membername: String = membermap.fm.apply(member)?.name
         let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, member, Array[CastTYPE].create(USize(8)))
         let ponytype: String = TypeLogic.resolveChain(chain)
-        Debug.out("  var " + membername + ": " + ponytype + " = " + ponytype + " // " + member)
+        Debug.out("  var " + ponyMemberName(membername) + ": " + ponytype + " = " + ponytype + " // " + member)
       end
     end
-
-
-
+    Debug.out("")
     stitle
 
+  fun ponyStruct(text: String val): String =>
+    var t: String iso = text.clone()
+    t.replace("_", "")
+    (var f: String iso, var r: String iso) = t.clone().chop(USize(1))
+    f.upper_in_place()
+    f.clone() + r.clone()
 
+  fun ponyMemberName(text: String val): String =>
+    var t: String iso = text.clone()
+    t.replace("_", "")
+    "p" + t.clone()
 
 
 class StructMap
