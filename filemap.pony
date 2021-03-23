@@ -25,7 +25,7 @@ class FileMap
     end
 
   fun lookupByID(id: String): String ? =>
-    fm.apply("_323")?
+    fm.apply(id)?
 
   fun lookupFIDsBySubstring(substring: String): Array[String] =>
     var results: Array[String] = Array[String].create()

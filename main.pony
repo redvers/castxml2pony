@@ -17,7 +17,11 @@ actor Main
     let membermap: MemberMap = MemberMap(ctxptr)
     let structmap: StructMap = StructMap(ctxptr)
 
-    let fids: Array[String] = filemap.lookupFIDsBySubstring("libxml2")
+//    let fids: Array[String] = filemap.lookupFIDsBySubstring("libxml2")
+    let examplefid: String = "f15"
+    for stru in structmap.iterByFID(examplefid) do
+      Debug.out(stru.ponyDefinition(membermap, ctxptr))
+    end
 
 
 
