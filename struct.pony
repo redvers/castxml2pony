@@ -22,7 +22,7 @@ class Struct
     align = LibXML2.xmlGetProp(element, "align")
 
   fun ponyDefinition(membermap: MemberMap, ctxptr: XmlxpathcontextPTR): String =>
-    let stitle: String = "struct " + ponyStruct(name)
+    let stitle: String = "struct " + StructLogic.ponyStruct(name)
 
     Debug.out(stitle)
     for member in members.values() do
@@ -30,12 +30,14 @@ class Struct
         var membername: String = membermap.fm.apply(member)?.name
         let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, member, Array[CastTYPE].create(USize(8)))
         let ponytype: String = TypeLogic.resolveChain(chain)
-        Debug.out("  var " + ponyMemberName(membername) + ": " + ponytype + " = " + ponytype + " // " + member)
+        Debug.out("  var " + StructLogic.ponyMemberName(membername) + ": " + ponytype + " = " + ponytype + " // " + member)
       end
     end
     Debug.out("")
     stitle
 
+
+primitive StructLogic
   fun ponyStruct(text: String val): String =>
     var t: String iso = text.clone()
     t.replace("_", "")

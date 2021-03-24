@@ -32,12 +32,12 @@ class ref CastTYPE
       | let x: String ref if recordtype == "Struct" =>
                 id = LibXML2.xmlGetProp(ttypeptr, "id")
                 dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-                ponytype = LibXML2.xmlGetProp(ttypeptr, "name")
+                ponytype = StructLogic.ponyStruct(LibXML2.xmlGetProp(ttypeptr, "name"))
                 if (ponytype == "") then ponytype = "OpaqueStruct" end
       | let x: String ref if recordtype == "Enumeration" =>
                 id = LibXML2.xmlGetProp(ttypeptr, "id")
                 dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-                ponytype = LibXML2.xmlGetProp(ttypeptr, "name")
+                ponytype = StructLogic.ponyStruct(LibXML2.xmlGetProp(ttypeptr, "name"))
                 if (ponytype == "") then ponytype = "OpaqueEnumeration" end
       | let x: String ref if recordtype == "FunctionType" =>
                 id = LibXML2.xmlGetProp(ttypeptr, "id")
