@@ -11,9 +11,11 @@ class ref CastTYPE
   var isnullptr: Bool = false
   var isarray: Bool = false
   var ponytype: String val = ""
+  var config: Config
 
-  new create(ctxptr: XmlxpathcontextPTR, id': String) =>
+  new create(ctxptr: XmlxpathcontextPTR, config': Config, id': String) =>
     let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//*[@id='" + id' + "']", ctxptr)
+    config = config'
     try
       let xpathexp: Xmlxpathobject = xpathexptr.apply()?
       let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
@@ -102,11 +104,11 @@ primitive TypeLogic
     acc
 
 
-  fun recurseType(ctxptr: XmlxpathcontextPTR, ttype: String, acc: Array[CastTYPE]): Array[CastTYPE] =>
-    var ct: CastTYPE = CastTYPE(ctxptr, ttype)
+  fun recurseType(ctxptr: XmlxpathcontextPTR, config: Config, ttype: String, acc: Array[CastTYPE]): Array[CastTYPE] =>
+    var ct: CastTYPE = CastTYPE(ctxptr, config, ttype)
     if (ct.ponytype == "") then
       acc.unshift(ct)
-      recurseType(ctxptr, ct.dstype, acc)
+      recurseType(ctxptr, config, ct.dstype, acc)
     else
       acc.unshift(ct)
     end

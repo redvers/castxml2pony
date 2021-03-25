@@ -1,0 +1,48 @@
+{
+  "fundamentalTypeDefaults": {
+    "unsigned int": "U32(0)",
+    "unsigned __int128": "U128(0)",
+    "void": "None",
+    "_Bool": "Bool",
+    "signed char": "I8(0)",
+    "char": "I8(0)",
+    "long unsigned int": "U64(0)",
+    "__int128": "I128(0)",
+    "long long int": "I64(0)",
+    "long long unsigned int": "U64(0)",
+    "long double": "F128(0)",
+    "int": "I32(0)",
+    "short int": "I16(0)",
+    "unsigned char": "U8(0)",
+    "double": "F64(0)",
+    "float": "F32(0)",
+    "long int": "I64(0)",
+    "short unsigned int": "U16(0)"
+  },
+  "typeAliases": {
+    "NullablePointer[U8]": "String",
+    "NullablePointer[String]": "Array[String]",
+    "NullablePointer[I8]": "String"
+  },
+  "fundamentalTypes": {
+    "unsigned int": "U32",
+    "unsigned __int128": "U128",
+    "void": "None",
+    "_Bool": "Bool",
+    "signed char": "I8",
+    "char": "I8",
+    "long unsigned int": "U64",
+    "__int128": "I128",
+    "long long int": "I64",
+    "long long unsigned int": "U64",
+    "long double": "F128",
+    "int": "I32",
+    "short int": "I16",
+    "unsigned char": "U8",
+    "double": "F64",
+    "float": "F32",
+    "long int": "I64",
+    "short unsigned int": "U16"
+  }
+}
+

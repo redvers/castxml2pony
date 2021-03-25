@@ -21,14 +21,14 @@ class Struct
     size = LibXML2.xmlGetProp(element, "size")
     align = LibXML2.xmlGetProp(element, "align")
 
-  fun ponyDefinition(membermap: MemberMap, ctxptr: XmlxpathcontextPTR): String =>
+  fun ponyDefinition(membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR): String =>
     let stitle: String = "struct " + StructLogic.ponyStruct(name)
 
     Debug.out(stitle)
     for member in members.values() do
       try
         var membername: String = membermap.fm.apply(member)?.name
-        let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, member, Array[CastTYPE].create(USize(8)))
+        let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, member, Array[CastTYPE].create(USize(8)))
         let ponytype: String = TypeLogic.resolveChain(chain)
         Debug.out("  var " + StructLogic.ponyMemberName(membername) + ": " + ponytype + " = " + ponytype + " // " + member)
       end
