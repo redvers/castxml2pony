@@ -61,32 +61,14 @@ class ref CastTYPE
     end
 
   fun fundamentalType(str: String val): String =>
-    match str
-    | let x: String val if str == "int" => "I32"
-    | let x: String val if str == "void" => "None"
-    | let x: String val if str == "_Bool" => "Bool"
-    | let x: String val if str == "char" => "I8"
-    | let x: String val if str == "signed char" => "I8"
-    | let x: String val if str == "unsigned char" => "U8"
-    | let x: String val if str == "short int" => "I16"
-    | let x: String val if str == "short unsigned int" => "U16"
-    | let x: String val if str == "unsigned int" => "U32"
-    | let x: String val if str == "float" => "F32"
-    | let x: String val if str == "long int" => "I64"
-    | let x: String val if str == "long unsigned int" => "U64"
-    | let x: String val if str == "double" => "F64"
-    | let x: String val if str == "long long unsigned int" => "U64"
-    | let x: String val if str == "long long int" => "I64"
-    | let x: String val if str == "__int128" => "I128"
-    | let x: String val if str == "unsigned __int128" => "U128"
-    | let x: String val if str == "long double" => "F128"
+    try
+      config.getFundType(str)?
     else
-      "None // default fundamentalType"
+      "None // FIXME - Unknown fundamental type: " + str
     end
 
-
 primitive TypeLogic
-  fun resolveChain(chain: Array[CastTYPE]): String =>
+  fun resolveChain(chain: Array[CastTYPE], config: Config): String =>
     var acc: String = ""
     for foo in chain.values() do
       if (foo.recordtype == "Struct") then acc = foo.ponytype end
@@ -96,9 +78,9 @@ primitive TypeLogic
       if (foo.recordtype == "Enumeration")     then acc = foo.ponytype end
       if (foo.recordtype == "FunctionType")     then acc = foo.ponytype end
 
-      if (acc == "NullablePointer[U8]") then acc = "String" end
-      if (acc == "NullablePointer[I8]") then acc = "String" end
-      if (acc == "NullablePointer[String]") then acc = "Array[String]" end
+      try
+        acc = config.getTypeAlias(acc)?
+      end
 
     end
     acc

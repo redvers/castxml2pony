@@ -29,7 +29,7 @@ class Struct
       try
         var membername: String = membermap.fm.apply(member)?.name
         let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, member, Array[CastTYPE].create(USize(8)))
-        let ponytype: String = TypeLogic.resolveChain(chain)
+        let ponytype: String = TypeLogic.resolveChain(chain, config)
         Debug.out("  var " + StructLogic.ponyMemberName(membername) + ": " + ponytype + " = " + ponytype + " // " + member)
       end
     end
