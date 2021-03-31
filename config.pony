@@ -29,8 +29,12 @@ class val Config
   fun val getFundType(key: String): String val ? =>
     fundamentalTypes.data(key)? as String
 
-  fun val getFundTypeDefault(key: String): String val ? =>
-    fundamentalTypeDefaults.data(key)? as String
+  fun val getFundTypeDefault(key: String): String val =>
+    try
+      fundamentalTypeDefaults.data(key)? as String
+    else
+      key
+    end
 
   fun val getTypeAlias(key: String): String val ? =>
     typeAliases.data(key)? as String
