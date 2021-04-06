@@ -21,6 +21,7 @@ actor Main
   new create(env: Env) =>
     checkForGlobalJSON(env)
 
+    var structFileOutputs: Map[String, Array[String]] = Map[String, Array[String]].create()
     let filename: String val = "libxml2.xml"
     Debug.err("Parsing: " + filename)
     let docptr: XmldocPTR = LibXML2.xmlParseFile("libxml2.xml")
@@ -34,12 +35,29 @@ actor Main
       let filemap: FileMap = FileMap(ctxptr)
       let membermap: MemberMap = MemberMap(ctxptr)
 
-      processStructs(filemap, membermap, config, ctxptr)
+      structFileOutputs = processStructs(filemap, membermap, config, ctxptr)
+      writeStructFiles(structFileOutputs, env.root as AmbientAuth)?
+    end
 
 
+
+
+
+  fun writeStructFiles(structFileOutputs: Map[String, Array[String]], auth: AmbientAuth): None ? =>
+    for (filename, blobarray) in structFileOutputs.pairs() do
+      let fp: FilePath = FilePath.create(auth, filename)?
+      fp.remove()
+
+      let file: File = File(fp)
+
+      for blob in blobarray.values() do
+        file.print(blob)
+        file.print("\n")
+      end
 
 
     end
+
 
   fun processStructs(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR): Map[String, Array[String]] =>
     let structme: Array[JsonObject val] = Array[JsonObject val].create(USize(8))

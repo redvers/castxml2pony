@@ -30,14 +30,12 @@ class Struct
         var membername: String = membermap.fm.apply(member)?.name
         let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, member, Array[CastTYPE].create(USize(8)))
         let ponytype: String = TypeLogic.resolveChain(chain, config)
-        ponytext = ponytext + ("  var ".clone() + StructLogic.ponyMemberName(membername) + ": " + ponytype + " = " + config.getFundTypeDefault(ponytype) + " // " + member + "\n")
+        ponytext = ponytext + ("  var ".clone() + StructLogic.ponyMemberName(membername) + ": " + ponytype + " = " + config.getFundTypeDefault(ponytype) + " // " + member + " " + ponytype + "\n")
       end
-
-      Debug.out("Successfully processed: " + stitle)
 
       consume ponytext
     else
-      "/* Failed to process " + stitle + " */"
+      "/* Failed to process " + stitle + " assigning it as a primitive */\n" + "primitive " + StructLogic.ponyStruct(name) + "\n"
     end
 
 
