@@ -29,7 +29,30 @@ actor Main
     // Let's preprocess some XML for fun and profit
     checkForInstanceJSON(env, ctxptr)
 
+    try
+      let config: Config val = Config(env.root as AmbientAuth)
+      let filemap: FileMap = FileMap(ctxptr)
+      let membermap: MemberMap = MemberMap(ctxptr)
 
+
+    processStructs(filemap, membermap, config, ctxptr)
+    // Let's preprocess some XML for fun and profit
+    end
+
+  fun processStructs(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR) =>
+    None
+
+
+
+
+
+//    processStruct(filemap, membermap, config, ctxptr, "f15")
+  fun processStruct(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR, fid: String) =>
+    let structmap: StructMap = StructMap(ctxptr)
+
+    for stru in structmap.iterByFID(fid) do
+      stru.ponyDefinition(membermap, config, ctxptr)
+    end
 
 
   fun checkForGlobalJSON(env: Env) =>
@@ -110,6 +133,8 @@ actor Main
     obj.data("fundamentalTypes") = fundamentalTypesJSON()
     obj.data("fundamentalTypeDefaults") = fundamentalTypeDefaultsJSON()
     obj.data("typeAliases") = typeAliasJSON()
+    obj.data("typeConversionInJSON") = typeConversionInJSON()
+    obj.data("typeConversionOutJSON") = typeConversionOutJSON()
     doc.data = obj
 
     let fp: FilePath = FilePath(auth, "global.json")?
@@ -199,3 +224,17 @@ actor Main
     fundamentalType.data("F128") = "F128"
     fundamentalType
 
+  fun typeConversionInJSON(): JsonObject =>
+    let typeConversionIn: JsonObject = JsonObject(USize(32))
+    typeConversionIn.data("String") = ".cstring()"
+
+    typeConversionIn
+
+  fun typeConversionOutJSON(): JsonObject =>
+    let typeConversionOut: JsonObject = JsonObject(USize(32))
+    let x: JsonArray = JsonArray.from_array([
+      "var cstring_pony: Pointer[U8 val] ref = "; "Pointer[U8 val] ref"
+      "    var string_pony: String val = String.from_cstring(cstring_pony).clone()
+           consume string_pony
+      "])
+    typeConversionOut

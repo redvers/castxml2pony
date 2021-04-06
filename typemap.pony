@@ -64,7 +64,7 @@ class ref CastTYPE
     try
       config.getFundType(str)?
     else
-      "None // FIXME - Unknown fundamental type: " + str
+      "None // FIXME - Unknown fundamental type: \"" + str + "\""
     end
 
 primitive TypeLogic
