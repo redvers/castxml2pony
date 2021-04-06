@@ -11,7 +11,7 @@ class val Config
   var fundamentalTypes: JsonObject = JsonObject
   var fundamentalTypeDefaults: JsonObject = JsonObject
   var typeAliases: JsonObject = JsonObject
-  var instances: Array[JsonType] = Array[JsonType]
+  var instances: JsonArray = JsonArray
 
   new val create(auth: AmbientAuth) =>
     _auth = auth
@@ -34,7 +34,7 @@ class val Config
       let doci: JsonDoc = JsonDoc
       doci.parse(contenti)?
 
-      instances = (doci.data as JsonArray).data
+      instances = (doci.data as JsonArray)
     end
 
   fun val getFundType(key: String): String val ? =>

@@ -34,19 +34,32 @@ actor Main
       let filemap: FileMap = FileMap(ctxptr)
       let membermap: MemberMap = MemberMap(ctxptr)
 
+      processStructs(filemap, membermap, config, ctxptr)
 
-    processStructs(filemap, membermap, config, ctxptr)
-    // Let's preprocess some XML for fun and profit
+
+
+
     end
 
   fun processStructs(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR) =>
-    None
+    let structme: Array[JsonObject val] = Array[JsonObject val].create(USize(8))
+
+    try
+      for jstmap in config.instances.data.values() do
+        if ((jstmap as JsonObject val).data("structs")? as Bool) then
+          structme.push(jstmap as JsonObject val)
+        end
+      end
+
+      for jstmap2 in structme.values() do
+        processStruct(filemap, membermap, config, ctxptr, (jstmap2.data("id")? as String val))
+      end
+    end
 
 
 
 
 
-//    processStruct(filemap, membermap, config, ctxptr, "f15")
   fun processStruct(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR, fid: String) =>
     let structmap: StructMap = StructMap(ctxptr)
 
