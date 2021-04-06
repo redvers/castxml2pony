@@ -1,2 +1,4 @@
 /castxml2pony
 *.swp
+/global.json
+/instance.json
