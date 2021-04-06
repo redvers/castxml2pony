@@ -41,8 +41,9 @@ actor Main
 
     end
 
-  fun processStructs(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR) =>
+  fun processStructs(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR): Map[String, Array[String]] =>
     let structme: Array[JsonObject val] = Array[JsonObject val].create(USize(8))
+    let rv: Map[String, Array[String]] = Map[String, Array[String]].create()
 
     try
       for jstmap in config.instances.data.values() do
@@ -52,20 +53,31 @@ actor Main
       end
 
       for jstmap2 in structme.values() do
-        processStruct(filemap, membermap, config, ctxptr, (jstmap2.data("id")? as String val))
+        let structtexts: Array[String] = processStruct(filemap, membermap, config, ctxptr, (jstmap2.data("id")? as String val))
+        let filename: String val = "out/struct-" + (jstmap2.data("ponyname")? as String val)
+        rv.update(filename, structtexts)
       end
     end
+    rv
 
 
 
 
 
-  fun processStruct(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR, fid: String) =>
+  fun processStruct(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR, fid: String): Array[String] =>
     let structmap: StructMap = StructMap(ctxptr)
+    let ponystructarray: Array[String] = Array[String]
 
     for stru in structmap.iterByFID(fid) do
-      stru.ponyDefinition(membermap, config, ctxptr)
+      let ponystr: String val = stru.ponyDefinition(membermap, config, ctxptr)
+      ponystructarray.push(ponystr)
     end
+
+    ponystructarray
+
+
+
+
 
 
   fun checkForGlobalJSON(env: Env) =>
@@ -95,27 +107,6 @@ actor Main
     end
 
 
-/*
-
-    let filename: String val = "libxml2.xml"
-    Debug.err("Parsing: " + filename)
-    let docptr: XmldocPTR = LibXML2.xmlParseFile("libxml2.xml")
-    let ctxptr: XmlxpathcontextPTR = LibXML2.xmlXPathNewContext(docptr)
-
-    // Let's preprocess some XML for fun and profit
-    let filemap: FileMap = FileMap(ctxptr)
-    let membermap: MemberMap = MemberMap(ctxptr)
-    let structmap: StructMap = StructMap(ctxptr)
-
-    try
-      let config: Config val = Config(env.root as AmbientAuth)
-
-      let examplefid: String = "f15"
-      for stru in structmap.iterByFID(examplefid) do
-        stru.ponyDefinition(membermap, config, ctxptr)
-      end
-    end
-*/
 
   fun hasGlobalJSON(auth: AmbientAuth): Bool ? =>
     let fp: FilePath = FilePath(auth, "global.json")?
