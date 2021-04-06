@@ -5,6 +5,7 @@ use "lib:xml2"
 
 class FileMap
   var fm: Map[String, String] = Map[String, String].create()
+  var fids: Array[String] = Array[String].create()
 
   new create(ctxptr: XmlxpathcontextPTR) =>
     let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//File", ctxptr)
@@ -21,6 +22,7 @@ class FileMap
         let id: String val = LibXML2.xmlGetProp(element, "id")
         let name: String val = LibXML2.xmlGetProp(element, "name")
         fm.insert(id, name)
+        fids.push(id)
       end
     end
 

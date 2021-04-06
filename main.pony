@@ -7,26 +7,56 @@ use "lib:xml2"
 use "json"
 use "files"
 
+/*
+ *  castxml2pony
+ *    -h help
+ *    -j re-write global.json (Contains global types configuration)
+ *    -f re-write default instance.json
+ *
+ *
+ *
+ *
+ */
 actor Main
   new create(env: Env) =>
-    checkForDefaultJSON(env)
+    checkForGlobalJSON(env)
+
+    let filename: String val = "libxml2.xml"
+    Debug.err("Parsing: " + filename)
+    let docptr: XmldocPTR = LibXML2.xmlParseFile("libxml2.xml")
+    let ctxptr: XmlxpathcontextPTR = LibXML2.xmlXPathNewContext(docptr)
+
+    // Let's preprocess some XML for fun and profit
+    checkForInstanceJSON(env, ctxptr)
 
 
 
 
-  fun checkForDefaultJSON(env: Env) =>
+  fun checkForGlobalJSON(env: Env) =>
     try
       let auth = env.root as AmbientAuth
-      // Check for defaults.json
-      if hasDefaultJSON(auth)? then
-        env.out.print("defaults.json exist")
+      // Check for global.json
+      if hasGlobalJSON(auth)? then
+        env.out.print("global.json exists")
       else
-        env.out.print("Generating defaults.json")
+        env.out.print("Generating global.json")
         writeDummyJSON(auth)?
-        env.out.print("defaults.json has been written.")
+        env.out.print("global.json has been written.")
       end
     end
 
+  fun checkForInstanceJSON(env: Env, ctxptr: XmlxpathcontextPTR) =>
+    try
+      let auth = env.root as AmbientAuth
+      // Check for instance.json
+      if hasInstanceJSON(auth)? then
+        env.out.print("instance.json exists")
+      else
+        env.out.print("Generating instance.json")
+        writeDummyInstanceJSON(auth, ctxptr)?
+        env.out.print("instance.json has been written.")
+      end
+    end
 
 
 /*
@@ -51,10 +81,13 @@ actor Main
     end
 */
 
-  fun hasDefaultJSON(auth: AmbientAuth): Bool ? =>
-    let fp: FilePath = FilePath(auth, "defaults.json")?
+  fun hasGlobalJSON(auth: AmbientAuth): Bool ? =>
+    let fp: FilePath = FilePath(auth, "global.json")?
     fp.exists()
 
+  fun hasInstanceJSON(auth: AmbientAuth): Bool ? =>
+    let fp: FilePath = FilePath(auth, "instance.json")?
+    fp.exists()
 
 
 //    writeDummyJSON(env)
@@ -79,8 +112,36 @@ actor Main
     obj.data("typeAliases") = typeAliasJSON()
     doc.data = obj
 
-    let fp: FilePath = FilePath(auth, "defaults.json")?
+    let fp: FilePath = FilePath(auth, "global.json")?
     let file: File = File.create(fp)
+    file.write(doc.string(where indent="  ", pretty_print=true))
+    file.dispose()
+
+  fun writeDummyInstanceJSON(auth: AmbientAuth, ctxptr: XmlxpathcontextPTR) ? =>
+    let doc: JsonDoc = JsonDoc
+    let array: Array[JsonType] = Array[JsonType].create()
+
+    let filemap: FileMap = FileMap(ctxptr)
+    var fm: Map[String, String] = filemap.fm
+
+    let fp: FilePath = FilePath(auth, "instance.json")?
+    let file: File = File.create(fp)
+
+//    for (fid, fname) in fm.pairs() do
+    for fid in filemap.fids.values() do
+      var fmap: JsonObject = JsonObject(USize(16))
+      fmap.data("id") = fid
+      fmap.data("cfilenamename") = fm.apply(fid)?
+      fmap.data("ponyname") = fid + ".pony"
+      fmap.data("structs") = false
+      fmap.data("use") = false
+      fmap.data("functions") = false
+      array.push(fmap)
+    end
+
+    let jarray = JsonArray.from_array(array)
+
+    doc.data = jarray
     file.write(doc.string(where indent="  ", pretty_print=true))
     file.dispose()
 
