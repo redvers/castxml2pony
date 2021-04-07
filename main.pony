@@ -197,6 +197,7 @@ actor Main
     typeAlias.data("NullablePointer[I8]") = "String"
     typeAlias.data("NullablePointer[U8]") = "String"
     typeAlias.data("NullablePointer[String]") = "Array[String]"
+    typeAlias.data("NullablePointer[None]") = "Pointer[None]"
     typeAlias
 
   fun fundamentalTypesJSON(): JsonObject =>
@@ -244,6 +245,9 @@ actor Main
     fundamentalType.data("F32") = "F32"
     fundamentalType.data("F64") = "F64"
     fundamentalType.data("F128") = "F128"
+
+    fundamentalType.data("String") = "Pointer[U8]"
+
     fundamentalType
 
   fun typeConversionInJSON(): JsonObject =>
@@ -255,8 +259,8 @@ actor Main
   fun typeConversionOutJSON(): JsonObject =>
     let typeConversionOut: JsonObject = JsonObject(USize(32))
     let x: JsonArray = JsonArray.from_array([
-      "var cstring_pony: Pointer[U8 val] = "  // What the FFI result is assigned to
-      "Pointer[U8 val]"                       // The value in the FFI return code
+      "var cstring_pony: Pointer[U8] = "  // What the FFI result is assigned to
+      "Pointer[U8]"                       // The value in the FFI return code
       """
           var string_pony: String val = String.from_cstring(cstring_pony).clone()
           consume string_pony
