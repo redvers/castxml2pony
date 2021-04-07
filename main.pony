@@ -255,8 +255,12 @@ actor Main
   fun typeConversionOutJSON(): JsonObject =>
     let typeConversionOut: JsonObject = JsonObject(USize(32))
     let x: JsonArray = JsonArray.from_array([
-      "var cstring_pony: Pointer[U8 val] ref = "; "Pointer[U8 val] ref"
-      "    var string_pony: String val = String.from_cstring(cstring_pony).clone()
-           consume string_pony
-      "])
+      "var cstring_pony: Pointer[U8 val] = "  // What the FFI result is assigned to
+      "Pointer[U8 val]"                       // The value in the FFI return code
+      """
+          var string_pony: String val = String.from_cstring(cstring_pony).clone()
+          consume string_pony
+      """ // How the FFI-returned value is converted back to a ponyval
+      ])
+    typeConversionOut.data("String") = x
     typeConversionOut

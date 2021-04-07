@@ -8,6 +8,8 @@ use "../pony-inspect/inspect"
 
 class val Config
   let _auth: AmbientAuth
+  var typeConversionInJSON: JsonObject = JsonObject
+  var typeConversionOutJSON: JsonObject = JsonObject
   var fundamentalTypes: JsonObject = JsonObject
   var fundamentalTypeDefaults: JsonObject = JsonObject
   var typeAliases: JsonObject = JsonObject
@@ -22,6 +24,9 @@ class val Config
 
       let doc: JsonDoc = JsonDoc
       doc.parse(content)?
+
+      typeConversionInJSON = (doc.data as JsonObject).data("typeConversionInJSON")? as JsonObject
+      typeConversionOutJSON = (doc.data as JsonObject).data("typeConversionOutJSON")? as JsonObject
       fundamentalTypes = (doc.data as JsonObject).data("fundamentalTypes")? as JsonObject
       fundamentalTypeDefaults = (doc.data as JsonObject).data("fundamentalTypeDefaults")? as JsonObject
       typeAliases = (doc.data as JsonObject).data("typeAliases")? as JsonObject
@@ -44,10 +49,28 @@ class val Config
     try
       fundamentalTypeDefaults.data(key)? as String
     else
+      checkForNullable(key)
+    end
+
+
+  fun checkForNullable(key: String): String val =>
+    if (key.contains("NullablePointer")) then
+      key + ".none()"
+    else
       key
     end
+
+
+
 
   fun val getTypeAlias(key: String): String val ? =>
     typeAliases.data(key)? as String
 
+
+  fun val getFFIType(key: String): String val =>
+    try
+      (typeConversionOutJSON.data(key)? as JsonArray val).data.apply(1)? as String
+    else
+      key
+    end
 
