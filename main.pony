@@ -34,11 +34,25 @@ actor Main
       let config: Config val = Config(env.root as AmbientAuth)
       let filemap: FileMap = FileMap(ctxptr)
       let membermap: MemberMap = MemberMap(ctxptr)
+      let enummap: EnumMap = EnumMap(ctxptr)
 
-      structFileOutputs = processStructs(filemap, membermap, config, ctxptr)
-      writeStructFiles(structFileOutputs, env.root as AmbientAuth)?
+//      structFileOutputs = processStructs(filemap, membermap, config, ctxptr)
+//      writeStructFiles(structFileOutputs, env.root as AmbientAuth)?
+      writeEnumOutputs(enummap.fm, env.root as AmbientAuth)?
     end
 
+
+
+
+
+  fun writeEnumOutputs(enummap: Map[String, Enum], auth: AmbientAuth)? =>
+      let fp: FilePath = FilePath.create(auth, "out/enumerations.pony")?
+      fp.remove()
+
+      let file: File = File(fp)
+    for enum in enummap.values() do
+      file.print("primitive " + EnumLogic.ponyStruct(enum.name))
+    end
 
 
 
