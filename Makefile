@@ -3,4 +3,5 @@ all:
 
 clean:
 	rm -f out/struct*pony
-	rm *json
+	rm -f out/enumerations.pony
+	rm -f *json

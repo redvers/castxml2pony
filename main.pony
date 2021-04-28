@@ -35,9 +35,10 @@ actor Main
       let filemap: FileMap = FileMap(ctxptr)
       let membermap: MemberMap = MemberMap(ctxptr)
       let enummap: EnumMap = EnumMap(ctxptr)
+      let functionmap: FunctionMap = FunctionMap(ctxptr)
 
-//      structFileOutputs = processStructs(filemap, membermap, config, ctxptr)
-//      writeStructFiles(structFileOutputs, env.root as AmbientAuth)?
+      structFileOutputs = processStructs(filemap, membermap, config, ctxptr)
+      writeStructFiles(structFileOutputs, env.root as AmbientAuth)?
       writeEnumOutputs(enummap.fm, env.root as AmbientAuth)?
     end
 
@@ -50,9 +51,10 @@ actor Main
       fp.remove()
 
       let file: File = File(fp)
-    for enum in enummap.values() do
-      file.print("primitive " + EnumLogic.ponyStruct(enum.name))
-    end
+      for enum in enummap.values() do
+        file.print("primitive " + EnumLogic.ponyStruct(enum.name))
+      end
+      file.dispose()
 
 
 
