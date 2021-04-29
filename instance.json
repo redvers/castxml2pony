@@ -99,7 +99,7 @@
     "id": "f12",
     "ponyname": "f12.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlversion.h",
-    "use": false,
+    "use": true,
     "structs": true,
     "functions": false
   },
@@ -403,7 +403,7 @@
     "id": "f50",
     "ponyname": "f50.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/SAX2.h",
-    "use": false,
+    "use": true,
     "structs": true,
     "functions": false
   },

@@ -5,14 +5,39 @@ use "../pony-libxml2/pony-libxml2"
 use "lib:xml2"
 
 class Function
+  var xmlnodeptr: XmlnodePTR
   var id: String
   var name: String
   var fid: String
+  var rvtype: String
 
   new create(element: XmlnodePTR) =>
     id = LibXML2.xmlGetProp(element, "id")
     name = LibXML2.xmlGetProp(element, "name")
     fid = LibXML2.xmlGetProp(element, "file")
+    rvtype = LibXML2.xmlGetProp(element, "returns")
+    xmlnodeptr = element
+
+    FunctionArgs.fargs(xmlnodeptr)
+
+primitive FunctionArgs
+  fun fargs(xmlnodeptr: XmlnodePTR): Array[XmlnodePTR] =>
+    var rv: Array[XmlnodePTR] = Array[XmlnodePTR].create()
+
+    let first: XmlnodePTR = LibXML2.xmlFirstElementChild(xmlnodeptr)
+
+
+
+
+//    let rv: XmlnodePTR = LibXML2.xmlFirstElementChild(xmlnodeptr)
+//    if (rv.is_none()) then
+//      Debug.out("I is nullptr")
+//    end
+//    try
+//    @printf[I32](rv.apply()?.pname)
+//    end
+    rv
+
 
     // Let's just start with definiting the types... we'll worry
     // about the actual values later...
@@ -55,8 +80,9 @@ primitive FunctionLogic
 class FunctionMap
   var fm: Map[String, Function] = Map[String, Function].create()
 
-  new create(ctxptr: XmlxpathcontextPTR) =>
-    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//Function", ctxptr)
+  new create(ctxptr: XmlxpathcontextPTR, fid: String) =>
+    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//Function[@file='" + fid + "']", ctxptr)
+
     try
       let xpathexp: Xmlxpathobject = xpathexptr.apply()?
       let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
@@ -67,11 +93,23 @@ class FunctionMap
 
       for element in nodearray.values() do
         let m: Function = Function(element)
-        Debug.out(m.name)
+//        Debug.out(m.name)
+//        Debug.out(m.fid)
         fm.insert(m.id, m)
       end
 
     end
+
+  fun ref lookupById(id: String): Function ref ? =>
+    let s: Function ref = fm.apply(id)?
+    s
+
+  fun ref iterByFID(fid: String): Iter[Function] =>
+    var v: Iterator[Function] = fm.values()
+    var iter: Iter[Function] = Iter[Function](v)
+    iter.filter_stateful({(s: Function): Bool => s.fid == fid})
+
+
 //
 //  fun ref lookupById(id: String): Function ref ? =>
 //    let s: Function ref = fm.apply(id)?
