@@ -42,7 +42,6 @@ actor Main
         let fid: String = (imap as JsonObject val).data("id")? as String val
         if ((imap as JsonObject val).data("use")? as Bool) then
           let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
-          Debug.out("use: " + fid)
           enumerateFunctions(ctxptr, config, functionmap)
         end
 //        if ((imap as JsonObject val).data("structs")? as Bool) then
@@ -61,13 +60,28 @@ actor Main
 //      writeUseOutputs(functionmap.fm, env.root as AmbientAuth)
     end
 
-  fun enumerateFunctions(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap) =>
-   for function in functionmap.fm.values() do
-     let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, function.rvtype, Array[CastTYPE].create(USize(8)))
-     let ponytype: String = TypeLogic.resolveChain(chain, config)
-     Debug.out("//use @" + function.name + "[" + ponytype + "]()")
-   end
-    None
+  fun enumerateFunctions(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): Array[String] =>
+    var rv: Array[String] = Array[String].create()
+    for function in functionmap.fm.values() do
+      let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, function.rvtype, Array[CastTYPE].create(USize(8)))
+      let ponytype: String = TypeLogic.resolveChain(chain, config)
+
+      let argstr: String = stringifyUseArgs(function.args, ctxptr, config)
+
+      Debug.out("//use @" + function.name + "[" + ponytype + "](" + argstr + ")")
+    end
+    rv
+
+  fun stringifyUseArgs(args: Array[(String, String)], ctxptr: XmlxpathcontextPTR, config: Config): String =>
+    var rva: Array[String] = Array[String].create(USize(4))
+    for (argname, argtype) in args.values() do
+      let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, argtype, Array[CastTYPE].create(USize(8)))
+      let ponytype: String = TypeLogic.resolveChain(chain, config)
+      let ctype: String = config.getFFIType(ponytype)
+
+      rva.push(StructLogic.ponyMemberName(argname) + ": " + ctype)
+    end
+    ", ".join(rva.values())
 
 
 

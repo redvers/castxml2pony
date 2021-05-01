@@ -5,27 +5,48 @@ use "../pony-libxml2/pony-libxml2"
 use "lib:xml2"
 
 class Function
-  var xmlnodeptr: XmlnodePTR
   var id: String
   var name: String
   var fid: String
   var rvtype: String
+  var args: Array[(String, String)]
 
   new create(element: XmlnodePTR) =>
     id = LibXML2.xmlGetProp(element, "id")
     name = LibXML2.xmlGetProp(element, "name")
     fid = LibXML2.xmlGetProp(element, "file")
     rvtype = LibXML2.xmlGetProp(element, "returns")
-    xmlnodeptr = element
 
-    FunctionArgs.fargs(xmlnodeptr)
+    args = FunctionArgs.fargs(element, name)
 
 primitive FunctionArgs
-  fun fargs(xmlnodeptr: XmlnodePTR): Array[XmlnodePTR] =>
-    var rv: Array[XmlnodePTR] = Array[XmlnodePTR].create()
+  fun fargs(xmlnodeptr: XmlnodePTR, name: String): Array[(String, String)] =>
+    var rv: Array[(String, String)] = Array[(String, String)].create()
 
-    let first: XmlnodePTR = LibXML2.xmlFirstElementChild(xmlnodeptr)
+    var elementcnt: U64 = LibXML2.xmlChildElementCount(xmlnodeptr)
+    if (elementcnt == 0) then
+      return(rv)
+    end
 
+    var argumentptr: XmlnodePTR = LibXML2.xmlFirstElementChild(xmlnodeptr)
+    var argname: String = ""
+    var argtype: String = ""
+
+    while (elementcnt > 0) do
+      elementcnt = elementcnt - 1
+      (argumentptr, argname, argtype) = parseargumentptr(argumentptr)
+      rv.push((argname, argtype))
+    end
+    rv
+
+
+
+  fun parseargumentptr(argumentptr: XmlnodePTR): (XmlnodePTR, String, String) =>
+    let argname: String = LibXML2.xmlGetProp(argumentptr, "name")
+    let argtype: String = LibXML2.xmlGetProp(argumentptr, "type")
+
+    let nextarg: XmlnodePTR = LibXML2.xmlNextElementSibling(argumentptr)
+    (nextarg, argname, argtype)
 
 
 
@@ -36,7 +57,6 @@ primitive FunctionArgs
 //    try
 //    @printf[I32](rv.apply()?.pname)
 //    end
-    rv
 
 
     // Let's just start with definiting the types... we'll worry
