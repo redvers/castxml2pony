@@ -7,16 +7,6 @@ use "lib:xml2"
 use "json"
 use "files"
 
-/*
- *  castxml2pony
- *    -h help
- *    -j re-write global.json (Contains global types configuration)
- *    -f re-write default instance.json
- *
- *
- *
- *
- */
 actor Main
   new create(env: Env) =>
     checkForGlobalJSON(env)
@@ -76,13 +66,6 @@ actor Main
     end
     rv
 
-//      if ((imap as JsonObject val).data("structs")? as Bool) then
-//          Debug.out("structs: " + fid)
-//        end
-//        if ((imap as JsonObject val).data("functions")? as Bool) then
-//          Debug.out("functions: " + fid)
-//        end
-
 
 
   fun enumerateFunctions(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): String =>
@@ -114,34 +97,6 @@ actor Main
 
 
 
-//  fun writeUseOutputs(functionmap: Map[String, Function], auth: AmbientAuth) =>
-//    for function in functionmap.keys() do
-////      Debug.out(function)
-//      None
-//    end
-//    None
-
-
-
-/*
-  fun processUses(filemap: FileMap, functionmap: FunctionMap, config: Config, ctxptr: XmlxpathcontextPTR) =>
-    let structme: Array[JsonObject val] = Array[JsonObject val].create(USize(8))
-    try
-      for jstmap in config.instances.data.values() do
-        if ((jstmap as JsonObject val).data("use")? as Bool) then
-          structme.push(jstmap as JsonObject val)
-        end
-      end
-
-      for jstmap2 in structme.values() do
-        Debug.out(jstmap2.data("id")? as String val)
-//        let usetexts: Array[String] = processUse(filemap, functionmap, config, ctxptr, (jstmap2.data("id")? as String val))
-//        let filename: String val = "out/struct-" + (jstmap2.data("ponyname")? as String val)
-//        rv.update(filename, structtexts)
-        None
-      end
-    end
-    */
 
 
   fun writeEnumOutputs(enummap: Map[String, Enum], auth: AmbientAuth)? =>
@@ -244,21 +199,6 @@ actor Main
   fun hasInstanceJSON(auth: AmbientAuth): Bool ? =>
     let fp: FilePath = FilePath(auth, "instance.json")?
     fp.exists()
-
-
-/*
-//    writeDummyJSON(env)
-
-//    let fids: Array[String] = filemap.lookupFIDsBySubstring("libxml2")
-*/
-/*
-    for ffid in iterator do
-      let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, ffid, Array[CastTYPE].create(USize(8)))
-
-      let ponytype: String = TypeLogic.resolveChain(chain)
-      Debug.out(ffid + ": " + ponytype)
-    end
-*/
 
   fun writeDummyJSON(auth: AmbientAuth) ? =>
     let doc: JsonDoc = JsonDoc
