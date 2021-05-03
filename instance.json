@@ -435,7 +435,7 @@
     "id": "f54",
     "ponyname": "f54.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xpath.h",
-    "use": false,
+    "use": true,
     "structs": true,
     "functions": false
   },

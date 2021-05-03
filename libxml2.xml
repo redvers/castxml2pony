@@ -9229,7 +9229,7 @@
   <Field id="_2658" name="docdict" type="_2499" context="_222" access="public" location="f16:266" file="f16" line="266" offset="3808"/>
   <Field id="_2659" name="str_xml" type="_2557" context="_222" access="public" location="f16:271" file="f16" line="271" offset="3840"/>
   <Field id="_2660" name="str_xmlns" type="_2557" context="_222" access="public" location="f16:272" file="f16" line="272" offset="3904"/>
-  <Field id="_2661" name="str_xml_ns" type="_2557" context="_222" access="public" location="f16:273" file="f16" line="273" offset="3968"/>
+  <Field id="_2661" name="pstr_xml_ns" type="_2557" context="_222" access="public" location="f16:273" file="f16" line="273" offset="3968"/>
   <Field id="_2662" name="sax2" type="_2499" context="_222" access="public" location="f16:278" file="f16" line="278" offset="4032"/>
   <Field id="_2663" name="nsNr" type="_2499" context="_222" access="public" location="f16:279" file="f16" line="279" offset="4064"/>
   <Field id="_2664" name="nsMax" type="_2499" context="_222" access="public" location="f16:280" file="f16" line="280" offset="4096"/>
