@@ -28,30 +28,52 @@ actor Main
       let membermap: MemberMap = MemberMap(ctxptr)
       let enummap: EnumMap = EnumMap(ctxptr)
 
-      structFileOutputs = processStructs(filemap, membermap, config, ctxptr)
-      useFileOutputs = processUses(config, ctxptr)?
-      writeUseFileOutputs(useFileOutputs, config, env.root as AmbientAuth)?
+//      structFileOutputs = processStructs(filemap, membermap, config, ctxptr)
+//      useFileOutputs = processUses(config, ctxptr)?
+      processFunctions(config, ctxptr)?
 
-      writeStructFiles(structFileOutputs, env.root as AmbientAuth)?
-      writeEnumOutputs(enummap.fm, env.root as AmbientAuth)?
+//      writeUseFileOutputs(useFileOutputs, config, env.root as AmbientAuth)?
+//      writeStructFiles(structFileOutputs, env.root as AmbientAuth)?
+//      writeEnumOutputs(enummap.fm, env.root as AmbientAuth)?
 
     end
 
 
-  fun writeUseFileOutputs(useFileOutputs: Map[String, String], config: Config, auth: AmbientAuth)? =>
-    for (fid, usetxt) in useFileOutputs.pairs() do
-      let filename: String val = "out/use-" + fid + ".pony"
-      let fp: FilePath = FilePath.create(auth, filename)?
-      fp.remove()
 
-      let file: File = File(fp)
-      file.print(usetxt)
-      file.print("\n")
-      file.dispose()
+  fun processFunctions(config: Config, ctxptr: XmlxpathcontextPTR)? =>
+    for imap in config.instances.data.values() do
+      let fid: String = (imap as JsonObject val).data("id")? as String val
+      Debug.out(fid)
+      if ((imap as JsonObject val).data("functions")? as Bool) then
+        let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
+
+        enumerateFuns(ctxptr, config, functionmap)
+
+      end
     end
 
 
+  fun enumerateFuns(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap) =>
+    for (fname, function) in functionmap.fm.pairs() do
+      let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, function.rvtype, Array[CastTYPE].create(USize(8)))
+      let argstr: String = stringifyUseArgs(function.args, ctxptr, config)
 
+      Debug.out(fname + " -> " + argstr)
+    end
+
+/*
+  fun enumerateFunctions(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): String =>
+    var rv: Array[String] = Array[String].create()
+    for function in functionmap.fm.values() do
+      let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, function.rvtype, Array[CastTYPE].create(USize(8)))
+      let ponytype: String = TypeLogic.resolveChain(chain, config)
+
+      let argstr: String = stringifyUseArgs(function.args, ctxptr, config)
+
+      rv.push("use @" + function.name + "[" + ponytype + "](" + argstr + ")")
+    end
+    "\n".join(rv.values())
+*/
 
 
   fun processUses(config: Config, ctxptr: XmlxpathcontextPTR): Map[String, String] ? =>
@@ -65,6 +87,18 @@ actor Main
       end
     end
     rv
+
+  fun writeUseFileOutputs(useFileOutputs: Map[String, String], config: Config, auth: AmbientAuth)? =>
+    for (fid, usetxt) in useFileOutputs.pairs() do
+      let filename: String val = "out/use-" + fid + ".pony"
+      let fp: FilePath = FilePath.create(auth, filename)?
+      fp.remove()
+
+      let file: File = File(fp)
+      file.print(usetxt)
+      file.print("\n")
+      file.dispose()
+    end
 
 
 

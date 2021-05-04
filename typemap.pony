@@ -88,6 +88,11 @@ primitive TypeLogic
 
   fun recurseType(ctxptr: XmlxpathcontextPTR, config: Config, ttype: String, acc: Array[CastTYPE]): Array[CastTYPE] =>
     var ct: CastTYPE = CastTYPE(ctxptr, config, ttype)
+    if (ct.dstype == "") then
+      acc.unshift(ct)
+      return acc
+    end
+
     if (ct.ponytype == "") then
       acc.unshift(ct)
       recurseType(ctxptr, config, ct.dstype, acc)
