@@ -25,6 +25,7 @@
     "NullablePointer[String]": "Array[String]",
     "NullablePointer[I8]": "String",
     "NullablePointer[I32]": "Pointer[I32]",
+    "NullablePointer[U64]": "Pointer[U64]",
     "NullablePointer[U8]": "String",
     "NullablePointer[None]": "Pointer[None]"
   },
@@ -32,11 +33,11 @@
     "String": [
       "var cstring_pony: Pointer[U8] = ",
       "Pointer[U8]",
-      "var string_pony: String val = String.from_cstring(cstring_pony).clone()\nconsume string_pony\n"
+      "    var string_pony: String val = String.from_cstring(cstring_pony).clone()\n    consume string_pony\n"
     ]
   },
   "typeConversionInJSON": {
-    "String": ".cstring()"
+    "Pointer[U8]": ".cstring()"
   },
   "fundamentalTypes": {
     "unsigned __int128": "U128",

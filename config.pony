@@ -62,10 +62,22 @@ class val Config
 
 
 
+  fun val getTypeMethod(key: String): String val =>
+    try
+      (typeConversionInJSON.data(key)? as String val)
+    else
+      ""
+    end
 
   fun val getTypeAlias(key: String): String val ? =>
     typeAliases.data(key)? as String
 
+  fun val getFunctionPre(key: String): String val =>
+    try
+      (typeConversionOutJSON.data(key)? as JsonArray val).data.apply(0)? as String
+    else
+      ""
+    end
 
   fun val getFFIType(key: String): String val =>
     try
@@ -74,3 +86,9 @@ class val Config
       key
     end
 
+  fun val getFunctionFinal(key: String): String val =>
+    try
+      (typeConversionOutJSON.data(key)? as JsonArray val).data.apply(2)? as String
+    else
+      ""
+    end
