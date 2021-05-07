@@ -35,9 +35,9 @@ actor Main
     Debug.out("Calling processStructs")
       structFileOutputs = processStructs(filemap, membermap, config, ctxptr) //
     Debug.out("Calling processUses")
-      useFileOutputs = processUses(config, ctxptr)? //
+      useFileOutputs = processUses(filemap, config, ctxptr)? //
     Debug.out("Calling processFunctions")
-      let functionFileOutputs: Map[String, Map[String, String]] = processFunctions(config, ctxptr)?
+      let functionFileOutputs: Map[String, Map[String, String]] = processFunctions(filemap, config, ctxptr)?
 
     Debug.out("Calling writeFunctionFiles")
       writeFunctionFiles(functionFileOutputs, env.root as AmbientAuth)?
@@ -75,11 +75,12 @@ actor Main
     file.dispose()
 
 
-  fun processFunctions(config: Config, ctxptr: XmlxpathcontextPTR): Map[String, Map[String, String]] ? =>
+  fun processFunctions(filemap: FileMap, config: Config, ctxptr: XmlxpathcontextPTR): Map[String, Map[String, String]] ? =>
     var rv: Map[String, Map[String, String]] = Map[String, Map[String, String]]
     for imap in config.instances.data.values() do
       let fid: String = (imap as JsonObject val).data("id")? as String val
       if ((imap as JsonObject val).data("functions")? as Bool) then
+        Debug.out("Processing: " + filemap.lookupByID(fid)?)
         let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
         let functionbodies: Map[String, String] = enumerateFuns(ctxptr, config, functionmap)
         rv.insert(fid, functionbodies)
@@ -91,6 +92,7 @@ actor Main
   fun enumerateFuns(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): Map[String, String] =>
     var rv: Map[String, String] = Map[String, String]
     for (fname, function) in functionmap.fm.pairs() do
+      Debug.out("            function " + function.name)
       let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, function.rvtype, Array[CastTYPE].create(USize(8)))
       let ponytype: String = TypeLogic.resolveChain(chain, config)
       let argstr: String = stringifyPonyFn(function.args, ctxptr, config)
@@ -150,12 +152,16 @@ actor Main
     ", ".join(rva.values())
 
 
-  fun processUses(config: Config, ctxptr: XmlxpathcontextPTR): Map[String, String] ? =>
+  fun processUses(filemap: FileMap, config: Config, ctxptr: XmlxpathcontextPTR): Map[String, String] ? =>
     var rv: Map[String, String] = Map[String, String].create()
     for imap in config.instances.data.values() do
       let fid: String = (imap as JsonObject val).data("id")? as String val
       if ((imap as JsonObject val).data("use")? as Bool) then
-        Debug.out("Processing: " + fid)
+        try
+          Debug.out("\nProcessing: " + filemap.lookupByID(fid)?)
+        else
+          Debug.out("\nUnknown error")
+        end
         let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
         let usetxt: String = enumerateFunctions(ctxptr, config, functionmap)
         rv.insert(fid, usetxt)
@@ -179,6 +185,7 @@ actor Main
   fun enumerateFunctions(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): String =>
     var rv: Array[String] = Array[String].create()
     for function in functionmap.fm.values() do
+        Debug.out("                 use " + function.name)
       let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, function.rvtype, Array[CastTYPE].create(USize(8)))
       let ponytype: String = TypeLogic.resolveChain(chain, config)
 
@@ -263,7 +270,7 @@ actor Main
     let ponystructarray: Array[String] = Array[String]
 
     try
-      Debug.out("Processing: " + filemap.lookupByID(fid)?)
+      Debug.out("\nProcessing: " + filemap.lookupByID(fid)?)
     else
       Debug.out("Unknown error")
     end
