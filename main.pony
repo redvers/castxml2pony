@@ -10,8 +10,6 @@ use "files"
 actor Main
   new create(env: Env) =>
     checkForGlobalJSON(env)
-
-
     var structFileOutputs: Map[String, Array[String]] = Map[String, Array[String]].create()
     var useFileOutputs: Map[String, String] = Map[String, String].create()
     let filename: String val = "libxml2.xml"
@@ -39,6 +37,7 @@ actor Main
 
     end
 
+
   fun writeFunctionFiles(functionFileOutputs: Map[String, Map[String, String]], auth: AmbientAuth)? =>
     let filename: String val = "out/functions.pony"
     let fp: FilePath = FilePath.create(auth, filename)?
@@ -60,9 +59,6 @@ actor Main
       end
     end
     file.dispose()
-
-
-
 
 
   fun processFunctions(config: Config, ctxptr: XmlxpathcontextPTR): Map[String, Map[String, String]] ? =>
@@ -100,6 +96,7 @@ actor Main
     end
     rv
 
+
   fun ponyFunctionBody(function: Function, ctxptr: XmlxpathcontextPTR, config: Config, rvponytype: String): String =>
     var prelim: String =
     "    " + config.getFunctionPre(rvponytype) +
@@ -120,20 +117,6 @@ actor Main
     let args: String = ", ".join(rva.values())
 
     prelim + args + ")\n" + config.getFunctionFinal(rvponytype) + "\n"
-
-
-
-
-//  "typeConversionOutJSON": {
-//     "String": [
-//       "var cstring_pony: Pointer[U8] = ",
-//       "Pointer[U8]",
-//       "var string_pony: String val = String.from_cstring(cstring_pony).clone()\nconsume string_pony\n"
-//     ]
-//  },
-//  "typeConversionInJSON": {
-//     "String": ".cstring()"
-//  },
 
 
   fun stringifyPonyFn(args: Array[(String, String)], ctxptr: XmlxpathcontextPTR, config: Config): String =>
@@ -166,6 +149,7 @@ actor Main
     end
     rv
 
+
   fun writeUseFileOutputs(useFileOutputs: Map[String, String], config: Config, auth: AmbientAuth)? =>
     for (fid, usetxt) in useFileOutputs.pairs() do
       let filename: String val = "out/use-" + fid + ".pony"
@@ -176,7 +160,6 @@ actor Main
       file.print(usetxt)
       file.dispose()
     end
-
 
 
   fun enumerateFunctions(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): String =>
@@ -191,6 +174,7 @@ actor Main
       rv.push("use @" + function.name + "[" + ctype + "](" + argstr + ")")
     end
     "\n".join(rv.values())
+
 
   fun stringifyUseArgs(args: Array[(String, String)], ctxptr: XmlxpathcontextPTR, config: Config): String =>
     var rva: Array[String] = Array[String].create(USize(4))
@@ -214,13 +198,6 @@ actor Main
     ", ".join(rva.values())
 
 
-
-
-
-
-
-
-
   fun writeEnumOutputs(enummap: Map[String, Enum], auth: AmbientAuth)? =>
     let fp: FilePath = FilePath.create(auth, "out/enumerations.pony")?
     fp.remove()
@@ -230,7 +207,6 @@ actor Main
       file.print("primitive " + EnumLogic.ponyStruct(enum.name))
     end
     file.dispose()
-
 
 
   fun writeStructFiles(structFileOutputs: Map[String, Array[String]], auth: AmbientAuth): None ? =>
@@ -268,9 +244,6 @@ actor Main
     rv
 
 
-
-
-
   fun processStruct(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR, fid: String): Array[String] =>
     let structmap: StructMap = StructMap(ctxptr)
     let ponystructarray: Array[String] = Array[String]
@@ -279,10 +252,7 @@ actor Main
       let ponystr: String val = stru.ponyDefinition(membermap, config, ctxptr)
       ponystructarray.push(ponystr)
     end
-
     ponystructarray
-
-
 
 
   fun checkForGlobalJSON(env: Env) =>
@@ -298,6 +268,7 @@ actor Main
       end
     end
 
+
   fun checkForInstanceJSON(env: Env, ctxptr: XmlxpathcontextPTR) =>
     try
       let auth = env.root as AmbientAuth
@@ -312,14 +283,15 @@ actor Main
     end
 
 
-
   fun hasGlobalJSON(auth: AmbientAuth): Bool ? =>
     let fp: FilePath = FilePath(auth, "global.json")?
     fp.exists()
 
+
   fun hasInstanceJSON(auth: AmbientAuth): Bool ? =>
     let fp: FilePath = FilePath(auth, "instance.json")?
     fp.exists()
+
 
   fun writeDummyJSON(auth: AmbientAuth) ? =>
     let doc: JsonDoc = JsonDoc
@@ -337,6 +309,7 @@ actor Main
     file.write(doc.string(where indent="  ", pretty_print=true))
     file.dispose()
 
+
   fun writeDummyInstanceJSON(auth: AmbientAuth, ctxptr: XmlxpathcontextPTR) ? =>
     let doc: JsonDoc = JsonDoc
     let array: Array[JsonType] = Array[JsonType].create()
@@ -346,7 +319,6 @@ actor Main
 
     let fp: FilePath = FilePath(auth, "instance.json")?
     let file: File = File.create(fp)
-
 //    for (fid, fname) in fm.pairs() do
     for fid in filemap.fids.values() do
       var fmap: JsonObject = JsonObject(USize(16))
@@ -365,6 +337,7 @@ actor Main
     file.write(doc.string(where indent="  ", pretty_print=true))
     file.dispose()
 
+
   fun typeAliasJSON(): JsonObject =>
     let typeAlias: JsonObject = JsonObject(USize(8))
     typeAlias.data("NullablePointer[I8]") = "String"
@@ -372,6 +345,7 @@ actor Main
     typeAlias.data("NullablePointer[String]") = "Array[String]"
     typeAlias.data("NullablePointer[None]") = "Pointer[None]"
     typeAlias
+
 
   fun fundamentalTypesJSON(): JsonObject =>
     let fundamentalType: JsonObject = JsonObject(USize(32))
@@ -394,6 +368,7 @@ actor Main
     fundamentalType.data("unsigned __int128") = "U128"
     fundamentalType.data("long double") = "F128"
     fundamentalType
+
 
   fun fundamentalTypeDefaultsJSON(): JsonObject =>
     let fundamentalType: JsonObject = JsonObject(USize(32))
@@ -420,14 +395,14 @@ actor Main
     fundamentalType.data("F128") = "F128"
 
     fundamentalType.data("String") = "Pointer[U8]"
-
     fundamentalType
+
 
   fun typeConversionInJSON(): JsonObject =>
     let typeConversionIn: JsonObject = JsonObject(USize(32))
     typeConversionIn.data("String") = ".cstring()"
-
     typeConversionIn
+
 
   fun typeConversionOutJSON(): JsonObject =>
     let typeConversionOut: JsonObject = JsonObject(USize(32))

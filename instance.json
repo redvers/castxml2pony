@@ -100,7 +100,7 @@
     "ponyname": "f12.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlversion.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -108,7 +108,7 @@
     "ponyname": "f13.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlstring.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -172,7 +172,7 @@
     "ponyname": "f21.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlmemory.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -404,7 +404,7 @@
     "ponyname": "f50.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/SAX2.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -460,7 +460,7 @@
     "ponyname": "f57.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/HTMLtree.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -468,7 +468,7 @@
     "ponyname": "f58.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/nanoftp.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -476,7 +476,7 @@
     "ponyname": "f59.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/nanohttp.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -484,7 +484,7 @@
     "ponyname": "f60.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/parserInternals.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -508,7 +508,7 @@
     "ponyname": "f63.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/SAX.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -580,7 +580,7 @@
     "ponyname": "f72.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlschemastypes.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -588,7 +588,7 @@
     "ponyname": "f73.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlunicode.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
@@ -604,7 +604,7 @@
     "ponyname": "f75.pony",
     "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xpathInternals.h",
     "use": true,
-    "structs": true,
+    "structs": false,
     "functions": true
   },
   {
