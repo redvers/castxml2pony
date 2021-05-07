@@ -25,6 +25,8 @@ class Struct
     let stitle: String = "struct " + StructLogic.ponyStruct(name)
     var ponytext: String val = stitle.clone() + "\n"
 
+    Debug.out("Processing: " + stitle)
+
     try
       for member in members.values() do
         var membername: String = membermap.fm.apply(member)?.name

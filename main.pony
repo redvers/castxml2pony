@@ -9,6 +9,7 @@ use "files"
 
 actor Main
   new create(env: Env) =>
+    Debug.out("Calling checkForGlobalJSON()")
     checkForGlobalJSON(env)
     var structFileOutputs: Map[String, Array[String]] = Map[String, Array[String]].create()
     var useFileOutputs: Map[String, String] = Map[String, String].create()
@@ -18,23 +19,36 @@ actor Main
     let ctxptr: XmlxpathcontextPTR = LibXML2.xmlXPathNewContext(docptr)
 
     // Let's preprocess some XML for fun and profit
+    Debug.out("Calling checkForInstanceJSON()")
     checkForInstanceJSON(env, ctxptr)
 
     try
+    Debug.out("Calling Config")
       let config: Config val = Config(env.root as AmbientAuth)
+    Debug.out("Calling FileMap")
       let filemap: FileMap = FileMap(ctxptr)
+    Debug.out("Calling MemberMap")
       let membermap: MemberMap = MemberMap(ctxptr)
+    Debug.out("Calling EnumMap")
       let enummap: EnumMap = EnumMap(ctxptr)
 
+    Debug.out("Calling processStructs")
       structFileOutputs = processStructs(filemap, membermap, config, ctxptr) //
+    Debug.out("Calling processUses")
       useFileOutputs = processUses(config, ctxptr)? //
+    Debug.out("Calling processFunctions")
       let functionFileOutputs: Map[String, Map[String, String]] = processFunctions(config, ctxptr)?
-      writeFunctionFiles(functionFileOutputs, env.root as AmbientAuth)?
 
+    Debug.out("Calling writeFunctionFiles")
+      writeFunctionFiles(functionFileOutputs, env.root as AmbientAuth)?
+    Debug.out("Calling writeUseFileOutputs")
       writeUseFileOutputs(useFileOutputs, config, env.root as AmbientAuth)? //
+    Debug.out("Calling writeStructFiles")
       writeStructFiles(structFileOutputs, env.root as AmbientAuth)? //
+    Debug.out("Calling writeEnumOutputs")
       writeEnumOutputs(enummap.fm, env.root as AmbientAuth)? //
 
+    Debug.out("Successful Finish")
     end
 
 
@@ -65,7 +79,6 @@ actor Main
     var rv: Map[String, Map[String, String]] = Map[String, Map[String, String]]
     for imap in config.instances.data.values() do
       let fid: String = (imap as JsonObject val).data("id")? as String val
-      Debug.out(fid)
       if ((imap as JsonObject val).data("functions")? as Bool) then
         let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
         let functionbodies: Map[String, String] = enumerateFuns(ctxptr, config, functionmap)
@@ -142,6 +155,7 @@ actor Main
     for imap in config.instances.data.values() do
       let fid: String = (imap as JsonObject val).data("id")? as String val
       if ((imap as JsonObject val).data("use")? as Bool) then
+        Debug.out("Processing: " + fid)
         let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
         let usetxt: String = enumerateFunctions(ctxptr, config, functionmap)
         rv.insert(fid, usetxt)
@@ -247,6 +261,12 @@ actor Main
   fun processStruct(filemap: FileMap, membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR, fid: String): Array[String] =>
     let structmap: StructMap = StructMap(ctxptr)
     let ponystructarray: Array[String] = Array[String]
+
+    try
+      Debug.out("Processing: " + filemap.lookupByID(fid)?)
+    else
+      Debug.out("Unknown error")
+    end
 
     for stru in structmap.iterByFID(fid) do
       let ponystr: String val = stru.ponyDefinition(membermap, config, ctxptr)
