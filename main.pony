@@ -13,9 +13,9 @@ actor Main
     checkForGlobalJSON(env)
     var structFileOutputs: Map[String, Array[String]] = Map[String, Array[String]].create()
     var useFileOutputs: Map[String, String] = Map[String, String].create()
-    let filename: String val = "libxml2.xml"
+    let filename: String val = "libffi.xml"
 //    Debug.err("Parsing: " + filename)
-    let docptr: XmldocPTR = LibXML2.xmlParseFile("libxml2.xml")
+    let docptr: XmldocPTR = LibXML2.xmlParseFile("libffi.xml")
     let ctxptr: XmlxpathcontextPTR = LibXML2.xmlXPathNewContext(docptr)
 
     // Let's preprocess some XML for fun and profit
@@ -82,14 +82,14 @@ actor Main
       if ((imap as JsonObject val).data("functions")? as Bool) then
         Debug.out("Processing: " + filemap.lookupByID(fid)?)
         let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
-        let functionbodies: Map[String, String] = enumerateFuns(ctxptr, config, functionmap)
+        let functionbodies: Map[String, String] = processFunction(ctxptr, config, functionmap)
         rv.insert(fid, functionbodies)
       end
     end
     rv
 
 
-  fun enumerateFuns(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): Map[String, String] =>
+  fun processFunction(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): Map[String, String] =>
     var rv: Map[String, String] = Map[String, String]
     for (fname, function) in functionmap.fm.pairs() do
       Debug.out("            function " + function.name)
@@ -163,7 +163,7 @@ actor Main
           Debug.out("\nUnknown error")
         end
         let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
-        let usetxt: String = enumerateFunctions(ctxptr, config, functionmap)
+        let usetxt: String = processUse(ctxptr, config, functionmap)
         rv.insert(fid, usetxt)
       end
     end
@@ -182,7 +182,7 @@ actor Main
     end
 
 
-  fun enumerateFunctions(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): String =>
+  fun processUse(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): String =>
     var rv: Array[String] = Array[String].create()
     for function in functionmap.fm.values() do
         Debug.out("                 use " + function.name)
