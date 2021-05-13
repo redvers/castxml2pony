@@ -10,7 +10,7 @@
   {
     "id": "f1",
     "ponyname": "f1.pony",
-    "cfilenamename": "/nix/store/bc4mhbkb39b5907ns4mfc7h59g2bgfpy-libffi-3.3-dev/include/ffitarget.h",
+    "cfilenamename": "/nix/store/kcihlm9hisj42rd92108h7z93dz7h5a8-CastXML-0.3.4/share/castxml/clang/include/stddef.h",
     "use": false,
     "structs": false,
     "functions": false
@@ -18,7 +18,7 @@
   {
     "id": "f2",
     "ponyname": "f2.pony",
-    "cfilenamename": "/nix/store/gdd44gp9j3r4zgsrh0h6h1biv78iwngq-CastXML-0.4.3/share/castxml/clang/include/stddef.h",
+    "cfilenamename": "/nix/store/kcihlm9hisj42rd92108h7z93dz7h5a8-CastXML-0.3.4/share/castxml/clang/include/stdarg.h",
     "use": false,
     "structs": false,
     "functions": false
@@ -26,7 +26,7 @@
   {
     "id": "f3",
     "ponyname": "f3.pony",
-    "cfilenamename": "/nix/store/gdd44gp9j3r4zgsrh0h6h1biv78iwngq-CastXML-0.4.3/share/castxml/clang/include/__stddef_max_align_t.h",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types.h",
     "use": false,
     "structs": false,
     "functions": false
@@ -34,9 +34,585 @@
   {
     "id": "f4",
     "ponyname": "f4.pony",
-    "cfilenamename": "/nix/store/bc4mhbkb39b5907ns4mfc7h59g2bgfpy-libffi-3.3-dev/include/ffi.h",
-    "use": true,
-    "structs": true,
-    "functions": true
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/__mbstate_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f5",
+    "ponyname": "f5.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/__fpos_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f6",
+    "ponyname": "f6.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/__fpos64_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f7",
+    "ponyname": "f7.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/struct_FILE.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f8",
+    "ponyname": "f8.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/__FILE.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f9",
+    "ponyname": "f9.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/FILE.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f10",
+    "ponyname": "f10.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/stdio.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f11",
+    "ponyname": "f11.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/floatn-common.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f12",
+    "ponyname": "f12.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlversion.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f13",
+    "ponyname": "f13.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlstring.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f14",
+    "ponyname": "f14.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlIO.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f15",
+    "ponyname": "f15.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/tree.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f16",
+    "ponyname": "f16.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/parser.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f17",
+    "ponyname": "f17.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/entities.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f18",
+    "ponyname": "f18.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlregexp.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f19",
+    "ponyname": "f19.pony",
+    "cfilenamename": "/nix/store/kcihlm9hisj42rd92108h7z93dz7h5a8-CastXML-0.3.4/share/castxml/clang/include/__stddef_max_align_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f20",
+    "ponyname": "f20.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/dict.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f21",
+    "ponyname": "f21.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlmemory.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f22",
+    "ponyname": "f22.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/threads.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f23",
+    "ponyname": "f23.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/hash.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f24",
+    "ponyname": "f24.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlerror.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f25",
+    "ponyname": "f25.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/list.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f26",
+    "ponyname": "f26.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlautomata.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f27",
+    "ponyname": "f27.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/valid.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f28",
+    "ponyname": "f28.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/iconv.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f29",
+    "ponyname": "f29.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/encoding.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f30",
+    "ponyname": "f30.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/stdlib.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f31",
+    "ponyname": "f31.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/sys/types.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f32",
+    "ponyname": "f32.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/clock_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f33",
+    "ponyname": "f33.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/clockid_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f34",
+    "ponyname": "f34.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/time_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f35",
+    "ponyname": "f35.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/timer_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f36",
+    "ponyname": "f36.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/stdint-intn.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f37",
+    "ponyname": "f37.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/byteswap.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f38",
+    "ponyname": "f38.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/uintn-identity.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f39",
+    "ponyname": "f39.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/__sigset_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f40",
+    "ponyname": "f40.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/sigset_t.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f41",
+    "ponyname": "f41.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/struct_timeval.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f42",
+    "ponyname": "f42.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/types/struct_timespec.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f43",
+    "ponyname": "f43.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/sys/select.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f44",
+    "ponyname": "f44.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/thread-shared-types.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f45",
+    "ponyname": "f45.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/struct_mutex.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f46",
+    "ponyname": "f46.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/struct_rwlock.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f47",
+    "ponyname": "f47.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/bits/pthreadtypes.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f48",
+    "ponyname": "f48.pony",
+    "cfilenamename": "/nix/store/x1h3zxbr0bif0xr2l44x2pl5hnnc2n0j-glibc-2.32-35-dev/include/alloca.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f49",
+    "ponyname": "f49.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xlink.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f50",
+    "ponyname": "f50.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/SAX2.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f51",
+    "ponyname": "f51.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/globals.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f52",
+    "ponyname": "f52.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/catalog.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f53",
+    "ponyname": "f53.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/chvalid.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f54",
+    "ponyname": "f54.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xpath.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f55",
+    "ponyname": "f55.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/debugXML.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f56",
+    "ponyname": "f56.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/HTMLparser.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f57",
+    "ponyname": "f57.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/HTMLtree.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f58",
+    "ponyname": "f58.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/nanoftp.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f59",
+    "ponyname": "f59.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/nanohttp.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f60",
+    "ponyname": "f60.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/parserInternals.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f61",
+    "ponyname": "f61.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/pattern.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f62",
+    "ponyname": "f62.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/relaxng.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f63",
+    "ponyname": "f63.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/SAX.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f64",
+    "ponyname": "f64.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/schemasInternals.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f65",
+    "ponyname": "f65.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/schematron.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f66",
+    "ponyname": "f66.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/uri.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f67",
+    "ponyname": "f67.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xinclude.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f68",
+    "ponyname": "f68.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlmodule.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f69",
+    "ponyname": "f69.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlschemas.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f70",
+    "ponyname": "f70.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlreader.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f71",
+    "ponyname": "f71.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlsave.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f72",
+    "ponyname": "f72.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlschemastypes.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f73",
+    "ponyname": "f73.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlunicode.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f74",
+    "ponyname": "f74.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xmlwriter.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f75",
+    "ponyname": "f75.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xpathInternals.h",
+    "use": false,
+    "structs": false,
+    "functions": false
+  },
+  {
+    "id": "f76",
+    "ponyname": "f76.pony",
+    "cfilenamename": "/nix/store/wsnw58h9pgjiihwz22vzj97mzkxrcfrx-libxml2-2.9.10-dev/include/libxml2/libxml/xpointer.h",
+    "use": false,
+    "structs": false,
+    "functions": false
   }
 ]

@@ -7,15 +7,237 @@ use "lib:xml2"
 use "json"
 use "files"
 
+primitive PVariable
+primitive PTypedef
+primitive PStruct
+primitive PEnumeration
+primitive PFunctionType
+primitive PUnion
+primitive PFundamentalType
+primitive PField
+primitive PFile
+primitive PPointerType
+primitive PElaboratedType
+primitive PCvQualifiedType
+primitive PArrayType
+primitive PUnimplemented
+primitive PFunction
+
 actor Main
   new create(env: Env) =>
+    None
+
+    let filename: String val = "libxml2.xml"
+    writeTypes(env, filename)
+
+
+
+
+
+
+
+  fun writeTypes(env: Env, filename: String): None =>
+    let docptr: XmldocPTR = LibXML2.xmlParseFile("libxml2.xml")
+    let ctxptr: XmlxpathcontextPTR = LibXML2.xmlXPathNewContext(docptr)
+
+    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//*", ctxptr)
+
+    try
+      let xpathexp: Xmlxpathobject = xpathexptr.apply()?
+      let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
+      let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
+      var nodecount: I32 val = xmlnodeset.pnodeNr
+
+      env.out.print("Found " + nodecount.string() + " nodes.")
+
+      var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
+
+      for xmlnodeptr in nodearray.values() do
+        let nodetype: String ref = String.copy_cstring(xmlnodeptr.apply()?.pname)
+        let id: String val = LibXML2.xmlGetProp(xmlnodeptr, "id")
+
+        if (id == "") then
+          continue
+        end
+
+        match nodetype
+        | let x: String ref if (nodetype == "Variable") =>
+                   let l: (PVariable, Array[String]) = parseVariable(id, xmlnodeptr)
+                   // [ id ; name ; ponyname ; ttype ; location ; extern ; mangled ]
+        | let x: String ref if (nodetype == "Typedef") =>
+                   let l: (PTypedef, Array[String]) = parseTypedef(id, xmlnodeptr)
+                   // [ id ; name ; ponyname ; location ; ttype ]
+        | let x: String ref if (nodetype == "Struct") =>
+                   let l: (PStruct, Array[String]) = parseStruct(id, xmlnodeptr)
+                   // [ id ; name ; ponyname ; location ; members ; incomplete ; align ]
+        | let x: String ref if (nodetype == "Enumeration") =>
+                   let l: (PEnumeration, Array[String]) = parseEnumeration(id, xmlnodeptr)
+                   // [ id ; name ; ponyname ; location ; size ; align ]
+        | let x: String ref if (nodetype == "FunctionType") =>
+                   let l: (PFunctionType, Array[String]) = parseFunctionType(id, xmlnodeptr)
+                   // [ id ; ponyname ; returns ]
+        | let x: String ref if (nodetype == "Union") =>
+                   let l: (PUnion, Array[String]) = parseUnion(id, xmlnodeptr)
+                   // [ id ; name ; ponyname ; location ; members ; size ; align ]
+        | let x: String ref if (nodetype == "FundamentalType") =>
+                   let l: (PFundamentalType, Array[String]) = parseFundamentalType(id, xmlnodeptr)
+                   // [ id ; name ; ponyname ; size ; align ]
+        | let x: String ref if (nodetype == "Field") =>
+                   let l: (PField, Array[String]) = parseField(id, xmlnodeptr)
+                   // [ id ; name ; ponyname ; ttype ; context ; access ; offset ]
+        | let x: String ref if (nodetype == "File") =>
+                   let l: (PFile, Array[String]) = parseFile(id, xmlnodeptr)
+                   // [ id ; name ]
+        | let x: String ref if (nodetype == "PointerType") =>
+                   let l: (PPointerType, Array[String]) = parsePointerType(id, xmlnodeptr)
+                   // [ id ; ttype ; size ; align ]
+        | let x: String ref if (nodetype == "ElaboratedType") =>
+                   let l: (PElaboratedType, Array[String]) = parseElaboratedType(id, xmlnodeptr)
+                   // [ id ; ttype ]
+        | let x: String ref if (nodetype == "CvQualifiedType") =>
+                   let l: (PCvQualifiedType, Array[String]) = parseCvQualifiedType(id, xmlnodeptr)
+                   // [ id ; ttype ; restrict ; const ]
+        | let x: String ref if (nodetype == "ArrayType") =>
+                   let l: (PArrayType, Array[String]) = parseArrayType(id, xmlnodeptr)
+                   // [ id ; ttype ; min ; max ]
+        | let x: String ref if (nodetype == "Unimplemented") =>
+                   let l: (PUnimplemented, Array[String]) = parseUnimplemented(id, xmlnodeptr)
+                   // [ id ; kind ]
+        | let x: String ref if (nodetype == "Function") =>
+                   let l: (PFunction, Array[String]) = parseFunction(id, xmlnodeptr)
+                   // [ id ; name ; ponyname ; returns ; mangled ]
+        else
+          Array[String]
+        end
+      end
+    else
+      env.out.print("Boom")
+    end
+
+
+  fun parseFunction(id: String, xmlnodeptr: XmlnodePTR): (PFunction, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    let ponyname:   String val = ponifyStruct(name)
+    let returns:    String val = LibXML2.xmlGetProp(xmlnodeptr, "returns")
+    let mangled:    String val = LibXML2.xmlGetProp(xmlnodeptr, "mangled")
+    (PFunction, [ id ; name ; ponyname ; returns ; mangled ])
+
+  fun parseUnimplemented(id: String, xmlnodeptr: XmlnodePTR): (PUnimplemented, Array[String]) =>
+    let kind:       String val = LibXML2.xmlGetProp(xmlnodeptr, "type")
+    (PUnimplemented, [ id ; kind ])
+
+  fun parseArrayType(id: String, xmlnodeptr: XmlnodePTR): (PArrayType, Array[String]) =>
+    let ttype:      String val = LibXML2.xmlGetProp(xmlnodeptr, "type")
+    let min:        String val = LibXML2.xmlGetProp(xmlnodeptr, "min")
+    let max:        String val = LibXML2.xmlGetProp(xmlnodeptr, "max")
+    (PArrayType, [ id ; ttype ; min ; max ])
+
+  fun parseCvQualifiedType(id: String, xmlnodeptr: XmlnodePTR): (PCvQualifiedType, Array[String]) =>
+    let ttype:      String val = LibXML2.xmlGetProp(xmlnodeptr, "type")
+    let restrict:   String val = LibXML2.xmlGetProp(xmlnodeptr, "restrict")
+    let const:      String val = LibXML2.xmlGetProp(xmlnodeptr, "const")
+    (PCvQualifiedType, [ id ; ttype ; restrict ; const ])
+
+  fun parseElaboratedType(id: String, xmlnodeptr: XmlnodePTR): (PElaboratedType, Array[String]) =>
+    let ttype:      String val = LibXML2.xmlGetProp(xmlnodeptr, "type")
+    (PElaboratedType, [ id ; ttype ])
+
+  fun parsePointerType(id: String, xmlnodeptr: XmlnodePTR): (PPointerType, Array[String]) =>
+    let ttype:      String val = LibXML2.xmlGetProp(xmlnodeptr, "type")
+    let size:       String val = LibXML2.xmlGetProp(xmlnodeptr, "size")
+    let align:      String val = LibXML2.xmlGetProp(xmlnodeptr, "align")
+    (PPointerType, [ id ; ttype ; size ; align ])
+
+  fun parseFile(id: String, xmlnodeptr: XmlnodePTR): (PFile, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    (PFile, [ id ; name ])
+
+  fun parseVariable(id: String, xmlnodeptr: XmlnodePTR): (PVariable, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    let ponyname:   String val = ponifyStruct(name)
+    let ttype:      String val = LibXML2.xmlGetProp(xmlnodeptr, "type")
+    let location:   String val = LibXML2.xmlGetProp(xmlnodeptr, "location")
+    let extern:     String val = LibXML2.xmlGetProp(xmlnodeptr, "extern")
+    let mangled:    String val = LibXML2.xmlGetProp(xmlnodeptr, "mangled")
+    (PVariable, [ id ; name ; ponyname ; ttype ; location ; extern ; mangled ])
+
+
+  fun parseTypedef(id: String, xmlnodeptr: XmlnodePTR): (PTypedef, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    let ponyname:   String val = ponifyStruct(name)
+    let location:   String val = LibXML2.xmlGetProp(xmlnodeptr, "location")
+    let ttype:      String val = LibXML2.xmlGetProp(xmlnodeptr, "type")
+    (PTypedef, [ id ; name ; ponyname ; location ; ttype ])
+
+  fun parseStruct(id: String, xmlnodeptr: XmlnodePTR): (PStruct, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    let ponyname:   String val = ponifyStruct(name)
+    let location:   String val = LibXML2.xmlGetProp(xmlnodeptr, "location")
+    let incomplete: String val = LibXML2.xmlGetProp(xmlnodeptr, "incomplete")
+    let members:    String val = LibXML2.xmlGetProp(xmlnodeptr, "members")
+    let align:      String val = LibXML2.xmlGetProp(xmlnodeptr, "align")
+    (PStruct, [ id ; name ; ponyname ; location ; members ; incomplete ; align ])
+
+  fun parseEnumeration(id: String, xmlnodeptr: XmlnodePTR): (PEnumeration, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    let ponyname:   String val = ponifyStruct(name)
+    let location:   String val = LibXML2.xmlGetProp(xmlnodeptr, "location")
+    let size:       String val = LibXML2.xmlGetProp(xmlnodeptr, "size")
+    let align:      String val = LibXML2.xmlGetProp(xmlnodeptr, "align")
+    (PEnumeration, [ id ; name ; ponyname ; location ; size ; align ])
+
+  fun parseUnion(id: String, xmlnodeptr: XmlnodePTR): (PUnion, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    let ponyname:   String val = ponifyStruct(name)
+    let location:   String val = LibXML2.xmlGetProp(xmlnodeptr, "location")
+    let members:    String val = LibXML2.xmlGetProp(xmlnodeptr, "members")
+    let size:       String val = LibXML2.xmlGetProp(xmlnodeptr, "size")
+    let align:      String val = LibXML2.xmlGetProp(xmlnodeptr, "align")
+    (PUnion, [ id ; name ; ponyname ; location ; members ; size ; align ])
+
+  fun parseFundamentalType(id: String, xmlnodeptr: XmlnodePTR): (PFundamentalType, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    let ponyname:   String val = "insert ponytype here"
+    let size:       String val = LibXML2.xmlGetProp(xmlnodeptr, "size")
+    let align:      String val = LibXML2.xmlGetProp(xmlnodeptr, "align")
+    (PFundamentalType, [ id ; name ; ponyname ; size ; align ])
+
+  fun parseFunctionType(id: String, xmlnodeptr: XmlnodePTR): (PFunctionType, Array[String]) =>
+    let ponyname:   String val = "CallbackFn"
+    let returns:    String val = LibXML2.xmlGetProp(xmlnodeptr, "returns")
+    (PFunctionType, [ id ; ponyname ; returns ])
+
+  fun parseField(id: String, xmlnodeptr: XmlnodePTR): (PField, Array[String]) =>
+    let name:       String val = LibXML2.xmlGetProp(xmlnodeptr, "name")
+    let ponyname:   String val = "p" + ponifyStruct(name)
+    let ttype:      String val = LibXML2.xmlGetProp(xmlnodeptr, "type")
+    let context:    String val = LibXML2.xmlGetProp(xmlnodeptr, "context")
+    let access:     String val = LibXML2.xmlGetProp(xmlnodeptr, "access")
+    let offset:     String val = LibXML2.xmlGetProp(xmlnodeptr, "offset")
+    (PField, [ id ; name ; ponyname ; ttype ; context ; access ; offset ])
+
+
+
+
+
+
+  fun ponifyStruct(text: String val): String =>
+    var t: String iso = text.clone()
+    t.replace("_", "")
+    (var f: String iso, var r: String iso) = t.clone().chop(USize(1))
+    f.upper_in_place()
+    f.clone() + r.clone()
+
+
+
+    /*
     Debug.out("Calling checkForGlobalJSON()")
     checkForGlobalJSON(env)
     var structFileOutputs: Map[String, Array[String]] = Map[String, Array[String]].create()
     var useFileOutputs: Map[String, String] = Map[String, String].create()
-    let filename: String val = "libffi.xml"
+    let filename: String val = "libxml2.xml"
 //    Debug.err("Parsing: " + filename)
-    let docptr: XmldocPTR = LibXML2.xmlParseFile("libffi.xml")
+    let docptr: XmldocPTR = LibXML2.xmlParseFile("libxml2.xml")
     let ctxptr: XmlxpathcontextPTR = LibXML2.xmlXPathNewContext(docptr)
 
     // Let's preprocess some XML for fun and profit
@@ -443,3 +665,4 @@ actor Main
       ])
     typeConversionOut.data("String") = x
     typeConversionOut
+*/
