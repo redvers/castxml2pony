@@ -22,6 +22,9 @@ primitive PCvQualifiedType
 primitive PArrayType
 primitive PUnimplemented
 primitive PFunction
+primitive PUnknown
+
+type PXMLTagType is (PVariable|PTypedef|PStruct|PEnumeration|PFunctionType|PUnion|PFundamentalType|PField|PFile|PPointerType|PElaboratedType|PCvQualifiedType|PArrayType|PUnimplemented|PFunction|PUnknown)
 
 actor Main
   new create(env: Env) =>
