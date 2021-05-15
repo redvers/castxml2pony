@@ -7,36 +7,54 @@ use "lib:xml2"
 use "json"
 use "files"
 
-primitive PVariable
-primitive PTypedef
-primitive PStruct
-primitive PEnumeration
-primitive PFunctionType
-primitive PUnion
-primitive PFundamentalType
-primitive PField
-primitive PFile
-primitive PPointerType
-primitive PElaboratedType
-primitive PCvQualifiedType
-primitive PArrayType
-primitive PUnimplemented
-primitive PFunction
-primitive PUnknown
+primitive PVariable fun filename(): String val => "variable.csv"
+primitive PTypedef fun filename(): String val => "typedef.csv"
+primitive PStruct fun filename(): String val => "struct.csv"
+primitive PEnumeration fun filename(): String val => "enumeration.csv"
+primitive PFunctionType fun filename(): String val => "functiontype.csv"
+primitive PUnion fun filename(): String val => "union.csv"
+primitive PFundamentalType fun filename(): String val => "fundamentaltype.csv"
+primitive PField fun filename(): String val => "field.csv"
+primitive PFile fun filename(): String val => "file.csv"
+primitive PPointerType fun filename(): String val => "pointertype.csv"
+primitive PElaboratedType fun filename(): String val => "elaboratedtype.csv"
+primitive PCvQualifiedType fun filename(): String val => "pcvqualifiedtype.csv"
+primitive PArrayType fun filename(): String val => "arraytype.csv"
+primitive PUnimplemented fun filename(): String val => "unimplemented.csv"
+primitive PFunction fun filename(): String val => "function.csv"
+primitive PUnknown fun filename(): String val => "unknown.csv"
 
 type PXMLTagType is (PVariable|PTypedef|PStruct|PEnumeration|PFunctionType|PUnion|PFundamentalType|PField|PFile|PPointerType|PElaboratedType|PCvQualifiedType|PArrayType|PUnimplemented|PFunction|PUnknown)
 
 actor Main
   new create(env: Env) =>
-    None
-
     let filename: String val = "libxml2.xml"
+    try
+      removeTypes(env)?
+    end
     writeTypes(env, filename)
 
 
 
 
 
+  fun removeTypes(env: Env): None ? =>
+    FilePath(env.root as AmbientAuth, PVariable.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PTypedef.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PStruct.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PEnumeration.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PFunctionType.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PUnion.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PFundamentalType.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PField.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PFile.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PPointerType.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PElaboratedType.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PCvQualifiedType.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PArrayType.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PUnimplemented.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PFunction.filename())?.remove()
+    FilePath(env.root as AmbientAuth, PUnknown.filename())?.remove()
 
 
   fun writeTypes(env: Env, filename: String): None =>
@@ -63,59 +81,76 @@ actor Main
           continue
         end
 
+        let m: (PXMLTagType, Array[String]) =
         match nodetype
         | let x: String ref if (nodetype == "Variable") =>
                    let l: (PVariable, Array[String]) = parseVariable(id, xmlnodeptr)
+                   l
                    // [ id ; name ; ponyname ; ttype ; location ; extern ; mangled ]
         | let x: String ref if (nodetype == "Typedef") =>
                    let l: (PTypedef, Array[String]) = parseTypedef(id, xmlnodeptr)
+                   l
                    // [ id ; name ; ponyname ; location ; ttype ]
         | let x: String ref if (nodetype == "Struct") =>
                    let l: (PStruct, Array[String]) = parseStruct(id, xmlnodeptr)
+                   l
                    // [ id ; name ; ponyname ; location ; members ; incomplete ; align ]
         | let x: String ref if (nodetype == "Enumeration") =>
                    let l: (PEnumeration, Array[String]) = parseEnumeration(id, xmlnodeptr)
+                   l
                    // [ id ; name ; ponyname ; location ; size ; align ]
         | let x: String ref if (nodetype == "FunctionType") =>
                    let l: (PFunctionType, Array[String]) = parseFunctionType(id, xmlnodeptr)
+                   l
                    // [ id ; ponyname ; returns ]
         | let x: String ref if (nodetype == "Union") =>
                    let l: (PUnion, Array[String]) = parseUnion(id, xmlnodeptr)
+                   l
                    // [ id ; name ; ponyname ; location ; members ; size ; align ]
         | let x: String ref if (nodetype == "FundamentalType") =>
                    let l: (PFundamentalType, Array[String]) = parseFundamentalType(id, xmlnodeptr)
+                   l
                    // [ id ; name ; ponyname ; size ; align ]
         | let x: String ref if (nodetype == "Field") =>
                    let l: (PField, Array[String]) = parseField(id, xmlnodeptr)
+                   l
                    // [ id ; name ; ponyname ; ttype ; context ; access ; offset ]
         | let x: String ref if (nodetype == "File") =>
                    let l: (PFile, Array[String]) = parseFile(id, xmlnodeptr)
+                   l
                    // [ id ; name ]
         | let x: String ref if (nodetype == "PointerType") =>
                    let l: (PPointerType, Array[String]) = parsePointerType(id, xmlnodeptr)
+                   l
                    // [ id ; ttype ; size ; align ]
         | let x: String ref if (nodetype == "ElaboratedType") =>
                    let l: (PElaboratedType, Array[String]) = parseElaboratedType(id, xmlnodeptr)
+                   l
                    // [ id ; ttype ]
         | let x: String ref if (nodetype == "CvQualifiedType") =>
                    let l: (PCvQualifiedType, Array[String]) = parseCvQualifiedType(id, xmlnodeptr)
+                   l
                    // [ id ; ttype ; restrict ; const ]
         | let x: String ref if (nodetype == "ArrayType") =>
                    let l: (PArrayType, Array[String]) = parseArrayType(id, xmlnodeptr)
+                   l
                    // [ id ; ttype ; min ; max ]
         | let x: String ref if (nodetype == "Unimplemented") =>
                    let l: (PUnimplemented, Array[String]) = parseUnimplemented(id, xmlnodeptr)
+                   l
                    // [ id ; kind ]
         | let x: String ref if (nodetype == "Function") =>
                    let l: (PFunction, Array[String]) = parseFunction(id, xmlnodeptr)
+                   l
                    // [ id ; name ; ponyname ; returns ; mangled ]
         else
-          Array[String]
+          (PUnknown,Array[String])
         end
       end
     else
       env.out.print("Boom")
     end
+
 
 
   fun parseFunction(id: String, xmlnodeptr: XmlnodePTR): (PFunction, Array[String]) =>
