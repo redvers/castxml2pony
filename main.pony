@@ -27,14 +27,66 @@ primitive PUnknown fun filename(): String val => "unknown.csv"
 type PXMLTagType is (PVariable|PTypedef|PStruct|PEnumeration|PFunctionType|PUnion|PFundamentalType|PField|PFile|PPointerType|PElaboratedType|PCvQualifiedType|PArrayType|PUnimplemented|PFunction|PUnknown)
 
 actor Main
-  new create(env: Env) =>
+  let env: Env
+  new create(env': Env) =>
+    env = env'
     let filename: String val = "libxml2.xml"
-    try
-      removeTypes(env)?
-    end
-    writeTypes(env, filename)
+//    try
+//      removeTypes(env)?
+//    end
+//    writeTypes(env, filename)
+    loadCSVs()
 
-  fun removeTypes(env: Env): None ? =>
+
+    // [ id ; name ; ponyname ; location ; ttype ] // Typedef
+    // [ id ; name ; ponyname ; ttype ; location ; extern ; mangled ] // Variable
+    // [ id ; name ; ponyname ; location ; members ; incomplete ; align ] // Struct
+    // [ id ; name ; ponyname ; location ; size ; align ] // Enumeration
+    // [ id ; ponyname ; returns ] // FunctionType
+    // [ id ; name ; ponyname ; location ; members ; size ; align ] // Union
+    // [ id ; name ; ponyname ; size ; align ] // FundamentalType
+    // [ id ; name ; ponyname ; ttype ; context ; access ; offset ] // Field
+    // [ id ; name ] // File
+    // [ id ; ttype ; size ; align ] // PointerType
+    // [ id ; ttype ] // ElaboratedType
+    // [ id ; ttype ; restrict ; const ] // CvQualifiedType
+    // [ id ; ttype ; min ; max ] // ArrayType
+    // [ id ; kind ] // Unimplemented
+    // [ id ; name ; ponyname ; returns ; mangled ] // Function
+
+
+  fun loadCSVs(): None =>
+    let map: Map[String, String] = Map[String, String]
+    loadTypedefCSV(map)
+
+
+//    (id, name, ponyname, location, ttype)
+
+
+  fun loadTypedefCSV(map: Map[String, String]): Map[String, String] =>
+    try
+      let file: File = File.open(FilePath(env.root as AmbientAuth, PTypedef.filename())?)
+      let csv: String iso = file.read_string(file.size())
+
+      let csvlines: Array[String] = csv.split_by("\n")
+
+      for line in csvlines.values() do
+        let fields: Array[String] = line.split_by(",")
+        if (line == "") then continue end
+        if (fields.size() != 5) then
+          env.err.print("Illegal Line: typedef.csv: " + line)
+        else
+          let id: String = fields.apply(0)?
+          let ty: String = fields.apply(4)?
+          map.insert(id, ty)
+        end
+      end
+    end
+    map
+
+
+
+  fun removeTypes(): None ? =>
     FilePath(env.root as AmbientAuth, PVariable.filename())?.remove()
     FilePath(env.root as AmbientAuth, PTypedef.filename())?.remove()
     FilePath(env.root as AmbientAuth, PStruct.filename())?.remove()
@@ -52,8 +104,7 @@ actor Main
     FilePath(env.root as AmbientAuth, PFunction.filename())?.remove()
     FilePath(env.root as AmbientAuth, PUnknown.filename())?.remove()
 
-
-  fun writeTypes(env: Env, filename: String): None =>
+  fun writeTypes(filename: String): None =>
     let docptr: XmldocPTR = LibXML2.xmlParseFile("libxml2.xml")
     let ctxptr: XmlxpathcontextPTR = LibXML2.xmlXPathNewContext(docptr)
 
