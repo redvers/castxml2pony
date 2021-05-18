@@ -30,42 +30,42 @@ actor Main
   let env: Env
   new create(env': Env) =>
     env = env'
-    let filename: String val = "libxml2.xml"
+//    let filename: String val = "libxml2.xml"
 //    try
-//      removeTypes(env)?
+//      removeTypes()?
 //    end
-//    writeTypes(env, filename)
-    loadCSVs()
+//    writeTypes(filename)
+    let idmaps: Map[String, (String, String)] = loadCSVs()
+
+    for id in idmaps.keys() do
+      try
+        (var tt: String, var nid: String) = idmaps.apply(id)?
+      end
+    end
 
 
-    // [ id ; name ; ponyname ; location ; ttype ] // Typedef
-    // [ id ; name ; ponyname ; ttype ; location ; extern ; mangled ] // Variable
-    // [ id ; name ; ponyname ; location ; members ; incomplete ; align ] // Struct
-    // [ id ; name ; ponyname ; location ; size ; align ] // Enumeration
-    // [ id ; ponyname ; returns ] // FunctionType
-    // [ id ; name ; ponyname ; location ; members ; size ; align ] // Union
-    // [ id ; name ; ponyname ; size ; align ] // FundamentalType
-    // [ id ; name ; ponyname ; ttype ; context ; access ; offset ] // Field
-    // [ id ; name ] // File
-    // [ id ; ttype ; size ; align ] // PointerType
-    // [ id ; ttype ] // ElaboratedType
-    // [ id ; ttype ; restrict ; const ] // CvQualifiedType
-    // [ id ; ttype ; min ; max ] // ArrayType
-    // [ id ; kind ] // Unimplemented
-    // [ id ; name ; ponyname ; returns ; mangled ] // Function
+
+  fun loadCSVs(): Map[String, (String, String)] =>
+    let map: Map[String, (String, String)] = Map[String, (String, String)]
+    loadCSV("Typedef", map, PTypedef.filename(),                 USize(6), USize(1), USize(5))
+    loadCSV("Variable", map, PVariable.filename(),               USize(8), USize(1), USize(4))
+    loadCSV("Struct", map, PStruct.filename(),                   USize(8), USize(1), USize(5))
+    loadCSV("Enumeration", map, PEnumeration.filename(),         USize(7), USize(1), USize(3))
+    loadCSV("FunctionType", map, PFunctionType.filename(),       USize(4), USize(1), USize(3))
+    loadCSV("Union", map, PUnion.filename(),                     USize(8), USize(1), USize(5))
+    loadCSV("FundamentalType", map, PFundamentalType.filename(), USize(6), USize(1), USize(3))
+    loadCSV("Field", map, PField.filename(),                     USize(8), USize(1), USize(4))
+    loadCSV("File", map, PFile.filename(),                       USize(3), USize(1), USize(2))
+    loadCSV("PointerType", map, PPointerType.filename(),         USize(5), USize(1), USize(2))
+    loadCSV("ElaboratedType", map, PElaboratedType.filename(),   USize(3), USize(1), USize(2))
+    loadCSV("ArrayType", map, PArrayType.filename(),             USize(5), USize(1), USize(2))
+    loadCSV("Function", map, PFunction.filename(),               USize(6), USize(1), USize(4))
+    map
 
 
-  fun loadCSVs(): None =>
-    let map: Map[String, String] = Map[String, String]
-    loadTypedefCSV(map)
-
-
-//    (id, name, ponyname, location, ttype)
-
-
-  fun loadTypedefCSV(map: Map[String, String]): Map[String, String] =>
+  fun loadCSV(t: String, map: Map[String, (String, String)], filename: String, size: USize, idn: USize, tyn: USize): Map[String, (String, String)] =>
     try
-      let file: File = File.open(FilePath(env.root as AmbientAuth, PTypedef.filename())?)
+      let file: File = File.open(FilePath(env.root as AmbientAuth, filename)?)
       let csv: String iso = file.read_string(file.size())
 
       let csvlines: Array[String] = csv.split_by("\n")
@@ -73,14 +73,15 @@ actor Main
       for line in csvlines.values() do
         let fields: Array[String] = line.split_by(",")
         if (line == "") then continue end
-        if (fields.size() != 5) then
+        if (fields.size() != size) then
           env.err.print("Illegal Line: typedef.csv: " + line)
         else
-          let id: String = fields.apply(0)?
-          let ty: String = fields.apply(4)?
-          map.insert(id, ty)
+          let id: String = fields.apply(idn)?
+          let ty: String = fields.apply(tyn)?
+          map.insert(id, (t, ty))
         end
       end
+
     end
     map
 
@@ -133,105 +134,105 @@ actor Main
                    let l: String = parseVariable(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PVariable.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ; ponyname ; ttype ; location ; extern ; mangled ] // Variable
         | let x: String ref if (nodetype == "Typedef") =>
                    let l: String = parseTypedef(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PTypedef.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ; ponyname ; location ; ttype ] // Typedef
         | let x: String ref if (nodetype == "Struct") =>
                    let l: String = parseStruct(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PStruct.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ; ponyname ; location ; members ; incomplete ; align ] // Struct
         | let x: String ref if (nodetype == "Enumeration") =>
                    let l: String = parseEnumeration(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PEnumeration.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ; ponyname ; location ; size ; align ] // Enumeration
         | let x: String ref if (nodetype == "FunctionType") =>
                    let l: String = parseFunctionType(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PFunctionType.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; ponyname ; returns ] // FunctionType
         | let x: String ref if (nodetype == "Union") =>
                    let l: String = parseUnion(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PUnion.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ; ponyname ; location ; members ; size ; align ] // Union
         | let x: String ref if (nodetype == "FundamentalType") =>
                    let l: String = parseFundamentalType(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PFundamentalType.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ; ponyname ; size ; align ] // FundamentalType
         | let x: String ref if (nodetype == "Field") =>
                    let l: String = parseField(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PField.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ; ponyname ; ttype ; context ; access ; offset ] // Field
         | let x: String ref if (nodetype == "File") =>
                    let l: String = parseFile(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PFile.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ] // File
         | let x: String ref if (nodetype == "PointerType") =>
                    let l: String = parsePointerType(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PPointerType.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; ttype ; size ; align ] // PointerType
         | let x: String ref if (nodetype == "ElaboratedType") =>
                    let l: String = parseElaboratedType(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PElaboratedType.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; ttype ] // ElaboratedType
         | let x: String ref if (nodetype == "CvQualifiedType") =>
                    let l: String = parseCvQualifiedType(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PCvQualifiedType.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; ttype ; restrict ; const ] // CvQualifiedType
         | let x: String ref if (nodetype == "ArrayType") =>
                    let l: String = parseArrayType(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PArrayType.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; ttype ; min ; max ] // ArrayType
         | let x: String ref if (nodetype == "Unimplemented") =>
                    let l: String = parseUnimplemented(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PUnimplemented.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; kind ] // Unimplemented
         | let x: String ref if (nodetype == "Function") =>
                    let l: String = parseFunction(id, xmlnodeptr)
                    File(FilePath(env.root as AmbientAuth, PFunction.filename())?)
                    .>seek_end(USize(0))
-                   .>print(l)
+                   .>print("0," + l)
                    .>dispose()
                    // [ id ; name ; ponyname ; returns ; mangled ] // Function
         else
@@ -796,3 +797,20 @@ actor Main
     typeConversionOut.data("String") = x
     typeConversionOut
 */
+
+    // [ id ; name ; ponyname ; location ; ttype ] // Typedef
+    // [ id ; name ; ponyname ; ttype ; location ; extern ; mangled ] // Variable
+    // [ id ; name ; ponyname ; location ; members ; incomplete ; align ] // Struct
+    // [ id ; name ; ponyname ; location ; size ; align ] // Enumeration
+    // [ id ; ponyname ; returns ] // FunctionType
+    // [ id ; name ; ponyname ; location ; members ; size ; align ] // Union
+    // [ id ; name ; ponyname ; size ; align ] // FundamentalType
+    // [ id ; name ; ponyname ; ttype ; context ; access ; offset ] // Field
+    // [ id ; name ] // File
+    // [ id ; ttype ; size ; align ] // PointerType
+    // [ id ; ttype ] // ElaboratedType
+    // [ id ; ttype ; restrict ; const ] // CvQualifiedType
+    // [ id ; ttype ; min ; max ] // ArrayType
+    // [ id ; kind ] // Unimplemented
+    // [ id ; name ; ponyname ; returns ; mangled ] // Function
+
