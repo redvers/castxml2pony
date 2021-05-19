@@ -51,6 +51,8 @@ actor Main
     Debug.out("Successful Finish")
 
     */
+    else
+      env.out.print("We errored out")
     end
 
   fun writeFunctionFiles(functionFileOutputs: Map[String, Map[String, String]], auth: AmbientAuth)? =>
@@ -268,14 +270,10 @@ actor Main
     let structmap: StructMap = StructMap(ctx)?
     let ponystructarray: Array[String] = Array[String]
 
-    try
-      Debug.out("\nProcessing: " + filemap.lookupByID(fid)?)
-    else
-      Debug.out("Unknown error")
-    end
+    Debug.out("\nProcessing: " + filemap.lookupByID(fid)?)
 
     for stru in structmap.iterByFID(fid) do
-      let ponystr: String val = stru.ponyDefinition(membermap, config, ctx)?
+      let ponystr: String val = stru.ponyDefinition(membermap, config, ctx)
       ponystructarray.push(ponystr)
     end
     ponystructarray
