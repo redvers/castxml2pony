@@ -13,16 +13,16 @@ actor Main
     checkForGlobalJSON(env)
     var structFileOutputs: Map[String, Array[String]] = Map[String, Array[String]].create()
     var useFileOutputs: Map[String, String] = Map[String, String].create()
-    let filename: String val = "libffi.xml"
+    let filename: String val = "libxml2.xml"
 //    Debug.err("Parsing: " + filename)
-    let docptr: XmldocPTR = LibXML2.xmlParseFile("libffi.xml")
-    let ctxptr: XmlxpathcontextPTR = LibXML2.xmlXPathNewContext(docptr)
+    try
+      let doc: Xml2Doc = Xml2Doc.xmlParseFile(filename)?
+      let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
 
     // Let's preprocess some XML for fun and profit
-    Debug.out("Calling checkForInstanceJSON()")
-    checkForInstanceJSON(env, ctxptr)
-
-    try
+      Debug.out("Calling checkForInstanceJSON()")
+      checkForInstanceJSON(env, ctx)
+/*
     Debug.out("Calling Config")
       let config: Config val = Config(env.root as AmbientAuth)
     Debug.out("Calling FileMap")
@@ -49,8 +49,9 @@ actor Main
       writeEnumOutputs(enummap.fm, env.root as AmbientAuth)? //
 
     Debug.out("Successful Finish")
-    end
 
+    */
+    end
 
   fun writeFunctionFiles(functionFileOutputs: Map[String, Map[String, String]], auth: AmbientAuth)? =>
     let filename: String val = "out/functions.pony"
@@ -296,7 +297,7 @@ actor Main
     end
 
 
-  fun checkForInstanceJSON(env: Env, ctxptr: XmlxpathcontextPTR) =>
+  fun checkForInstanceJSON(env: Env, ctx: Xml2xpathcontext) =>
     try
       let auth = env.root as AmbientAuth
       // Check for instance.json
@@ -304,7 +305,7 @@ actor Main
         env.out.print("instance.json exists")
       else
         env.out.print("Generating instance.json")
-        writeDummyInstanceJSON(auth, ctxptr)?
+        writeDummyInstanceJSON(auth, ctx)?
         env.out.print("instance.json has been written.")
       end
     end
@@ -336,12 +337,11 @@ actor Main
     file.write(doc.string(where indent="  ", pretty_print=true))
     file.dispose()
 
-
-  fun writeDummyInstanceJSON(auth: AmbientAuth, ctxptr: XmlxpathcontextPTR) ? =>
+  fun writeDummyInstanceJSON(auth: AmbientAuth, ctx: Xml2xpathcontext) ? =>
     let doc: JsonDoc = JsonDoc
     let array: Array[JsonType] = Array[JsonType].create()
 
-    let filemap: FileMap = FileMap(ctxptr)
+    let filemap: FileMap = FileMap(ctx)?
     var fm: Map[String, String] = filemap.fm
 
     let fp: FilePath = FilePath(auth, "instance.json")?

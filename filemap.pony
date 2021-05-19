@@ -7,23 +7,15 @@ class FileMap
   var fm: Map[String, String] = Map[String, String].create()
   var fids: Array[String] = Array[String].create()
 
-  new create(ctxptr: XmlxpathcontextPTR) =>
-    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//File", ctxptr)
-    try
-      let xpathexp: Xmlxpathobject = xpathexptr.apply()?
-      let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
+  new create(ctx: Xml2xpathcontext)? =>
+    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//File")?
 
-      let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
-      var nodecount: I32 val = xmlnodeset.pnodeNr
-      var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-
-      for element in nodearray.values() do
-        let xmlnode: Xmlnode = element.apply()?
-        let id: String val = LibXML2.xmlGetProp(element, "id")
-        let name: String val = LibXML2.xmlGetProp(element, "name")
-        fm.insert(id, name)
-        fids.push(id)
-      end
+    for element in xpathobj.nodearray.values() do
+      let xmlnode: Xmlnode = element.ptr
+      let id: String val = LibXML2.xmlGetProp(element.ptr', "id")
+      let name: String val = LibXML2.xmlGetProp(element.ptr', "name")
+      fm.insert(id, name)
+      fids.push(id)
     end
 
   fun lookupByID(id: String): String ? =>
