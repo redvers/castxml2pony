@@ -41,9 +41,9 @@ actor Main
 
     Debug.out("Calling writeFunctionFiles")
       writeFunctionFiles(functionFileOutputs, env.root as AmbientAuth)?
+*/
     Debug.out("Calling writeUseFileOutputs")
       writeUseFileOutputs(useFileOutputs, config, env.root as AmbientAuth)? //
-*/
     Debug.out("Calling writeStructFiles")
       writeStructFiles(structFileOutputs, env.root as AmbientAuth)? //
     Debug.out("Calling writeEnumOutputs")
@@ -162,7 +162,7 @@ actor Main
       let fid: String = (imap as JsonObject val).data("id")? as String val
       if ((imap as JsonObject val).data("use")? as Bool) then
         let functionmap: FunctionMap = FunctionMap(ctx, fid)?
-//        let usetxt: String = processUse(ctxptr, config, functionmap)
+        let usetxt: String = processUse(ctx, config, functionmap)?
 //        rv.insert(fid, usetxt)
         None
       end
@@ -170,55 +170,55 @@ actor Main
     rv
 
 
-//          fun writeUseFileOutputs(useFileOutputs: Map[String, String], config: Config, auth: AmbientAuth)? =>
-//            for (fid, usetxt) in useFileOutputs.pairs() do
-//              let filename: String val = "out/use-" + fid + ".pony"
-//              let fp: FilePath = FilePath.create(auth, filename)?
-//              fp.remove()
-//
-//              let file: File = File(fp)
-//              file.print(usetxt)
-//              file.dispose()
-//            end
-//
-//
-//          fun processUse(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): String =>
-//            var rv: Array[String] = Array[String].create()
-//            for function in functionmap.fm.values() do
-//                Debug.out("                 use " + function.name)
-//              let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, function.rvtype, Array[CastTYPE].create(USize(8)))
-//              let ponytype: String = TypeLogic.resolveChain(chain, config)
-//
-//              let argstr: String = stringifyUseArgs(function.args, ctxptr, config)
-//
-//              let ctype: String = config.getFFIType(ponytype)
-//              rv.push("use @" + function.name + "[" + ctype + "](" + argstr + ")")
-//            end
-//            "\n".join(rv.values())
-//
-//
-//          fun stringifyUseArgs(args: Array[(String, String)], ctxptr: XmlxpathcontextPTR, config: Config): String =>
-//            var rva: Array[String] = Array[String].create(USize(4))
-//            var cnt: U8 = U8(0)
-//            for (argname, argtype) in args.values() do
-//              let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, argtype, Array[CastTYPE].create(USize(8)))
-//              let ponytype: String = TypeLogic.resolveChain(chain, config)
-//              var ctype: String = config.getFFIType(ponytype)
-//
-//              if (ctype == "Pointer[U8]") then
-//                ctype = "Pointer[U8] tag"
-//              end
-//
-//              if (ctype == "") then
-//                rva.push("...")
-//              else
-//                rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + ": " + ctype)
-//              end
-//              cnt = cnt + 1
-//            end
-//            ", ".join(rva.values())
-//
-//
+    fun writeUseFileOutputs(useFileOutputs: Map[String, String], config: Config, auth: AmbientAuth)? =>
+      for (fid, usetxt) in useFileOutputs.pairs() do
+        let filename: String val = "out/use-" + fid + ".pony"
+        let fp: FilePath = FilePath.create(auth, filename)?
+        fp.remove()
+
+        let file: File = File(fp)
+        file.print(usetxt)
+        file.dispose()
+      end
+
+
+  fun processUse(ctx: Xml2xpathcontext, config: Config, functionmap: FunctionMap): String ? =>
+    var rv: Array[String] = Array[String].create()
+    for function in functionmap.fm.values() do
+        Debug.out("                 use " + function.name)
+      let chain: Array[CastTYPE] = TypeLogic.recurseType(ctx, config, function.rvtype, Array[CastTYPE].create(USize(8)))?
+      let ponytype: String = TypeLogic.resolveChain(chain, config)
+
+      let argstr: String = stringifyUseArgs(function.args, ctx, config)?
+
+      let ctype: String = config.getFFIType(ponytype)
+      rv.push("use @" + function.name + "[" + ctype + "](" + argstr + ")")
+    end
+    "\n".join(rv.values())
+
+
+  fun stringifyUseArgs(args: Array[(String, String)], ctx: Xml2xpathcontext, config: Config): String ? =>
+     var rva: Array[String] = Array[String].create(USize(4))
+     var cnt: U8 = U8(0)
+     for (argname, argtype) in args.values() do
+       let chain: Array[CastTYPE] = TypeLogic.recurseType(ctx, config, argtype, Array[CastTYPE].create(USize(8)))?
+       let ponytype: String = TypeLogic.resolveChain(chain, config)
+       var ctype: String = config.getFFIType(ponytype)
+
+       if (ctype == "Pointer[U8]") then
+         ctype = "Pointer[U8] tag"
+       end
+
+       if (ctype == "") then
+         rva.push("...")
+       else
+         rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + ": " + ctype)
+       end
+       cnt = cnt + 1
+     end
+     ", ".join(rva.values())
+
+
   fun writeEnumOutputs(enummap: Map[String, Enum], auth: AmbientAuth)? =>
     let fp: FilePath = FilePath.create(auth, "out/enumerations.pony")?
     fp.remove()
