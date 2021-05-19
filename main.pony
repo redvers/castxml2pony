@@ -22,13 +22,13 @@ actor Main
     // Let's preprocess some XML for fun and profit
       Debug.out("Calling checkForInstanceJSON()")
       checkForInstanceJSON(env, ctx)
-/*
     Debug.out("Calling Config")
       let config: Config val = Config(env.root as AmbientAuth)
     Debug.out("Calling FileMap")
-      let filemap: FileMap = FileMap(ctxptr)
+      let filemap: FileMap = FileMap(ctx)?
     Debug.out("Calling MemberMap")
-      let membermap: MemberMap = MemberMap(ctxptr)
+      let membermap: MemberMap = MemberMap(ctx)
+/*
     Debug.out("Calling EnumMap")
       let enummap: EnumMap = EnumMap(ctxptr)
 
