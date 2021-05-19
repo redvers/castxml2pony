@@ -57,21 +57,12 @@ primitive EnumLogic
 class EnumMap
   var fm: Map[String, Enum] = Map[String, Enum].create()
 
-  new create(ctxptr: XmlxpathcontextPTR) =>
-    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//Enumeration", ctxptr)
-    try
-      let xpathexp: Xmlxpathobject = xpathexptr.apply()?
-      let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
+  new create(ctx: Xml2xpathcontext)? =>
+    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//Enumeration")?
 
-      let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
-      var nodecount: I32 val = xmlnodeset.pnodeNr
-      var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-
-      for element in nodearray.values() do
-        let m: Enum = Enum(element)
-        fm.insert(m.id, m)
-      end
-
+    for element in xpathobj.nodearray.values() do
+      let m: Enum = Enum(element.ptr')
+      fm.insert(m.id, m)
     end
 
   fun ref lookupById(id: String): Enum ref ? =>
@@ -101,21 +92,21 @@ class EnumMember
 class EnumMemberMap
   var fm: Map[String, Member] = Map[String, Member].create()
 
-  new create(ctxptr: XmlxpathcontextPTR) =>
-    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//Field", ctxptr)
+  new create(ctx: Xmlxpathcontext) =>
     try
-      let xpathexp: Xmlxpathobject = xpathexptr.apply()?
-      let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
-
-      let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
-      var nodecount: I32 val = xmlnodeset.pnodeNr
-      var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-
-      for element in nodearray.values() do
-        let m: Member = Member(element)
-        fm.insert(m.id, m)
-      end
+      let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//Field")
+//      let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//Field", ctxptr)
+//      let xpathexp: Xmlxpathobject = xpathexptr.apply()?
+//      let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
+//
+//      let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
+//      var nodecount: I32 val = xmlnodeset.pnodeNr
+//      var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
+//
+//      for element in nodearray.values() do
+//        let m: Member = Member(element)
+//        fm.insert(m.id, m)
+//      end
 
     end
-
 */

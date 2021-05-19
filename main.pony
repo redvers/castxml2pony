@@ -28,9 +28,9 @@ actor Main
       let filemap: FileMap = FileMap(ctx)?
     Debug.out("Calling MemberMap")
       let membermap: MemberMap = MemberMap(ctx)
-/*
     Debug.out("Calling EnumMap")
-      let enummap: EnumMap = EnumMap(ctxptr)
+      let enummap: EnumMap = EnumMap(ctx)?
+/*
 
     Debug.out("Calling processStructs")
       structFileOutputs = processStructs(filemap, membermap, config, ctxptr) //
