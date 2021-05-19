@@ -15,51 +15,40 @@ class ref CastTYPE
 
   new create(ctx: Xml2xpathcontext, config': Config, id': String)? =>
     let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//*[@id='" + id' + "']")?
-//    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//*[@id='" + id' + "']", ctxptr)
     config = config'
-//    try
-//      let xpathexp: Xmlxpathobject = xpathexptr.apply()?
-//      let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
-//
-//      let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
-//      var nodecount: I32 val = xmlnodeset.pnodeNr
-//      if nodecount != 1 then
-//        error
-//      end
-//
-//      var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-//      var ttypeptr: XmlnodePTR = nodearray(0)?
-//      recordtype = String.copy_cstring(ttypeptr.apply()?.pname)
-//
-//      match recordtype
-//      | let x: String ref if recordtype == "Struct" =>
-//                id = LibXML2.xmlGetProp(ttypeptr, "id")
-//                dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-//                ponytype = StructLogic.ponyStruct(LibXML2.xmlGetProp(ttypeptr, "name"))
-//                if (ponytype == "") then ponytype = "OpaqueStruct" end
-//      | let x: String ref if recordtype == "Enumeration" =>
-//                id = LibXML2.xmlGetProp(ttypeptr, "id")
-//                dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-//                ponytype = StructLogic.ponyStruct(LibXML2.xmlGetProp(ttypeptr, "name"))
-//                if (ponytype == "") then ponytype = "OpaqueEnumeration" end
-//      | let x: String ref if recordtype == "FunctionType" =>
-//                id = LibXML2.xmlGetProp(ttypeptr, "id")
-//                dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-//                ponytype = "CallbackFn"
-//      | let x: String ref if recordtype == "Union" =>
-//                id = LibXML2.xmlGetProp(ttypeptr, "id")
-//                dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-//                ponytype = "Union"
-//      | let x: String ref if recordtype == "FundamentalType" =>
-//                id = LibXML2.xmlGetProp(ttypeptr, "id")
-//                dstype = LibXML2.xmlGetProp(ttypeptr, "name")
-//                ponytype = fundamentalType(dstype)
-//      else
-//                id = LibXML2.xmlGetProp(ttypeptr, "id")
-//                dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-//      end
-//
-//    end
+
+    var ttypeptr: XmlnodePTR = xpathobj.nodearray'.apply(0)?
+
+    recordtype = String.copy_cstring(ttypeptr.apply()?.pname)
+
+    match recordtype
+    | let x: String ref if recordtype == "Struct" =>
+              id = LibXML2.xmlGetProp(ttypeptr, "id")
+              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+              ponytype = StructLogic.ponyStruct(LibXML2.xmlGetProp(ttypeptr, "name"))
+              if (ponytype == "") then ponytype = "OpaqueStruct" end
+    | let x: String ref if recordtype == "Enumeration" =>
+              id = LibXML2.xmlGetProp(ttypeptr, "id")
+              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+              ponytype = StructLogic.ponyStruct(LibXML2.xmlGetProp(ttypeptr, "name"))
+              if (ponytype == "") then ponytype = "OpaqueEnumeration" end
+    | let x: String ref if recordtype == "FunctionType" =>
+              id = LibXML2.xmlGetProp(ttypeptr, "id")
+              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+              ponytype = "CallbackFn"
+    | let x: String ref if recordtype == "Union" =>
+              id = LibXML2.xmlGetProp(ttypeptr, "id")
+              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+              ponytype = "Union"
+    | let x: String ref if recordtype == "FundamentalType" =>
+              id = LibXML2.xmlGetProp(ttypeptr, "id")
+              dstype = LibXML2.xmlGetProp(ttypeptr, "name")
+              ponytype = fundamentalType(dstype)
+    else
+              id = LibXML2.xmlGetProp(ttypeptr, "id")
+              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+    end
+
 
   fun fundamentalType(str: String val): String =>
     try

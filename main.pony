@@ -33,9 +33,9 @@ actor Main
 
     Debug.out("Calling processStructs")
       structFileOutputs = processStructs(filemap, membermap, config, ctx)? //
-/*
     Debug.out("Calling processUses")
-      useFileOutputs = processUses(filemap, config, ctxptr)? //
+      useFileOutputs = processUses(filemap, config, ctx)? //
+/*
     Debug.out("Calling processFunctions")
       let functionFileOutputs: Map[String, Map[String, String]] = processFunctions(filemap, config, ctxptr)?
 
@@ -43,11 +43,12 @@ actor Main
       writeFunctionFiles(functionFileOutputs, env.root as AmbientAuth)?
     Debug.out("Calling writeUseFileOutputs")
       writeUseFileOutputs(useFileOutputs, config, env.root as AmbientAuth)? //
+*/
     Debug.out("Calling writeStructFiles")
       writeStructFiles(structFileOutputs, env.root as AmbientAuth)? //
     Debug.out("Calling writeEnumOutputs")
       writeEnumOutputs(enummap.fm, env.root as AmbientAuth)? //
-
+/*
     Debug.out("Successful Finish")
 
     */
@@ -155,24 +156,20 @@ actor Main
 //            ", ".join(rva.values())
 //
 //
-//          fun processUses(filemap: FileMap, config: Config, ctxptr: XmlxpathcontextPTR): Map[String, String] ? =>
-//            var rv: Map[String, String] = Map[String, String].create()
-//            for imap in config.instances.data.values() do
-//              let fid: String = (imap as JsonObject val).data("id")? as String val
-//              if ((imap as JsonObject val).data("use")? as Bool) then
-//                try
-//                  Debug.out("\nProcessing: " + filemap.lookupByID(fid)?)
-//                else
-//                  Debug.out("\nUnknown error")
-//                end
-//                let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
-//                let usetxt: String = processUse(ctxptr, config, functionmap)
-//                rv.insert(fid, usetxt)
-//              end
-//            end
-//            rv
-//
-//
+  fun processUses(filemap: FileMap, config: Config, ctx: Xml2xpathcontext): Map[String, String] ? =>
+    var rv: Map[String, String] = Map[String, String].create()
+    for imap in config.instances.data.values() do
+      let fid: String = (imap as JsonObject val).data("id")? as String val
+      if ((imap as JsonObject val).data("use")? as Bool) then
+        let functionmap: FunctionMap = FunctionMap(ctx, fid)?
+//        let usetxt: String = processUse(ctxptr, config, functionmap)
+//        rv.insert(fid, usetxt)
+        None
+      end
+    end
+    rv
+
+
 //          fun writeUseFileOutputs(useFileOutputs: Map[String, String], config: Config, auth: AmbientAuth)? =>
 //            for (fid, usetxt) in useFileOutputs.pairs() do
 //              let filename: String val = "out/use-" + fid + ".pony"
@@ -222,32 +219,32 @@ actor Main
 //            ", ".join(rva.values())
 //
 //
-//          fun writeEnumOutputs(enummap: Map[String, Enum], auth: AmbientAuth)? =>
-//            let fp: FilePath = FilePath.create(auth, "out/enumerations.pony")?
-//            fp.remove()
-//
-//            let file: File = File(fp)
-//            for enum in enummap.values() do
-//              file.print("primitive " + EnumLogic.ponyStruct(enum.name))
-//            end
-//            file.dispose()
-//
-//
-//          fun writeStructFiles(structFileOutputs: Map[String, Array[String]], auth: AmbientAuth): None ? =>
-//            for (filename, blobarray) in structFileOutputs.pairs() do
-//              let fp: FilePath = FilePath.create(auth, filename)?
-//              fp.remove()
-//
-//              let file: File = File(fp)
-//
-//              for blob in blobarray.values() do
-//                file.print(blob)
-//              end
-//
-//
-//            end
-//
-//
+  fun writeEnumOutputs(enummap: Map[String, Enum], auth: AmbientAuth)? =>
+    let fp: FilePath = FilePath.create(auth, "out/enumerations.pony")?
+    fp.remove()
+
+    let file: File = File(fp)
+    for enum in enummap.values() do
+      file.print("primitive " + EnumLogic.ponyStruct(enum.name))
+    end
+    file.dispose()
+
+
+  fun writeStructFiles(structFileOutputs: Map[String, Array[String]], auth: AmbientAuth): None ? =>
+    for (filename, blobarray) in structFileOutputs.pairs() do
+      let fp: FilePath = FilePath.create(auth, filename)?
+      fp.remove()
+
+      let file: File = File(fp)
+
+      for blob in blobarray.values() do
+        file.print(blob)
+      end
+
+
+    end
+
+
     fun processStructs(filemap: FileMap, membermap: MemberMap, config: Config, ctx: Xml2xpathcontext): Map[String, Array[String]] ? =>
       let structme: Array[JsonObject val] = Array[JsonObject val].create(USize(8))
       let rv: Map[String, Array[String]] = Map[String, Array[String]].create()

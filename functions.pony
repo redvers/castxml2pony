@@ -100,25 +100,16 @@ primitive FunctionLogic
 class FunctionMap
   var fm: Map[String, Function] = Map[String, Function].create()
 
-  new create(ctxptr: XmlxpathcontextPTR, fid: String) =>
-    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//Function[@file='" + fid + "']", ctxptr)
+  new create(ctx: Xml2xpathcontext, fid: String)? =>
+    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//Function[@file='" + fid + "']")?
 
-    try
-      let xpathexp: Xmlxpathobject = xpathexptr.apply()?
-      let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
-
-      let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
-      var nodecount: I32 val = xmlnodeset.pnodeNr
-      var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-
-      for element in nodearray.values() do
-        let m: Function = Function(element)
-//        Debug.out(m.name)
-//        Debug.out(m.fid)
-        fm.insert(m.id, m)
-      end
-
+    for element in xpathobj.nodearray'.values() do
+      let m: Function = Function(element)
+//      Debug.out(m.name)
+//      Debug.out(m.fid)
+      fm.insert(m.id, m)
     end
+
 
   fun ref lookupById(id: String): Function ref ? =>
     let s: Function ref = fm.apply(id)?
