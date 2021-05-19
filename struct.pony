@@ -21,25 +21,21 @@ class Struct
     size = LibXML2.xmlGetProp(element, "size")
     align = LibXML2.xmlGetProp(element, "align")
 
-  fun ponyDefinition(membermap: MemberMap, config: Config, ctxptr: XmlxpathcontextPTR): String val =>
+  fun ponyDefinition(membermap: MemberMap, config: Config, ctx: Xml2xpathcontext): String val ? =>
     let stitle: String = "struct " + StructLogic.ponyStruct(name)
     var ponytext: String val = stitle.clone() + "\n"
 
     Debug.out("            " + stitle)
 
-    try
       for member in members.values() do
         var membername: String = membermap.fm.apply(member)?.name
-        let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, member, Array[CastTYPE].create(USize(8)))
+        let chain: Array[CastTYPE] = TypeLogic.recurseType(ctx, config, member, Array[CastTYPE].create(USize(8)))?
         let ponytype: String = TypeLogic.resolveChain(chain, config)
         ponytext = ponytext + ("  var ".clone() + StructLogic.ponyMemberName(membername) + ": " + config.getFFIType(ponytype) + " = " + config.getFundTypeDefault(ponytype) + " // " + member + " " + ponytype + "\n")
 //        ponytext = ponytext + ("  var ".clone() + StructLogic.ponyMemberName(membername) + ": " + config.getFFIType(ponytype) + " = " + config.getFundTypeDefault(ponytype) + " // " + member + " " + ponytype + "\n")
       end
 
       consume ponytext
-    else
-      "/* Failed to process " + stitle + " assigning it as an empty struct */\n" + "struct " + StructLogic.ponyStruct(name) + "\n"
-    end
 
 
 primitive StructLogic
@@ -59,21 +55,11 @@ primitive StructLogic
 class StructMap
   var fm: Map[String, Struct] = Map[String, Struct].create()
 
-  new create(ctxptr: XmlxpathcontextPTR) =>
-    let xpathexptr: XmlxpathobjectPTR = LibXML2.xmlXPathEvalExpression("//Struct", ctxptr)
-    try
-      let xpathexp: Xmlxpathobject = xpathexptr.apply()?
-      let xmlnodesetptr: XmlnodesetPTR = xpathexp.pnodesetval
-
-      let xmlnodeset: Xmlnodeset = xmlnodesetptr.apply()?
-      var nodecount: I32 val = xmlnodeset.pnodeNr
-      var nodearray: Array[XmlnodePTR] = Array[XmlnodePTR].from_cpointer(xmlnodeset.pnodeTab, nodecount.usize())
-
-      for element in nodearray.values() do
-        let m: Struct = Struct(element)
-        fm.insert(m.id, m)
-      end
-
+  new create(ctx: Xml2xpathcontext)? =>
+    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//Struct")?
+    for element in xpathobj.nodearray.values() do
+      let m: Struct = Struct(element.ptr')
+      fm.insert(m.id, m)
     end
 
   fun ref lookupById(id: String): Struct ref ? =>
