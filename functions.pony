@@ -105,7 +105,7 @@ class FunctionMap
 
     for element in xpathobj.nodearray'.values() do
       let m: Function = Function(element)
-//      Debug.out(m.name)
+      Debug.out(m.name)
 //      Debug.out(m.fid)
       fm.insert(m.id, m)
     end

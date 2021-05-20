@@ -34,14 +34,11 @@ actor Main
     Debug.out("Calling processStructs")
       structFileOutputs = processStructs(filemap, membermap, config, ctx)? //
     Debug.out("Calling processUses")
-      useFileOutputs = processUses(filemap, config, ctx)? //
-/*
+      useFileOutputs = processUses(filemap, config, ctx) //
     Debug.out("Calling processFunctions")
-      let functionFileOutputs: Map[String, Map[String, String]] = processFunctions(filemap, config, ctxptr)?
-
+      let functionFileOutputs: Map[String, Map[String, String]] = processFunctions(filemap, config, ctx)?
     Debug.out("Calling writeFunctionFiles")
       writeFunctionFiles(functionFileOutputs, env.root as AmbientAuth)?
-*/
     Debug.out("Calling writeUseFileOutputs")
       writeUseFileOutputs(useFileOutputs, config, env.root as AmbientAuth)? //
     Debug.out("Calling writeStructFiles")
@@ -72,99 +69,104 @@ actor Main
 //      let file: File = File(fp)
 
       for fnbody in functionbodies.values() do
-//        Debug.out(fnbody)
+        Debug.out(fnbody)
         file.print(fnbody)
       end
     end
     file.dispose()
 
 
-//          fun processFunctions(filemap: FileMap, config: Config, ctxptr: XmlxpathcontextPTR): Map[String, Map[String, String]] ? =>
-//            var rv: Map[String, Map[String, String]] = Map[String, Map[String, String]]
-//            for imap in config.instances.data.values() do
-//              let fid: String = (imap as JsonObject val).data("id")? as String val
-//              if ((imap as JsonObject val).data("functions")? as Bool) then
-//                Debug.out("Processing: " + filemap.lookupByID(fid)?)
-//                let functionmap: FunctionMap = FunctionMap(ctxptr, fid)
-//                let functionbodies: Map[String, String] = processFunction(ctxptr, config, functionmap)
-//                rv.insert(fid, functionbodies)
-//              end
-//            end
-//            rv
-//
-//
-//          fun processFunction(ctxptr: XmlxpathcontextPTR, config: Config, functionmap: FunctionMap): Map[String, String] =>
-//            var rv: Map[String, String] = Map[String, String]
-//            for (fname, function) in functionmap.fm.pairs() do
-//              Debug.out("            function " + function.name)
-//              let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, function.rvtype, Array[CastTYPE].create(USize(8)))
-//              let ponytype: String = TypeLogic.resolveChain(chain, config)
-//              let argstr: String = stringifyPonyFn(function.args, ctxptr, config)
-//              let fnbody: String = ponyFunctionBody(function, ctxptr, config, ponytype)
-//
-//              let i: String = function.name.substring(0,1)
-//              let j: String = function.name.substring(1, function.name.size().isize())
-//
-//              let dcname = i.lower() + j
-//
-//              if (function.name.substring(0,2) == "__") then
-//                rv.insert(fname, ("/*\n  fun " + function.name + "(" + argstr + "): " + ponytype + " =>\n" + fnbody + " */"))
-//              else
-//                rv.insert(fname, ("  fun " + dcname + "(" + argstr + "): " + ponytype + " =>\n" + fnbody))
-//              end
-//            end
-//            rv
-//
-//
-//          fun ponyFunctionBody(function: Function, ctxptr: XmlxpathcontextPTR, config: Config, rvponytype: String): String =>
-//            var prelim: String =
-//            "    " + config.getFunctionPre(rvponytype) +
-//            "@" + function.name + "[" + config.getFFIType(rvponytype) + "]("
-//
-//            var rva: Array[String] = Array[String].create(USize(4))
-//            var cnt: U8 = U8(0)
-//            for (argname, argtype) in function.args.values() do
-//              let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, argtype, Array[CastTYPE].create(USize(8)))
-//              let ponytype: String = TypeLogic.resolveChain(chain, config)
-//              let ctype: String = config.getFFIType(ponytype)
-//
-//              if (ctype != "") then
-//                rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + config.getTypeMethod(ctype))
-//              end
-//              cnt = cnt + 1
-//            end
-//            let args: String = ", ".join(rva.values())
-//
-//            prelim + args + ")\n" + config.getFunctionFinal(rvponytype) + "\n"
-//
-//
-//          fun stringifyPonyFn(args: Array[(String, String)], ctxptr: XmlxpathcontextPTR, config: Config): String =>
-//            var rva: Array[String] = Array[String].create(USize(4))
-//            var cnt: U8 = U8(0)
-//            for (argname, argtype) in args.values() do
-//              let chain: Array[CastTYPE] = TypeLogic.recurseType(ctxptr, config, argtype, Array[CastTYPE].create(USize(8)))
-//              let ponytype: String = TypeLogic.resolveChain(chain, config)
-//              let ctype: String = config.getFFIType(ponytype)
-//
-//              if (ctype == "") then
-//                "BOOM"
-//              else
-//                rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + ": " + ponytype)
-//              end
-//              cnt = cnt + 1
-//            end
-//            ", ".join(rva.values())
-//
-//
-  fun processUses(filemap: FileMap, config: Config, ctx: Xml2xpathcontext): Map[String, String] ? =>
-    var rv: Map[String, String] = Map[String, String].create()
+  fun processFunctions(filemap: FileMap, config: Config, ctx: Xml2xpathcontext): Map[String, Map[String, String]] ? =>
+    var rv: Map[String, Map[String, String]] = Map[String, Map[String, String]]
     for imap in config.instances.data.values() do
       let fid: String = (imap as JsonObject val).data("id")? as String val
-      if ((imap as JsonObject val).data("use")? as Bool) then
+      if ((imap as JsonObject val).data("functions")? as Bool) then
+        Debug.out("Processing: " + filemap.lookupByID(fid)?)
         let functionmap: FunctionMap = FunctionMap(ctx, fid)?
-        let usetxt: String = processUse(ctx, config, functionmap)?
-//        rv.insert(fid, usetxt)
-        None
+        let functionbodies: Map[String, String] = processFunction(ctx, config, functionmap)
+        rv.insert(fid, functionbodies)
+      end
+      None
+    end
+    rv
+
+
+  fun processFunction(ctx: Xml2xpathcontext, config: Config, functionmap: FunctionMap): Map[String, String] =>
+    var rv: Map[String, String] = Map[String, String]
+    for (fname, function) in functionmap.fm.pairs() do
+      try
+        Debug.out("            function " + function.name)
+        let chain: Array[CastTYPE] = TypeLogic.recurseType(ctx, config, function.rvtype, Array[CastTYPE].create(USize(8)))?
+        let ponytype: String = TypeLogic.resolveChain(chain, config)
+        let argstr: String = stringifyPonyFn(function.args, ctx, config)?
+        let fnbody: String = ponyFunctionBody(function, ctx, config, ponytype)?
+
+        let i: String = function.name.substring(0,1)
+        let j: String = function.name.substring(1, function.name.size().isize())
+
+        let dcname = i.lower() + j
+
+        if (function.name.substring(0,2) == "__") then
+          rv.insert(fname, ("/*\n  fun " + function.name + "(" + argstr + "): " + ponytype + " =>\n" + fnbody + " */"))
+        else
+          rv.insert(fname, ("  fun " + dcname + "(" + argstr + "): " + ponytype + " =>\n" + fnbody))
+        end
+      end
+    end
+    rv
+
+
+  fun ponyFunctionBody(function: Function, ctx: Xml2xpathcontext, config: Config, rvponytype: String): String ? =>
+    var prelim: String =
+    "    " + config.getFunctionPre(rvponytype) +
+    "@" + function.name + "[" + config.getFFIType(rvponytype) + "]("
+
+    var rva: Array[String] = Array[String].create(USize(4))
+    var cnt: U8 = U8(0)
+    for (argname, argtype) in function.args.values() do
+      let chain: Array[CastTYPE] = TypeLogic.recurseType(ctx, config, argtype, Array[CastTYPE].create(USize(8)))?
+      let ponytype: String = TypeLogic.resolveChain(chain, config)
+      let ctype: String = config.getFFIType(ponytype)
+
+      if (ctype != "") then
+        rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + config.getTypeMethod(ctype))
+      end
+      cnt = cnt + 1
+    end
+    let args: String = ", ".join(rva.values())
+
+    prelim + args + ")\n" + config.getFunctionFinal(rvponytype) + "\n"
+
+
+  fun stringifyPonyFn(args: Array[(String, String)], ctx: Xml2xpathcontext, config: Config): String ? =>
+    var rva: Array[String] = Array[String].create(USize(4))
+    var cnt: U8 = U8(0)
+    for (argname, argtype) in args.values() do
+      let chain: Array[CastTYPE] = TypeLogic.recurseType(ctx, config, argtype, Array[CastTYPE].create(USize(8)))?
+      let ponytype: String = TypeLogic.resolveChain(chain, config)
+      let ctype: String = config.getFFIType(ponytype)
+
+      if (ctype == "") then
+        "BOOM"
+      else
+        rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + ": " + ponytype)
+      end
+      cnt = cnt + 1
+    end
+    ", ".join(rva.values())
+
+
+  fun processUses(filemap: FileMap, config: Config, ctx: Xml2xpathcontext): Map[String, String] =>
+    var rv: Map[String, String] = Map[String, String].create()
+    for imap in config.instances.data.values() do
+      try
+        let fid: String = (imap as JsonObject val).data("id")? as String val
+        Debug.out("processUses: " + fid)
+        if ((imap as JsonObject val).data("use")? as Bool) then
+          let functionmap: FunctionMap = FunctionMap(ctx, fid)?
+          let usetxt: String = processUse(ctx, config, functionmap)?
+          rv.insert(fid, usetxt)
+        end
       end
     end
     rv
