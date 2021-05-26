@@ -59,7 +59,7 @@ class StructMap
   var fm: Map[String, Struct] = Map[String, Struct].create()
 
   new create(ctx: Xml2xpathcontext)? =>
-    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//Struct")?
+    let xpathobj: Xml2pathobject = ctx.xpathEval("//Struct")?
     for element in xpathobj.nodearray.values() do
       let m: Struct = Struct(element.ptr')
       fm.insert(m.id, m)
@@ -93,7 +93,7 @@ class MemberMap
 
   new create(ctx: Xml2xpathcontext) =>
     try
-      let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//Field")?
+      let xpathobj: Xml2pathobject = ctx.xpathEval("//Field")?
 
       for element in xpathobj.nodearray.values() do
         let m: Member = Member(element.ptr')

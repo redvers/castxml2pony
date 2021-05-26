@@ -16,7 +16,7 @@ actor Main
     let filename: String val = "libxml2.xml"
 //    Debug.err("Parsing: " + filename)
     try
-      let doc: Xml2Doc = Xml2Doc.xmlParseFile(filename)?
+      let doc: Xml2Doc = Xml2Doc.parseFile(filename)?
       let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
 
     // Let's preprocess some XML for fun and profit

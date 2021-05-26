@@ -14,7 +14,7 @@ class ref CastTYPE
   var config: Config
 
   new create(ctx: Xml2xpathcontext, config': Config, id': String)? =>
-    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//*[@id='" + id' + "']")?
+    let xpathobj: Xml2pathobject = ctx.xpathEval("//*[@id='" + id' + "']")?
     config = config'
 
     var ttypeptr: XmlnodePTR = xpathobj.nodearray'.apply(0)?

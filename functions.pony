@@ -101,7 +101,7 @@ class FunctionMap
   var fm: Map[String, Function] = Map[String, Function].create()
 
   new create(ctx: Xml2xpathcontext, fid: String)? =>
-    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//Function[@file='" + fid + "']")?
+    let xpathobj: Xml2pathobject = ctx.xpathEval("//Function[@file='" + fid + "']")?
 
     for element in xpathobj.nodearray'.values() do
       let m: Function = Function(element)

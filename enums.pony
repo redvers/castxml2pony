@@ -58,7 +58,7 @@ class EnumMap
   var fm: Map[String, Enum] = Map[String, Enum].create()
 
   new create(ctx: Xml2xpathcontext)? =>
-    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//Enumeration")?
+    let xpathobj: Xml2pathobject = ctx.xpathEval("//Enumeration")?
 
     for element in xpathobj.nodearray.values() do
       let m: Enum = Enum(element.ptr')

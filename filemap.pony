@@ -8,7 +8,7 @@ class FileMap
   var fids: Array[String] = Array[String].create()
 
   new create(ctx: Xml2xpathcontext)? =>
-    let xpathobj: Xml2pathobject = ctx.xmlXPathEval("//File")?
+    let xpathobj: Xml2pathobject = ctx.xpathEval("//File")?
 
     for element in xpathobj.nodearray.values() do
       let xmlnode: Xmlnode = element.ptr
