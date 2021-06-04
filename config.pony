@@ -17,6 +17,7 @@ class val Config
   new val create(auth: AmbientAuth) =>
     _auth = auth
     try
+      Debug.out("Starting global.json parsing...")
       let fp: FilePath = FilePath(auth, "global.json")?
       let fd: File = File.open(fp)
       let content: String val = fd.read_string(fd.size())
@@ -38,7 +39,12 @@ class val Config
       let doci: JsonDoc = JsonDoc
       doci.parse(contenti)?
 
+      Debug.out("Starting instance.json parsing...")
+
       instances = (doci.data as JsonArray)
+      Debug.out("Parsed: " + instances.data.size().string())
+    else
+      Debug.out("I failed in config creation")
     end
 
   fun val getFundType(key: String): String val ? =>
@@ -63,8 +69,10 @@ class val Config
 
   fun val getTypeMethod(key: String): String val =>
     try
+      Debug.out("SUCCESSFUL MATCH: getTypeMethod(" + key + ")")
       (typeConversionInJSON.data(key)? as String val)
     else
+      Debug.out("getTypeMethod(" + key + ")")
       ""
     end
 

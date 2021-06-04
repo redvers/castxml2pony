@@ -19,39 +19,34 @@ class ref CastTYPE
 
     var ttype: Xml2node = xpathobj.apply(0)?
     recordtype = recover ref ttype.name().clone() end
-/*
-    var ttypeptr: NullablePointer[Xmlnode] = xpathobj.nodearray'.apply(0)?
-
-    recordtype = String.copy_cstring(ttypeptr.apply()?.pname)
 
     match recordtype
     | let x: String ref if recordtype == "Struct" =>
-              id = LibXML2.xmlGetProp(ttypeptr, "id")
-              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-              ponytype = StructLogic.ponyStruct(LibXML2.xmlGetProp(ttypeptr, "name"))
+              id = ttype.getProp("id")
+              dstype = ttype.getProp("type")
+              ponytype = StructLogic.ponyStruct(ttype.getProp("name"))
               if (ponytype == "") then ponytype = "OpaqueStruct" end
     | let x: String ref if recordtype == "Enumeration" =>
-              id = LibXML2.xmlGetProp(ttypeptr, "id")
-              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
-              ponytype = StructLogic.ponyStruct(LibXML2.xmlGetProp(ttypeptr, "name"))
+              id = ttype.getProp("id")
+              dstype = ttype.getProp("type")
+              ponytype = StructLogic.ponyStruct(ttype.getProp("name"))
               if (ponytype == "") then ponytype = "OpaqueEnumeration" end
     | let x: String ref if recordtype == "FunctionType" =>
-              id = LibXML2.xmlGetProp(ttypeptr, "id")
-              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+              id = ttype.getProp("id")
+              dstype = ttype.getProp("type")
               ponytype = "CallbackFn"
     | let x: String ref if recordtype == "Union" =>
-              id = LibXML2.xmlGetProp(ttypeptr, "id")
-              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+              id = ttype.getProp("id")
+              dstype = ttype.getProp("type")
               ponytype = "Union"
     | let x: String ref if recordtype == "FundamentalType" =>
-              id = LibXML2.xmlGetProp(ttypeptr, "id")
-              dstype = LibXML2.xmlGetProp(ttypeptr, "name")
+              id = ttype.getProp("id")
+              dstype = ttype.getProp("name")
               ponytype = fundamentalType(dstype)
     else
-              id = LibXML2.xmlGetProp(ttypeptr, "id")
-              dstype = LibXML2.xmlGetProp(ttypeptr, "type")
+              id = ttype.getProp("id")
+              dstype = ttype.getProp("type")
     end
-*/
 
   fun fundamentalType(str: String val): String =>
     try

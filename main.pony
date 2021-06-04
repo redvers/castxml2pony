@@ -44,10 +44,8 @@ actor Main
       writeStructFiles(structFileOutputs, env.root as AmbientAuth)? //
     Debug.out("Calling writeEnumOutputs")
       writeEnumOutputs(enummap.fm, env.root as AmbientAuth)? //
-/*
     Debug.out("Successful Finish")
 
-    */
     else
       env.out.print("We errored out")
     end
@@ -77,8 +75,10 @@ actor Main
 
   fun processFunctions(filemap: FileMap, config: Config, ctx: Xml2xpathcontext): Map[String, Map[String, String]] ? =>
     var rv: Map[String, Map[String, String]] = Map[String, Map[String, String]]
+      Debug.out("input map size: " + config.instances.data.size().string())
     for imap in config.instances.data.values() do
       let fid: String = (imap as JsonObject val).data("id")? as String val
+      Debug.out("considering...: " + filemap.lookupByID(fid)?)
       if ((imap as JsonObject val).data("functions")? as Bool) then
         Debug.out("Processing: " + filemap.lookupByID(fid)?)
         let functionmap: FunctionMap = FunctionMap(ctx, fid)?
@@ -118,7 +118,8 @@ actor Main
   fun ponyFunctionBody(function: Function, ctx: Xml2xpathcontext, config: Config, rvponytype: String): String ? =>
     var prelim: String =
     "    " + config.getFunctionPre(rvponytype) +
-    "@" + function.name + "[" + config.getFFIType(rvponytype) + "]("
+    "@" + function.name + "("
+//    "@" + function.name + "[" + config.getFFIType(rvponytype) + "]("
 
     var rva: Array[String] = Array[String].create(USize(4))
     var cnt: U8 = U8(0)
@@ -128,7 +129,8 @@ actor Main
       let ctype: String = config.getFFIType(ponytype)
 
       if (ctype != "") then
-        rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + config.getTypeMethod(ctype))
+        rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + config.getTypeMethod(ponytype))
+//      rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + config.getTypeMethod(ctype))
       end
       cnt = cnt + 1
     end
@@ -160,12 +162,26 @@ actor Main
     for imap in config.instances.data.values() do
       try
         let fid: String = (imap as JsonObject val).data("id")? as String val
-        Debug.out("processUses: " + fid)
         if ((imap as JsonObject val).data("use")? as Bool) then
-          let functionmap: FunctionMap = FunctionMap(ctx, fid)?
-          let usetxt: String = processUse(ctx, config, functionmap)?
+          Debug.out("processUses: " + fid)
+          let functionmap: FunctionMap =
+            try
+              FunctionMap(ctx, fid)?
+            else
+              Debug.out("Failed to create a FunctionMap for " + fid)
+              error
+            end
+          let usetxt: String =
+            try
+              processUse(ctx, config, functionmap)?
+            else
+              Debug.out("Failed to processUse for the functionmap")
+              error
+            end
           rv.insert(fid, usetxt)
         end
+      else
+        Debug.out("I failed in processUses")
       end
     end
     rv
@@ -173,6 +189,7 @@ actor Main
 
     fun writeUseFileOutputs(useFileOutputs: Map[String, String], config: Config, auth: AmbientAuth)? =>
       for (fid, usetxt) in useFileOutputs.pairs() do
+        Debug.out("Writing: " + fid)
         let filename: String val = "out/use-" + fid + ".pony"
         let fp: FilePath = FilePath.create(auth, filename)?
         fp.remove()
@@ -188,9 +205,12 @@ actor Main
     for function in functionmap.fm.values() do
         Debug.out("                 use " + function.name)
       let chain: Array[CastTYPE] = TypeLogic.recurseType(ctx, config, function.rvtype, Array[CastTYPE].create(USize(8)))?
+      Debug.out("Completed chain for " + function.name)
       let ponytype: String = TypeLogic.resolveChain(chain, config)
 
+      Debug.out("Starting stringify for " + function.name)
       let argstr: String = stringifyUseArgs(function.args, ctx, config)?
+      Debug.out("Completed stringify for " + function.name)
 
       let ctype: String = config.getFFIType(ponytype)
       rv.push("use @" + function.name + "[" + ctype + "](" + argstr + ")")
@@ -202,15 +222,22 @@ actor Main
      var rva: Array[String] = Array[String].create(USize(4))
      var cnt: U8 = U8(0)
      for (argname, argtype) in args.values() do
+       Debug.out("Starting argchain for " + argname + " -> " + argtype)
+       if (argtype == "") then
+         rva.push("...")
+         break
+       end
        let chain: Array[CastTYPE] = TypeLogic.recurseType(ctx, config, argtype, Array[CastTYPE].create(USize(8)))?
+       Debug.out("Completed argchain for " + argname + " -> " + argtype)
        let ponytype: String = TypeLogic.resolveChain(chain, config)
        var ctype: String = config.getFFIType(ponytype)
+
 
        if (ctype == "Pointer[U8]") then
          ctype = "Pointer[U8] tag"
        end
 
-       if (ctype == "") then
+       if (argtype == "") then
          rva.push("...")
        else
          rva.push(StructLogic.ponyMemberName(argname) + cnt.string() + ": " + ctype)
