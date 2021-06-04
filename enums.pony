@@ -10,7 +10,7 @@ class Enum
   var name: String
   var fid: String
 
-  new create(element: XmlnodePTR) =>
+  new create(element: NullablePointer[Xmlnode]) =>
     id = LibXML2.xmlGetProp(element, "id")
     name = LibXML2.xmlGetProp(element, "name")
     fid = LibXML2.xmlGetProp(element, "file")

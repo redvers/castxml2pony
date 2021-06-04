@@ -4,7 +4,6 @@ use "collections"
 use "json"
 use "files"
 use "lib:xml2"
-use "../pony-inspect/inspect"
 
 class val Config
   let _auth: AmbientAuth

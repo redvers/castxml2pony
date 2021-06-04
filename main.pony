@@ -2,7 +2,6 @@ use "debug"
 use "itertools"
 use "collections"
 use "../pony-libxml2/pony-libxml2"
-use "../pony-inspect/inspect"
 use "lib:xml2"
 use "json"
 use "files"
@@ -101,10 +100,10 @@ actor Main
         let argstr: String = stringifyPonyFn(function.args, ctx, config)?
         let fnbody: String = ponyFunctionBody(function, ctx, config, ponytype)?
 
-        let i: String = function.name.substring(0,1)
-        let j: String = function.name.substring(1, function.name.size().isize())
+        let i: String ref = function.name.substring(0,1)
+        let j: String ref = function.name.substring(1, function.name.size().isize())
 
-        let dcname = i.lower() + j
+        let dcname: String ref = i.lower() + j
 
         if (function.name.substring(0,2) == "__") then
           rv.insert(fname, ("/*\n  fun " + function.name + "(" + argstr + "): " + ponytype + " =>\n" + fnbody + " */"))

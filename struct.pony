@@ -13,7 +13,7 @@ class Struct
   var size: String
   var align: String
 
-  new create(element: XmlnodePTR) =>
+  new create(element: NullablePointer[Xmlnode]) =>
     id = LibXML2.xmlGetProp(element, "id")
     name = LibXML2.xmlGetProp(element, "name")
     fid = LibXML2.xmlGetProp(element, "file")
@@ -81,7 +81,7 @@ class Member
   var fid: String = ""
   var offset: String = ""
 
-  new create(element: XmlnodePTR) =>
+  new create(element: NullablePointer[Xmlnode]) =>
     id = LibXML2.xmlGetProp(element, "id")
     name = LibXML2.xmlGetProp(element, "name")
     ttype = LibXML2.xmlGetProp(element, "type")

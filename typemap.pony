@@ -17,7 +17,10 @@ class ref CastTYPE
     let xpathobj: Xml2pathobject = ctx.xpathEval("//*[@id='" + id' + "']")?
     config = config'
 
-    var ttypeptr: XmlnodePTR = xpathobj.nodearray'.apply(0)?
+    var ttype: Xml2node = xpathobj.apply(0)?
+    recordtype = recover ref ttype.name().clone() end
+/*
+    var ttypeptr: NullablePointer[Xmlnode] = xpathobj.nodearray'.apply(0)?
 
     recordtype = String.copy_cstring(ttypeptr.apply()?.pname)
 
@@ -48,7 +51,7 @@ class ref CastTYPE
               id = LibXML2.xmlGetProp(ttypeptr, "id")
               dstype = LibXML2.xmlGetProp(ttypeptr, "type")
     end
-
+*/
 
   fun fundamentalType(str: String val): String =>
     try

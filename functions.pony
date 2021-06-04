@@ -11,7 +11,7 @@ class Function
   var rvtype: String
   var args: Array[(String, String)]
 
-  new create(element: XmlnodePTR) =>
+  new create(element: NullablePointer[Xmlnode]) =>
     id = LibXML2.xmlGetProp(element, "id")
     name = LibXML2.xmlGetProp(element, "name")
     fid = LibXML2.xmlGetProp(element, "file")
@@ -20,7 +20,7 @@ class Function
     args = FunctionArgs.fargs(element, name)
 
 primitive FunctionArgs
-  fun fargs(xmlnodeptr: XmlnodePTR, name: String): Array[(String, String)] =>
+  fun fargs(xmlnodeptr: NullablePointer[Xmlnode], name: String): Array[(String, String)] =>
     var rv: Array[(String, String)] = Array[(String, String)].create()
 
     var elementcnt: U64 = LibXML2.xmlChildElementCount(xmlnodeptr)
@@ -28,7 +28,7 @@ primitive FunctionArgs
       return(rv)
     end
 
-    var argumentptr: XmlnodePTR = LibXML2.xmlFirstElementChild(xmlnodeptr)
+    var argumentptr: NullablePointer[Xmlnode] = LibXML2.xmlFirstElementChild(xmlnodeptr)
     var argname: String = ""
     var argtype: String = ""
 
@@ -41,11 +41,11 @@ primitive FunctionArgs
 
 
 
-  fun parseargumentptr(argumentptr: XmlnodePTR): (XmlnodePTR, String, String) =>
+  fun parseargumentptr(argumentptr: NullablePointer[Xmlnode]): (NullablePointer[Xmlnode], String, String) =>
     let argname: String = LibXML2.xmlGetProp(argumentptr, "name")
     let argtype: String = LibXML2.xmlGetProp(argumentptr, "type")
 
-    let nextarg: XmlnodePTR = LibXML2.xmlNextElementSibling(argumentptr)
+    let nextarg: NullablePointer[Xmlnode] = LibXML2.xmlNextElementSibling(argumentptr)
     (nextarg, argname, argtype)
 
 
@@ -103,8 +103,8 @@ class FunctionMap
   new create(ctx: Xml2xpathcontext, fid: String)? =>
     let xpathobj: Xml2pathobject = ctx.xpathEval("//Function[@file='" + fid + "']")?
 
-    for element in xpathobj.nodearray'.values() do
-      let m: Function = Function(element)
+    for element in xpathobj.nodearray.values() do
+      let m: Function = Function(element.ptr')
       Debug.out(m.name)
 //      Debug.out(m.fid)
       fm.insert(m.id, m)
