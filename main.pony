@@ -6,45 +6,452 @@ use "lib:xml2"
 use "json"
 use "files"
 
+use @printf[I32](str: Pointer[U8] tag, ...)
+use @exit[None](errcode: USize)
+
+type CXMLCastType is (CXMLFunction | CXMLArrayType | CXMLCvQualifiedType | CXMLElaboratedType | CXMLEnumeration | CXMLField | CXMLFile | CXMLFunctionType | CXMLFundamentalType | CXMLPointerType | CXMLStruct | CXMLTypedef | CXMLUnimplemented | CXMLUnion | CXMLVariable )
+
 actor Main
   new create(env: Env) =>
-    Debug.out("Calling checkForGlobalJSON()")
-    checkForGlobalJSON(env)
     var structFileOutputs: Map[String, Array[String]] = Map[String, Array[String]].create()
     var useFileOutputs: Map[String, String] = Map[String, String].create()
     let filename: String val = "libxml2.xml"
 //    Debug.err("Parsing: " + filename)
+
+    var itypemap: Map[String, CXMLCastType] = Map[String, CXMLCastType]
+
     try
       let doc: Xml2Doc = Xml2Doc.parseFile(filename)?
       let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
 
-    // Let's preprocess some XML for fun and profit
-      Debug.out("Calling checkForInstanceJSON()")
-      checkForInstanceJSON(env, ctx)
-    Debug.out("Calling Config")
-      let config: Config val = Config(env.root as AmbientAuth)
-    Debug.out("Calling FileMap")
-      let filemap: FileMap = FileMap(ctx)?
-    Debug.out("Calling MemberMap")
-      let membermap: MemberMap = MemberMap(ctx)
-    Debug.out("Calling EnumMap")
-      let enummap: EnumMap = EnumMap(ctx)?
+      let res: Xml2pathobject = ctx.xpathEval("//*[@id]")?
+      Debug.out("Found " + res.size()?.string() + " records to examine in xml file")
 
-    Debug.out("Calling processStructs")
-      structFileOutputs = processStructs(filemap, membermap, config, ctx)? //
-    Debug.out("Calling processUses")
-      useFileOutputs = processUses(filemap, config, ctx) //
-    Debug.out("Calling processFunctions")
-      let functionFileOutputs: Map[String, Map[String, String]] = processFunctions(filemap, config, ctx)?
-    Debug.out("Calling writeFunctionFiles")
-      writeFunctionFiles(functionFileOutputs, env.root as AmbientAuth)?
-    Debug.out("Calling writeUseFileOutputs")
-      writeUseFileOutputs(useFileOutputs, config, env.root as AmbientAuth)? //
-    Debug.out("Calling writeStructFiles")
-      writeStructFiles(structFileOutputs, env.root as AmbientAuth)? //
-    Debug.out("Calling writeEnumOutputs")
-      writeEnumOutputs(enummap.fm, env.root as AmbientAuth)? //
-    Debug.out("Successful Finish")
+      for instance in res.values()? do
+        match instance.name()
+        | let x: String val if (x == "Function") => itypemap.insert(instance.getProp("id"), CXMLFunction(instance))
+        | let x: String val if (x == "rrayType") => itypemap.insert(instance.getProp("id"), CXMLArrayType(instance))
+        | let x: String val if (x == "CvQualifiedType") => itypemap.insert(instance.getProp("id"), CXMLCvQualifiedType(instance))
+        | let x: String val if (x == "ElaboratedType") => itypemap.insert(instance.getProp("id"), CXMLElaboratedType(instance))
+        | let x: String val if (x == "Enumeration") => itypemap.insert(instance.getProp("id"), CXMLEnumeration(instance))
+        | let x: String val if (x == "Field") => itypemap.insert(instance.getProp("id"), CXMLField(instance))
+        | let x: String val if (x == "File") => itypemap.insert(instance.getProp("id"), CXMLFile(instance))
+        | let x: String val if (x == "FunctionType") => itypemap.insert(instance.getProp("id"), CXMLFunctionType(instance))
+        | let x: String val if (x == "FundamentalType") => itypemap.insert(instance.getProp("id"), CXMLFundamentalType(instance))
+        | let x: String val if (x == "PointerType") => itypemap.insert(instance.getProp("id"), CXMLPointerType(instance))
+        | let x: String val if (x == "Struct") => itypemap.insert(instance.getProp("id"), CXMLStruct(instance))
+        | let x: String val if (x == "Typedef") => itypemap.insert(instance.getProp("id"), CXMLTypedef(instance))
+        | let x: String val if (x == "Unimplemented") => itypemap.insert(instance.getProp("id"), CXMLUnimplemented(instance))
+        | let x: String val if (x == "Union") => itypemap.insert(instance.getProp("id"), CXMLUnion(instance))
+        | let x: String val if (x == "Variable") => itypemap.insert(instance.getProp("id"), CXMLVariable(instance))
+        end
+      end
+    else
+      die("Unable to identify all of the xml types - it's a bug\n")
+    end
+
+    Debug.out("Found " + itypemap.size().string() + " valid records")
+
+    try
+      recurseType(itypemap, "_2843")?
+      recurseType(itypemap, "_2843")?
+    else
+      Debug.out("Unable to find _2843 in itypemap")
+    end
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String)? =>
+    Debug.out("Starting with: " + id)
+    itypemap.apply(id)?.recurseType(itypemap, id)
+
+
+  fun die(str: String) =>
+    @printf("%s".cstring(), str.cstring())
+    @exit(1)
+
+
+
+
+class CXMLFunction
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLFunction"
+  var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    ponytype
+
+
+class CXMLArrayType
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLArrayType"
+  var min: String
+  var max: String
+  var typeid: String
+	var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+    min  = xml2node.getProp("min")
+    max  = xml2node.getProp("max")
+    typeid = xml2node.getProp("type")
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    try
+      itypemap.apply(typeid)?.recurseType(itypemap, typeid)
+    end
+    "poytype"
+
+
+class CXMLCvQualifiedType
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLCvQualifiedType"
+  var const: String
+  var restrict: String
+  var volatile: String
+  var typeid: String
+  var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+    const  = xml2node.getProp("const")
+    restrict  = xml2node.getProp("restrict")
+    volatile = xml2node.getProp("volatile")
+    typeid = xml2node.getProp("type")
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    try
+      ponytype = itypemap.apply(typeid)?.recurseType(itypemap, typeid)
+      Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
+      return ponytype
+    end
+    "ponytype"
+
+class CXMLElaboratedType
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLElaboratedType"
+  var typeid: String
+  var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+    typeid = xml2node.getProp("type")
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    try
+      itypemap.apply(typeid)?.recurseType(itypemap, typeid)
+    end
+    "ponytype"
+
+
+class CXMLEnumeration
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLEnumeration"
+  var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    "ponytype"
+
+
+class CXMLField
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLField"
+  var name: String = ""
+  var access: String = ""
+  var typeid: String = ""
+  var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+    name = xml2node.getProp("name")
+    access = xml2node.getProp("access")
+    typeid = xml2node.getProp("type")
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    try
+      ponytype = itypemap.apply(typeid)?.recurseType(itypemap, typeid)
+      Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
+      return ponytype
+    end
+    "ponytype"
+
+class CXMLFile
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLFile"
+  var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    "ponytype"
+
+
+class CXMLFunctionType
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLFunctionType"
+	var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    "ponytype"
+
+
+class CXMLFundamentalType
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLFundamentalType"
+  var name: String
+  var size: String
+  var align: String
+  var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+    name  = xml2node.getProp("name")
+    size  = xml2node.getProp("size")
+    align = xml2node.getProp("align")
+
+    ponytype =
+    match name
+    | let x: String if (name == "int") => "I32"
+		| let x: String if (name == "void") => "None"
+		| let x: String if (name == "_Bool") => "Bool"
+		| let x: String if (name == "char") => "I8"
+		| let x: String if (name == "signed char") => "I8"
+		| let x: String if (name == "unsigned char") => "U8"
+		| let x: String if (name == "short int") => "I16"
+		| let x: String if (name == "short unsigned int") => "U16"
+		| let x: String if (name == "unsigned int") => "U32"
+		| let x: String if (name == "float") => "F32"
+		| let x: String if (name == "long int") => "I64"
+		| let x: String if (name == "long unsigned int") => "U64"
+		| let x: String if (name == "double") => "F64"
+		| let x: String if (name == "long long unsigned int") => "U64"
+		| let x: String if (name == "long long int") => "I64"
+		| let x: String if (name == "__int128") => "I128"
+		| let x: String if (name == "unsigned __int128") => "U128"
+		| let x: String if (name == "long double") => "F128"
+    else
+      die("Unknown Fundamental Type: " + name)
+			"Unknown"
+    end
+
+  fun tag die(str: String) =>
+    @printf("%s\n".cstring(), str.cstring())
+    @exit(1)
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " " + name + " " + ponytype)
+    ponytype
+
+
+class CXMLPointerType
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLPointerType"
+  var size: String
+  var align: String
+  var typeid: String
+	var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+    size  = xml2node.getProp("size")
+    align = xml2node.getProp("align")
+    typeid = xml2node.getProp("type")
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    try
+      ponytype = itypemap.apply(typeid)?.recurseType(itypemap, typeid)
+      if (ponytype == "U8") then
+        Debug.out("PASSBACK: " + cxmltype + id + " String")
+        return("String")
+      else
+        Debug.out("PASSBACK: " + cxmltype + id + " Pointer[" + ponytype + "]")
+				return("Pointer[" + ponytype + "]")
+      end
+    end
+		"ponytype"
+
+
+class CXMLStruct
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLStruct"
+	var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+		"ponytype"
+
+
+class CXMLTypedef
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLTypedef"
+  var name: String
+  var typeid: String
+  var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+    name  = xml2node.getProp("name")
+    typeid = xml2node.getProp("type")
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " " + name)
+    try
+      ponytype = itypemap.apply(typeid)?.recurseType(itypemap, typeid)
+      Debug.out("PASSBACK: " + cxmltype + id + " " + name + " " + ponytype)
+      return ponytype
+    end
+    "ponytype"
+
+
+class CXMLUnimplemented
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLUnimplemented"
+	var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    "ponytype"
+
+
+class CXMLUnion
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLUnion"
+	var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    "ponytype"
+
+
+class CXMLVariable
+  var xml2node: Xml2node
+  var cxmltype: String = "CXMLVariable"
+	var ponytype: String = ""
+
+  new create(xml2node': Xml2node) =>
+    xml2node = xml2node'
+
+  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+    Debug.out(cxmltype + id + " ")
+    "ponytype"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    // Let's preprocess some XML for fun and profit
+//      Debug.out("Calling checkForInstanceJSON()")
+//      checkForInstanceJSON(env, ctx)
+//    Debug.out("Calling Config")
+//      let config: Config val = Config(env.root as AmbientAuth)
+//    Debug.out("Calling FileMap")
+//      let filemap: FileMap = FileMap(ctx)?
+//    Debug.out("Calling MemberMap")
+//      let membermap: MemberMap = MemberMap(ctx)
+//    Debug.out("Calling EnumMap")
+//      let enummap: EnumMap = EnumMap(ctx)?
+
+//    Debug.out("Calling processStructs")
+//      structFileOutputs = processStructs(filemap, membermap, config, ctx)? //
+//    Debug.out("Calling processUses")
+//      useFileOutputs = processUses(filemap, config, ctx) //
+//    Debug.out("Calling processFunctions")
+//      let functionFileOutputs: Map[String, Map[String, String]] = processFunctions(filemap, config, ctx)?
+//    Debug.out("Calling writeFunctionFiles")
+//      writeFunctionFiles(functionFileOutputs, env.root as AmbientAuth)?
+//    Debug.out("Calling writeUseFileOutputs")
+//      writeUseFileOutputs(useFileOutputs, config, env.root as AmbientAuth)? //
+//    Debug.out("Calling writeStructFiles")
+//      writeStructFiles(structFileOutputs, env.root as AmbientAuth)? //
+//    Debug.out("Calling writeEnumOutputs")
+//      writeEnumOutputs(enummap.fm, env.root as AmbientAuth)? //
+//    Debug.out("Successful Finish")
 
     else
       env.out.print("We errored out")
@@ -464,3 +871,4 @@ actor Main
       ])
     typeConversionOut.data("String") = x
     typeConversionOut
+*/
