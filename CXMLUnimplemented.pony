@@ -14,3 +14,7 @@ class CXMLUnimplemented
     Debug.out(cxmltype + id + " ")
     "ponytype"
 
+
+  fun ctype(): String =>
+    cxmltype
+

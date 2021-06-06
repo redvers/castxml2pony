@@ -34,17 +34,14 @@ class CXMLPointerType
         ponytype = "Array[String]"
         Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
         return ponytype
-      else
-        match itypemap.apply(typeid)?
-        | let x: CXMLStruct =>
+      elseif (itypemap.apply(typeid)?.ctype() == "CXMLElaboratedType") then
           ponytype = "NullablePointer[" + ponytype + "]"
           Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
           return ponytype
-        | let x: CXMLCastType =>
+      else
           ponytype = "Pointer[" + ponytype + "]"
           Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
 			  	return ponytype
-        end
       end
     end
 		die("I died on " + id + " for some reason")
@@ -53,3 +50,8 @@ class CXMLPointerType
   fun ref die(str: String) =>
     @printf[I32]("%s\n".cstring(), str.cstring())
     @exit(1)
+
+
+  fun ctype(): String =>
+    cxmltype
+

@@ -26,3 +26,8 @@ class CXMLTypedef
     else
       ponytype
     end
+
+
+  fun ctype(): String =>
+    cxmltype
+

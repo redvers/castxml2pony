@@ -49,3 +49,7 @@ class CXMLFundamentalType
     Debug.out(cxmltype + id + " " + name + " " + ponytype)
     ponytype
 
+
+  fun ctype(): String =>
+    cxmltype
+

@@ -26,3 +26,7 @@ class CXMLCvQualifiedType
       return ponytype
     end
     "ponytype"
+
+  fun ctype(): String =>
+    cxmltype
+

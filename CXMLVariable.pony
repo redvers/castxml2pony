@@ -14,3 +14,7 @@ class CXMLVariable
     Debug.out(cxmltype + id + " ")
     "ponytype"
 
+
+  fun ctype(): String =>
+    cxmltype
+

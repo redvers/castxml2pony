@@ -34,3 +34,8 @@ class CXMLField
   fun ref die(str: String) =>
     @printf[I32]("%s\n".cstring(), str.cstring())
     @exit(1)
+
+
+  fun ctype(): String =>
+    cxmltype
+

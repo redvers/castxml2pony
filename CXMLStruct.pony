@@ -15,3 +15,8 @@ class CXMLStruct
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
 		Debug.out("PASSBACK: " + cxmltype + id + " " + name)
     name
+
+
+  fun ctype(): String =>
+    cxmltype
+

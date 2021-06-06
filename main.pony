@@ -30,7 +30,7 @@ actor Main
       for instance in res.values()? do
         match instance.name()
         | let x: String val if (x == "Function") => itypemap.insert(instance.getProp("id"), CXMLFunction(instance))
-        | let x: String val if (x == "rrayType") => itypemap.insert(instance.getProp("id"), CXMLArrayType(instance))
+        | let x: String val if (x == "ArrayType") => itypemap.insert(instance.getProp("id"), CXMLArrayType(instance))
         | let x: String val if (x == "CvQualifiedType") => itypemap.insert(instance.getProp("id"), CXMLCvQualifiedType(instance))
         | let x: String val if (x == "ElaboratedType") => itypemap.insert(instance.getProp("id"), CXMLElaboratedType(instance))
         | let x: String val if (x == "Enumeration") => itypemap.insert(instance.getProp("id"), CXMLEnumeration(instance))
@@ -52,8 +52,35 @@ actor Main
 
     Debug.out("Found " + itypemap.size().string() + " valid records")
 
-    Debug.out("Final Type: " + recurseType(itypemap, "_2836"))
-    Debug.out("Final Type: " + recurseType(itypemap, "_2846"))
+    // Test Function _2399
+    Debug.out(functionUse(itypemap, "_2399"))
+
+
+  fun functionUse(itypemap: Map[String, CXMLCastType], id: String): String =>
+    try
+      match itypemap.apply(id)?
+      | let x: CXMLFunction =>
+        var returntext: String = ""
+        returntext = returntext + "{ \"name\": \"" + x.name + "\", \"rv\": \"" + x.rv + "\", \"args\": [\n"
+        var varargs: Array[String] = Array[String]
+        for (name, typeid) in x.args.values() do
+          varargs.push("  \"name\": \"" + name + "\", \"type\": \"" + typeid + "\"")
+        end
+        returntext = returntext + ", \n".join(varargs.values())
+        returntext = returntext + "] }"
+        return returntext
+      else
+        ""
+      end
+    else
+      die("Not a function in the map: " + id)
+      ""
+    end
+    ""
+
+
+
+
 
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
     Debug.out("Starting with: " + id)
@@ -66,7 +93,7 @@ actor Main
 
 
   fun die(str: String) =>
-    @printf("%s".cstring(), str.cstring())
+    @printf("%s\n".cstring(), str.cstring())
     @exit(1)
 
 
