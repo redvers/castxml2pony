@@ -9,7 +9,7 @@ use "files"
 use @printf[I32](str: Pointer[U8] tag, ...)
 use @exit[None](errcode: USize)
 
-type CXMLCastType is (CXMLFunction | CXMLArrayType | CXMLCvQualifiedType | CXMLElaboratedType | CXMLEnumeration | CXMLField | CXMLFile | CXMLFunctionType | CXMLFundamentalType | CXMLPointerType | CXMLStruct | CXMLTypedef | CXMLUnimplemented | CXMLUnion | CXMLVariable )
+type CXMLCastType is (CXMLFunction | CXMLArrayType | CXMLCvQualifiedType | CXMLElaboratedType | CXMLEnumeration | CXMLField | CXMLFile | CXMLFunctionType | CXMLFundamentalType | CXMLPointerType | CXMLStruct | CXMLTypedef | CXMLUnimplemented | CXMLUnion | CXMLVariable)
 
 actor Main
   new create(env: Env) =>
@@ -52,8 +52,17 @@ actor Main
 
     Debug.out("Found " + itypemap.size().string() + " valid records")
 
+    for (id, m) in itypemap.pairs() do
+      match m
+      | let x: CXMLFunction => Debug.out("Function Name: " + x.name)
+        Debug.out(functionUse(itypemap, id))
+      end
+    end
+
+
     // Test Function _2399
-    Debug.out(functionUse(itypemap, "_2399"))
+
+//    Debug.out(functionUse(itypemap, "_2399"))
 
 
   fun functionUse(itypemap: Map[String, CXMLCastType], id: String): String =>
@@ -61,10 +70,10 @@ actor Main
       match itypemap.apply(id)?
       | let x: CXMLFunction =>
         var returntext: String = ""
-        returntext = returntext + "{ \"name\": \"" + x.name + "\", \"rv\": \"" + x.rv + "\", \"args\": [\n"
+        returntext = returntext + "{ \"name\": \"" + x.name + "\", \"rv\": \"" + recurseType(itypemap, x.rv) + "\", \"args\": [\n"
         var varargs: Array[String] = Array[String]
         for (name, typeid) in x.args.values() do
-          varargs.push("  \"name\": \"" + name + "\", \"type\": \"" + typeid + "\"")
+          varargs.push("  \"name\": \"" + name + "\", \"type\": \"" + recurseType(itypemap, typeid) + "\"")
         end
         returntext = returntext + ", \n".join(varargs.values())
         returntext = returntext + "] }"
@@ -82,8 +91,11 @@ actor Main
 
 
 
-  fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
+  fun recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
     Debug.out("Starting with: " + id)
+    if (id == "...") then
+      return "..."
+    end
     try
       return itypemap.apply(id)?.recurseType(itypemap, id)
     else

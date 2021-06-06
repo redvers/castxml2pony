@@ -20,10 +20,14 @@ class CXMLFunction
     var argno: ISize = ISize(0)
     for xmlnode in argnodes.values() do
       var argname: String = xmlnode.getProp("name")
+      var argtype: String = xmlnode.getProp("type")
       if (argname == "") then
         argname = "parg" + argno.string()
       end
-      args.push(("p" + argname, xmlnode.getProp("type")))
+      if (argtype == "") then
+        argtype = "..."
+      end
+      args.push(("p" + argname, argtype))
       argno = argno + 1
     end
 
