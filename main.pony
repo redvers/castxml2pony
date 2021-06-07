@@ -52,40 +52,60 @@ actor Main
 
     Debug.out("Found " + itypemap.size().string() + " valid records")
 
+    let neededTypes: Map[String, String] = Map[String, String]
+
     for (id, m) in itypemap.pairs() do
       match m
       | let x: CXMLFunction => Debug.out("Function Name: " + x.name)
-        Debug.out(functionUse(itypemap, id))
+          var json: String
+          var deps: Array[String]
+          (json, deps) = functionUse(itypemap, id)
+          for f in deps.values() do
+            neededTypes.insert(f, f)
+          end
+          Debug.out(json)
       end
+    end
+
+    for f in neededTypes.values() do
+      Debug.out("TypeDefinition: "+ f)
     end
 
 
     // Test Function _2399
 
-//    Debug.out(functionUse(itypemap, "_2399"))
 
 
-  fun functionUse(itypemap: Map[String, CXMLCastType], id: String): String =>
+  fun functionUse(itypemap: Map[String, CXMLCastType], id: String): (String, Array[String]) =>
+    var deps: Array[String] = Array[String]
     try
       match itypemap.apply(id)?
       | let x: CXMLFunction =>
         var returntext: String = ""
-        returntext = returntext + "{ \"name\": \"" + x.name + "\", \"rv\": \"" + recurseType(itypemap, x.rv) + "\", \"args\": [\n"
+        let rvtype: String = recurseType(itypemap, x.rv)
+        deps.push(rvtype)
+        returntext = returntext + "{ \"name\": \"" + x.name + "\", \"rv\": \"" + rvtype + "\", \"args\": "
         var varargs: Array[String] = Array[String]
         for (name, typeid) in x.args.values() do
-          varargs.push("  \"name\": \"" + name + "\", \"type\": \"" + recurseType(itypemap, typeid) + "\"")
+          let ttype: String = recurseType(itypemap, typeid)
+          deps.push(rvtype)
+          varargs.push("    { \"name\": \"" + name + "\", \"type\": \"" + ttype + "\" }")
         end
-        returntext = returntext + ", \n".join(varargs.values())
-        returntext = returntext + "] }"
-        return returntext
+        if (varargs.size() == 0) then
+          returntext = returntext + "[] }"
+          return (returntext, deps)
+        end
+
+        returntext = returntext + "\n  [ \n" + ", \n".join(varargs.values()) + "\n  ]\n}"
+        return (returntext, deps)
       else
-        ""
+        ("", deps)
       end
     else
       die("Not a function in the map: " + id)
-      ""
+      ("", Array[String])
     end
-    ""
+    ("", Array[String])
 
 
 
