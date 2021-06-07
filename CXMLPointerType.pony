@@ -38,6 +38,10 @@ class CXMLPointerType
           ponytype = "NullablePointer[" + ponytype + "]"
           Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
           return ponytype
+      elseif (itypemap.apply(typeid)?.ctype() == "CXMLTypedef") then
+          ponytype = "NullablePointer[" + ponytype + "]"
+          Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
+          return ponytype
       else
           ponytype = "Pointer[" + ponytype + "]"
           Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
