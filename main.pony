@@ -94,11 +94,13 @@ actor Main
     var depmaps: Map[String, String]
     (funcjson, depmaps) = processUseCases(itypemap, functionids)
 
-    env.out.print("{\n  \"types\": {")
-    env.out.print(generateDepJSON(depmaps))
-    env.out.print("  },\n  \"use\": [")
-    env.out.print(generateUseJSON(funcjson))
-    env.out.print("  ]\n}\n")
+    if (genUse) then
+      env.out.print("{\n  \"types\": {")
+      env.out.print(generateDepJSON(depmaps))
+      env.out.print("  },\n  \"use\": [")
+      env.out.print(generateUseJSON(funcjson))
+      env.out.print("  ]\n}\n")
+    end
 
 
   fun generateUseJSON(funcjson: Array[String]): String =>
