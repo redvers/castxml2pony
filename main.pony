@@ -52,12 +52,13 @@ actor Main
 
     Debug.out("Found " + itypemap.size().string() + " valid records")
 
-    var functionids: Array[String] = getFunctionidsFromFID(filename, [ "f12" ])
+    var functionids: Array[String] = getFunctionidsFromFID(filename, [ "f15" ])
     var funcjson: Array[String]
     var depmaps: Map[String, String]
     (funcjson, depmaps) = processUseCases(itypemap, functionids)
 
 
+    generateDepJSON(depmaps)
     for f in depmaps.keys() do
       Debug.out("Deps: " + f)
     end
@@ -67,8 +68,24 @@ actor Main
     end
 
 
+  fun generateDepJSON(depmaps: Map[String, String]) =>
+    for f in depmaps.keys() do
+			None
 
 
+    end
+
+  fun ponyStruct(text: String val): String =>
+    var t: String iso = text.clone()
+    t.replace("_", "")
+    (var f: String iso, var r: String iso) = t.clone().chop(USize(1))
+    f.upper_in_place()
+    f.clone() + r.clone()
+
+  fun ponyMemberName(text: String val): String =>
+    var t: String iso = text.clone()
+    t.replace("_", "")
+    "p" + t.clone()
 
   fun getFunctionidsFromFID(filename: String, fids: Array[String]): Array[String] =>
     var funcids: Array[String] = Array[String]
@@ -101,29 +118,6 @@ actor Main
     (jsonarray, neededTypes)
 
 
-
-//    for (id, m) in itypemap.pairs() do
-//      match m
-//      | let x: CXMLFunction => Debug.out("Function Name: " + x.name)
-//          var json: String
-//          var deps: Array[String]
-//          (json, deps) = functionUse(itypemap, id)
-//          for f in deps.values() do
-//            neededTypes.insert(f, f)
-//          end
-//          Debug.out(json)
-//      end
-//    end
-//
-//    for f in neededTypes.values() do
-//      Debug.out("TypeDefinition: "+ f)
-//    end
-
-
-    // Test Function _2399
-
-
-
   fun functionUse(itypemap: Map[String, CXMLCastType], id: String): (String, Array[String]) =>
     var deps: Array[String] = Array[String]
     try
@@ -136,7 +130,7 @@ actor Main
         var varargs: Array[String] = Array[String]
         for (name, typeid) in x.args.values() do
           let ttype: String = recurseType(itypemap, typeid)
-          deps.push(rvtype)
+          deps.push(ttype)
           varargs.push("    { \"name\": \"" + name + "\", \"type\": \"" + ttype + "\" }")
         end
         if (varargs.size() == 0) then
@@ -154,9 +148,6 @@ actor Main
       ("", Array[String])
     end
     ("", Array[String])
-
-
-
 
 
   fun recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>

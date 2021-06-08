@@ -27,7 +27,10 @@ class CXMLFunction
       if (argtype == "") then
         argtype = "..."
       end
-      args.push(("p" + argname, argtype))
+
+      var argnameiso: String iso = recover iso argname.clone() end
+      argnameiso.replace("_", "")
+      args.push(("p" + consume argnameiso, argtype))
       argno = argno + 1
     end
 

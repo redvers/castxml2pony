@@ -14,9 +14,22 @@ class CXMLStruct
 
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
 		Debug.out("PASSBACK: " + cxmltype + id + " " + name)
-    name
+    ponyStruct(name)
 
 
   fun ctype(): String =>
     cxmltype
+
+  fun ponyStruct(text: String val): String =>
+    var t: String iso = text.clone()
+    t.replace("_", "")
+    (var f: String iso, var r: String iso) = t.clone().chop(USize(1))
+    f.upper_in_place()
+    f.clone() + r.clone()
+
+  fun ponyMemberName(text: String val): String =>
+    var t: String iso = text.clone()
+    t.replace("_", "")
+    "p" + t.clone()
+
 

@@ -3,6 +3,12 @@ use "debug"
 use "../pony-libxml2/pony-libxml2"
 
 class CXMLPointerType
+  let primitiveSet: Set[String] = Set[String]
+  let ponyprimitives: Array[String] = [
+    "None" ; "Bool" ; "F32" ; "F64" ; "F128"
+    "I8" ; "I16" ; "I32" ; "I64" ; "I128"
+    "U8" ; "U16" ; "U32" ; "U64" ; "U128"
+  ]
   var xml2node: Xml2node
   var cxmltype: String = "CXMLPointerType"
   var size: String
@@ -15,6 +21,10 @@ class CXMLPointerType
     size  = xml2node.getProp("size")
     align = xml2node.getProp("align")
     typeid = xml2node.getProp("type")
+
+    for f in ponyprimitives.values() do
+      primitiveSet.set(f)
+    end
 
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
     if (ponytype != "") then
@@ -34,22 +44,17 @@ class CXMLPointerType
         ponytype = "Array[String]"
         Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
         return ponytype
-      elseif (itypemap.apply(typeid)?.ctype() == "CXMLElaboratedType") then
-          ponytype = "NullablePointer[" + ponytype + "]"
-          Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
-          return ponytype
-      elseif (itypemap.apply(typeid)?.ctype() == "CXMLTypedef") then
-          ponytype = "NullablePointer[" + ponytype + "]"
-          Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
-          return ponytype
-      elseif (itypemap.apply(typeid)?.ctype() == "CXMLCvQualifiedType") then
-          ponytype = "NullablePointer[" + ponytype + "]"
-          Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
-          return ponytype
+      elseif (primitiveSet.contains(ponytype)) then
+        ponytype = "Pointer[" + ponytype + "]"
+        Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
+			 	return ponytype
+      elseif (ponytype.substring(0,15) == "NullablePointer") then
+        ponytype = "Array[" + ponytype + "]"
+        return ponytype
       else
-          ponytype = "Pointer[" + ponytype + "]"
+          ponytype = "NullablePointer[" + ponytype + "]"
           Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
-			  	return ponytype
+          return ponytype
       end
     end
 		die("I died on " + id + " for some reason")
