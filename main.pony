@@ -52,28 +52,48 @@ actor Main
 
     Debug.out("Found " + itypemap.size().string() + " valid records")
 
-    var functionids: Array[String] = getFunctionidsFromFID(filename, [ "f15" ])
+    var functionids: Array[String] = getFunctionidsFromFID(filename, [ "f12" ])
     var funcjson: Array[String]
     var depmaps: Map[String, String]
     (funcjson, depmaps) = processUseCases(itypemap, functionids)
 
+    Debug.out("{\n  \"types\": {")
+    Debug.out(generateDepJSON(depmaps))
+    Debug.out("  },\n  \"use\": [")
+    Debug.out(generateUseJSON(funcjson))
+    Debug.out("  ]\n}\n")
 
-    generateDepJSON(depmaps)
+
+  fun generateUseJSON(funcjson: Array[String]): String =>
+    ",\n".join(funcjson.values())
+
+  fun generateDepJSON(depmaps: Map[String, String]): String =>
+    let deprefs: Array[String] = Array[String]
+    try
+      depmaps.remove("String")?
+      depmaps.remove("Array[String]")?
+    end
+
+      deprefs.push("    \"String\": {\n" +
+                   "      \"argtype\": \"Pointer[U8] tag\",\n" +
+                   "      \"rvtype\": \"Pointer[U8]\"\n" +
+                   "    }"
+                  )
+
+      deprefs.push("    \"Array[String]\": {\n" +
+                   "      \"argtype\": \"Pointer[Pointer[U8]] tag\",\n" +
+                   "      \"rvtype\": \"Pointer[Pointer[U8]]\"\n" +
+                   "    }"
+                  )
+
     for f in depmaps.keys() do
-      Debug.out("Deps: " + f)
+      deprefs.push("    \"" + f + "\": {\n" +
+                   "      \"argtype\": \"" + f + " tag\",\n" +
+                   "      \"rvtype\": \"" + f + "\"\n" +
+                   "    }"
+                  )
     end
-
-    for f in funcjson.values() do
-      Debug.out("Funcjson:\n" + f)
-    end
-
-
-  fun generateDepJSON(depmaps: Map[String, String]) =>
-    for f in depmaps.keys() do
-			None
-
-
-    end
+    ",\n".join(deprefs.values())
 
   fun ponyStruct(text: String val): String =>
     var t: String iso = text.clone()
@@ -126,19 +146,19 @@ actor Main
         var returntext: String = ""
         let rvtype: String = recurseType(itypemap, x.rv)
         deps.push(rvtype)
-        returntext = returntext + "{ \"name\": \"" + x.name + "\", \"rv\": \"" + rvtype + "\", \"args\": "
+        returntext = returntext + "    { \"name\": \"" + x.name + "\", \"rv\": \"" + rvtype + "\", \"args\": "
         var varargs: Array[String] = Array[String]
         for (name, typeid) in x.args.values() do
           let ttype: String = recurseType(itypemap, typeid)
           deps.push(ttype)
-          varargs.push("    { \"name\": \"" + name + "\", \"type\": \"" + ttype + "\" }")
+          varargs.push("        { \"name\": \"" + name + "\", \"type\": \"" + ttype + "\" }")
         end
         if (varargs.size() == 0) then
           returntext = returntext + "[] }"
           return (returntext, deps)
         end
 
-        returntext = returntext + "\n  [ \n" + ", \n".join(varargs.values()) + "\n  ]\n}"
+        returntext = returntext + "\n      [ \n" + ", \n".join(varargs.values()) + "\n      ]\n    }"
         return (returntext, deps)
       else
         ("", deps)
