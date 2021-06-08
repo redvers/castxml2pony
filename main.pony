@@ -119,15 +119,32 @@ actor Main
       env.out.print("  ]\n}\n")
     end
 
+    var structids: Array[String] = getStructidsFromFID(filename, ifid )
     if (genStruct) then
       var structjson: Array[String] = Array[String]
-      (structjson, depmaps) = processStructs(itypemap, ["_365" ; "_367" ; "_368" ; "_369" ; "_370" ; "_371" ; "_372" ; "_373" ])
+      (structjson, depmaps) = processStructs(itypemap, structids)
       env.out.print("{\n  \"types\": {")
       env.out.print(generateDepJSON(depmaps))
       env.out.print("  },\n  \"structs\": [")
       env.out.print(generateStructJSON(structjson))
       env.out.print("  ]\n}\n")
     end
+
+  fun getStructidsFromFID(filename: String, fids: Array[String]): Array[String] =>
+    var structids: Array[String] = Array[String]
+    try
+      let doc: Xml2Doc = Xml2Doc.parseFile(filename)?
+      let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
+
+      for f in fids.values() do
+        let res: Xml2pathobject = ctx.xpathEval("//Struct[@file='" + f + "']")?
+        for xmlnode in res.values()? do
+          structids.push(xmlnode.getProp("id"))
+        end
+      end
+    end
+    structids
+
 
   fun generateStructJSON(funcjson: Array[String]): String =>
     ",\n".join(funcjson.values())
