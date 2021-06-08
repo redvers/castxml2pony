@@ -7,10 +7,14 @@ class CXMLStruct
   var cxmltype: String = "CXMLStruct"
 	var ponytype: String = ""
 	var name: String = ""
+	var members: Array[String] = Array[String]
+	var incomplete: Bool = false
 
   new create(xml2node': Xml2node) =>
     xml2node = xml2node'
 		name = xml2node.getProp("name")
+    members = xml2node.getProp("members").split()
+    if (xml2node.getProp("incomplete") == "1") then incomplete = true end
 
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
 		Debug.out("PASSBACK: " + cxmltype + id + " " + name)
