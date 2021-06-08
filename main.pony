@@ -5,6 +5,7 @@ use "../pony-libxml2/pony-libxml2"
 use "lib:xml2"
 use "json"
 use "files"
+use "cli"
 
 use @printf[I32](str: Pointer[U8] tag, ...)
 use @exit[None](errcode: USize)
@@ -13,9 +14,45 @@ type CXMLCastType is (CXMLFunction | CXMLArrayType | CXMLCvQualifiedType | CXMLE
 
 actor Main
   new create(env: Env) =>
+    let cs =
+      try
+        CommandSpec.leaf("castxml2pony", "Code Generation for C-FFI", [
+          OptionSpec.bool("use", "Generate use json" where short' = 'u', default' = false)
+          OptionSpec.string("xmlin", "Specify castxml .xml file" where short' = 'x')
+        ], [
+          ArgSpec.string_seq("fileids", "The fileids to generate for")
+        ])? .> add_help()?
+      else
+        env.exitcode(-1)  // some kind of coding error
+        return
+      end
+
+    let cmd =
+      match CommandParser(cs).parse(env.args, env.vars)
+      | let c: Command => c
+      | let ch: CommandHelp =>
+          ch.print_help(env.out)
+          env.exitcode(0)
+          return
+      | let se: SyntaxError =>
+          env.out.print(se.string())
+          env.exitcode(1)
+          return
+      end
+
+    var filename: String = cmd.option("xmlin").string()
+    let genUse = cmd.option("use").bool()
+    let inputfileids = cmd.arg("fileids").string_seq()
+
+    let ifid: Array[String] = Array[String]
+		for f in inputfileids.values() do
+			ifid.push(f)
+		end
+
+
     var structFileOutputs: Map[String, Array[String]] = Map[String, Array[String]].create()
     var useFileOutputs: Map[String, String] = Map[String, String].create()
-    let filename: String val = "libxml2.xml"
+//    let filename: String val = "libzip.xml"
 //    Debug.err("Parsing: " + filename)
 
     var itypemap: Map[String, CXMLCastType] = Map[String, CXMLCastType]
@@ -52,16 +89,16 @@ actor Main
 
     Debug.out("Found " + itypemap.size().string() + " valid records")
 
-    var functionids: Array[String] = getFunctionidsFromFID(filename, [ "f12" ])
+    var functionids: Array[String] = getFunctionidsFromFID(filename, ifid )
     var funcjson: Array[String]
     var depmaps: Map[String, String]
     (funcjson, depmaps) = processUseCases(itypemap, functionids)
 
-    Debug.out("{\n  \"types\": {")
-    Debug.out(generateDepJSON(depmaps))
-    Debug.out("  },\n  \"use\": [")
-    Debug.out(generateUseJSON(funcjson))
-    Debug.out("  ]\n}\n")
+    env.out.print("{\n  \"types\": {")
+    env.out.print(generateDepJSON(depmaps))
+    env.out.print("  },\n  \"use\": [")
+    env.out.print(generateUseJSON(funcjson))
+    env.out.print("  ]\n}\n")
 
 
   fun generateUseJSON(funcjson: Array[String]): String =>
@@ -74,17 +111,17 @@ actor Main
       depmaps.remove("Array[String]")?
     end
 
-      deprefs.push("    \"String\": {\n" +
-                   "      \"argtype\": \"Pointer[U8] tag\",\n" +
-                   "      \"rvtype\": \"Pointer[U8]\"\n" +
-                   "    }"
-                  )
+    deprefs.push("    \"String\": {\n" +
+                 "      \"argtype\": \"Pointer[U8] tag\",\n" +
+                 "      \"rvtype\": \"Pointer[U8]\"\n" +
+                 "    }"
+                )
 
-      deprefs.push("    \"Array[String]\": {\n" +
-                   "      \"argtype\": \"Pointer[Pointer[U8]] tag\",\n" +
-                   "      \"rvtype\": \"Pointer[Pointer[U8]]\"\n" +
-                   "    }"
-                  )
+    deprefs.push("    \"Array[String]\": {\n" +
+                 "      \"argtype\": \"Pointer[Pointer[U8]] tag\",\n" +
+                 "      \"rvtype\": \"Pointer[Pointer[U8]]\"\n" +
+                 "    }"
+                )
 
     for f in depmaps.keys() do
       deprefs.push("    \"" + f + "\": {\n" +
