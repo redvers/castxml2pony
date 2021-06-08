@@ -12,7 +12,7 @@ class CXMLFunctionType
 
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
     Debug.out(cxmltype + id + " ")
-    "ponytype"
+    "FUNCTIONTYPE"
 
 
   fun ctype(): String =>

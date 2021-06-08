@@ -52,24 +52,72 @@ actor Main
 
     Debug.out("Found " + itypemap.size().string() + " valid records")
 
-    let neededTypes: Map[String, String] = Map[String, String]
+    var functionids: Array[String] = getFunctionidsFromFID(filename, [ "f12" ])
+    var funcjson: Array[String]
+    var depmaps: Map[String, String]
+    (funcjson, depmaps) = processUseCases(itypemap, functionids)
 
-    for (id, m) in itypemap.pairs() do
-      match m
-      | let x: CXMLFunction => Debug.out("Function Name: " + x.name)
-          var json: String
-          var deps: Array[String]
-          (json, deps) = functionUse(itypemap, id)
-          for f in deps.values() do
-            neededTypes.insert(f, f)
-          end
-          Debug.out(json)
+
+    for f in depmaps.keys() do
+      Debug.out("Deps: " + f)
+    end
+
+    for f in funcjson.values() do
+      Debug.out("Funcjson:\n" + f)
+    end
+
+
+
+
+
+  fun getFunctionidsFromFID(filename: String, fids: Array[String]): Array[String] =>
+    var funcids: Array[String] = Array[String]
+    try
+      let doc: Xml2Doc = Xml2Doc.parseFile(filename)?
+      let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
+
+      for f in fids.values() do
+        let res: Xml2pathobject = ctx.xpathEval("//Function[@file='" + f + "']")?
+        for xmlnode in res.values()? do
+          funcids.push(xmlnode.getProp("id"))
+        end
       end
     end
+    funcids
 
-    for f in neededTypes.values() do
-      Debug.out("TypeDefinition: "+ f)
+  fun processUseCases(itypemap: Map[String, CXMLCastType], funcids: Array[String]): (Array[String], Map[String, String]) =>
+    var jsonarray: Array[String] = Array[String]
+    let neededTypes: Map[String, String] = Map[String, String]
+
+    for id in funcids.values() do
+      var json: String
+      var deps: Array[String]
+      (json, deps) = functionUse(itypemap, id)
+      for f in deps.values() do
+        neededTypes.insert(f, f)
+      end
+      jsonarray.push(json)
     end
+    (jsonarray, neededTypes)
+
+
+
+//    for (id, m) in itypemap.pairs() do
+//      match m
+//      | let x: CXMLFunction => Debug.out("Function Name: " + x.name)
+//          var json: String
+//          var deps: Array[String]
+//          (json, deps) = functionUse(itypemap, id)
+//          for f in deps.values() do
+//            neededTypes.insert(f, f)
+//          end
+//          Debug.out(json)
+//      end
+//    end
+//
+//    for f in neededTypes.values() do
+//      Debug.out("TypeDefinition: "+ f)
+//    end
 
 
     // Test Function _2399
