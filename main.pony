@@ -200,7 +200,7 @@ actor Main
                  "      \"ponytypein\": \"String\",\n" +
                  "      \"ponytypeinconv\": \".cstring()\",\n" +
                  "      \"ponytypeout\": \"String\",\n" +
-                 "      \"ponytypeoutconv\": [ \"    var pcstring: Pointer[U8] = \", \"    String.from_cstring(pcstring).clone()\" ],\n" +
+                 "      \"ponytypeoutconv\": [ \"var pcstring: Pointer[U8] = \", \"let p: String iso = String.from_cstring(pcstring).clone()\\n    consume p\" ],\n" +
                  "      \"structtype\": \"Pointer[U8]\",\n" +
                  "      \"structdef\": \"Pointer[U8]\",\n" +
                  "      \"argtype\": \"Pointer[U8] tag\",\n" +
