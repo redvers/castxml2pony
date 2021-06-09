@@ -197,6 +197,10 @@ actor Main
     end
 
     deprefs.push("    \"String\": {\n" +
+                 "      \"ponytypein\": \"String\",\n" +
+                 "      \"ponytypeinconv\": \".cstring()\",\n" +
+                 "      \"ponytypeout\": \"String\",\n" +
+                 "      \"ponytypeoutconv\": [ \"    var pcstring: Pointer[U8] = \", \"    String.from_cstring(pcstring).clone()\" ],\n" +
                  "      \"structtype\": \"Pointer[U8]\",\n" +
                  "      \"structdef\": \"Pointer[U8]\",\n" +
                  "      \"argtype\": \"Pointer[U8] tag\",\n" +
@@ -205,6 +209,10 @@ actor Main
                 )
 
     deprefs.push("    \"Array[String]\": {\n" +
+                 "      \"ponytypein\": \"Array[String]\",\n" +
+                 "      \"ponytypeinconv\": \"\",\n" +
+                 "      \"ponytypeout\": \"Pointer[Pointer[U8]]\",\n" +
+                 "      \"ponytypeoutconv\": [ \"\" ],\n" +
                  "      \"structtype\": \"Pointer[Pointer[U8]]\",\n" +
                  "      \"structdef\": \"Pointer[Pointer[U8]]\",\n" +
                  "      \"argtype\": \"Pointer[Pointer[U8]] tag\",\n" +
@@ -215,6 +223,10 @@ actor Main
     for f in depmaps.keys() do
       if (primitiveSet.contains(f)) then
       deprefs.push("    \"" + f + "\": {\n" +
+                   "      \"ponytypein\": \"" + f + "\",\n" +
+                   "      \"ponytypeinconv\": \"\",\n" +
+                   "      \"ponytypeout\": \"" + f + "\",\n" +
+                   "      \"ponytypeoutconv\": [ \"\" ],\n" +
                    "      \"structtype\": \"" + f + "\",\n" +
                    "      \"structdef\": \"" + f + "(0)\",\n" +
                    "      \"argtype\": \"" + f + "\",\n" +
@@ -223,6 +235,10 @@ actor Main
                   )
       else
       deprefs.push("    \"" + f + "\": {\n" +
+                   "      \"ponytypein\": \"" + f + "\",\n" +
+                   "      \"ponytypeinconv\": \"\",\n" +
+                   "      \"ponytypeout\": \"" + f + "\",\n" +
+                   "      \"ponytypeoutconv\": [ \"\" ],\n" +
                    "      \"structtype\": \"" + f + "\",\n" +
                    "      \"structdef\": \"" + f + "\",\n" +
                    "      \"argtype\": \"" + f + " tag\",\n" +
@@ -284,7 +300,9 @@ actor Main
         var returntext: String = ""
         let rvtype: String = recurseType(itypemap, x.rv)
         deps.push(rvtype)
-        returntext = returntext + "    { \"name\": \"" + x.name + "\", \"rv\": \"" + rvtype + "\", \"args\": "
+        returntext = returntext + "    {     \"name\": \"" + x.name + "\",\n" +
+                                  "      \"ponyname\": \"" + ponyMemberName(x.name) + "\",\n" +
+                                  "            \"rv\": \"" + rvtype + "\", \"args\": "
         var varargs: Array[String] = Array[String]
         for (name, typeid) in x.args.values() do
           let ttype: String = recurseType(itypemap, typeid)

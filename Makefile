@@ -1,7 +1,6 @@
 all:
 	ponyc .
-	./castxml2pony -x libzip.xml f36 -s | ./gen_structfile.sh
-#	./castxml2pony -x libzip.xml f36 -u | ./gen_usefile.sh
+	./castxml2pony -x libzip.xml f36 -u | ./gen_functions.sh
 
 clean:
 	rm -f out/struct*pony
