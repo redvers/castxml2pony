@@ -1,8 +1,15 @@
-all:
+json:
 	ponyc .
-	./castxml2pony -x libzip.xml f36 -u | ./gen_usefile.sh | tee out/use.pony
-	./castxml2pony -x libzip.xml f36 -u | ./gen_functions.sh | tee out/functions.pony
-	./castxml2pony -x libzip.xml f36 -s | ./gen_structfile.sh | tee out/structs.pony
+	./castxml2pony -x zip.xml f36 -u | tee zip-use.json
+	./castxml2pony -x zip.xml f36 -s | tee zip-struct.json
+
+codegen:
+	cat zip-use.json | ./gen_usefile.sh | tee out/use.pony
+	echo "use \"lib:zip\"" > out/functions.pony
+	echo "primitive LibZIP" >> out/functions.pony
+	cat zip-use.json | ./gen_functions.sh >> out/functions.pony
+	cat zip-struct.json | ./gen_structfile.sh | tee out/structs.pony
+#	./castxml2pony -x zip.xml f36 -s | ./gen_structfile.sh | tee out/structs.pony
 
 clean:
 	rm -f out/struct*pony
