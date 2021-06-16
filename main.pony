@@ -235,7 +235,7 @@ actor Main
                   )
       else
       deprefs.push("    \"" + f + "\": {\n" +
-                   "      \"ponytypein\": \"" + f + "\",\n" +
+                   "      \"ponytypein\": \"" + f + " tag\",\n" +
                    "      \"ponytypeinconv\": \"\",\n" +
                    "      \"ponytypeout\": \"" + f + "\",\n" +
                    "      \"ponytypeoutconv\": [ \"\" ],\n" +
