@@ -61,7 +61,7 @@ class CXMLPointerType
     "Nope"
 
   fun ref die(str: String) =>
-    @printf[I32]("%s\n".cstring(), str.cstring())
+    @printf("%s\n".cstring(), str.cstring())
     @exit(1)
 
 
