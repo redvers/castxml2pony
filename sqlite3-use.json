@@ -1,0 +1,2494 @@
+{
+  "types": {
+    "String": {
+      "ponytypein": "String",
+      "ponytypeinconv": ".cstring()",
+      "ponytypeout": "String",
+      "ponytypeoutconv": [ "var pcstring: Pointer[U8] = ", "let p: String iso = String.from_cstring(pcstring).clone()\n    consume p" ],
+      "structtype": "Pointer[U8]",
+      "structdef": "Pointer[U8]",
+      "argtype": "Pointer[U8] tag",
+      "rvtype": "Pointer[U8]"
+    },
+    "Array[String]": {
+      "ponytypein": "Pointer[Pointer[U8]]",
+      "ponytypeinconv": "",
+      "ponytypeout": "Pointer[Pointer[U8]]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Pointer[Pointer[U8]]",
+      "structdef": "Pointer[Pointer[U8]]",
+      "argtype": "Pointer[Pointer[U8]] tag",
+      "rvtype": "Pointer[Pointer[U8]]"
+    },
+    "F64": {
+      "ponytypein": "F64",
+      "ponytypeinconv": "",
+      "ponytypeout": "F64",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "F64",
+      "structdef": "F64(0)",
+      "argtype": "F64",
+      "rvtype": "F64"
+    },
+    "Pointer[None]": {
+      "ponytypein": "Pointer[None] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "Pointer[None]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Pointer[None]",
+      "structdef": "Pointer[None]",
+      "argtype": "Pointer[None] tag",
+      "rvtype": "Pointer[None]"
+    },
+    "NullablePointer[Array[String]]": {
+      "ponytypein": "Pointer[Pointer[U8]] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "Pointer[Pointer[U8]]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Pointer[Pointer[U8]]",
+      "structdef": "Pointer[Pointer[U8]]",
+      "argtype": "Pointer[Pointer[U8]] tag",
+      "rvtype": "Pointer[Pointer[U8]]"
+    },
+    "NullablePointer[Sqlite3file]": {
+      "ponytypein": "NullablePointer[Sqlite3file] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3file]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3file]",
+      "structdef": "NullablePointer[Sqlite3file]",
+      "argtype": "NullablePointer[Sqlite3file] tag",
+      "rvtype": "NullablePointer[Sqlite3file]"
+    },
+    "I32": {
+      "ponytypein": "I32",
+      "ponytypeinconv": "",
+      "ponytypeout": "I32",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "I32",
+      "structdef": "I32(0)",
+      "argtype": "I32",
+      "rvtype": "I32"
+    },
+    "Array[NullablePointer[Sqlite3blob]]": {
+      "ponytypein": "Array[NullablePointer[Sqlite3blob]] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "Array[NullablePointer[Sqlite3blob]]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Array[NullablePointer[Sqlite3blob]]",
+      "structdef": "Array[NullablePointer[Sqlite3blob]]",
+      "argtype": "Array[NullablePointer[Sqlite3blob]] tag",
+      "rvtype": "Array[NullablePointer[Sqlite3blob]]"
+    },
+    "U32": {
+      "ponytypein": "U32",
+      "ponytypeinconv": "",
+      "ponytypeout": "U32",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "U32",
+      "structdef": "U32(0)",
+      "argtype": "U32",
+      "rvtype": "U32"
+    },
+    "NullablePointer[Sqlite3snapshot]": {
+      "ponytypein": "NullablePointer[Sqlite3snapshot] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3snapshot]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3snapshot]",
+      "structdef": "NullablePointer[Sqlite3snapshot]",
+      "argtype": "NullablePointer[Sqlite3snapshot] tag",
+      "rvtype": "NullablePointer[Sqlite3snapshot]"
+    },
+    "NullablePointer[Sqlite3backup]": {
+      "ponytypein": "NullablePointer[Sqlite3backup] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3backup]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3backup]",
+      "structdef": "NullablePointer[Sqlite3backup]",
+      "argtype": "NullablePointer[Sqlite3backup] tag",
+      "rvtype": "NullablePointer[Sqlite3backup]"
+    },
+    "Pointer[I64]": {
+      "ponytypein": "Pointer[I64] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "Pointer[I64]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Pointer[I64]",
+      "structdef": "Pointer[I64]",
+      "argtype": "Pointer[I64] tag",
+      "rvtype": "Pointer[I64]"
+    },
+    "NullablePointer[Sqlite3mutex]": {
+      "ponytypein": "NullablePointer[Sqlite3mutex] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3mutex]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3mutex]",
+      "structdef": "NullablePointer[Sqlite3mutex]",
+      "argtype": "NullablePointer[Sqlite3mutex] tag",
+      "rvtype": "NullablePointer[Sqlite3mutex]"
+    },
+    "I64": {
+      "ponytypein": "I64",
+      "ponytypeinconv": "",
+      "ponytypeout": "I64",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "I64",
+      "structdef": "I64(0)",
+      "argtype": "I64",
+      "rvtype": "I64"
+    },
+    "U64": {
+      "ponytypein": "U64",
+      "ponytypeinconv": "",
+      "ponytypeout": "U64",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "U64",
+      "structdef": "U64(0)",
+      "argtype": "U64",
+      "rvtype": "U64"
+    },
+    "NullablePointer[Sqlite3indexinfo]": {
+      "ponytypein": "NullablePointer[Sqlite3indexinfo] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3indexinfo]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3indexinfo]",
+      "structdef": "NullablePointer[Sqlite3indexinfo]",
+      "argtype": "NullablePointer[Sqlite3indexinfo] tag",
+      "rvtype": "NullablePointer[Sqlite3indexinfo]"
+    },
+    "NullablePointer[Pointer[None]]": {
+      "ponytypein": "NullablePointer[Pointer[None]] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Pointer[None]]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Pointer[None]]",
+      "structdef": "NullablePointer[Pointer[None]]",
+      "argtype": "NullablePointer[Pointer[None]] tag",
+      "rvtype": "NullablePointer[Pointer[None]]"
+    },
+    "NullablePointer[Sqlite3]": {
+      "ponytypein": "NullablePointer[Sqlite3] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3]",
+      "structdef": "NullablePointer[Sqlite3]",
+      "argtype": "NullablePointer[Sqlite3] tag",
+      "rvtype": "NullablePointer[Sqlite3]"
+    },
+    "NullablePointer[Valisttag]": {
+      "ponytypein": "NullablePointer[Valisttag] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Valisttag]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Valisttag]",
+      "structdef": "NullablePointer[Valisttag]",
+      "argtype": "NullablePointer[Valisttag] tag",
+      "rvtype": "NullablePointer[Valisttag]"
+    },
+    "NullablePointer[Sqlite3value]": {
+      "ponytypein": "NullablePointer[Sqlite3value] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3value]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3value]",
+      "structdef": "NullablePointer[Sqlite3value]",
+      "argtype": "NullablePointer[Sqlite3value] tag",
+      "rvtype": "NullablePointer[Sqlite3value]"
+    },
+    "Pointer[I32]": {
+      "ponytypein": "Pointer[I32] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "Pointer[I32]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Pointer[I32]",
+      "structdef": "Pointer[I32]",
+      "argtype": "Pointer[I32] tag",
+      "rvtype": "Pointer[I32]"
+    },
+    "...": {
+      "ponytypein": "... tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "...",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "...",
+      "structdef": "...",
+      "argtype": "... tag",
+      "rvtype": "..."
+    },
+    "None": {
+      "ponytypein": "None tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "None",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "None",
+      "structdef": "None",
+      "argtype": "None tag",
+      "rvtype": "None"
+    },
+    "Array[NullablePointer[Sqlite3snapshot]]": {
+      "ponytypein": "Array[NullablePointer[Sqlite3snapshot]] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "Array[NullablePointer[Sqlite3snapshot]]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Array[NullablePointer[Sqlite3snapshot]]",
+      "structdef": "Array[NullablePointer[Sqlite3snapshot]]",
+      "argtype": "Array[NullablePointer[Sqlite3snapshot]] tag",
+      "rvtype": "Array[NullablePointer[Sqlite3snapshot]]"
+    },
+    "Array[NullablePointer[Sqlite3]]": {
+      "ponytypein": "Array[NullablePointer[Sqlite3]] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "Array[NullablePointer[Sqlite3]]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Array[NullablePointer[Sqlite3]]",
+      "structdef": "Array[NullablePointer[Sqlite3]]",
+      "argtype": "Array[NullablePointer[Sqlite3]] tag",
+      "rvtype": "Array[NullablePointer[Sqlite3]]"
+    },
+    "NullablePointer[Sqlite3vfs]": {
+      "ponytypein": "NullablePointer[Sqlite3vfs] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3vfs]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3vfs]",
+      "structdef": "NullablePointer[Sqlite3vfs]",
+      "argtype": "NullablePointer[Sqlite3vfs] tag",
+      "rvtype": "NullablePointer[Sqlite3vfs]"
+    },
+    "NullablePointer[FUNCTIONTYPE]": {
+      "ponytypein": "NullablePointer[FUNCTIONTYPE] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[FUNCTIONTYPE]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[FUNCTIONTYPE]",
+      "structdef": "NullablePointer[FUNCTIONTYPE]",
+      "argtype": "NullablePointer[FUNCTIONTYPE] tag",
+      "rvtype": "NullablePointer[FUNCTIONTYPE]"
+    },
+    "NullablePointer[Sqlite3stmt]": {
+      "ponytypein": "NullablePointer[Sqlite3stmt] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3stmt]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3stmt]",
+      "structdef": "NullablePointer[Sqlite3stmt]",
+      "argtype": "NullablePointer[Sqlite3stmt] tag",
+      "rvtype": "NullablePointer[Sqlite3stmt]"
+    },
+    "NullablePointer[Sqlite3blob]": {
+      "ponytypein": "NullablePointer[Sqlite3blob] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3blob]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3blob]",
+      "structdef": "NullablePointer[Sqlite3blob]",
+      "argtype": "NullablePointer[Sqlite3blob] tag",
+      "rvtype": "NullablePointer[Sqlite3blob]"
+    },
+    "NullablePointer[Sqlite3module]": {
+      "ponytypein": "NullablePointer[Sqlite3module] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3module]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3module]",
+      "structdef": "NullablePointer[Sqlite3module]",
+      "argtype": "NullablePointer[Sqlite3module] tag",
+      "rvtype": "NullablePointer[Sqlite3module]"
+    },
+    "U8": {
+      "ponytypein": "U8",
+      "ponytypeinconv": "",
+      "ponytypeout": "U8",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "U8",
+      "structdef": "U8(0)",
+      "argtype": "U8",
+      "rvtype": "U8"
+    },
+    "NullablePointer[Sqlite3str]": {
+      "ponytypein": "NullablePointer[Sqlite3str] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3str]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3str]",
+      "structdef": "NullablePointer[Sqlite3str]",
+      "argtype": "NullablePointer[Sqlite3str] tag",
+      "rvtype": "NullablePointer[Sqlite3str]"
+    },
+    "NullablePointer[Sqlite3context]": {
+      "ponytypein": "NullablePointer[Sqlite3context] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "NullablePointer[Sqlite3context]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "NullablePointer[Sqlite3context]",
+      "structdef": "NullablePointer[Sqlite3context]",
+      "argtype": "NullablePointer[Sqlite3context] tag",
+      "rvtype": "NullablePointer[Sqlite3context]"
+    },
+    "Array[NullablePointer[Sqlite3stmt]]": {
+      "ponytypein": "Array[NullablePointer[Sqlite3stmt]] tag",
+      "ponytypeinconv": "",
+      "ponytypeout": "Array[NullablePointer[Sqlite3stmt]]",
+      "ponytypeoutconv": [ "" ],
+      "structtype": "Array[NullablePointer[Sqlite3stmt]]",
+      "structdef": "Array[NullablePointer[Sqlite3stmt]]",
+      "argtype": "Array[NullablePointer[Sqlite3stmt]] tag",
+      "rvtype": "Array[NullablePointer[Sqlite3stmt]]"
+    }
+  },
+  "use": [
+    {     "name": "sqlite3_libversion",
+      "ponyname": "psqlite3_libversion",
+            "rv": "String", "args": [] },
+    {     "name": "sqlite3_sourceid",
+      "ponyname": "psqlite3_sourceid",
+            "rv": "String", "args": [] },
+    {     "name": "sqlite3_libversion_number",
+      "ponyname": "psqlite3_libversion_number",
+            "rv": "I32", "args": [] },
+    {     "name": "sqlite3_compileoption_used",
+      "ponyname": "psqlite3_compileoption_used",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pzOptName", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_compileoption_get",
+      "ponyname": "psqlite3_compileoption_get",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pN", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_threadsafe",
+      "ponyname": "psqlite3_threadsafe",
+            "rv": "I32", "args": [] },
+    {     "name": "sqlite3_close",
+      "ponyname": "psqlite3_close",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_close_v2",
+      "ponyname": "psqlite3_close_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_exec",
+      "ponyname": "psqlite3_exec",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "psql", "type": "String" }, 
+        { "name": "pcallback", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg3", "type": "Pointer[None]" }, 
+        { "name": "perrmsg", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_initialize",
+      "ponyname": "psqlite3_initialize",
+            "rv": "I32", "args": [] },
+    {     "name": "sqlite3_shutdown",
+      "ponyname": "psqlite3_shutdown",
+            "rv": "I32", "args": [] },
+    {     "name": "sqlite3_os_init",
+      "ponyname": "psqlite3_os_init",
+            "rv": "I32", "args": [] },
+    {     "name": "sqlite3_os_end",
+      "ponyname": "psqlite3_os_end",
+            "rv": "I32", "args": [] },
+    {     "name": "sqlite3_extended_result_codes",
+      "ponyname": "psqlite3_extended_result_codes",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "ponoff", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_last_insert_rowid",
+      "ponyname": "psqlite3_last_insert_rowid",
+            "rv": "I64", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_set_last_insert_rowid",
+      "ponyname": "psqlite3_set_last_insert_rowid",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "I64" }
+      ]
+    },
+    {     "name": "sqlite3_changes",
+      "ponyname": "psqlite3_changes",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_total_changes",
+      "ponyname": "psqlite3_total_changes",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_interrupt",
+      "ponyname": "psqlite3_interrupt",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_complete",
+      "ponyname": "psqlite3_complete",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "psql", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_complete16",
+      "ponyname": "psqlite3_complete16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "psql", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_busy_handler",
+      "ponyname": "psqlite3_busy_handler",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_busy_timeout",
+      "ponyname": "psqlite3_busy_timeout",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pms", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_get_table",
+      "ponyname": "psqlite3_get_table",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSql", "type": "String" }, 
+        { "name": "ppazResult", "type": "NullablePointer[Array[String]]" }, 
+        { "name": "ppnRow", "type": "Pointer[I32]" }, 
+        { "name": "ppnColumn", "type": "Pointer[I32]" }, 
+        { "name": "ppzErrmsg", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_free_table",
+      "ponyname": "psqlite3_free_table",
+            "rv": "None", "args": 
+      [ 
+        { "name": "presult", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_malloc",
+      "ponyname": "psqlite3_malloc",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_malloc64",
+      "ponyname": "psqlite3_malloc64",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "U64" }
+      ]
+    },
+    {     "name": "sqlite3_realloc",
+      "ponyname": "psqlite3_realloc",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "Pointer[None]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_realloc64",
+      "ponyname": "psqlite3_realloc64",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "Pointer[None]" }, 
+        { "name": "pparg1", "type": "U64" }
+      ]
+    },
+    {     "name": "sqlite3_free",
+      "ponyname": "psqlite3_free",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_msize",
+      "ponyname": "psqlite3_msize",
+            "rv": "U64", "args": 
+      [ 
+        { "name": "pparg0", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_memory_used",
+      "ponyname": "psqlite3_memory_used",
+            "rv": "I64", "args": [] },
+    {     "name": "sqlite3_memory_highwater",
+      "ponyname": "psqlite3_memory_highwater",
+            "rv": "I64", "args": 
+      [ 
+        { "name": "presetFlag", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_randomness",
+      "ponyname": "psqlite3_randomness",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pN", "type": "I32" }, 
+        { "name": "pP", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_set_authorizer",
+      "ponyname": "psqlite3_set_authorizer",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pxAuth", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "ppUserData", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_trace",
+      "ponyname": "psqlite3_trace",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pxTrace", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_profile",
+      "ponyname": "psqlite3_profile",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pxProfile", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_trace_v2",
+      "ponyname": "psqlite3_trace_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "puMask", "type": "U32" }, 
+        { "name": "pxCallback", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "ppCtx", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_progress_handler",
+      "ponyname": "psqlite3_progress_handler",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg3", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_open",
+      "ponyname": "psqlite3_open",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pfilename", "type": "String" }, 
+        { "name": "pppDb", "type": "Array[NullablePointer[Sqlite3]]" }
+      ]
+    },
+    {     "name": "sqlite3_open16",
+      "ponyname": "psqlite3_open16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pfilename", "type": "Pointer[None]" }, 
+        { "name": "pppDb", "type": "Array[NullablePointer[Sqlite3]]" }
+      ]
+    },
+    {     "name": "sqlite3_open_v2",
+      "ponyname": "psqlite3_open_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pfilename", "type": "String" }, 
+        { "name": "pppDb", "type": "Array[NullablePointer[Sqlite3]]" }, 
+        { "name": "pflags", "type": "I32" }, 
+        { "name": "pzVfs", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_uri_parameter",
+      "ponyname": "psqlite3_uri_parameter",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pzFilename", "type": "String" }, 
+        { "name": "pzParam", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_uri_boolean",
+      "ponyname": "psqlite3_uri_boolean",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pzFile", "type": "String" }, 
+        { "name": "pzParam", "type": "String" }, 
+        { "name": "pbDefault", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_uri_int64",
+      "ponyname": "psqlite3_uri_int64",
+            "rv": "I64", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }, 
+        { "name": "pparg1", "type": "String" }, 
+        { "name": "pparg2", "type": "I64" }
+      ]
+    },
+    {     "name": "sqlite3_uri_key",
+      "ponyname": "psqlite3_uri_key",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pzFilename", "type": "String" }, 
+        { "name": "pN", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_filename_database",
+      "ponyname": "psqlite3_filename_database",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_filename_journal",
+      "ponyname": "psqlite3_filename_journal",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_filename_wal",
+      "ponyname": "psqlite3_filename_wal",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_database_file_object",
+      "ponyname": "psqlite3_database_file_object",
+            "rv": "NullablePointer[Sqlite3file]", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_create_filename",
+      "ponyname": "psqlite3_create_filename",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pzDatabase", "type": "String" }, 
+        { "name": "pzJournal", "type": "String" }, 
+        { "name": "pzWal", "type": "String" }, 
+        { "name": "pnParam", "type": "I32" }, 
+        { "name": "pazParam", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_free_filename",
+      "ponyname": "psqlite3_free_filename",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_errcode",
+      "ponyname": "psqlite3_errcode",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_extended_errcode",
+      "ponyname": "psqlite3_extended_errcode",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_errmsg",
+      "ponyname": "psqlite3_errmsg",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_errmsg16",
+      "ponyname": "psqlite3_errmsg16",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_errstr",
+      "ponyname": "psqlite3_errstr",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_limit",
+      "ponyname": "psqlite3_limit",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pid", "type": "I32" }, 
+        { "name": "pnewVal", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_prepare",
+      "ponyname": "psqlite3_prepare",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSql", "type": "String" }, 
+        { "name": "pnByte", "type": "I32" }, 
+        { "name": "pppStmt", "type": "Array[NullablePointer[Sqlite3stmt]]" }, 
+        { "name": "ppzTail", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_prepare_v2",
+      "ponyname": "psqlite3_prepare_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSql", "type": "String" }, 
+        { "name": "pnByte", "type": "I32" }, 
+        { "name": "pppStmt", "type": "Array[NullablePointer[Sqlite3stmt]]" }, 
+        { "name": "ppzTail", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_prepare_v3",
+      "ponyname": "psqlite3_prepare_v3",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSql", "type": "String" }, 
+        { "name": "pnByte", "type": "I32" }, 
+        { "name": "pprepFlags", "type": "U32" }, 
+        { "name": "pppStmt", "type": "Array[NullablePointer[Sqlite3stmt]]" }, 
+        { "name": "ppzTail", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_prepare16",
+      "ponyname": "psqlite3_prepare16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSql", "type": "Pointer[None]" }, 
+        { "name": "pnByte", "type": "I32" }, 
+        { "name": "pppStmt", "type": "Array[NullablePointer[Sqlite3stmt]]" }, 
+        { "name": "ppzTail", "type": "NullablePointer[Pointer[None]]" }
+      ]
+    },
+    {     "name": "sqlite3_prepare16_v2",
+      "ponyname": "psqlite3_prepare16_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSql", "type": "Pointer[None]" }, 
+        { "name": "pnByte", "type": "I32" }, 
+        { "name": "pppStmt", "type": "Array[NullablePointer[Sqlite3stmt]]" }, 
+        { "name": "ppzTail", "type": "NullablePointer[Pointer[None]]" }
+      ]
+    },
+    {     "name": "sqlite3_prepare16_v3",
+      "ponyname": "psqlite3_prepare16_v3",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSql", "type": "Pointer[None]" }, 
+        { "name": "pnByte", "type": "I32" }, 
+        { "name": "pprepFlags", "type": "U32" }, 
+        { "name": "pppStmt", "type": "Array[NullablePointer[Sqlite3stmt]]" }, 
+        { "name": "ppzTail", "type": "NullablePointer[Pointer[None]]" }
+      ]
+    },
+    {     "name": "sqlite3_sql",
+      "ponyname": "psqlite3_sql",
+            "rv": "String", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_expanded_sql",
+      "ponyname": "psqlite3_expanded_sql",
+            "rv": "String", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_normalized_sql",
+      "ponyname": "psqlite3_normalized_sql",
+            "rv": "String", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_stmt_readonly",
+      "ponyname": "psqlite3_stmt_readonly",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_stmt_isexplain",
+      "ponyname": "psqlite3_stmt_isexplain",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_stmt_busy",
+      "ponyname": "psqlite3_stmt_busy",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_bind_blob",
+      "ponyname": "psqlite3_bind_blob",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }, 
+        { "name": "pn", "type": "I32" }, 
+        { "name": "pparg4", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_bind_blob64",
+      "ponyname": "psqlite3_bind_blob64",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }, 
+        { "name": "pparg3", "type": "U64" }, 
+        { "name": "pparg4", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_bind_double",
+      "ponyname": "psqlite3_bind_double",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "F64" }
+      ]
+    },
+    {     "name": "sqlite3_bind_int",
+      "ponyname": "psqlite3_bind_int",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_bind_int64",
+      "ponyname": "psqlite3_bind_int64",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "I64" }
+      ]
+    },
+    {     "name": "sqlite3_bind_null",
+      "ponyname": "psqlite3_bind_null",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_bind_text",
+      "ponyname": "psqlite3_bind_text",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "String" }, 
+        { "name": "pparg3", "type": "I32" }, 
+        { "name": "pparg4", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_bind_text16",
+      "ponyname": "psqlite3_bind_text16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }, 
+        { "name": "pparg3", "type": "I32" }, 
+        { "name": "pparg4", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_bind_text64",
+      "ponyname": "psqlite3_bind_text64",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "String" }, 
+        { "name": "pparg3", "type": "U64" }, 
+        { "name": "pparg4", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pencoding", "type": "U8" }
+      ]
+    },
+    {     "name": "sqlite3_bind_value",
+      "ponyname": "psqlite3_bind_value",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_bind_pointer",
+      "ponyname": "psqlite3_bind_pointer",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }, 
+        { "name": "pparg3", "type": "String" }, 
+        { "name": "pparg4", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_bind_zeroblob",
+      "ponyname": "psqlite3_bind_zeroblob",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pn", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_bind_zeroblob64",
+      "ponyname": "psqlite3_bind_zeroblob64",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }, 
+        { "name": "pparg2", "type": "U64" }
+      ]
+    },
+    {     "name": "sqlite3_bind_parameter_count",
+      "ponyname": "psqlite3_bind_parameter_count",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_bind_parameter_name",
+      "ponyname": "psqlite3_bind_parameter_name",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_bind_parameter_index",
+      "ponyname": "psqlite3_bind_parameter_index",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pzName", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_clear_bindings",
+      "ponyname": "psqlite3_clear_bindings",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_column_count",
+      "ponyname": "psqlite3_column_count",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_column_name",
+      "ponyname": "psqlite3_column_name",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pN", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_name16",
+      "ponyname": "psqlite3_column_name16",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pN", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_database_name",
+      "ponyname": "psqlite3_column_database_name",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_database_name16",
+      "ponyname": "psqlite3_column_database_name16",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_table_name",
+      "ponyname": "psqlite3_column_table_name",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_table_name16",
+      "ponyname": "psqlite3_column_table_name16",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_origin_name",
+      "ponyname": "psqlite3_column_origin_name",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_origin_name16",
+      "ponyname": "psqlite3_column_origin_name16",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_decltype",
+      "ponyname": "psqlite3_column_decltype",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_decltype16",
+      "ponyname": "psqlite3_column_decltype16",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_step",
+      "ponyname": "psqlite3_step",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_data_count",
+      "ponyname": "psqlite3_data_count",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_column_blob",
+      "ponyname": "psqlite3_column_blob",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_double",
+      "ponyname": "psqlite3_column_double",
+            "rv": "F64", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_int",
+      "ponyname": "psqlite3_column_int",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_int64",
+      "ponyname": "psqlite3_column_int64",
+            "rv": "I64", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_text",
+      "ponyname": "psqlite3_column_text",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_text16",
+      "ponyname": "psqlite3_column_text16",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_value",
+      "ponyname": "psqlite3_column_value",
+            "rv": "NullablePointer[Sqlite3value]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_bytes",
+      "ponyname": "psqlite3_column_bytes",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_bytes16",
+      "ponyname": "psqlite3_column_bytes16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_column_type",
+      "ponyname": "psqlite3_column_type",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "piCol", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_finalize",
+      "ponyname": "psqlite3_finalize",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_reset",
+      "ponyname": "psqlite3_reset",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_create_function",
+      "ponyname": "psqlite3_create_function",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzFunctionName", "type": "String" }, 
+        { "name": "pnArg", "type": "I32" }, 
+        { "name": "peTextRep", "type": "I32" }, 
+        { "name": "ppApp", "type": "Pointer[None]" }, 
+        { "name": "pxFunc", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxStep", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxFinal", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_create_function16",
+      "ponyname": "psqlite3_create_function16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzFunctionName", "type": "Pointer[None]" }, 
+        { "name": "pnArg", "type": "I32" }, 
+        { "name": "peTextRep", "type": "I32" }, 
+        { "name": "ppApp", "type": "Pointer[None]" }, 
+        { "name": "pxFunc", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxStep", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxFinal", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_create_function_v2",
+      "ponyname": "psqlite3_create_function_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzFunctionName", "type": "String" }, 
+        { "name": "pnArg", "type": "I32" }, 
+        { "name": "peTextRep", "type": "I32" }, 
+        { "name": "ppApp", "type": "Pointer[None]" }, 
+        { "name": "pxFunc", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxStep", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxFinal", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxDestroy", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_create_window_function",
+      "ponyname": "psqlite3_create_window_function",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzFunctionName", "type": "String" }, 
+        { "name": "pnArg", "type": "I32" }, 
+        { "name": "peTextRep", "type": "I32" }, 
+        { "name": "ppApp", "type": "Pointer[None]" }, 
+        { "name": "pxStep", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxFinal", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxValue", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxInverse", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxDestroy", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_aggregate_count",
+      "ponyname": "psqlite3_aggregate_count",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }
+      ]
+    },
+    {     "name": "sqlite3_expired",
+      "ponyname": "psqlite3_expired",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_transfer_bindings",
+      "ponyname": "psqlite3_transfer_bindings",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pparg1", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_global_recover",
+      "ponyname": "psqlite3_global_recover",
+            "rv": "I32", "args": [] },
+    {     "name": "sqlite3_thread_cleanup",
+      "ponyname": "psqlite3_thread_cleanup",
+            "rv": "None", "args": [] },
+    {     "name": "sqlite3_memory_alarm",
+      "ponyname": "psqlite3_memory_alarm",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "I64" }
+      ]
+    },
+    {     "name": "sqlite3_value_blob",
+      "ponyname": "psqlite3_value_blob",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_double",
+      "ponyname": "psqlite3_value_double",
+            "rv": "F64", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_int",
+      "ponyname": "psqlite3_value_int",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_int64",
+      "ponyname": "psqlite3_value_int64",
+            "rv": "I64", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_pointer",
+      "ponyname": "psqlite3_value_pointer",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }, 
+        { "name": "pparg1", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_value_text",
+      "ponyname": "psqlite3_value_text",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_text16",
+      "ponyname": "psqlite3_value_text16",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_text16le",
+      "ponyname": "psqlite3_value_text16le",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_text16be",
+      "ponyname": "psqlite3_value_text16be",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_bytes",
+      "ponyname": "psqlite3_value_bytes",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_bytes16",
+      "ponyname": "psqlite3_value_bytes16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_type",
+      "ponyname": "psqlite3_value_type",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_numeric_type",
+      "ponyname": "psqlite3_value_numeric_type",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_nochange",
+      "ponyname": "psqlite3_value_nochange",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_frombind",
+      "ponyname": "psqlite3_value_frombind",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_subtype",
+      "ponyname": "psqlite3_value_subtype",
+            "rv": "U32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_dup",
+      "ponyname": "psqlite3_value_dup",
+            "rv": "NullablePointer[Sqlite3value]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_value_free",
+      "ponyname": "psqlite3_value_free",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_aggregate_context",
+      "ponyname": "psqlite3_aggregate_context",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pnBytes", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_user_data",
+      "ponyname": "psqlite3_user_data",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }
+      ]
+    },
+    {     "name": "sqlite3_context_db_handle",
+      "ponyname": "psqlite3_context_db_handle",
+            "rv": "NullablePointer[Sqlite3]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }
+      ]
+    },
+    {     "name": "sqlite3_get_auxdata",
+      "ponyname": "psqlite3_get_auxdata",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pN", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_set_auxdata",
+      "ponyname": "psqlite3_set_auxdata",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pN", "type": "I32" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_result_blob",
+      "ponyname": "psqlite3_result_blob",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "I32" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_result_blob64",
+      "ponyname": "psqlite3_result_blob64",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "U64" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_result_double",
+      "ponyname": "psqlite3_result_double",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "F64" }
+      ]
+    },
+    {     "name": "sqlite3_result_error",
+      "ponyname": "psqlite3_result_error",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "String" }, 
+        { "name": "pparg2", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_result_error16",
+      "ponyname": "psqlite3_result_error16",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_result_error_toobig",
+      "ponyname": "psqlite3_result_error_toobig",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }
+      ]
+    },
+    {     "name": "sqlite3_result_error_nomem",
+      "ponyname": "psqlite3_result_error_nomem",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }
+      ]
+    },
+    {     "name": "sqlite3_result_error_code",
+      "ponyname": "psqlite3_result_error_code",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_result_int",
+      "ponyname": "psqlite3_result_int",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_result_int64",
+      "ponyname": "psqlite3_result_int64",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "I64" }
+      ]
+    },
+    {     "name": "sqlite3_result_null",
+      "ponyname": "psqlite3_result_null",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }
+      ]
+    },
+    {     "name": "sqlite3_result_text",
+      "ponyname": "psqlite3_result_text",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "String" }, 
+        { "name": "pparg2", "type": "I32" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_result_text64",
+      "ponyname": "psqlite3_result_text64",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "String" }, 
+        { "name": "pparg2", "type": "U64" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pencoding", "type": "U8" }
+      ]
+    },
+    {     "name": "sqlite3_result_text16",
+      "ponyname": "psqlite3_result_text16",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "I32" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_result_text16le",
+      "ponyname": "psqlite3_result_text16le",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "I32" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_result_text16be",
+      "ponyname": "psqlite3_result_text16be",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "I32" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_result_value",
+      "ponyname": "psqlite3_result_value",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "NullablePointer[Sqlite3value]" }
+      ]
+    },
+    {     "name": "sqlite3_result_pointer",
+      "ponyname": "psqlite3_result_pointer",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "String" }, 
+        { "name": "pparg3", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_result_zeroblob",
+      "ponyname": "psqlite3_result_zeroblob",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pn", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_result_zeroblob64",
+      "ponyname": "psqlite3_result_zeroblob64",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pn", "type": "U64" }
+      ]
+    },
+    {     "name": "sqlite3_result_subtype",
+      "ponyname": "psqlite3_result_subtype",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }, 
+        { "name": "pparg1", "type": "U32" }
+      ]
+    },
+    {     "name": "sqlite3_create_collation",
+      "ponyname": "psqlite3_create_collation",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzName", "type": "String" }, 
+        { "name": "peTextRep", "type": "I32" }, 
+        { "name": "ppArg", "type": "Pointer[None]" }, 
+        { "name": "pxCompare", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_create_collation_v2",
+      "ponyname": "psqlite3_create_collation_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzName", "type": "String" }, 
+        { "name": "peTextRep", "type": "I32" }, 
+        { "name": "ppArg", "type": "Pointer[None]" }, 
+        { "name": "pxCompare", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pxDestroy", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_create_collation16",
+      "ponyname": "psqlite3_create_collation16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzName", "type": "Pointer[None]" }, 
+        { "name": "peTextRep", "type": "I32" }, 
+        { "name": "ppArg", "type": "Pointer[None]" }, 
+        { "name": "pxCompare", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_collation_needed",
+      "ponyname": "psqlite3_collation_needed",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_collation_needed16",
+      "ponyname": "psqlite3_collation_needed16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "Pointer[None]" }, 
+        { "name": "pparg2", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_sleep",
+      "ponyname": "psqlite3_sleep",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_win32_set_directory",
+      "ponyname": "psqlite3_win32_set_directory",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ptype", "type": "U64" }, 
+        { "name": "pzValue", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_win32_set_directory8",
+      "ponyname": "psqlite3_win32_set_directory8",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ptype", "type": "U64" }, 
+        { "name": "pzValue", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_win32_set_directory16",
+      "ponyname": "psqlite3_win32_set_directory16",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ptype", "type": "U64" }, 
+        { "name": "pzValue", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_get_autocommit",
+      "ponyname": "psqlite3_get_autocommit",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_db_handle",
+      "ponyname": "psqlite3_db_handle",
+            "rv": "NullablePointer[Sqlite3]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_db_filename",
+      "ponyname": "psqlite3_db_filename",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDbName", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_db_readonly",
+      "ponyname": "psqlite3_db_readonly",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDbName", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_txn_state",
+      "ponyname": "psqlite3_txn_state",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSchema", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_next_stmt",
+      "ponyname": "psqlite3_next_stmt",
+            "rv": "NullablePointer[Sqlite3stmt]", "args": 
+      [ 
+        { "name": "ppDb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_commit_hook",
+      "ponyname": "psqlite3_commit_hook",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_rollback_hook",
+      "ponyname": "psqlite3_rollback_hook",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_update_hook",
+      "ponyname": "psqlite3_update_hook",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_enable_shared_cache",
+      "ponyname": "psqlite3_enable_shared_cache",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_release_memory",
+      "ponyname": "psqlite3_release_memory",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_db_release_memory",
+      "ponyname": "psqlite3_db_release_memory",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_soft_heap_limit64",
+      "ponyname": "psqlite3_soft_heap_limit64",
+            "rv": "I64", "args": 
+      [ 
+        { "name": "pN", "type": "I64" }
+      ]
+    },
+    {     "name": "sqlite3_hard_heap_limit64",
+      "ponyname": "psqlite3_hard_heap_limit64",
+            "rv": "I64", "args": 
+      [ 
+        { "name": "pN", "type": "I64" }
+      ]
+    },
+    {     "name": "sqlite3_soft_heap_limit",
+      "ponyname": "psqlite3_soft_heap_limit",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pN", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_table_column_metadata",
+      "ponyname": "psqlite3_table_column_metadata",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDbName", "type": "String" }, 
+        { "name": "pzTableName", "type": "String" }, 
+        { "name": "pzColumnName", "type": "String" }, 
+        { "name": "ppzDataType", "type": "Array[String]" }, 
+        { "name": "ppzCollSeq", "type": "Array[String]" }, 
+        { "name": "ppNotNull", "type": "Pointer[I32]" }, 
+        { "name": "ppPrimaryKey", "type": "Pointer[I32]" }, 
+        { "name": "ppAutoinc", "type": "Pointer[I32]" }
+      ]
+    },
+    {     "name": "sqlite3_load_extension",
+      "ponyname": "psqlite3_load_extension",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzFile", "type": "String" }, 
+        { "name": "pzProc", "type": "String" }, 
+        { "name": "ppzErrMsg", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_enable_load_extension",
+      "ponyname": "psqlite3_enable_load_extension",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "ponoff", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_auto_extension",
+      "ponyname": "psqlite3_auto_extension",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pxEntryPoint", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_cancel_auto_extension",
+      "ponyname": "psqlite3_cancel_auto_extension",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pxEntryPoint", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_reset_auto_extension",
+      "ponyname": "psqlite3_reset_auto_extension",
+            "rv": "None", "args": [] },
+    {     "name": "sqlite3_create_module",
+      "ponyname": "psqlite3_create_module",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzName", "type": "String" }, 
+        { "name": "pp", "type": "NullablePointer[Sqlite3module]" }, 
+        { "name": "ppClientData", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_create_module_v2",
+      "ponyname": "psqlite3_create_module_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzName", "type": "String" }, 
+        { "name": "pp", "type": "NullablePointer[Sqlite3module]" }, 
+        { "name": "ppClientData", "type": "Pointer[None]" }, 
+        { "name": "pxDestroy", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    },
+    {     "name": "sqlite3_drop_modules",
+      "ponyname": "psqlite3_drop_modules",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pazKeep", "type": "Array[String]" }
+      ]
+    },
+    {     "name": "sqlite3_declare_vtab",
+      "ponyname": "psqlite3_declare_vtab",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSQL", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_overload_function",
+      "ponyname": "psqlite3_overload_function",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzFuncName", "type": "String" }, 
+        { "name": "pnArg", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_blob_open",
+      "ponyname": "psqlite3_blob_open",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDb", "type": "String" }, 
+        { "name": "pzTable", "type": "String" }, 
+        { "name": "pzColumn", "type": "String" }, 
+        { "name": "piRow", "type": "I64" }, 
+        { "name": "pflags", "type": "I32" }, 
+        { "name": "pppBlob", "type": "Array[NullablePointer[Sqlite3blob]]" }
+      ]
+    },
+    {     "name": "sqlite3_blob_reopen",
+      "ponyname": "psqlite3_blob_reopen",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3blob]" }, 
+        { "name": "pparg1", "type": "I64" }
+      ]
+    },
+    {     "name": "sqlite3_blob_close",
+      "ponyname": "psqlite3_blob_close",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3blob]" }
+      ]
+    },
+    {     "name": "sqlite3_blob_bytes",
+      "ponyname": "psqlite3_blob_bytes",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3blob]" }
+      ]
+    },
+    {     "name": "sqlite3_blob_read",
+      "ponyname": "psqlite3_blob_read",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3blob]" }, 
+        { "name": "pZ", "type": "Pointer[None]" }, 
+        { "name": "pN", "type": "I32" }, 
+        { "name": "piOffset", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_blob_write",
+      "ponyname": "psqlite3_blob_write",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3blob]" }, 
+        { "name": "pz", "type": "Pointer[None]" }, 
+        { "name": "pn", "type": "I32" }, 
+        { "name": "piOffset", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_vfs_find",
+      "ponyname": "psqlite3_vfs_find",
+            "rv": "NullablePointer[Sqlite3vfs]", "args": 
+      [ 
+        { "name": "pzVfsName", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_vfs_register",
+      "ponyname": "psqlite3_vfs_register",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3vfs]" }, 
+        { "name": "pmakeDflt", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_vfs_unregister",
+      "ponyname": "psqlite3_vfs_unregister",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3vfs]" }
+      ]
+    },
+    {     "name": "sqlite3_mutex_alloc",
+      "ponyname": "psqlite3_mutex_alloc",
+            "rv": "NullablePointer[Sqlite3mutex]", "args": 
+      [ 
+        { "name": "pparg0", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_mutex_free",
+      "ponyname": "psqlite3_mutex_free",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3mutex]" }
+      ]
+    },
+    {     "name": "sqlite3_mutex_enter",
+      "ponyname": "psqlite3_mutex_enter",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3mutex]" }
+      ]
+    },
+    {     "name": "sqlite3_mutex_try",
+      "ponyname": "psqlite3_mutex_try",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3mutex]" }
+      ]
+    },
+    {     "name": "sqlite3_mutex_leave",
+      "ponyname": "psqlite3_mutex_leave",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3mutex]" }
+      ]
+    },
+    {     "name": "sqlite3_mutex_held",
+      "ponyname": "psqlite3_mutex_held",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3mutex]" }
+      ]
+    },
+    {     "name": "sqlite3_mutex_notheld",
+      "ponyname": "psqlite3_mutex_notheld",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3mutex]" }
+      ]
+    },
+    {     "name": "sqlite3_db_mutex",
+      "ponyname": "psqlite3_db_mutex",
+            "rv": "NullablePointer[Sqlite3mutex]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_file_control",
+      "ponyname": "psqlite3_file_control",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDbName", "type": "String" }, 
+        { "name": "pop", "type": "I32" }, 
+        { "name": "pparg3", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_keyword_count",
+      "ponyname": "psqlite3_keyword_count",
+            "rv": "I32", "args": [] },
+    {     "name": "sqlite3_keyword_name",
+      "ponyname": "psqlite3_keyword_name",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "I32" }, 
+        { "name": "pparg1", "type": "Array[String]" }, 
+        { "name": "pparg2", "type": "Pointer[I32]" }
+      ]
+    },
+    {     "name": "sqlite3_keyword_check",
+      "ponyname": "psqlite3_keyword_check",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_str_new",
+      "ponyname": "psqlite3_str_new",
+            "rv": "NullablePointer[Sqlite3str]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_str_finish",
+      "ponyname": "psqlite3_str_finish",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3str]" }
+      ]
+    },
+    {     "name": "sqlite3_str_append",
+      "ponyname": "psqlite3_str_append",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3str]" }, 
+        { "name": "pzIn", "type": "String" }, 
+        { "name": "pN", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_str_appendall",
+      "ponyname": "psqlite3_str_appendall",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3str]" }, 
+        { "name": "pzIn", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_str_appendchar",
+      "ponyname": "psqlite3_str_appendchar",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3str]" }, 
+        { "name": "pN", "type": "I32" }, 
+        { "name": "pC", "type": "U8" }
+      ]
+    },
+    {     "name": "sqlite3_str_reset",
+      "ponyname": "psqlite3_str_reset",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3str]" }
+      ]
+    },
+    {     "name": "sqlite3_str_errcode",
+      "ponyname": "psqlite3_str_errcode",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3str]" }
+      ]
+    },
+    {     "name": "sqlite3_str_length",
+      "ponyname": "psqlite3_str_length",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3str]" }
+      ]
+    },
+    {     "name": "sqlite3_str_value",
+      "ponyname": "psqlite3_str_value",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3str]" }
+      ]
+    },
+    {     "name": "sqlite3_status",
+      "ponyname": "psqlite3_status",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pop", "type": "I32" }, 
+        { "name": "ppCurrent", "type": "Pointer[I32]" }, 
+        { "name": "ppHighwater", "type": "Pointer[I32]" }, 
+        { "name": "presetFlag", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_status64",
+      "ponyname": "psqlite3_status64",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pop", "type": "I32" }, 
+        { "name": "ppCurrent", "type": "Pointer[I64]" }, 
+        { "name": "ppHighwater", "type": "Pointer[I64]" }, 
+        { "name": "presetFlag", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_db_status",
+      "ponyname": "psqlite3_db_status",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pop", "type": "I32" }, 
+        { "name": "ppCur", "type": "Pointer[I32]" }, 
+        { "name": "ppHiwtr", "type": "Pointer[I32]" }, 
+        { "name": "presetFlg", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_stmt_status",
+      "ponyname": "psqlite3_stmt_status",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pop", "type": "I32" }, 
+        { "name": "presetFlg", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_backup_init",
+      "ponyname": "psqlite3_backup_init",
+            "rv": "NullablePointer[Sqlite3backup]", "args": 
+      [ 
+        { "name": "ppDest", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDestName", "type": "String" }, 
+        { "name": "ppSource", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSourceName", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_backup_step",
+      "ponyname": "psqlite3_backup_step",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pp", "type": "NullablePointer[Sqlite3backup]" }, 
+        { "name": "pnPage", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_backup_finish",
+      "ponyname": "psqlite3_backup_finish",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pp", "type": "NullablePointer[Sqlite3backup]" }
+      ]
+    },
+    {     "name": "sqlite3_backup_remaining",
+      "ponyname": "psqlite3_backup_remaining",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pp", "type": "NullablePointer[Sqlite3backup]" }
+      ]
+    },
+    {     "name": "sqlite3_backup_pagecount",
+      "ponyname": "psqlite3_backup_pagecount",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pp", "type": "NullablePointer[Sqlite3backup]" }
+      ]
+    },
+    {     "name": "sqlite3_unlock_notify",
+      "ponyname": "psqlite3_unlock_notify",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ppBlocked", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pxNotify", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "ppNotifyArg", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_stricmp",
+      "ponyname": "psqlite3_stricmp",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }, 
+        { "name": "pparg1", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_strnicmp",
+      "ponyname": "psqlite3_strnicmp",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "String" }, 
+        { "name": "pparg1", "type": "String" }, 
+        { "name": "pparg2", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_strglob",
+      "ponyname": "psqlite3_strglob",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pzGlob", "type": "String" }, 
+        { "name": "pzStr", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_strlike",
+      "ponyname": "psqlite3_strlike",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pzGlob", "type": "String" }, 
+        { "name": "pzStr", "type": "String" }, 
+        { "name": "pcEsc", "type": "U32" }
+      ]
+    },
+    {     "name": "sqlite3_wal_hook",
+      "ponyname": "psqlite3_wal_hook",
+            "rv": "Pointer[None]", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pparg1", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "pparg2", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_wal_autocheckpoint",
+      "ponyname": "psqlite3_wal_autocheckpoint",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pN", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_wal_checkpoint",
+      "ponyname": "psqlite3_wal_checkpoint",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDb", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_wal_checkpoint_v2",
+      "ponyname": "psqlite3_wal_checkpoint_v2",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDb", "type": "String" }, 
+        { "name": "peMode", "type": "I32" }, 
+        { "name": "ppnLog", "type": "Pointer[I32]" }, 
+        { "name": "ppnCkpt", "type": "Pointer[I32]" }
+      ]
+    },
+    {     "name": "sqlite3_vtab_on_conflict",
+      "ponyname": "psqlite3_vtab_on_conflict",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_vtab_nochange",
+      "ponyname": "psqlite3_vtab_nochange",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3context]" }
+      ]
+    },
+    {     "name": "sqlite3_vtab_collation",
+      "ponyname": "psqlite3_vtab_collation",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3indexinfo]" }, 
+        { "name": "pparg1", "type": "I32" }
+      ]
+    },
+    {     "name": "sqlite3_stmt_scanstatus",
+      "ponyname": "psqlite3_stmt_scanstatus",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "ppStmt", "type": "NullablePointer[Sqlite3stmt]" }, 
+        { "name": "pidx", "type": "I32" }, 
+        { "name": "piScanStatusOp", "type": "I32" }, 
+        { "name": "ppOut", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_stmt_scanstatus_reset",
+      "ponyname": "psqlite3_stmt_scanstatus_reset",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3stmt]" }
+      ]
+    },
+    {     "name": "sqlite3_db_cacheflush",
+      "ponyname": "psqlite3_db_cacheflush",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_system_errno",
+      "ponyname": "psqlite3_system_errno",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3]" }
+      ]
+    },
+    {     "name": "sqlite3_snapshot_get",
+      "ponyname": "psqlite3_snapshot_get",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSchema", "type": "String" }, 
+        { "name": "pppSnapshot", "type": "Array[NullablePointer[Sqlite3snapshot]]" }
+      ]
+    },
+    {     "name": "sqlite3_snapshot_open",
+      "ponyname": "psqlite3_snapshot_open",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSchema", "type": "String" }, 
+        { "name": "ppSnapshot", "type": "NullablePointer[Sqlite3snapshot]" }
+      ]
+    },
+    {     "name": "sqlite3_snapshot_free",
+      "ponyname": "psqlite3_snapshot_free",
+            "rv": "None", "args": 
+      [ 
+        { "name": "pparg0", "type": "NullablePointer[Sqlite3snapshot]" }
+      ]
+    },
+    {     "name": "sqlite3_snapshot_cmp",
+      "ponyname": "psqlite3_snapshot_cmp",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pp1", "type": "NullablePointer[Sqlite3snapshot]" }, 
+        { "name": "pp2", "type": "NullablePointer[Sqlite3snapshot]" }
+      ]
+    },
+    {     "name": "sqlite3_snapshot_recover",
+      "ponyname": "psqlite3_snapshot_recover",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzDb", "type": "String" }
+      ]
+    },
+    {     "name": "sqlite3_serialize",
+      "ponyname": "psqlite3_serialize",
+            "rv": "String", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSchema", "type": "String" }, 
+        { "name": "ppiSize", "type": "Pointer[I64]" }, 
+        { "name": "pmFlags", "type": "U32" }
+      ]
+    },
+    {     "name": "sqlite3_deserialize",
+      "ponyname": "psqlite3_deserialize",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzSchema", "type": "String" }, 
+        { "name": "ppData", "type": "String" }, 
+        { "name": "pszDb", "type": "I64" }, 
+        { "name": "pszBuf", "type": "I64" }, 
+        { "name": "pmFlags", "type": "U32" }
+      ]
+    },
+    {     "name": "sqlite3_rtree_geometry_callback",
+      "ponyname": "psqlite3_rtree_geometry_callback",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzGeom", "type": "String" }, 
+        { "name": "pxGeom", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "ppContext", "type": "Pointer[None]" }
+      ]
+    },
+    {     "name": "sqlite3_rtree_query_callback",
+      "ponyname": "psqlite3_rtree_query_callback",
+            "rv": "I32", "args": 
+      [ 
+        { "name": "pdb", "type": "NullablePointer[Sqlite3]" }, 
+        { "name": "pzQueryFunc", "type": "String" }, 
+        { "name": "pxQueryFunc", "type": "NullablePointer[FUNCTIONTYPE]" }, 
+        { "name": "ppContext", "type": "Pointer[None]" }, 
+        { "name": "pxDestructor", "type": "NullablePointer[FUNCTIONTYPE]" }
+      ]
+    }
+  ]
+}
+
