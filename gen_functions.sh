@@ -1,4 +1,4 @@
-#!/nix/store/4lwf6gz246ap3xmrgxdhlb8bpq5vrin6-jq-1.6-bin/bin/jq -Mfr
+#!/nix/store/mv4rsk81kr57yn8j4z6m0fcdxzw1ir3r-jq-1.6-bin/bin/jq -Mfr
 
 def ponyfnArg(n): if (n.u.type == "...") then "..." else (n.u.name + ": " + n.t[n.u.type].ponytypein) end;
 def useArg(n): if (n.u.type == "...") then "..." else (n.u.name) + n.t[n.u.type].ponytypeinconv end;

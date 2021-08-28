@@ -258,7 +258,7 @@ actor Main
 
   fun ponyMemberName(text: String val): String =>
     var t: String iso = text.clone()
-    t.replace("_", "")
+//    t.replace("_", "")
     "p" + t.clone()
 
   fun getFunctionidsFromFID(filename: String, fids: Array[String]): Array[String] =>
