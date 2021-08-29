@@ -1,6 +1,9 @@
 all: gobject gtk3
-gobject: gobjectjson gobjectstructs
-gtk3: gtk3json gtk3structs
+gobject: gobjectjson gobjectstructs gobjectenums
+gtk3: gtk3json gtk3structs gtk3enums
+
+gtk3enums:
+	cat gtkwindow-enums.json | ./gen_enumfile.sh | tee out/gtkwindow-enums.pony
 
 gtk3structs:
 	cat gtkwindow-struct.json | ./gen_structfile.sh | tee out/gtkwindow-struct.pony
@@ -10,7 +13,9 @@ gtk3structs:
 
 
 gtk3json:
+	./castxml2pony -x gtk.xml f402 -u | tee gtkwindow-use.json
 	./castxml2pony -x gtk.xml f402 -s | tee gtkwindow-struct.json
+	./castxml2pony -x gtk.xml f402 -e | tee gtkwindow-enums.json
 	./castxml2pony -x gtk.xml f438 -s | tee gtkbin-struct.json
 	./castxml2pony -x gtk.xml f437 -s | tee gtkcontainer-struct.json
 	./castxml2pony -x gtk.xml f398 -s | tee gtkwidget-struct.json
@@ -18,10 +23,16 @@ gtk3json:
 gobjectjson:
 	./castxml2pony -x gtk.xml f140 -s | tee gobject-struct.json
 	./castxml2pony -x gtk.xml f132 -s | tee gtype-struct.json
+	./castxml2pony -x gtk.xml f132 -e | tee gtype-enums.json
 	./castxml2pony -x gtk.xml f133 -s | tee gvalue-struct.json
 	./castxml2pony -x gtk.xml f65 -s | tee gdataset-struct.json
 	./castxml2pony -x gtk.xml f81 -s | tee gslist-struct.json
 	./castxml2pony -x gtk.xml f134 -s | tee gparam-struct.json
+	./castxml2pony -x gtk.xml f134 -e | tee gparam-enums.json
+
+gobjectenums:
+	cat gtype-enums.json | ./gen_enumfile.sh | tee out/gtype-enums.pony
+	cat gparam-enums.json | ./gen_enumfile.sh | tee out/gparam-enums.pony
 
 gobjectstructs:
 	cat gobject-struct.json | ./gen_structfile.sh | tee out/gobject-struct.pony

@@ -7,6 +7,7 @@ use "json"
 use "files"
 use "cli"
 
+
 use @printf[I32](str: Pointer[U8] tag, ...)
 use @exit[None](errcode: USize)
 
@@ -30,6 +31,7 @@ actor Main
         CommandSpec.leaf("castxml2pony", "Code Generation for C-FFI", [
           OptionSpec.bool("use", "Generate use json" where short' = 'u', default' = false)
           OptionSpec.bool("struct", "Generate struct output" where short' = 's', default' = false)
+          OptionSpec.bool("enum", "Generate enum output" where short' = 'e', default' = false)
           OptionSpec.string("xmlin", "Specify castxml .xml file" where short' = 'x')
         ], [
           ArgSpec.string_seq("fileids", "The fileids to generate for")
@@ -59,6 +61,7 @@ actor Main
     var filename: String = cmd.option("xmlin").string()
     let genUse = cmd.option("use").bool()
     let genStruct = cmd.option("struct").bool()
+    let genEnum = cmd.option("enum").bool()
     let inputfileids = cmd.arg("fileids").string_seq()
 
     let ifid: Array[String] = Array[String]
@@ -129,6 +132,65 @@ actor Main
       env.out.print(generateStructJSON(structjson))
       env.out.print("  ]\n}\n")
     end
+
+    var enumids: Array[String] = getEnumidsFromFID(filename, ifid )
+    if (genEnum) then
+      var enumjson: Array[String] = Array[String]
+      (enumjson, depmaps) = processEnums(itypemap, enumids)
+//      env.out.print("{\n  \"types\": {")
+//      env.out.print(generateDepJSON(depmaps))
+      env.out.print("{\n  \"enums\": [")
+      env.out.print(generateEnumJSON(enumjson))
+      env.out.print("  ]\n}\n")
+    end
+
+  fun generateEnumJSON(enumjson: Array[String]): String =>
+    ",\n".join(enumjson.values())
+
+  fun processEnums(itypemap: Map[String, CXMLCastType], ids: Array[String]): (Array[String], Map[String, String]) =>
+    var jsons: Array[String] = Array[String]
+    var neededTypes: Map[String, String] = Map[String, String]
+    var deps: Map[String, String] = Map[String, String]
+
+    for f in ids.values() do
+      Debug.out("processEnums: " + f)
+      var json: String
+      (json, deps) = processEnum(itypemap, f)
+      jsons.push(json)
+    end
+    (jsons, neededTypes)
+
+  fun processEnum(itypemap: Map[String, CXMLCastType], id: String): (String, Map[String, String]) =>
+    var deps: Map[String, String] = Map[String, String]
+    ("foo", deps)
+    var enumname: String = recover iso String end
+    var jsonarray: Array[String] = Array[String]
+    try
+      match itypemap.apply(id)?
+      | let x: CXMLEnumeration =>
+        enumname = ponyStruct(x.name)
+        for (an, ai) in x.members.values() do
+          jsonarray.push("      { \"name\": \"" + an + "\", \"type\": \"" + ai + "\" }")
+        end
+      end
+    end
+    let values: String = ",\n".join(jsonarray.values())
+    ("    { \"enumname\": \"" + enumname + "\", \"values\": [\n" + values + " ]\n" + "    }", deps)
+
+  fun getEnumidsFromFID(filename: String, fids: Array[String]): Array[String] =>
+    var enumids: Array[String] = Array[String]
+    try
+      let doc: Xml2Doc = Xml2Doc.parseFile(filename)?
+      let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
+
+      for f in fids.values() do
+        let res: Xml2pathobject = ctx.xpathEval("//Enumeration[@file='" + f + "']")?
+        for xmlnode in res.values()? do
+          enumids.push(xmlnode.getProp("id"))
+        end
+      end
+    end
+    enumids
 
   fun getStructidsFromFID(filename: String, fids: Array[String]): Array[String] =>
     var structids: Array[String] = Array[String]
