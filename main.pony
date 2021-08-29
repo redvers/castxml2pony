@@ -155,18 +155,20 @@ actor Main
     var deps: Map[String, String] = Map[String, String]
 
     for f in ids.values() do
-      var json: String
-      (json, deps) = processStruct(itypemap, f)
-      jsons.push(json)
+      try
+        var json: String
+        (json, deps) = processStruct(itypemap, f)?
+        jsons.push(json)
 
-      for y in deps.keys() do
-        neededTypes.insert(y,y)
+        for y in deps.keys() do
+          neededTypes.insert(y,y)
+        end
       end
     end
     (jsons, neededTypes)
 
 
-  fun processStruct(itypemap: Map[String, CXMLCastType], id: String): (String, Map[String, String]) =>
+  fun processStruct(itypemap: Map[String, CXMLCastType], id: String): (String, Map[String, String])? =>
     var deps: Map[String, String] = Map[String, String]
     var structname: String = recover iso String end
     var jsonarray: Array[String] = Array[String]
@@ -183,7 +185,12 @@ actor Main
       end
     end
     let fields: String = ",\n".join(jsonarray.values())
-    ("    { \"structname\": \"" + structname + "\", \"fields\": [\n" + fields + " ]\n" + "    }", deps)
+
+    if (structname == "") then
+      error
+    else
+      ("    { \"structname\": \"" + structname + "\", \"fields\": [\n" + fields + " ]\n" + "    }", deps)
+    end
 
 
   fun generateUseJSON(funcjson: Array[String]): String =>
@@ -230,6 +237,18 @@ actor Main
                    "      \"structtype\": \"" + f + "\",\n" +
                    "      \"structdef\": \"" + f + "(0)\",\n" +
                    "      \"argtype\": \"" + f + "\",\n" +
+                   "      \"rvtype\": \"" + f + "\"\n" +
+                   "    }"
+                  )
+      elseif (f.contains("NullablePo")) then
+      deprefs.push("    \"" + f + "\": {\n" +
+                   "      \"ponytypein\": \"" + f + " tag\",\n" +
+                   "      \"ponytypeinconv\": \"\",\n" +
+                   "      \"ponytypeout\": \"" + f + "\",\n" +
+                   "      \"ponytypeoutconv\": [ \"\" ],\n" +
+                   "      \"structtype\": \"" + f + "\",\n" +
+                   "      \"structdef\": \"" + f + ".none()\",\n" +
+                   "      \"argtype\": \"" + f + " tag\",\n" +
                    "      \"rvtype\": \"" + f + "\"\n" +
                    "    }"
                   )

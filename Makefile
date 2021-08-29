@@ -1,29 +1,54 @@
-json:
-	ponyc .
-	./castxml2pony -x zip.xml f36 -u | tee zip-use.json
-	./castxml2pony -x zip.xml f36 -s | tee zip-struct.json
+all: gobject gtk3
+gobject: gobjectjson gobjectstructs
+gtk3: gtk3json gtk3structs
 
-codegen:
-	cat zip-use.json | ./gen_usefile.sh | tee out/use.pony
-	echo "use \"lib:zip\"" > out/functions.pony
-	echo "primitive LibZIP" >> out/functions.pony
-	cat zip-use.json | ./gen_functions.sh >> out/functions.pony
-	cat zip-struct.json | ./gen_structfile.sh | tee out/structs.pony
-#	./castxml2pony -x zip.xml f36 -s | ./gen_structfile.sh | tee out/structs.pony
+gtk3structs:
+	cat gtkwindow-struct.json | ./gen_structfile.sh | tee out/gtkwindow-struct.pony
+	cat gtkbin-struct.json | ./gen_structfile.sh | tee out/gtkbin-struct.pony
+	cat gtkcontainer-struct.json | ./gen_structfile.sh | tee out/gtkcontainer-struct.pony
+	cat gtkwidget-struct.json | ./gen_structfile.sh | tee out/gtkwidget-struct.pony
 
-clean:
-	rm -f out/struct*pony
-	rm -f out/enumerations.pony
-	rm -f out/use-*.pony
-	rm -f out/functions-f*pony
-	rm -f out/functions.pony
-	rm -f out/out
 
-libzip:
+gtk3json:
+	./castxml2pony -x gtk.xml f402 -s | tee gtkwindow-struct.json
+	./castxml2pony -x gtk.xml f438 -s | tee gtkbin-struct.json
+	./castxml2pony -x gtk.xml f437 -s | tee gtkcontainer-struct.json
+	./castxml2pony -x gtk.xml f398 -s | tee gtkwidget-struct.json
+
+gobjectjson:
+	./castxml2pony -x gtk.xml f140 -s | tee gobject-struct.json
+	./castxml2pony -x gtk.xml f132 -s | tee gtype-struct.json
+	./castxml2pony -x gtk.xml f133 -s | tee gvalue-struct.json
+	./castxml2pony -x gtk.xml f65 -s | tee gdataset-struct.json
+	./castxml2pony -x gtk.xml f81 -s | tee gslist-struct.json
+	./castxml2pony -x gtk.xml f134 -s | tee gparam-struct.json
+
+gobjectstructs:
+	cat gobject-struct.json | ./gen_structfile.sh | tee out/gobject-struct.pony
+	cat gtype-struct.json | ./gen_structfile.sh | tee out/gtype-struct.pony
+	cat gvalue-struct.json | ./gen_structfile.sh | tee out/gvalue-struct.pony
+	cat gdataset-struct.json | ./gen_structfile.sh | tee out/gdataset-struct.pony
+	cat gslist-struct.json | ./gen_structfile.sh | tee out/gslist-struct.pony
+	cat gparam-struct.json | ./gen_structfile.sh | tee out/gparam-struct.pony
+
+castxmlgtk3:
 	castxml --castxml-output=1,0,0 \
-		-I/nix/store/c4yl30zdwb0ysw2qpninzh7y23sknar0-libzip-1.7.3-dev/include \
-		-I/nix/store/637r9rfg768z29sqa9ppajjnkskszrja-glibc-2.27-dev/include \
-		-I/nix/store/9rmf9whh2m8fqlqp859d8pmsb63jarsp-gcc-10.2.0/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include \
-		/nix/store/c4yl30zdwb0ysw2qpninzh7y23sknar0-libzip-1.7.3-dev/include/zip.h
+		-I/nix/store/4hk8pjnd10fyp92m4jc24dfj1zcc10d1-clang-7.1.0-lib/lib/clang/7.1.0/include/ \
+		-I/nix/store/hrhn14rls3slhpz0g057c0dyp4lm3rgd-glibc-2.33-47-dev/include \
+		`pkg-config gtk+-3.0 --cflags` \
+		gtk.h
 
 
+castxmlsdl2:
+	castxml --castxml-output=1,0,0 \
+		-I/nix/store/4hk8pjnd10fyp92m4jc24dfj1zcc10d1-clang-7.1.0-lib/lib/clang/7.1.0/include/ \
+		-I/nix/store/hrhn14rls3slhpz0g057c0dyp4lm3rgd-glibc-2.33-47-dev/include \
+		-I/nix/store/7pawaqlinph961g28wkrkih3cj8xxixj-SDL2-2.0.14-dev/include/SDL2 SDL.h
+
+
+
+#	cat ei-use.json | ./gen_usefile.sh | tee out/use.pony
+#	echo "use \"lib:ei\"" > out/functions.pony
+#	echo "primitive EI" >> out/functions.pony
+#	cat ei-use.json | ./gen_functions.sh >> out/functions.pony
+#	./castxml2pony -x SDL.xml f123 -u | tee ei-use.json
