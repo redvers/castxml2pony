@@ -1,6 +1,11 @@
 all: gobject gtk3
 gobject: gobjectjson gobjectstructs gobjectenums
-gtk3: gtk3json gtk3structs gtk3enums
+gtk3: gtk3json gtk3structs gtk3enums gtk3functions
+
+gtk3functions:
+	cat gtkmain-use.json | ./gen_usefile.sh | tee out/gtkmain-use.pony
+	echo "primitive Gtk" > out/gtkmain-functions.pony
+	cat gtkmain-use.json | ./gen_functions.sh >> out/gtkmain-functions.pony
 
 gtk3enums:
 	cat gtkwindow-enums.json | ./gen_enumfile.sh | tee out/gtkwindow-enums.pony
@@ -13,6 +18,7 @@ gtk3structs:
 
 
 gtk3json:
+	./castxml2pony -x gtk.xml f568 -u | tee gtkmain-use.json
 	./castxml2pony -x gtk.xml f402 -u | tee gtkwindow-use.json
 	./castxml2pony -x gtk.xml f402 -s | tee gtkwindow-struct.json
 	./castxml2pony -x gtk.xml f402 -e | tee gtkwindow-enums.json

@@ -1,4 +1,7 @@
 /castxml2pony
 *.swp
-global.json
-instance.json
+*.json
+*.h
+*.xml
+trash
+out/
