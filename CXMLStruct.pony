@@ -7,12 +7,20 @@ class CXMLStruct
   var cxmltype: String = "CXMLStruct"
 	var ponytype: String = ""
 	var name: String = ""
+	var size: String = ""
+	var align: String = ""
+	var fid: String = ""
+	var lineno: String = ""
 	var members: Array[String] = Array[String]
 	var incomplete: Bool = false
 
   new create(xml2node': Xml2node) =>
     xml2node = xml2node'
 		name = xml2node.getProp("name")
+		size = xml2node.getProp("size")
+		align = xml2node.getProp("align")
+		fid = xml2node.getProp("file")
+		lineno = xml2node.getProp("line")
     members = xml2node.getProp("members").split()
     if (xml2node.getProp("incomplete") == "1") then incomplete = true end
 
