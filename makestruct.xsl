@@ -13,7 +13,7 @@
   Struct Size (bits):  <xsl:value-of select="@size"/>
   Struct Align (bits): <xsl:value-of select="@align"/>
 
-  Fields:
+  Fields (Offset in bits):
 <xsl:apply-templates select="field" mode="generateCommentField"/>*/
 struct <xsl:value-of select="@name"/><xsl:text>
 </xsl:text>
@@ -37,7 +37,7 @@ struct <xsl:value-of select="@name"/><xsl:text>
 <xsl:variable name="tkey" select="@fieldid"/>
 <xsl:variable name="ffid" select="@fid"/>
 <xsl:variable name="n" select="/castxml2pony/CastXML/*[@id=$tkey]"/>
-<xsl:text>     </xsl:text><xsl:call-template name="recurse">
+<xsl:text>     </xsl:text><xsl:value-of select="format-number(@offset, '000000')"/>: <xsl:call-template name="recurse">
   <xsl:with-param name="node" select="/castxml2pony/CastXML/*[@id=$tkey]"/>
 </xsl:call-template>: <xsl:value-of select="/castxml2pony/CastXML/Field[@id=$fieldkey]/@name"/>
 <xsl:text>  </xsl:text><!-- <xsl:call-template name="fileName">
