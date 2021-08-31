@@ -150,9 +150,9 @@ actor Main
                     <?xml version="1.0" encoding="UTF-8"?>
                     <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
                     <xi:include href="./types.xml"/>
-                    <xi:include href="./zip.xml"/>
+                    <xi:include href="./""" + xmlfilename + "\"/>
                     <structs>
-                    """
+                    "
                     + generateStructXML(structjson) + "</structs>\n</castxml2pony>\n")
 //      env.out.print("  ]\n}\n")
     end
