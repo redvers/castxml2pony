@@ -11,6 +11,7 @@ pkgs.mkShell {
     cairo
     glib
     gtk3
+    libxslt
 #    gtk4
 #    gnome3.webkitgtk
     libxml2

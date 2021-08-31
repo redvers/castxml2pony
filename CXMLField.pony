@@ -9,12 +9,20 @@ class CXMLField
   var access: String = ""
   var typeid: String = ""
   var ponytype: String = ""
+  var offset: String = ""
+  var fid: String = ""
+  var lineno: String = ""
+  var fieldid: String = ""
 
   new create(xml2node': Xml2node) =>
     xml2node = xml2node'
     name = xml2node.getProp("name")
     access = xml2node.getProp("access")
     typeid = xml2node.getProp("type")
+    offset = xml2node.getProp("offset")
+    fid = xml2node.getProp("file")
+    lineno = xml2node.getProp("line")
+    fieldid = xml2node.getProp("id")
 
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
     if (ponytype != "") then

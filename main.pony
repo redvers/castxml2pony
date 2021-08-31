@@ -15,6 +15,7 @@ type CXMLCastType is (CXMLFunction | CXMLArrayType | CXMLCvQualifiedType | CXMLE
 
 actor Main
   let primitiveSet: Set[String] = Set[String]
+  var xmlfilename: String = ""
   let ponyprimitives: Array[String] = [
     "F32" ; "F64" ; "F128"
     "I8" ; "I16" ; "I32" ; "I64" ; "I128"
@@ -31,6 +32,7 @@ actor Main
         CommandSpec.leaf("castxml2pony", "Code Generation for C-FFI", [
           OptionSpec.bool("use", "Generate use json" where short' = 'u', default' = false)
           OptionSpec.bool("struct", "Generate struct output" where short' = 's', default' = false)
+          OptionSpec.bool("allstruct", "Generate struct output" where short' = 'a', default' = false)
           OptionSpec.bool("enum", "Generate enum output" where short' = 'e', default' = false)
           OptionSpec.string("xmlin", "Specify castxml .xml file" where short' = 'x')
         ], [
@@ -59,8 +61,10 @@ actor Main
     end
 
     var filename: String = cmd.option("xmlin").string()
+    xmlfilename = filename
     let genUse = cmd.option("use").bool()
     let genStruct = cmd.option("struct").bool()
+    let genAllStruct = cmd.option("allstruct").bool()
     let genEnum = cmd.option("enum").bool()
     let inputfileids = cmd.arg("fileids").string_seq()
 
@@ -133,6 +137,26 @@ actor Main
       env.out.print("  ]\n}\n")
     end
 
+    structids = getAllStructids(filename)
+    if (genAllStruct) then
+      var structjson: Array[String] = Array[String]
+      (structjson, depmaps) = processStructsXML(itypemap, structids)
+//      env.out.print("{\n  \"types\": {")
+      writeTypesFile(env, "types.xml", "<typedefs>\n" + generateDepXML(depmaps) + "</typedefs>\n")
+//      env.out.print(generateDepXML(depmaps))
+//      env.out.print("  },\n  \"structs\": [")
+      writeTypesFile(env, "structs.xml",
+                    """
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
+                    <xi:include href="./types.xml"/>
+                    <xi:include href="./zip.xml"/>
+                    <structs>
+                    """
+                    + generateStructXML(structjson) + "</structs>\n</castxml2pony>\n")
+//      env.out.print("  ]\n}\n")
+    end
+
     var enumids: Array[String] = getEnumidsFromFID(filename, ifid )
     if (genEnum) then
       var enumjson: Array[String] = Array[String]
@@ -192,6 +216,19 @@ actor Main
     end
     enumids
 
+  fun getAllStructids(filename: String): Array[String] =>
+    var structids: Array[String] = Array[String]
+    try
+      let doc: Xml2Doc = Xml2Doc.parseFile(filename)?
+      let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
+
+      let res: Xml2pathobject = ctx.xpathEval("//Struct")?
+      for xmlnode in res.values()? do
+        structids.push(xmlnode.getProp("id"))
+      end
+    end
+    structids
+
   fun getStructidsFromFID(filename: String, fids: Array[String]): Array[String] =>
     var structids: Array[String] = Array[String]
     try
@@ -211,6 +248,9 @@ actor Main
   fun generateStructJSON(funcjson: Array[String]): String =>
     ",\n".join(funcjson.values())
 
+  fun generateStructXML(funcjson: Array[String]): String =>
+    "\n".join(funcjson.values())
+
   fun processStructs(itypemap: Map[String, CXMLCastType], ids: Array[String]): (Array[String], Map[String, String]) =>
     var jsons: Array[String] = Array[String]
     var neededTypes: Map[String, String] = Map[String, String]
@@ -229,6 +269,70 @@ actor Main
     end
     (jsons, neededTypes)
 
+  fun processStructsXML(itypemap: Map[String, CXMLCastType], ids: Array[String]): (Array[String], Map[String, String]) =>
+    var jsons: Array[String] = Array[String]
+    var neededTypes: Map[String, String] = Map[String, String]
+    var deps: Map[String, String] = Map[String, String]
+
+    for f in ids.values() do
+      try
+        var json: String
+        (json, deps) = processStructXML(itypemap, f)?
+        jsons.push(json)
+
+        for y in deps.keys() do
+          neededTypes.insert(y,y)
+        end
+      end
+    end
+    (jsons, neededTypes)
+
+  fun processStructXML(itypemap: Map[String, CXMLCastType], id: String): (String, Map[String, String])? =>
+    var deps: Map[String, String] = Map[String, String]
+    var structname: String = recover iso String end
+    var jsonarray: Array[String] = Array[String]
+    var ssize: String = ""
+    var salign: String = ""
+    var fid: String = ""
+    var lineno: String = ""
+    try
+      match itypemap.apply(id)?
+      | let x: CXMLStruct =>
+        ssize = x.size
+        salign = x.align
+        fid = x.fid
+        lineno = x.lineno
+        structname = ponyStruct(x.name)
+        for f in x.members.values() do
+          match itypemap.apply(f)?
+          | let y: CXMLField => jsonarray.push("    <field name=\"" + ponyMemberName(y.name) +
+              "\" id=\"" + y.fieldid +
+              "\" type=\"" + y.recurseType(itypemap, f) +
+              "\" fieldid=\""+ y.typeid +
+              "\" offset=\"" + y.offset +
+              "\" fid=\"" + y.fid +
+              "\" line=\"" + y.lineno +
+              "\"/>")
+          deps.insert(y.recurseType(itypemap, f), y.recurseType(itypemap, f))
+          end
+        end
+      end
+    end
+    let fields: String = "\n".join(jsonarray.values())
+
+    if (structname == "") then
+      error
+    else
+      ("  <struct name=\""
+        + structname +
+        "\" id=\"" + id +
+        "\" size=\"" + ssize +
+        "\" align=\"" + salign +
+        "\" fid=\"" + fid +
+        "\" lineno=\"" + lineno +
+        "\">\n" + fields +
+        "\n  </struct>\n", deps)
+    end
 
   fun processStruct(itypemap: Map[String, CXMLCastType], id: String): (String, Map[String, String])? =>
     var deps: Map[String, String] = Map[String, String]
@@ -339,7 +443,7 @@ actor Main
 
   fun ponyMemberName(text: String val): String =>
     var t: String iso = text.clone()
-//    t.replace("_", "")
+    t.replace("_", "")
     "p" + t.clone()
 
   fun getFunctionidsFromFID(filename: String, fids: Array[String]): Array[String] =>
@@ -423,5 +527,94 @@ actor Main
   fun die(str: String) =>
     @printf("%s\n".cstring(), str.cstring())
     @exit(1)
+
+
+  fun generateDepXML(depmaps: Map[String, String]): String =>
+    let deprefs: Array[String] = Array[String]
+    try
+      depmaps.remove("String")?
+      depmaps.remove("Array[String]")?
+    end
+
+    deprefs.push("  <typedef name=\"String\"\n" +
+                 "    ponytypein=\"String\"\n" +
+                 "    ponytypeinconv=\".cstring()\"\n" +
+                 "    ponytypeout=\"String\"\n" +
+                 "    ponytypeoutconva=\"var pcstring: Pointer[U8] = \"\n" +
+                 "    ponytypeoutconvb=\"let p: String iso = String.from_cstring(pcstring).clone()\\n    consume p\"\n" +
+                 "    structtype=\"Pointer[U8]\"\n" +
+                 "    structdef=\"Pointer[U8]\"\n" +
+                 "    argtype=\"Pointer[U8] tag\"\n" +
+                 "    rvtype=\"Pointer[U8]\"/>\n"
+                )
+
+    deprefs.push("  <typedef name=\"Array[String]\"\n" +
+                 "    ponytypein=\"Array[String]\"\n" +
+                 "    ponytypeinconv=\"\"\n" +
+                 "    ponytypeout=\"Pointer[Pointer[U8]]\"\n" +
+                 "    ponytypeoutconva=\"\"\n" +
+                 "    ponytypeoutconvb=\"\"\n" +
+                 "    structtype=\"Pointer[Pointer[U8]]\"\n" +
+                 "    structdef=\"Pointer[Pointer[U8]]\"\n" +
+                 "    argtype=\"Pointer[Pointer[U8]] tag\"\n" +
+                 "    rvtype=\"Pointer[Pointer[U8]]\"/>\n"
+                )
+
+    for f in depmaps.keys() do
+      if (primitiveSet.contains(f)) then
+      deprefs.push("  <typedef name=\"" + f + "\"\n" +
+                   "    ponytypein=\"" + f + "\"\n" +
+                   "    ponytypeinconv=\"\"\n" +
+                   "    ponytypeout=\"" + f + "\"\n" +
+                   "    ponytypeoutconva=\"\"\n" +
+                   "    ponytypeoutconvb=\"\"\n" +
+                   "    structtype=\"" + f + "\"\n" +
+                   "    structdef=\"" + f + "(0)\"\n" +
+                   "    argtype=\"" + f + "\"\n" +
+                   "    rvtype=\"" + f + "\"/>\n"
+                  )
+      elseif (f.substring(0,15) == "NullablePointer") then
+      deprefs.push("  <typedef name=\"" + f + "\"\n" +
+                   "    ponytypein=\"" + f + " tag\"\n" +
+                   "    ponytypeinconv=\"\"\n" +
+                   "    ponytypeout=\"" + f + "\"\n" +
+                   "    ponytypeoutconva=\"\"\n" +
+                   "    ponytypeoutconvb=\"\"\n" +
+                   "    structtype=\"" + f + "\"\n" +
+                   "    structdef=\"" + f + ".none()\"\n" +
+                   "    argtype=\"" + f + " tag\"\n" +
+                   "    rvtype=\"" + f + "\"/>\n"
+                  )
+      else
+      deprefs.push("  <typedef name=\"" + f + "\"\n" +
+                   "    ponytypein=\"" + f + " tag\"\n" +
+                   "    ponytypeinconv=\"\"\n" +
+                   "    ponytypeout=\"" + f + "\"\n" +
+                   "    ponytypeoutconva=\"\"\n" +
+                   "    ponytypeoutconvb=\"\"\n" +
+                   "    structtype=\"" + f + "\"\n" +
+                   "    structdef=\"" + f + "\"\n" +
+                   "    argtype=\"" + f + " tag\"\n" +
+                   "    rvtype=\"" + f + "\"/>\n"
+                  )
+      end
+    end
+    "\n".join(deprefs.values())
+
+//      writeTypesFile(env, "types.xml", "<typedefs>\n" + generateStructXML(structjson) + "</typedefs>\n"
+  fun writeTypesFile(env: Env, filename: String, content: String) =>
+    try
+      let fp: FilePath = FilePath(env.root as AmbientAuth, filename)?
+      fp.remove()
+
+      let f: File = File(fp)
+      f.print(content)
+      f.dispose()
+    else
+      die("Unable to write the types file: " + filename)
+    end
+
+
+
 
 
