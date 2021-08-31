@@ -129,12 +129,23 @@ actor Main
     var structids: Array[String] = getStructidsFromFID(filename, ifid )
     if (genStruct) then
       var structjson: Array[String] = Array[String]
-      (structjson, depmaps) = processStructs(itypemap, structids)
-      env.out.print("{\n  \"types\": {")
-      env.out.print(generateDepJSON(depmaps))
-      env.out.print("  },\n  \"structs\": [")
-      env.out.print(generateStructJSON(structjson))
-      env.out.print("  ]\n}\n")
+      (structjson, depmaps) = processStructsXML(itypemap, structids)
+      writeTypesFile(env, "types.xml", "<typedefs>\n" + generateDepXML(depmaps) + "</typedefs>\n")
+      writeTypesFile(env, "structs.xml",
+                    """
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
+                    <xi:include href="./types.xml"/>
+                    <xi:include href="./""" + xmlfilename + "\"/>
+                    <structs>
+                    "
+                    + generateStructXML(structjson) + "</structs>\n</castxml2pony>\n")
+//      (structjson, depmaps) = processStructs(itypemap, structids)
+//      env.out.print("{\n  \"types\": {")
+//      env.out.print(generateDepJSON(depmaps))
+//      env.out.print("  },\n  \"structs\": [")
+//      env.out.print(generateStructJSON(structjson))
+//      env.out.print("  ]\n}\n")
     end
 
     structids = getAllStructids(filename)

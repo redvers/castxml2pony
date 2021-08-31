@@ -1,6 +1,7 @@
 all:
 	ponyc -d .
 	./castxml2pony -x zip.xml -a
+	xsltproc --xinclude makestruct.xsl structs.xml  > out/structs.pony
 #all: gobject gtk3
 gobject: gobjectjson gobjectstructs gobjectenums
 gtk3: gtk3json gtk3structs gtk3enums gtk3functions
