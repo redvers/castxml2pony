@@ -2,25 +2,36 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output method="text" omit-xml-declaration="yes" indent="no"/>
 <xsl:strip-space elements="*"/>
-<xsl:template match="/castxml2pony/structs/struct">
+
+<xsl:template match="/castxml2pony/renderstructs/renderstruct">
+	<xsl:variable name="iid" select="@id"/>
+	<xsl:call-template name="mainstruct"><xsl:with-param name="n" select="/castxml2pony/structs/struct[@id=$iid]"/><xsl:with-param name="renderfields" select="@render"/></xsl:call-template>
+</xsl:template>
+
+<!--
+<xsl:template match="/castxml2pony/renderstructs/renderstruct[@render='0']">
+	<xsl:apply-templates select="/castxml2pony/structs/struct" mode="inactive"/>*/
+</xsl:template>
+-->
+<xsl:template name="mainstruct">
+<xsl:param name="n" />
+<xsl:param name="renderfields" />
 <xsl:text>
 /*
   Source: </xsl:text>
-    <xsl:variable name="fid" select="@fid"/>
-    <xsl:variable name="originalid" select="@id"/>
-    <xsl:value-of select="/castxml2pony/CastXML/File[@id=$fid]/@name"/>:<xsl:value-of select="@lineno"/>
+    <xsl:variable name="fid" select="$n/@fid"/>
+    <xsl:variable name="originalid" select="$n/@id"/>
+    <xsl:value-of select="/castxml2pony/CastXML/File[@id=$fid]/@name"/>:<xsl:value-of select="$n/@lineno"/>
   Original Name: <xsl:value-of select="/castxml2pony/CastXML/Struct[@id=$originalid]/@name"/>
-  Struct Size (bits):  <xsl:value-of select="@size"/>
-  Struct Align (bits): <xsl:value-of select="@align"/>
+  Struct Size (bits):  <xsl:value-of select="$n/@size"/>
+  Struct Align (bits): <xsl:value-of select="$n/@align"/>
 
   Fields (Offset in bits):
-<xsl:apply-templates select="field" mode="generateCommentField"/>*/
-struct <xsl:value-of select="@name"/><xsl:text>
+<xsl:apply-templates select="$n/field" mode="generateCommentField"/>*/
+struct <xsl:value-of select="$n/@name"/><xsl:text>
 </xsl:text>
 
-
-
-<xsl:apply-templates select="field" mode="generateField"/>
+<xsl:if test="$renderfields='1'"><xsl:apply-templates select="$n/field" mode="generateField"/></xsl:if>
 </xsl:template>
 
 <xsl:template match="field" mode="generateField">
