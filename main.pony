@@ -32,9 +32,10 @@ actor Main
         CommandSpec.leaf("castxml2pony", "Code Generation for C-FFI", [
           OptionSpec.bool("use", "Generate use json" where short' = 'u', default' = false)
           OptionSpec.bool("struct", "Generate struct output" where short' = 's', default' = false)
-          OptionSpec.bool("allstruct", "Generate struct output" where short' = 'a', default' = false)
           OptionSpec.bool("enum", "Generate enum output" where short' = 'e', default' = false)
           OptionSpec.string("xmlin", "Specify castxml .xml file" where short' = 'x')
+          OptionSpec.bool("allstruct", "Generate struct output" where short' = 'a', default' = false)
+          OptionSpec.bool("allstructdefault", "Defaults all structs to render" where short' = 'd', default' = false)
         ], [
           ArgSpec.string_seq("fileids", "The fileids to generate for")
         ])? .> add_help()?
@@ -67,6 +68,7 @@ actor Main
     let genAllStruct = cmd.option("allstruct").bool()
     let genEnum = cmd.option("enum").bool()
     let inputfileids = cmd.arg("fileids").string_seq()
+    let asdefault = cmd.option("allstructdefault").bool()
 
     let ifid: Array[String] = Array[String]
 		for f in inputfileids.values() do
@@ -136,6 +138,7 @@ actor Main
                     <?xml version="1.0" encoding="UTF-8"?>
                     <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
                     <xi:include href="./types.xml"/>
+                    <xi:include href="./renderstructs.xml"/>
                     <xi:include href="./""" + xmlfilename + "\"/>
                     <structs>
                     "
@@ -152,10 +155,7 @@ actor Main
     if (genAllStruct) then
       var structjson: Array[String] = Array[String]
       (structjson, depmaps) = processStructsXML(itypemap, structids)
-//      env.out.print("{\n  \"types\": {")
       writeTypesFile(env, "types.xml", "<typedefs>\n" + generateDepXML(depmaps) + "</typedefs>\n")
-//      env.out.print(generateDepXML(depmaps))
-//      env.out.print("  },\n  \"structs\": [")
       writeTypesFile(env, "structs.xml",
                     """
                     <?xml version="1.0" encoding="UTF-8"?>
@@ -165,19 +165,37 @@ actor Main
                     <structs>
                     "
                     + generateStructXML(structjson) + "</structs>\n</castxml2pony>\n")
-//      env.out.print("  ]\n}\n")
+        writeTypesFile(env, "renderstructs.xml", "<renderstructs>\n" + ("\n".join(genRenderStructs(itypemap, structids, asdefault).values())) + "\n</renderstructs>")
     end
 
     var enumids: Array[String] = getEnumidsFromFID(filename, ifid )
     if (genEnum) then
       var enumjson: Array[String] = Array[String]
       (enumjson, depmaps) = processEnums(itypemap, enumids)
-//      env.out.print("{\n  \"types\": {")
-//      env.out.print(generateDepJSON(depmaps))
       env.out.print("{\n  \"enums\": [")
       env.out.print(generateEnumJSON(enumjson))
       env.out.print("  ]\n}\n")
     end
+
+    fun genRenderStructs(itypemap: Map[String, CXMLCastType], structids: Array[String], default: Bool): Array[String] =>
+      var slist: Array[String] = Array[String]
+      for f in structids.values() do
+        try
+          match itypemap.apply(f)?
+          | let x: CXMLStruct =>
+            if (x.name == "") then
+              continue
+            end
+            if (default) then
+              slist.push("  <renderstruct id=\"" + x.structid + "\" render=\"1\"/><!-- " + ponyStruct(x.name) + " -->")
+            else
+              slist.push("  <renderstruct id=\"" + x.structid + "\" render=\"0\"/><!-- " + ponyStruct(x.name) + " -->")
+            end
+          end
+        end
+      end
+      slist
+
 
   fun generateEnumJSON(enumjson: Array[String]): String =>
     ",\n".join(enumjson.values())

@@ -17,6 +17,9 @@
 <xsl:apply-templates select="field" mode="generateCommentField"/>*/
 struct <xsl:value-of select="@name"/><xsl:text>
 </xsl:text>
+
+
+
 <xsl:apply-templates select="field" mode="generateField"/>
 </xsl:template>
 

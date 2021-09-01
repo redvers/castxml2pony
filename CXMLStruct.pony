@@ -9,6 +9,7 @@ class CXMLStruct
 	var name: String = ""
 	var size: String = ""
 	var align: String = ""
+	var structid: String = ""
 	var fid: String = ""
 	var lineno: String = ""
 	var members: Array[String] = Array[String]
@@ -20,6 +21,7 @@ class CXMLStruct
 		size = xml2node.getProp("size")
 		align = xml2node.getProp("align")
 		fid = xml2node.getProp("file")
+    structid = xml2node.getProp("id")
 		lineno = xml2node.getProp("line")
     members = xml2node.getProp("members").split()
     if (xml2node.getProp("incomplete") == "1") then incomplete = true end
