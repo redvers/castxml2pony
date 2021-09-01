@@ -12,6 +12,7 @@ pkgs.mkShell {
     glib
     gtk3
     libxslt
+    saxon
 #    gtk4
 #    gnome3.webkitgtk
     libxml2

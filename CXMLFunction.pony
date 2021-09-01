@@ -8,12 +8,18 @@ class CXMLFunction
   var ponytype: String = ""
   var name: String = ""
   var rv: String = ""
+  var useid: String = ""
+  var fid: String = ""
+  var lineno: String = ""
   var args: Array[(String, String)] = Array[(String, String)]
 
   new create(xml2node': Xml2node) =>
     xml2node = xml2node'
     rv = xml2node.getProp("returns")
     name = xml2node.getProp("name")
+    useid = xml2node.getProp("id")
+    fid = xml2node.getProp("file")
+    lineno = xml2node.getProp("line")
 
     let argnodes: Array[Xml2node] = xml2node.getChildren()
 

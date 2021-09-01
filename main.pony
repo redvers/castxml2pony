@@ -126,11 +126,13 @@ actor Main
                     """
                     <?xml version="1.0" encoding="UTF-8"?>
                     <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
+                    <xi:include href="./renderuse.xml"/>
                     <xi:include href="./usetypes.xml"/>
                     <xi:include href="./""" + xmlfilename + "\"/>
                     <uses>
                     "
                     + generateUseXML(funcjson) + "</uses>\n</castxml2pony>\n")
+        writeTypesFile(env, "renderuse.xml", "<renderuses>\n" + ("\n".join(genRenderUse(itypemap, functionids, asdefault).values())) + "\n</renderuses>")
 //      env.out.print("<typedefs>")
 //      env.out.print(generateDepXML(depmaps))
 //      env.out.print("</typedefs>\n<uses>\n")
@@ -186,6 +188,25 @@ actor Main
       env.out.print(generateEnumJSON(enumjson))
       env.out.print("  ]\n}\n")
     end
+
+    fun genRenderUse(itypemap: Map[String, CXMLCastType], useids: Array[String], default: Bool): Array[String] =>
+      var slist: Array[String] = Array[String]
+      for f in useids.values() do
+        try
+          match itypemap.apply(f)?
+          | let x: CXMLFunction =>
+            if (x.name == "") then
+              continue
+            end
+            if (default) then
+              slist.push("  <renderuse id=\"" + x.useid + "\" render=\"1\"/><!-- " + x.name + " -->")
+            else
+              slist.push("  <renderuse id=\"" + x.useid + "\" render=\"0\"/><!-- " + x.name + " -->")
+            end
+          end
+        end
+      end
+      slist
 
     fun genRenderStructs(itypemap: Map[String, CXMLCastType], structids: Array[String], default: Bool): Array[String] =>
       var slist: Array[String] = Array[String]
@@ -527,8 +548,10 @@ actor Main
         var returntext: String = ""
         let rvtype: String = recurseType(itypemap, x.rv)
         deps.push(rvtype)
-        returntext = returntext + "  <use name=\"" + x.name + "\"\n" +
+        returntext = returntext + "  <use id=\"" + x.useid + "\" name=\"" + x.name + "\"\n" +
                                   "     ponyname=\"" + ponyMemberName(x.name) + "\"\n" +
+                                  "     fid=\"" + x.fid + "\"\n" +
+                                  "     lineno=\"" + x.lineno + "\"\n" +
                                   "     rv=\"" + rvtype + "\">\n"
         var varargs: Array[String] = Array[String]
         for (name, typeid) in x.args.values() do
