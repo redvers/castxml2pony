@@ -133,11 +133,6 @@ actor Main
                     "
                     + generateUseXML(funcjson) + "</uses>\n</castxml2pony>\n")
         writeTypesFile(env, "renderuse.xml", "<renderuses>\n" + ("\n".join(genRenderUse(itypemap, functionids, asdefault).values())) + "\n</renderuses>")
-//      env.out.print("<typedefs>")
-//      env.out.print(generateDepXML(depmaps))
-//      env.out.print("</typedefs>\n<uses>\n")
-//      env.out.print(generateUseXML(funcjson))
-//      env.out.print("</uses>\n")
     end
 
     var structids: Array[String] = getStructidsFromFID(filename, ifid )
@@ -154,12 +149,6 @@ actor Main
                     <structs>
                     "
                     + generateStructXML(structjson) + "</structs>\n</castxml2pony>\n")
-//      (structjson, depmaps) = processStructs(itypemap, structids)
-//      env.out.print("{\n  \"types\": {")
-//      env.out.print(generateDepJSON(depmaps))
-//      env.out.print("  },\n  \"structs\": [")
-//      env.out.print(generateStructJSON(structjson))
-//      env.out.print("  ]\n}\n")
     end
 
     structids = getAllStructids(filename)
@@ -184,9 +173,15 @@ actor Main
     if (genEnum) then
       var enumjson: Array[String] = Array[String]
       (enumjson, depmaps) = processEnums(itypemap, enumids)
-      env.out.print("{\n  \"enums\": [")
-      env.out.print(generateEnumJSON(enumjson))
-      env.out.print("  ]\n}\n")
+      writeTypesFile(env, "enums.xml",
+                    """
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
+                    """
+                    + "<xi:include href=\"./" + xmlfilename + "\"/>\n<enums>\n"
+                    + generateEnumXML(enumjson)
+                    + "</enums>\n"
+                    + "</castxml2pony>\n")
     end
 
     fun genRenderUse(itypemap: Map[String, CXMLCastType], useids: Array[String], default: Bool): Array[String] =>
@@ -228,7 +223,7 @@ actor Main
       slist
 
 
-  fun generateEnumJSON(enumjson: Array[String]): String =>
+  fun generateEnumXML(enumjson: Array[String]): String =>
     ",\n".join(enumjson.values())
 
   fun processEnums(itypemap: Map[String, CXMLCastType], ids: Array[String]): (Array[String], Map[String, String]) =>
@@ -246,7 +241,6 @@ actor Main
 
   fun processEnum(itypemap: Map[String, CXMLCastType], id: String): (String, Map[String, String]) =>
     var deps: Map[String, String] = Map[String, String]
-    ("foo", deps)
     var enumname: String = recover iso String end
     var jsonarray: Array[String] = Array[String]
     try
@@ -254,12 +248,12 @@ actor Main
       | let x: CXMLEnumeration =>
         enumname = ponyStruct(x.name)
         for (an, ai) in x.members.values() do
-          jsonarray.push("      { \"name\": \"" + an + "\", \"type\": \"" + ai + "\" }")
+          jsonarray.push("    <enummember name=\"" + an + "\" init=\"" + ai + "\"/>")
         end
       end
     end
     let values: String = ",\n".join(jsonarray.values())
-    ("    { \"enumname\": \"" + enumname + "\", \"values\": [\n" + values + " ]\n" + "    }", deps)
+    ("  <enum id=\"" + id + "\" name=\"" + enumname + "\">\n" + values + "\n  </enum>\n", deps)
 
   fun getEnumidsFromFID(filename: String, fids: Array[String]): Array[String] =>
     var enumids: Array[String] = Array[String]
@@ -323,7 +317,7 @@ actor Main
         jsons.push(json)
 
         for y in deps.keys() do
-          neededTypes.insert(y,y)
+          neededTypes.insert(y,"x")
         end
       end
     end
@@ -341,7 +335,7 @@ actor Main
         jsons.push(json)
 
         for y in deps.keys() do
-          neededTypes.insert(y,y)
+          neededTypes.insert(y,"x")
         end
       end
     end
@@ -373,7 +367,7 @@ actor Main
               "\" fid=\"" + y.fid +
               "\" line=\"" + y.lineno +
               "\"/>")
-          deps.insert(y.recurseType(itypemap, f), y.recurseType(itypemap, f))
+          deps.insert(y.recurseType(itypemap, f), "x")
           end
         end
       end
@@ -405,7 +399,7 @@ actor Main
         for f in x.members.values() do
           match itypemap.apply(f)?
           | let y: CXMLField => jsonarray.push("      { \"name\": \"" + ponyMemberName(y.name) + "\", \"type\": \"" + y.recurseType(itypemap, f) + "\" }")
-          deps.insert(y.recurseType(itypemap, f), y.recurseType(itypemap, f))
+          deps.insert(y.recurseType(itypemap, f), "x")
           end
         end
       end
@@ -424,78 +418,6 @@ actor Main
 
   fun generateUseJSON(funcjson: Array[String]): String =>
     ",\n".join(funcjson.values())
-
-  fun generateDepJSON(depmaps: Map[String, String]): String =>
-    let deprefs: Array[String] = Array[String]
-    try
-      depmaps.remove("String")?
-      depmaps.remove("Array[String]")?
-    end
-
-    deprefs.push("    \"String\": {\n" +
-                 "      \"ponytypein\": \"String\",\n" +
-                 "      \"ponytypeinconv\": \".cstring()\",\n" +
-                 "      \"ponytypeout\": \"String\",\n" +
-                 "      \"ponytypeoutconv\": [ \"var pcstring: Pointer[U8] = \", \"let p: String iso = String.from_cstring(pcstring).clone()\\n    consume p\" ],\n" +
-                 "      \"structtype\": \"Pointer[U8]\",\n" +
-                 "      \"structdef\": \"Pointer[U8]\",\n" +
-                 "      \"argtype\": \"Pointer[U8] tag\",\n" +
-                 "      \"rvtype\": \"Pointer[U8]\"\n" +
-                 "    }"
-                )
-
-    deprefs.push("    \"Array[String]\": {\n" +
-                 "      \"ponytypein\": \"Array[String]\",\n" +
-                 "      \"ponytypeinconv\": \"\",\n" +
-                 "      \"ponytypeout\": \"Pointer[Pointer[U8]]\",\n" +
-                 "      \"ponytypeoutconv\": [ \"\" ],\n" +
-                 "      \"structtype\": \"Pointer[Pointer[U8]]\",\n" +
-                 "      \"structdef\": \"Pointer[Pointer[U8]]\",\n" +
-                 "      \"argtype\": \"Pointer[Pointer[U8]] tag\",\n" +
-                 "      \"rvtype\": \"Pointer[Pointer[U8]]\"\n" +
-                 "    }"
-                )
-
-    for f in depmaps.keys() do
-      if (primitiveSet.contains(f)) then
-      deprefs.push("    \"" + f + "\": {\n" +
-                   "      \"ponytypein\": \"" + f + "\",\n" +
-                   "      \"ponytypeinconv\": \"\",\n" +
-                   "      \"ponytypeout\": \"" + f + "\",\n" +
-                   "      \"ponytypeoutconv\": [ \"\" ],\n" +
-                   "      \"structtype\": \"" + f + "\",\n" +
-                   "      \"structdef\": \"" + f + "(0)\",\n" +
-                   "      \"argtype\": \"" + f + "\",\n" +
-                   "      \"rvtype\": \"" + f + "\"\n" +
-                   "    }"
-                  )
-      elseif (f.contains("NullablePo")) then
-      deprefs.push("    \"" + f + "\": {\n" +
-                   "      \"ponytypein\": \"" + f + " tag\",\n" +
-                   "      \"ponytypeinconv\": \"\",\n" +
-                   "      \"ponytypeout\": \"" + f + "\",\n" +
-                   "      \"ponytypeoutconv\": [ \"\" ],\n" +
-                   "      \"structtype\": \"" + f + "\",\n" +
-                   "      \"structdef\": \"" + f + ".none()\",\n" +
-                   "      \"argtype\": \"" + f + " tag\",\n" +
-                   "      \"rvtype\": \"" + f + "\"\n" +
-                   "    }"
-                  )
-      else
-      deprefs.push("    \"" + f + "\": {\n" +
-                   "      \"ponytypein\": \"" + f + " tag\",\n" +
-                   "      \"ponytypeinconv\": \"\",\n" +
-                   "      \"ponytypeout\": \"" + f + "\",\n" +
-                   "      \"ponytypeoutconv\": [ \"\" ],\n" +
-                   "      \"structtype\": \"" + f + "\",\n" +
-                   "      \"structdef\": \"" + f + "\",\n" +
-                   "      \"argtype\": \"" + f + " tag\",\n" +
-                   "      \"rvtype\": \"" + f + "\"\n" +
-                   "    }"
-                  )
-      end
-    end
-    ",\n".join(deprefs.values())
 
   fun ponyStruct(text: String val): String =>
     var t: String iso = text.clone()
@@ -533,7 +455,8 @@ actor Main
       var deps: Array[String]
       (json, deps) = functionUse(itypemap, id)
       for f in deps.values() do
-        neededTypes.insert(f, f)
+        Debug.out("XXXXXXXXXXXXXXXXXXXXXX " + f)
+        neededTypes.insert(f, "x")
       end
       jsonarray.push(json)
     end
@@ -556,6 +479,9 @@ actor Main
         var varargs: Array[String] = Array[String]
         for (name, typeid) in x.args.values() do
           let ttype: String = recurseType(itypemap, typeid)
+          try
+            Debug.out("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: " + ttype + " " + itypemap.apply(typeid)?.ctype())
+          end
           deps.push(ttype)
           varargs.push("       <usearg name=\"" + name + "\" type=\"" + ttype + "\"/>")
         end

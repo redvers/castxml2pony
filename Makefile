@@ -1,6 +1,6 @@
 all:
 	ponyc -d .
-	./castxml2pony -x zip.xml f36 -u -d
+#	./castxml2pony -x zip.xml f36 -e
 #all: gobject gtk3
 gobject: gobjectjson gobjectstructs gobjectenums
 gtk3: gtk3json gtk3structs gtk3enums gtk3functions
