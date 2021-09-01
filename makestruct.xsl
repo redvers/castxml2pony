@@ -17,6 +17,7 @@
 <xsl:param name="n" />
 <xsl:param name="renderfields" />
 <xsl:text>
+
 /*
   Source: </xsl:text>
     <xsl:variable name="fid" select="$n/@fid"/>

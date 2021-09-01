@@ -121,11 +121,21 @@ actor Main
     (funcjson, depmaps) = processUseCases(itypemap, functionids)
 
     if (genUse) then
-      env.out.print("{\n  \"types\": {")
-      env.out.print(generateDepJSON(depmaps))
-      env.out.print("  },\n  \"use\": [")
-      env.out.print(generateUseJSON(funcjson))
-      env.out.print("  ]\n}\n")
+      writeTypesFile(env, "usetypes.xml", "<typedefs>\n" + generateDepXML(depmaps) + "</typedefs>\n")
+      writeTypesFile(env, "use.xml",
+                    """
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
+                    <xi:include href="./usetypes.xml"/>
+                    <xi:include href="./""" + xmlfilename + "\"/>
+                    <uses>
+                    "
+                    + generateUseXML(funcjson) + "</uses>\n</castxml2pony>\n")
+//      env.out.print("<typedefs>")
+//      env.out.print(generateDepXML(depmaps))
+//      env.out.print("</typedefs>\n<uses>\n")
+//      env.out.print(generateUseXML(funcjson))
+//      env.out.print("</uses>\n")
     end
 
     var structids: Array[String] = getStructidsFromFID(filename, ifid )
@@ -388,6 +398,9 @@ actor Main
     end
 
 
+  fun generateUseXML(funcjson: Array[String]): String =>
+    "\n".join(funcjson.values())
+
   fun generateUseJSON(funcjson: Array[String]): String =>
     ",\n".join(funcjson.values())
 
@@ -514,21 +527,21 @@ actor Main
         var returntext: String = ""
         let rvtype: String = recurseType(itypemap, x.rv)
         deps.push(rvtype)
-        returntext = returntext + "    {     \"name\": \"" + x.name + "\",\n" +
-                                  "      \"ponyname\": \"" + ponyMemberName(x.name) + "\",\n" +
-                                  "            \"rv\": \"" + rvtype + "\", \"args\": "
+        returntext = returntext + "  <use name=\"" + x.name + "\"\n" +
+                                  "     ponyname=\"" + ponyMemberName(x.name) + "\"\n" +
+                                  "     rv=\"" + rvtype + "\">\n"
         var varargs: Array[String] = Array[String]
         for (name, typeid) in x.args.values() do
           let ttype: String = recurseType(itypemap, typeid)
           deps.push(ttype)
-          varargs.push("        { \"name\": \"" + name + "\", \"type\": \"" + ttype + "\" }")
+          varargs.push("       <usearg name=\"" + name + "\" type=\"" + ttype + "\"/>")
         end
         if (varargs.size() == 0) then
-          returntext = returntext + "[] }"
+          returntext = returntext + "     <useargs/>\n  </use>"
           return (returntext, deps)
         end
 
-        returntext = returntext + "\n      [ \n" + ", \n".join(varargs.values()) + "\n      ]\n    }"
+        returntext = returntext + "     <useargs>\n" + "\n".join(varargs.values()) + "\n     </useargs>\n  </use>"
         return (returntext, deps)
       else
         ("", deps)
