@@ -224,7 +224,7 @@ actor Main
 
 
   fun generateEnumXML(enumjson: Array[String]): String =>
-    ",\n".join(enumjson.values())
+    "\n".join(enumjson.values())
 
   fun processEnums(itypemap: Map[String, CXMLCastType], ids: Array[String]): (Array[String], Map[String, String]) =>
     var jsons: Array[String] = Array[String]

@@ -33,7 +33,7 @@
   <xsl:apply-templates select="/castxml2pony/uses/use[@id=$originalid]/useargs/usearg" mode="generateArgument"/>
 </xsl:variable>
 <xsl:variable name="rrv" select="$n/@rv"/>
-<xsl:text>use @</xsl:text><xsl:value-of select="$n/@name"/>[<xsl:value-of select="/castxml2pony/typedefs/typedef[@name=$rrv]/@rvtype"/>](<xsl:value-of select="$args"/>)
+<xsl:if test="$render='0'">// </xsl:if><xsl:text>use @</xsl:text><xsl:value-of select="$n/@name"/>[<xsl:value-of select="/castxml2pony/typedefs/typedef[@name=$rrv]/@rvtype"/>](<xsl:value-of select="$args"/>)
 
 </xsl:template>
 
@@ -55,7 +55,7 @@
   <xsl:param name="node" />
   <xsl:choose>
     <xsl:when test="name($node) = 'Union'">[UNION size=<xsl:value-of select="$node/@size"/>]  UNSUPPORTED FIXME</xsl:when>
-    <xsl:when test="name($node) = 'FunctionType'">[FunctionType]  WRITE MANUALLY - FIXME</xsl:when>
+    <xsl:when test="name($node) = 'FunctionType'">[FunctionType]  WRITE MANUALLY</xsl:when>
     <xsl:when test="name($node) = 'Struct'">[Struct size=<xsl:value-of select="$node/@size"/>,fid: <xsl:value-of select="$node/@file"/>]</xsl:when>
     <xsl:when test="name($node) = 'Enumeration'">[Enumeration size=<xsl:value-of select="$node/@size"/>,fid: <xsl:value-of select="$node/@file"/>]</xsl:when>
     <xsl:when test="name($node) = 'FundamentalType'">[FundamentalType(<xsl:value-of select="$node/@name"/>) size=<xsl:value-of select="$node/@size"/>]</xsl:when>
