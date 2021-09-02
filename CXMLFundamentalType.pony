@@ -20,6 +20,7 @@ class CXMLFundamentalType
     match name
     | let x: String if (name == "int") => "I32"
 		| let x: String if (name == "void") => "None"
+		| let x: String if (name == "bool") => "Bool"
 		| let x: String if (name == "_Bool") => "Bool"
 		| let x: String if (name == "char") => "U8"
 		| let x: String if (name == "signed char") => "I8"

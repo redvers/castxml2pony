@@ -43,7 +43,8 @@ class CXMLStruct
 
   fun ponyMemberName(text: String val): String =>
     var t: String iso = text.clone()
-    t.replace("_", "")
-    "p" + t.clone()
+    t
+//    t.replace("_", "")
+//    "p" + t.clone()
 
 

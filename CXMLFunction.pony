@@ -36,7 +36,7 @@ class CXMLFunction
 
       var argnameiso: String iso = recover iso argname.clone() end
       argnameiso.replace("_", "")
-      args.push(("p" + consume argnameiso, argtype))
+      args.push((consume argnameiso, argtype))
       argno = argno + 1
     end
 

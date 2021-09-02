@@ -13,7 +13,7 @@ pkgs.mkShell {
     gtk3
     libxslt
     saxon
-#    gtk4
+    gtk4
 #    gnome3.webkitgtk
     libxml2
 #    protobufc

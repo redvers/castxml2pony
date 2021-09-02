@@ -145,6 +145,7 @@ actor Main
                     <?xml version="1.0" encoding="UTF-8"?>
                     <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
                     <xi:include href="./types.xml"/>
+                    <xi:include href="./renderstructs.xml"/>
                     <xi:include href="./""" + xmlfilename + "\"/>
                     <structs>
                     "
@@ -428,8 +429,9 @@ actor Main
 
   fun ponyMemberName(text: String val): String =>
     var t: String iso = text.clone()
-    t.replace("_", "")
-    "p" + t.clone()
+    t
+//    t.replace("_", "")
+//    "p" + t.clone()
 
   fun getFunctionidsFromFID(filename: String, fids: Array[String]): Array[String] =>
     var funcids: Array[String] = Array[String]
@@ -531,20 +533,26 @@ actor Main
                  "    ponytypein=\"String\"\n" +
                  "    ponytypeinconv=\".cstring()\"\n" +
                  "    ponytypeout=\"String\"\n" +
-                 "    ponytypeoutconva=\"var pcstring: Pointer[U8] = \"\n" +
-                 "    ponytypeoutconvb=\"let p: String iso = String.from_cstring(pcstring).clone()\\n    consume p\"\n" +
                  "    structtype=\"Pointer[U8]\"\n" +
                  "    structdef=\"Pointer[U8]\"\n" +
                  "    argtype=\"Pointer[U8] tag\"\n" +
-                 "    rvtype=\"Pointer[U8]\"/>\n"
+                 "    rvtype=\"Pointer[U8]\">\n" +
+                 "    <ponytypeconvout>\n" +
+                 "      <prefixs>\n" +
+                 "        <prefix>var pcstring: Pointer[U8] = </prefix>\n" +
+                 "      </prefixs>\n" +
+                 "      <suffixes>\n" +
+                 "        <suffix>let p: String iso = String.from_cstring(pcstring).clone()</suffix>\n" +
+                 "        <suffix>consume p</suffix>\n" +
+                 "      </suffixes>\n" +
+                 "    </ponytypeconvout>\n" +
+                 "  </typedef>\n"
                 )
 
     deprefs.push("  <typedef name=\"Array[String]\"\n" +
                  "    ponytypein=\"Array[String]\"\n" +
                  "    ponytypeinconv=\"\"\n" +
                  "    ponytypeout=\"Pointer[Pointer[U8]]\"\n" +
-                 "    ponytypeoutconva=\"\"\n" +
-                 "    ponytypeoutconvb=\"\"\n" +
                  "    structtype=\"Pointer[Pointer[U8]]\"\n" +
                  "    structdef=\"Pointer[Pointer[U8]]\"\n" +
                  "    argtype=\"Pointer[Pointer[U8]] tag\"\n" +
@@ -557,8 +565,6 @@ actor Main
                    "    ponytypein=\"" + f + "\"\n" +
                    "    ponytypeinconv=\"\"\n" +
                    "    ponytypeout=\"" + f + "\"\n" +
-                   "    ponytypeoutconva=\"\"\n" +
-                   "    ponytypeoutconvb=\"\"\n" +
                    "    structtype=\"" + f + "\"\n" +
                    "    structdef=\"" + f + "(0)\"\n" +
                    "    argtype=\"" + f + "\"\n" +
@@ -569,8 +575,6 @@ actor Main
                    "    ponytypein=\"" + f + " tag\"\n" +
                    "    ponytypeinconv=\"\"\n" +
                    "    ponytypeout=\"" + f + "\"\n" +
-                   "    ponytypeoutconva=\"\"\n" +
-                   "    ponytypeoutconvb=\"\"\n" +
                    "    structtype=\"" + f + "\"\n" +
                    "    structdef=\"" + f + ".none()\"\n" +
                    "    argtype=\"" + f + " tag\"\n" +
@@ -581,8 +585,6 @@ actor Main
                    "    ponytypein=\"" + f + " tag\"\n" +
                    "    ponytypeinconv=\"\"\n" +
                    "    ponytypeout=\"" + f + "\"\n" +
-                   "    ponytypeoutconva=\"\"\n" +
-                   "    ponytypeoutconvb=\"\"\n" +
                    "    structtype=\"" + f + "\"\n" +
                    "    structdef=\"" + f + "\"\n" +
                    "    argtype=\"" + f + " tag\"\n" +

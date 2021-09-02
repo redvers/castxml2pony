@@ -22,6 +22,7 @@
   Source: </xsl:text>
     <xsl:variable name="fid" select="$n/@fid"/>
     <xsl:variable name="originalid" select="$n/@id"/>
+    <xsl:message>[<xsl:value-of select="/castxml2pony/CastXML/Struct[@id=$originalid]/@name"/>]<xsl:value-of select="/castxml2pony/CastXML/File[@id=$fid]/@name"/>:<xsl:value-of select="$n/@lineno"/></xsl:message>
     <xsl:value-of select="/castxml2pony/CastXML/File[@id=$fid]/@name"/>:<xsl:value-of select="$n/@lineno"/>
   Original Name: <xsl:value-of select="/castxml2pony/CastXML/Struct[@id=$originalid]/@name"/>
   Struct Size (bits):  <xsl:value-of select="$n/@size"/>
@@ -123,5 +124,7 @@ struct <xsl:value-of select="$n/@name"/><xsl:text>
   </xsl:choose>
 </xsl:template>
 
+<xsl:template match="prefix"></xsl:template>
+<xsl:template match="suffix"></xsl:template>
 
 </xsl:stylesheet>

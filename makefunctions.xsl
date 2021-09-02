@@ -8,11 +8,6 @@
 	<xsl:call-template name="mainuse"><xsl:with-param name="n" select="/castxml2pony/uses/use[@id=$iid]"/><xsl:with-param name="render" select="@render"/></xsl:call-template>
 </xsl:template>
 
-<!--
-<xsl:template match="/castxml2pony/renderstructs/renderstruct[@render='0']">
-	<xsl:apply-templates select="/castxml2pony/structs/struct" mode="inactive"/>*/
-</xsl:template>
--->
 <xsl:template name="mainuse">
 <xsl:param name="n" />
 <xsl:param name="render" />
@@ -32,15 +27,51 @@
 <xsl:variable name="args">
   <xsl:apply-templates select="/castxml2pony/uses/use[@id=$originalid]/useargs/usearg" mode="generateArgument"/>
 </xsl:variable>
+<xsl:variable name="cargs">
+  <xsl:apply-templates select="/castxml2pony/uses/use[@id=$originalid]/useargs/usearg" mode="generateCArgument"/>
+</xsl:variable>
 <xsl:variable name="rrv" select="$n/@rv"/>
-<xsl:if test="$render='0'">// </xsl:if><xsl:text>use @</xsl:text><xsl:value-of select="$n/@name"/>[<xsl:value-of select="/castxml2pony/typedefs/typedef[@name=$rrv]/@rvtype"/>](<xsl:value-of select="$args"/>)
+<xsl:variable name="varargs" select="/castxml2pony/CastXML/Function[@id=$originalid]/Ellipsis"/>
+<xsl:if test="name($varargs)='Ellipsis'">/*</xsl:if>
+<xsl:if test="$render='0'"><xsl:text>/*
+</xsl:text></xsl:if><xsl:text>  fun </xsl:text><xsl:value-of select="$n/@ponyname"/>(<xsl:value-of select="$args"/>): <xsl:value-of select="/castxml2pony/typedefs/typedef[@name=$rrv]/@ponytypeout"/> =>
+<xsl:variable name="pfix">
+<xsl:apply-templates select="/castxml2pony/typedefs/typedef[@name=$rrv]/ponytypeconvout/prefixs/prefix" mode="perline"/>
+</xsl:variable>
+<xsl:variable name="sfix">
+<xsl:apply-templates select="/castxml2pony/typedefs/typedef[@name=$rrv]/ponytypeconvout/suffixes/suffix" mode="perline"/>
+</xsl:variable>
 
+<xsl:if test="$pfix=''"><xsl:text>   </xsl:text></xsl:if><xsl:value-of select="$pfix"/> @<xsl:value-of select="$n/@name"/>(<xsl:value-of select="$cargs"/>)
+<xsl:value-of select="$sfix"/>
+<xsl:if test="$render='0'"><xsl:text>*/
+</xsl:text></xsl:if>
+<xsl:if test="name($varargs)='Ellipsis'">*/</xsl:if>
+
+</xsl:template>
+
+
+<xsl:template match="prefix" mode="perline">
+<xsl:text>    </xsl:text><xsl:value-of select="./text()"/><xsl:if test="position() > 1"><xsl:text>
+</xsl:text>
+</xsl:if>
+</xsl:template>
+
+<xsl:template match="suffix" mode="perline">
+<xsl:text>    </xsl:text><xsl:value-of select="./text()"/><xsl:text>
+</xsl:text>
 </xsl:template>
 
 <xsl:template match="usearg" mode="generateArgument">
 <xsl:if test="position() > 1">, </xsl:if>
 <xsl:choose><xsl:when test="@type='...'">...</xsl:when><xsl:otherwise>
-<xsl:value-of select="@name"/>: <xsl:variable name="ttype" select="@type"/><xsl:value-of select="/castxml2pony/typedefs/typedef[@name=$ttype]/@argtype"/></xsl:otherwise></xsl:choose>
+<xsl:value-of select="@name"/>: <xsl:variable name="ttype" select="@type"/><xsl:value-of select="/castxml2pony/typedefs/typedef[@name=$ttype]/@ponytypein"/></xsl:otherwise></xsl:choose>
+</xsl:template>
+
+<xsl:template match="usearg" mode="generateCArgument">
+<xsl:if test="position() > 1">, </xsl:if>
+<xsl:choose><xsl:when test="@type='...'">...</xsl:when><xsl:otherwise>
+<xsl:value-of select="@name"/><xsl:variable name="ttype" select="@type"/><xsl:value-of select="/castxml2pony/typedefs/typedef[@name=$ttype]/@ponytypeinconv"/></xsl:otherwise></xsl:choose>
 </xsl:template>
 
 <xsl:template match="Argument" mode="generateCommentArg">
@@ -123,30 +154,3 @@
 <xsl:template match="suffix"></xsl:template>
 
 </xsl:stylesheet>
-<!--
-<xsl:value-of select="$n/@name"/>[]()<xsl:text>
-</xsl:text>
-
-<xsl:if test="$render='1'"><xsl:apply-templates select="$n/field" mode="generateField"/></xsl:if>
--->
-<!--
--->
-<!--
-
-
-
-
-<xsl:template name="fileName">
-  <xsl:param name="str" />
-  <xsl:choose>
-    <xsl:when test="normalize-space(substring-after($str,'/'))">
-      <xsl:call-template name="fileName">
-        <xsl:with-param name="str" select="substring-after($str,'/')" />
-      </xsl:call-template>  
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:value-of select="$str" />
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
--->
