@@ -14,7 +14,8 @@
 
   Temporary type placeholder until we work on members
 */
-type <xsl:value-of select="@name"/> is I32
+<xsl:variable name="enumname" select="@name"/>
+<xsl:if test="$enumname=''">// </xsl:if>type <xsl:value-of select="@name"/> is I32
 
 </xsl:template>
 </xsl:stylesheet>

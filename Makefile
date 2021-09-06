@@ -65,6 +65,20 @@ castxmlsdl2:
 		-I/nix/store/hrhn14rls3slhpz0g057c0dyp4lm3rgd-glibc-2.33-47-dev/include \
 		-I/nix/store/7pawaqlinph961g28wkrkih3cj8xxixj-SDL2-2.0.14-dev/include/SDL2 SDL.h
 
+castxmlffi:
+	castxml --castxml-output=1,0,0 \
+		-I/nix/store/4hk8pjnd10fyp92m4jc24dfj1zcc10d1-clang-7.1.0-lib/lib/clang/7.1.0/include/ \
+		-I/nix/store/hrhn14rls3slhpz0g057c0dyp4lm3rgd-glibc-2.33-47-dev/include \
+		-I/nix/store/nqsjh3xwhg4j9p1l5549wx9l4b02p02s-libffi-3.3-dev/include \
+		/nix/store/nqsjh3xwhg4j9p1l5549wx9l4b02p02s-libffi-3.3-dev/include/ffi.h
+
+castxmlgirepository:
+	castxml --castxml-output=1,0,0 \
+		-I/nix/store/4hk8pjnd10fyp92m4jc24dfj1zcc10d1-clang-7.1.0-lib/lib/clang/7.1.0/include/ \
+		-I/nix/store/hrhn14rls3slhpz0g057c0dyp4lm3rgd-glibc-2.33-47-dev/include \
+		`pkg-config gtk+-3.0 --cflags` \
+		`pkg-config gobject-introspection-1.0 --cflags` \
+		/nix/store/sc3cq7qkkdnlv74f1h2s5445zwzx5bph-gobject-introspection-1.68.0-dev/include/gobject-introspection-1.0/girepository.h
 
 
 #	cat ei-use.json | ./gen_usefile.sh | tee out/use.pony

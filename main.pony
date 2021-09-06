@@ -33,8 +33,9 @@ actor Main
           OptionSpec.bool("use", "Generate use json" where short' = 'u', default' = false)
           OptionSpec.bool("struct", "Generate struct output" where short' = 's', default' = false)
           OptionSpec.bool("enum", "Generate enum output" where short' = 'e', default' = false)
+          OptionSpec.bool("allenum", "Generate enum output" where short' = 'E', default' = false)
           OptionSpec.string("xmlin", "Specify castxml .xml file" where short' = 'x')
-          OptionSpec.bool("allstruct", "Generate struct output" where short' = 'a', default' = false)
+          OptionSpec.bool("allstruct", "Generate struct output" where short' = 'S', default' = false)
           OptionSpec.bool("allstructdefault", "Defaults all structs to render" where short' = 'd', default' = false)
         ], [
           ArgSpec.string_seq("fileids", "The fileids to generate for")
@@ -67,6 +68,7 @@ actor Main
     let genStruct = cmd.option("struct").bool()
     let genAllStruct = cmd.option("allstruct").bool()
     let genEnum = cmd.option("enum").bool()
+    let genAllEnum = cmd.option("allenum").bool()
     let inputfileids = cmd.arg("fileids").string_seq()
     let asdefault = cmd.option("allstructdefault").bool()
 
@@ -170,8 +172,25 @@ actor Main
         writeTypesFile(env, "renderstructs.xml", "<renderstructs>\n" + ("\n".join(genRenderStructs(itypemap, structids, asdefault).values())) + "\n</renderstructs>")
     end
 
-    var enumids: Array[String] = getEnumidsFromFID(filename, ifid )
+    var enumids: Array[String] = Array[String]
+
     if (genEnum) then
+      enumids = getEnumidsFromFID(filename, ifid )
+      var enumjson: Array[String] = Array[String]
+      (enumjson, depmaps) = processEnums(itypemap, enumids)
+      writeTypesFile(env, "enums.xml",
+                    """
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
+                    """
+                    + "<xi:include href=\"./" + xmlfilename + "\"/>\n<enums>\n"
+                    + generateEnumXML(enumjson)
+                    + "</enums>\n"
+                    + "</castxml2pony>\n")
+    end
+
+    if (genAllEnum) then
+      enumids = getAllEnumids(filename)
       var enumjson: Array[String] = Array[String]
       (enumjson, depmaps) = processEnums(itypemap, enumids)
       writeTypesFile(env, "enums.xml",
@@ -267,6 +286,19 @@ actor Main
         for xmlnode in res.values()? do
           enumids.push(xmlnode.getProp("id"))
         end
+      end
+    end
+    enumids
+
+  fun getAllEnumids(filename: String): Array[String] =>
+    var enumids: Array[String] = Array[String]
+    try
+      let doc: Xml2Doc = Xml2Doc.parseFile(filename)?
+      let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
+
+      let res: Xml2pathobject = ctx.xpathEval("//Enumeration")?
+      for xmlnode in res.values()? do
+        enumids.push(xmlnode.getProp("id"))
       end
     end
     enumids

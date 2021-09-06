@@ -1,7 +1,9 @@
 with import <nixpkgs> {} ;
 pkgs.mkShell {
   buildInputs = with pkgs; [
+    gobject-introspection
     castxml
+    libffi
     file
     pkg-config
     libzip
