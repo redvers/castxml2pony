@@ -233,9 +233,9 @@ actor Main
               continue
             end
             if (default) then
-              slist.push("  <renderstruct id=\"" + x.structid + "\" render=\"1\"/><!-- " + ponyStruct(x.name) + " -->")
+              slist.push("  <renderstruct id=\"" + x.structid + "\" render=\"1\"/><!-- " + ponyStruct(x.name) + " " + x.fid + " -->")
             else
-              slist.push("  <renderstruct id=\"" + x.structid + "\" render=\"0\"/><!-- " + ponyStruct(x.name) + " -->")
+              slist.push("  <renderstruct id=\"" + x.structid + "\" render=\"0\"/><!-- " + ponyStruct(x.name) + " " + x.fid + " -->")
             end
           end
         end
