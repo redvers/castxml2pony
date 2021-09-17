@@ -36,21 +36,22 @@ class CXMLPointerType
     Debug.out("FirstRun: " + cxmltype + " " + id + " ")
     try
       ponytype = itypemap.apply(typeid)?.recurseType(itypemap, typeid)
-      if (ponytype == "U8") then
-        ponytype = "String"
-        Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
-        return ponytype
-      elseif (ponytype == "String") then
-        ponytype = "Array[String]"
-        Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
-        return ponytype
-      elseif (primitiveSet.contains(ponytype)) then
+//      if (ponytype == "U8") then
+//        ponytype = "String"
+//        Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
+//        return ponytype
+//      elseif (ponytype == "String") then
+//        ponytype = "Array[String]"
+//        Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
+//        return ponytype
+//      elseif (primitiveSet.contains(ponytype)) then
+      if (primitiveSet.contains(ponytype)) then
         ponytype = "Pointer[" + ponytype + "]"
         Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
 			 	return ponytype
-      elseif (ponytype.substring(0,15) == "NullablePointer") then
-        ponytype = "Array[" + ponytype + "]"
-        return ponytype
+//      elseif (ponytype.substring(0,15) == "NullablePointer") then
+//        ponytype = "Array[" + ponytype + "]"
+//        return ponytype
       else
           ponytype = "NullablePointer[" + ponytype + "]"
           Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
