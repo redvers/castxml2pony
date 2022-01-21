@@ -24,6 +24,8 @@ class CXMLStruct
     structid = xml2node.getProp("id")
 		lineno = xml2node.getProp("line")
     members = xml2node.getProp("members").split()
+
+    if (name == "") then name = "Anon" end
     if (xml2node.getProp("incomplete") == "1") then incomplete = true end
 
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>

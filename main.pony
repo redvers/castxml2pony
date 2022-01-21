@@ -210,9 +210,6 @@ actor Main
         try
           match itypemap.apply(f)?
           | let x: CXMLFunction =>
-            if (x.name == "") then
-              continue
-            end
             if (default) then
               slist.push("  <renderuse id=\"" + x.useid + "\" render=\"1\"/><!-- " + x.name + " -->")
             else
@@ -562,6 +559,7 @@ actor Main
     end
 
     deprefs.push("  <typedef name=\"String\"\n" +
+                 "    embed=\"var\"\n" +
                  "    ponytypein=\"String\"\n" +
                  "    ponytypeinconv=\".cstring()\"\n" +
                  "    ponytypeout=\"String\"\n" +
@@ -582,6 +580,7 @@ actor Main
                 )
 
     deprefs.push("  <typedef name=\"Array[String]\"\n" +
+                 "    embed=\"var\"\n" +
                  "    ponytypein=\"Array[String]\"\n" +
                  "    ponytypeinconv=\"\"\n" +
                  "    ponytypeout=\"Pointer[Pointer[U8]]\"\n" +
@@ -594,6 +593,7 @@ actor Main
     for f in depmaps.keys() do
       if (primitiveSet.contains(f)) then
       deprefs.push("  <typedef name=\"" + f + "\"\n" +
+                   "    embed=\"var\"\n" +
                    "    ponytypein=\"" + f + "\"\n" +
                    "    ponytypeinconv=\"\"\n" +
                    "    ponytypeout=\"" + f + "\"\n" +
@@ -604,6 +604,7 @@ actor Main
                   )
       elseif (f.substring(0,15) == "NullablePointer") then
       deprefs.push("  <typedef name=\"" + f + "\"\n" +
+                   "    embed=\"var\"\n" +
                    "    ponytypein=\"" + f + " tag\"\n" +
                    "    ponytypeinconv=\"\"\n" +
                    "    ponytypeout=\"" + f + "\"\n" +
@@ -612,8 +613,20 @@ actor Main
                    "    argtype=\"" + f + " tag\"\n" +
                    "    rvtype=\"" + f + "\"/>\n"
                   )
+      elseif (f.substring(0,7) == "Pointer") then
+      deprefs.push("  <typedef name=\"" + f + "\"\n" +
+                   "    embed=\"var\"\n" +
+                   "    ponytypein=\"" + f + " tag\"\n" +
+                   "    ponytypeinconv=\"\"\n" +
+                   "    ponytypeout=\"" + f + "\"\n" +
+                   "    structtype=\"" + f + "\"\n" +
+                   "    structdef=\"" + f + "\"\n" +
+                   "    argtype=\"" + f + " tag\"\n" +
+                   "    rvtype=\"" + f + "\"/>\n"
+                  )
       else
       deprefs.push("  <typedef name=\"" + f + "\"\n" +
+                   "    embed=\"embed\"\n" +
                    "    ponytypein=\"" + f + " tag\"\n" +
                    "    ponytypeinconv=\"\"\n" +
                    "    ponytypeout=\"" + f + "\"\n" +

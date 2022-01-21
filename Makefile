@@ -80,7 +80,20 @@ castxmlgirepository:
 		`pkg-config gobject-introspection-1.0 --cflags` \
 		/nix/store/sc3cq7qkkdnlv74f1h2s5445zwzx5bph-gobject-introspection-1.68.0-dev/include/gobject-introspection-1.0/girepository.h
 
+castxmlvulkan:
+	castxml --castxml-output=1,0,0 \
+		-I/nix/store/153mrcimhzc3n0qxyba88vbx8yk23mcx-clang-9.0.1-lib/lib/clang/9.0.1/include/ \
+		-I/nix/store/hrhn14rls3slhpz0g057c0dyp4lm3rgd-glibc-2.33-47-dev/include \
+		`pkg-config vulkan --cflags` \
+		/nix/store/009nbc0glwp0pg5x0gzcbwfpyidpkibw-vulkan-headers-1.2.189.1/include/vulkan/vulkan.h
 
+castxmlglfw3:
+	castxml --castxml-output=1,0,0 \
+		-I/nix/store/153mrcimhzc3n0qxyba88vbx8yk23mcx-clang-9.0.1-lib/lib/clang/9.0.1/include/ \
+		-I/nix/store/hrhn14rls3slhpz0g057c0dyp4lm3rgd-glibc-2.33-47-dev/include \
+		`pkg-config glfw3 --cflags` \
+		`pkg-config gl --cflags` \
+		/nix/store/rd17pyv1cc63n281wv414xkig6vwadr3-glfw-3.3.4/include/GLFW/glfw3.h
 #	cat ei-use.json | ./gen_usefile.sh | tee out/use.pony
 #	echo "use \"lib:ei\"" > out/functions.pony
 #	echo "primitive EI" >> out/functions.pony
