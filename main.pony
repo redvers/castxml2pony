@@ -1,3 +1,4 @@
+use "format"
 use "debug"
 use "itertools"
 use "collections"
@@ -31,6 +32,7 @@ actor Main
       try
         CommandSpec.leaf("castxml2pony", "Code Generation for C-FFI", [
           OptionSpec.bool("use", "Generate use json" where short' = 'u', default' = false)
+          OptionSpec.bool("alluse", "Generate use json" where short' = 'U', default' = false)
           OptionSpec.bool("struct", "Generate struct output" where short' = 's', default' = false)
           OptionSpec.bool("enum", "Generate enum output" where short' = 'e', default' = false)
           OptionSpec.bool("allenum", "Generate enum output" where short' = 'E', default' = false)
@@ -65,6 +67,7 @@ actor Main
     var filename: String = cmd.option("xmlin").string()
     xmlfilename = filename
     let genUse = cmd.option("use").bool()
+    let genAllUse = cmd.option("alluse").bool()
     let genStruct = cmd.option("struct").bool()
     let genAllStruct = cmd.option("allstruct").bool()
     let genEnum = cmd.option("enum").bool()
@@ -117,12 +120,17 @@ actor Main
 
     Debug.out("Found " + itypemap.size().string() + " valid records")
 
-    var functionids: Array[String] = getFunctionidsFromFID(filename, ifid )
+    var functionids: Array[String] =
+      if (genUse) then
+        getFunctionidsFromFID(filename, ifid )
+      else
+        getAllUseids(filename)
+      end
     var funcjson: Array[String]
     var depmaps: Map[String, String]
     (funcjson, depmaps) = processUseCases(itypemap, functionids)
 
-    if (genUse) then
+    if (genUse or genAllUse) then
       writeTypesFile(env, "usetypes.xml", "<typedefs>\n" + generateDepXML(depmaps) + "</typedefs>\n")
       writeTypesFile(env, "use.xml",
                     """
@@ -211,9 +219,11 @@ actor Main
           match itypemap.apply(f)?
           | let x: CXMLFunction =>
             if (default) then
-              slist.push("  <renderuse id=\"" + x.useid + "\" render=\"1\"/><!-- " + x.name + " -->")
+              slist.push(Format("<!-- " + x.name + " -->" where width = 100) + "<renderuse render=\"1\" id=\"" + x.useid + "\"/>")
+//              slist.push("<!-- " + x.name + " --><renderuse render=\"1\" id=\"" + x.useid + "\"/>")
             else
-              slist.push("  <renderuse id=\"" + x.useid + "\" render=\"0\"/><!-- " + x.name + " -->")
+              slist.push(Format("<!-- " + x.name + " -->" where width = 100) + "<renderuse render=\"0\" id=\"" + x.useid + "\"/>")
+//              slist.push("<!-- " + x.name + " --><renderuse render=\"0\" id=\"" + x.useid + "\"/>")
             end
           end
         end
@@ -312,6 +322,19 @@ actor Main
       end
     end
     structids
+
+  fun getAllUseids(filename: String): Array[String] =>
+    var useids: Array[String] = Array[String]
+    try
+      let doc: Xml2Doc = Xml2Doc.parseFile(filename)?
+      let ctx: Xml2xpathcontext = Xml2xpathcontext(doc)?
+
+      let res: Xml2pathobject = ctx.xpathEval("//Function")?
+      for xmlnode in res.values()? do
+        useids.push(xmlnode.getProp("id"))
+      end
+    end
+    useids
 
   fun getStructidsFromFID(filename: String, fids: Array[String]): Array[String] =>
     var structids: Array[String] = Array[String]
@@ -559,7 +582,6 @@ actor Main
     end
 
     deprefs.push("  <typedef name=\"String\"\n" +
-                 "    embed=\"var\"\n" +
                  "    ponytypein=\"String\"\n" +
                  "    ponytypeinconv=\".cstring()\"\n" +
                  "    ponytypeout=\"String\"\n" +
@@ -580,7 +602,6 @@ actor Main
                 )
 
     deprefs.push("  <typedef name=\"Array[String]\"\n" +
-                 "    embed=\"var\"\n" +
                  "    ponytypein=\"Array[String]\"\n" +
                  "    ponytypeinconv=\"\"\n" +
                  "    ponytypeout=\"Pointer[Pointer[U8]]\"\n" +
@@ -592,48 +613,44 @@ actor Main
 
     for f in depmaps.keys() do
       if (primitiveSet.contains(f)) then
-      deprefs.push("  <typedef name=\"" + f + "\"\n" +
-                   "    embed=\"var\"\n" +
-                   "    ponytypein=\"" + f + "\"\n" +
-                   "    ponytypeinconv=\"\"\n" +
-                   "    ponytypeout=\"" + f + "\"\n" +
-                   "    structtype=\"" + f + "\"\n" +
-                   "    structdef=\"" + f + "(0)\"\n" +
-                   "    argtype=\"" + f + "\"\n" +
-                   "    rvtype=\"" + f + "\"/>\n"
+      deprefs.push("<typedef name=\"" + f + "\" " +
+                   "ponytypein=\"" + f + "\" " +
+                   "ponytypeinconv=\"\" " +
+                   "ponytypeout=\"" + f + "\" " +
+                   "structtype=\"" + f + "\" " +
+                   "structdef=\"" + f + "(0)\" " +
+                   "argtype=\"" + f + "\" " +
+                   "rvtype=\"" + f + "\"/>"
                   )
       elseif (f.substring(0,15) == "NullablePointer") then
-      deprefs.push("  <typedef name=\"" + f + "\"\n" +
-                   "    embed=\"var\"\n" +
-                   "    ponytypein=\"" + f + " tag\"\n" +
-                   "    ponytypeinconv=\"\"\n" +
-                   "    ponytypeout=\"" + f + "\"\n" +
-                   "    structtype=\"" + f + "\"\n" +
-                   "    structdef=\"" + f + ".none()\"\n" +
-                   "    argtype=\"" + f + " tag\"\n" +
-                   "    rvtype=\"" + f + "\"/>\n"
+      deprefs.push("<typedef name=\"" + f + "\" " +
+                   "ponytypein=\"" + f + " tag\" " +
+                   "ponytypeinconv=\"\" " +
+                   "ponytypeout=\"" + f + "\" " +
+                   "structtype=\"" + f + "\" " +
+                   "structdef=\"" + f + ".none()\" " +
+                   "argtype=\"" + f + " tag\" " +
+                   "rvtype=\"" + f + "\"/>"
                   )
       elseif (f.substring(0,7) == "Pointer") then
-      deprefs.push("  <typedef name=\"" + f + "\"\n" +
-                   "    embed=\"var\"\n" +
-                   "    ponytypein=\"" + f + " tag\"\n" +
-                   "    ponytypeinconv=\"\"\n" +
-                   "    ponytypeout=\"" + f + "\"\n" +
-                   "    structtype=\"" + f + "\"\n" +
-                   "    structdef=\"" + f + "\"\n" +
-                   "    argtype=\"" + f + " tag\"\n" +
-                   "    rvtype=\"" + f + "\"/>\n"
+      deprefs.push("<typedef name=\"" + f + "\" " +
+                   "ponytypein=\"" + f + " tag\" " +
+                   "ponytypeinconv=\"\" " +
+                   "ponytypeout=\"" + f + "\" " +
+                   "structtype=\"" + f + "\" " +
+                   "structdef=\"" + f + "\" " +
+                   "argtype=\"" + f + " tag\" " +
+                   "rvtype=\"" + f + "\"/>"
                   )
       else
-      deprefs.push("  <typedef name=\"" + f + "\"\n" +
-                   "    embed=\"embed\"\n" +
-                   "    ponytypein=\"" + f + " tag\"\n" +
-                   "    ponytypeinconv=\"\"\n" +
-                   "    ponytypeout=\"" + f + "\"\n" +
-                   "    structtype=\"" + f + "\"\n" +
-                   "    structdef=\"" + f + "\"\n" +
-                   "    argtype=\"" + f + " tag\"\n" +
-                   "    rvtype=\"" + f + "\"/>\n"
+      deprefs.push("<typedef name=\"" + f + "\" " +
+                   "ponytypein=\"" + f + " tag\" " +
+                   "ponytypeinconv=\"\" " +
+                   "ponytypeout=\"" + f + "\" " +
+                   "structtype=\"" + f + "\" " +
+                   "structdef=\"" + f + "\" " +
+                   "argtype=\"" + f + " tag\" " +
+                   "rvtype=\"" + f + "\"/>"
                   )
       end
     end
@@ -642,7 +659,7 @@ actor Main
 //      writeTypesFile(env, "types.xml", "<typedefs>\n" + generateStructXML(structjson) + "</typedefs>\n"
   fun writeTypesFile(env: Env, filename: String, content: String) =>
     try
-      let fp: FilePath = FilePath(env.root as AmbientAuth, filename)?
+      let fp: FilePath = FilePath(env.root as AmbientAuth, filename)
       fp.remove()
 
       let f: File = File(fp)

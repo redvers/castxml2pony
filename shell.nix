@@ -1,6 +1,7 @@
 with import <nixpkgs> {} ;
 pkgs.mkShell {
   buildInputs = with pkgs; [
+    enlightenment.efl
     saxon-he
     glfw
     clang_9
