@@ -658,16 +658,12 @@ actor Main
 
 //      writeTypesFile(env, "types.xml", "<typedefs>\n" + generateStructXML(structjson) + "</typedefs>\n"
   fun writeTypesFile(env: Env, filename: String, content: String) =>
-    try
-      let fp: FilePath = FilePath(env.root as AmbientAuth, filename)
-      fp.remove()
+    let fp: FilePath = FilePath(FileAuth(env.root), filename)
+    fp.remove()
 
-      let f: File = File(fp)
-      f.print(content)
-      f.dispose()
-    else
-      die("Unable to write the types file: " + filename)
-    end
+    let f: File = File(fp)
+    f.print(content)
+    f.dispose()
 
 
 
