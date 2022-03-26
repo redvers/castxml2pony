@@ -38,7 +38,7 @@ primitive LibXML2
   Arguments:
     [PointerType size=64]->[Struct size=1408,fid: f15]
 */
-  fun xmlDocGetRootElement(doc: NullablePointer[XmlDoc] tag): NullablePointer[XmlNode] =>
+  fun xmlDocGetRootElement(doc: NullablePointer[XmlDocS] tag): NullablePointer[XmlNode] =>
     @xmlDocGetRootElement(doc)
 
 
@@ -177,7 +177,7 @@ primitive LibXML2
   Arguments:
     [PointerType size=64]->[FundamentalType(unsigned char) size=8]
 */
-  fun xmlParseDoc(cur: String): NullablePointer[XmlDoc] =>
+  fun xmlParseDoc(cur: String): NullablePointer[XmlDocS] =>
     @xmlParseDoc(cur.cstring())
 
 
@@ -190,7 +190,7 @@ primitive LibXML2
   Arguments:
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-  fun xmlParseFile(filename: String): NullablePointer[XmlDoc] =>
+  fun xmlParseFile(filename: String): NullablePointer[XmlDocS] =>
     @xmlParseFile(filename.cstring())
 
 
@@ -257,7 +257,7 @@ primitive LibXML2
   Arguments:
     [PointerType size=64]->[Struct size=1408,fid: f15]
 */
-  fun xmlXPathNewContext(doc: NullablePointer[XmlDoc] tag): NullablePointer[XmlXPathContext] =>
+  fun xmlXPathNewContext(doc: NullablePointer[XmlDocS] tag): NullablePointer[XmlXPathContext] =>
     @xmlXPathNewContext(doc)
 
 

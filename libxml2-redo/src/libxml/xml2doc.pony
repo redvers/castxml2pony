@@ -1,5 +1,5 @@
-class Xml2Doc
-  var ptr: NullablePointer[XmlDoc]
+class XmlDoc
+  var ptr: NullablePointer[XmlDocS]
 
   new parseFile(filename: String) =>
     ptr = LibXML2.xmlParseFile(filename)

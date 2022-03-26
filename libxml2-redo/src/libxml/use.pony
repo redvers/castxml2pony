@@ -35,7 +35,7 @@ use @xmlGetNodePath[Pointer[U8]](node: NullablePointer[XmlNode] tag)
   Arguments:
     [PointerType size=64]->[Struct size=1408,fid: f15]
 */
-use @xmlDocGetRootElement[NullablePointer[XmlNode]](doc: NullablePointer[XmlDoc] tag)
+use @xmlDocGetRootElement[NullablePointer[XmlNode]](doc: NullablePointer[XmlDocS] tag)
 
 
 
@@ -168,7 +168,7 @@ use @xmlPreviousElementSibling[NullablePointer[XmlNode]](node: NullablePointer[X
   Arguments:
     [PointerType size=64]->[FundamentalType(unsigned char) size=8]
 */
-use @xmlParseDoc[NullablePointer[XmlDoc]](cur: Pointer[U8] tag)
+use @xmlParseDoc[NullablePointer[XmlDocS]](cur: Pointer[U8] tag)
 
 
 
@@ -181,7 +181,7 @@ use @xmlParseDoc[NullablePointer[XmlDoc]](cur: Pointer[U8] tag)
   Arguments:
     [PointerType size=64]->[FundamentalType(char) size=8]
 */
-use @xmlParseFile[NullablePointer[XmlDoc]](filename: Pointer[U8] tag)
+use @xmlParseFile[NullablePointer[XmlDocS]](filename: Pointer[U8] tag)
 
 
 
@@ -246,7 +246,7 @@ use @xmlXPathFreeNodeSet[None](obj: NullablePointer[XmlNodeSet] tag)
   Arguments:
     [PointerType size=64]->[Struct size=1408,fid: f15]
 */
-use @xmlXPathNewContext[NullablePointer[XmlXPathContext]](doc: NullablePointer[XmlDoc] tag)
+use @xmlXPathNewContext[NullablePointer[XmlXPathContext]](doc: NullablePointer[XmlDocS] tag)
 
 
 

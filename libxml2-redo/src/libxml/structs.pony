@@ -197,7 +197,7 @@ struct XmlParserInput
 struct XmlParserCtxt
   var sax: NullablePointer[XmlSAXHandler] = NullablePointer[XmlSAXHandler].none()
   var userData: Pointer[None] = Pointer[None]
-  var myDoc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var myDoc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var wellFormed: I32 = I32(0)
   var replaceEntities: I32 = I32(0)
   var version: Pointer[U8] = Pointer[U8]
@@ -416,7 +416,7 @@ struct XmlEntity
   var parent: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
   var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var orig: Pointer[U8] = Pointer[U8]
   var content: Pointer[U8] = Pointer[U8]
   var length: I32 = I32(0)
@@ -526,7 +526,7 @@ struct XmlAttribute
   var parent: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
   var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var nexth: NullablePointer[XmlAttribute] = NullablePointer[XmlAttribute].none()
   var atype: I32 = I32(0)
   var def: I32 = I32(0)
@@ -625,7 +625,7 @@ struct XmlElement
   var parent: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
   var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var etype: I32 = I32(0)
   var content: NullablePointer[XmlElementContent] = NullablePointer[XmlElementContent].none()
   var attributes: NullablePointer[XmlAttribute] = NullablePointer[XmlAttribute].none()
@@ -653,7 +653,7 @@ struct XmlNs
   var href: Pointer[U8] = Pointer[U8]
   var prefix: Pointer[U8] = Pointer[U8]
   var _private: Pointer[None] = Pointer[None]
-  var context: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var context: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
 
 
 /*
@@ -686,10 +686,10 @@ struct XmlDtd
   var name: Pointer[U8] = Pointer[U8]
   var children: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var last: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var parent: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var parent: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var notations: Pointer[None] = Pointer[None]
   var elements: Pointer[None] = Pointer[None]
   var attributes: Pointer[None] = Pointer[None]
@@ -728,7 +728,7 @@ struct XmlAttr
   var parent: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var next: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
   var prev: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var ns: NullablePointer[XmlNs] = NullablePointer[XmlNs].none()
   var atype: I32 = I32(0)
   var psvi: Pointer[None] = Pointer[None]
@@ -754,7 +754,7 @@ struct XmlID
   var attr: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
   var name: Pointer[U8] = Pointer[U8]
   var lineno: I32 = I32(0)
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
 
 
 /*
@@ -811,7 +811,7 @@ struct XmlNode
   var parent: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var ns: NullablePointer[XmlNs] = NullablePointer[XmlNs].none()
   var content: Pointer[U8] = Pointer[U8]
   var properties: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
@@ -853,7 +853,7 @@ struct XmlNode
      001344: [FundamentalType(int) size=32]: parseFlags  
      001376: [FundamentalType(int) size=32]: properties  
 */
-struct XmlDoc
+struct XmlDocS
   var _private: Pointer[None] = Pointer[None]
   var xmltype: I32 = I32(0)
   var name: Pointer[U8] = Pointer[U8]
@@ -862,7 +862,7 @@ struct XmlDoc
   var parent: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var compression: I32 = I32(0)
   var standalone: I32 = I32(0)
   var intSubset: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
@@ -1057,7 +1057,7 @@ struct XmlValidCtxt
   var nodeMax: I32 = I32(0)
   var nodeTab: Pointer[NullablePointer[XmlNode]] = Pointer[NullablePointer[XmlNode]]
   var finishDtd: U32 = U32(0)
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var valid: I32 = I32(0)
   var vstate: NullablePointer[XmlValidState] = NullablePointer[XmlValidState].none()
   var vstateNr: I32 = I32(0)
@@ -1397,7 +1397,7 @@ struct XmlChRangeGroup
      003008: [FundamentalType(int) size=32]: maxParserDepth  
 */
 struct XmlXPathContext
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
   var nb_variables_unused: I32 = I32(0)
   var max_variables_unused: I32 = I32(0)
@@ -2153,7 +2153,7 @@ struct XmlSchema
   var targetNamespace: Pointer[U8] = Pointer[U8]
   var version: Pointer[U8] = Pointer[U8]
   var id: Pointer[U8] = Pointer[U8]
-  var doc: NullablePointer[XmlDoc] = NullablePointer[XmlDoc].none()
+  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
   var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
   var flags: I32 = I32(0)
   var typeDecl: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()

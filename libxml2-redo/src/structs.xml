@@ -429,7 +429,7 @@
     <field name="extra" id="_3038" type="U16" fieldid="_2632" offset="912" fid="f15" line="507"/>
   </struct>
 
-  <struct name="XmlDoc" id="_331" size="1408" align="64" fid="f15" lineno="551">
+  <struct name="XmlDocS" id="_331" size="1408" align="64" fid="f15" lineno="551">
     <field name="_private" id="_3042" type="Pointer[None]" fieldid="_2640" offset="0" fid="f15" line="552"/>
     <field name="xmltype" id="_3043" type="I32" fieldid="_244" offset="64" fid="f15" line="553"/>
     <field name="name" id="_3044" type="String" fieldid="_2628" offset="128" fid="f15" line="554"/>
