@@ -1,0 +1,28 @@
+<renderuses>
+<!-- xmlGetLineNo -->                                                                               <renderuse render="1" id="_405"/>
+<!-- xmlGetNodePath -->                                                                             <renderuse render="1" id="_406"/>
+<!-- xmlDocGetRootElement -->                                                                       <renderuse render="1" id="_407"/>
+<!-- xmlGetProp -->                                                                                 <renderuse render="1" id="_435"/>
+<!-- xmlHasNsProp -->                                                                               <renderuse render="1" id="_437"/>
+<!-- xmlNodeGetContent -->                                                                          <renderuse render="1" id="_447"/>
+<!-- xmlNodeGetLang -->                                                                             <renderuse render="1" id="_450"/>
+<!-- xmlChildElementCount -->                                                                       <renderuse render="1" id="_491"/>
+<!-- xmlNextElementSibling -->                                                                      <renderuse render="1" id="_492"/>
+<!-- xmlFirstElementChild -->                                                                       <renderuse render="1" id="_493"/>
+<!-- xmlLastElementChild -->                                                                        <renderuse render="1" id="_494"/>
+<!-- xmlPreviousElementSibling -->                                                                  <renderuse render="1" id="_495"/>
+<!-- xmlParseDoc -->                                                                                <renderuse render="1" id="_1034"/>
+<!-- xmlParseFile -->                                                                               <renderuse render="1" id="_1035"/>
+<!-- xmlXPathCastNodeToString -->                                                                   <renderuse render="1" id="_1564"/>
+
+<!-- xmlXPathFreeObject -->                                                                         <renderuse render="1" id="_1547"/>
+<!-- xmlXPathFreeNodeSetList -->                                                                    <renderuse render="1" id="_1549"/>
+<!-- xmlXPathFreeNodeSet -->                                                                        <renderuse render="1" id="_1550"/>
+<!-- xmlXPathNewContext -->                                                                         <renderuse render="1" id="_1570"/>
+<!-- xmlXPathFreeContext -->                                                                        <renderuse render="1" id="_1571"/>
+<!-- xmlXPathSetContextNode -->                                                                     <renderuse render="1" id="_1574"/>
+<!-- xmlXPathEval -->                                                                               <renderuse render="1" id="_1576"/>
+<!-- xmlXPathFreeCompExpr -->                                                                       <renderuse render="1" id="_1583"/>
+<!-- xmlXPathFreeParserContext -->                                                                  <renderuse render="1" id="_2523"/>
+
+</renderuses>

@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<castxml2pony xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include href="./types.xml"/>
+<xi:include href="./renderstructs.xml"/>
+<xi:include href="./libxml2.xml"/>
+                    <structs>
+                      <struct name="Anon" id="_44" size="64" align="32" fid="f3" lineno="155">
+    <field name="__val" id="_2638" type="Pointer[I32]" fieldid="_3893" offset="0" fid="f3" line="155"/>
+  </struct>
+
+  <struct name="Anon" id="_73" size="64" align="32" fid="f4" lineno="13">
+    <field name="__count" id="_2641" type="I32" fieldid="_2636" offset="0" fid="f4" line="15"/>
+    <field name="__value" id="_2643" type="None" fieldid="_3896" offset="32" fid="f4" line="20"/>
+  </struct>
+
+  <struct name="Gfpost" id="_75" size="128" align="64" fid="f5" lineno="10">
+    <field name="__pos" id="_2645" type="I64" fieldid="_41" offset="0" fid="f5" line="12"/>
+    <field name="__state" id="_2646" type="Anon" fieldid="_74" offset="64" fid="f5" line="13"/>
+  </struct>
+
+  <struct name="Gfpos64t" id="_77" size="128" align="64" fid="f6" lineno="10">
+    <field name="__pos" id="_2648" type="I64" fieldid="_42" offset="0" fid="f6" line="12"/>
+    <field name="__state" id="_2649" type="Anon" fieldid="_74" offset="64" fid="f6" line="13"/>
+  </struct>
+
+  <struct name="IOFILE" id="_79" size="1728" align="64" fid="f7" lineno="49">
+    <field name="_flags" id="_2651" type="I32" fieldid="_2636" offset="0" fid="f7" line="51"/>
+    <field name="_IO_read_ptr" id="_2652" type="String" fieldid="_2628" offset="64" fid="f7" line="54"/>
+    <field name="_IO_read_end" id="_2653" type="String" fieldid="_2628" offset="128" fid="f7" line="55"/>
+    <field name="_IO_read_base" id="_2654" type="String" fieldid="_2628" offset="192" fid="f7" line="56"/>
+    <field name="_IO_write_base" id="_2655" type="String" fieldid="_2628" offset="256" fid="f7" line="57"/>
+    <field name="_IO_write_ptr" id="_2656" type="String" fieldid="_2628" offset="320" fid="f7" line="58"/>
+    <field name="_IO_write_end" id="_2657" type="String" fieldid="_2628" offset="384" fid="f7" line="59"/>
+    <field name="_IO_buf_base" id="_2658" type="String" fieldid="_2628" offset="448" fid="f7" line="60"/>
+    <field name="_IO_buf_end" id="_2659" type="String" fieldid="_2628" offset="512" fid="f7" line="61"/>
+    <field name="_IO_save_base" id="_2660" type="String" fieldid="_2628" offset="576" fid="f7" line="64"/>
+    <field name="_IO_backup_base" id="_2661" type="String" fieldid="_2628" offset="640" fid="f7" line="65"/>
+    <field name="_IO_save_end" id="_2662" type="String" fieldid="_2628" offset="704" fid="f7" line="66"/>
+    <field name="_markers" id="_2663" type="NullablePointer[IOmarker]" fieldid="_3897" offset="768" fid="f7" line="68"/>
+    <field name="_chain" id="_2664" type="NullablePointer[IOFILE]" fieldid="_3898" offset="832" fid="f7" line="70"/>
+    <field name="_fileno" id="_2665" type="I32" fieldid="_2636" offset="896" fid="f7" line="72"/>
+    <field name="_flags2" id="_2666" type="I32" fieldid="_2636" offset="928" fid="f7" line="73"/>
+    <field name="_old_offset" id="_2667" type="I64" fieldid="_41" offset="960" fid="f7" line="74"/>
+    <field name="_cur_column" id="_2668" type="U16" fieldid="_2632" offset="1024" fid="f7" line="77"/>
+    <field name="_vtable_offset" id="_2669" type="I8" fieldid="_2634" offset="1040" fid="f7" line="78"/>
+    <field name="_shortbuf" id="_2670" type="Pointer[U8]" fieldid="_3899" offset="1048" fid="f7" line="79"/>
+    <field name="_lock" id="_2671" type="Pointer[None]" fieldid="_3900" offset="1088" fid="f7" line="81"/>
+    <field name="_offset" id="_2672" type="I64" fieldid="_42" offset="1152" fid="f7" line="89"/>
+    <field name="_codecvt" id="_2673" type="NullablePointer[IOcodecvt]" fieldid="_3901" offset="1216" fid="f7" line="91"/>
+    <field name="_wide_data" id="_2674" type="NullablePointer[IOwidedata]" fieldid="_3902" offset="1280" fid="f7" line="92"/>
+    <field name="_freeres_list" id="_2675" type="NullablePointer[IOFILE]" fieldid="_3898" offset="1344" fid="f7" line="93"/>
+    <field name="_freeres_buf" id="_2676" type="Pointer[None]" fieldid="_2640" offset="1408" fid="f7" line="94"/>
+    <field name="__pad5" id="_2677" type="U64" fieldid="_7" offset="1472" fid="f7" line="95"/>
+    <field name="_mode" id="_2678" type="I32" fieldid="_2636" offset="1536" fid="f7" line="96"/>
+    <field name="_unused2" id="_2679" type="Pointer[U8]" fieldid="_3903" offset="1568" fid="f7" line="98"/>
+  </struct>
+
+  <struct name="IOmarker" id="_82" size="" align="" fid="f7" lineno="36">
+
+  </struct>
+
+  <struct name="IOcodecvt" id="_83" size="" align="" fid="f7" lineno="37">
+
+  </struct>
+
+  <struct name="IOwidedata" id="_84" size="" align="" fid="f7" lineno="38">
+
+  </struct>
+
+  <struct name="XmlParserInputBuffer" id="_210" size="512" align="64" fid="f14" lineno="125">
+    <field name="context" id="_2695" type="Pointer[None]" fieldid="_2640" offset="0" fid="f14" line="126"/>
+    <field name="readcallback" id="_2696" type="Pointer[None]" fieldid="_972" offset="64" fid="f14" line="127"/>
+    <field name="closecallback" id="_2697" type="Pointer[None]" fieldid="_973" offset="128" fid="f14" line="128"/>
+    <field name="encoder" id="_2698" type="NullablePointer[XmlCharEncodingHandler]" fieldid="_950" offset="192" fid="f14" line="130"/>
+    <field name="buffer" id="_2699" type="NullablePointer[XmlBuf]" fieldid="_238" offset="256" fid="f14" line="132"/>
+    <field name="raw" id="_2700" type="NullablePointer[XmlBuf]" fieldid="_238" offset="320" fid="f14" line="133"/>
+    <field name="compressed" id="_2701" type="I32" fieldid="_2636" offset="384" fid="f14" line="134"/>
+    <field name="xmlerror" id="_2702" type="I32" fieldid="_2636" offset="416" fid="f14" line="135"/>
+    <field name="rawconsumed" id="_2703" type="U64" fieldid="_2630" offset="448" fid="f14" line="136"/>
+  </struct>
+
+  <struct name="XmlOutputBuffer" id="_213" size="448" align="64" fid="f14" lineno="141">
+    <field name="context" id="_2706" type="Pointer[None]" fieldid="_2640" offset="0" fid="f14" line="142"/>
+    <field name="writecallback" id="_2707" type="Pointer[None]" fieldid="_976" offset="64" fid="f14" line="143"/>
+    <field name="closecallback" id="_2708" type="Pointer[None]" fieldid="_977" offset="128" fid="f14" line="144"/>
+    <field name="encoder" id="_2709" type="NullablePointer[XmlCharEncodingHandler]" fieldid="_950" offset="192" fid="f14" line="146"/>
+    <field name="buffer" id="_2710" type="NullablePointer[XmlBuf]" fieldid="_238" offset="256" fid="f14" line="148"/>
+    <field name="conv" id="_2711" type="NullablePointer[XmlBuf]" fieldid="_238" offset="320" fid="f14" line="149"/>
+    <field name="written" id="_2712" type="I32" fieldid="_2636" offset="384" fid="f14" line="150"/>
+    <field name="xmlerror" id="_2713" type="I32" fieldid="_2636" offset="416" fid="f14" line="151"/>
+  </struct>
+
+  <struct name="XmlParserInput" id="_216" size="832" align="64" fid="f16" lineno="54">
+    <field name="buf" id="_2716" type="NullablePointer[XmlParserInputBuffer]" fieldid="_212" offset="0" fid="f16" line="56"/>
+    <field name="filename" id="_2717" type="String" fieldid="_2683" offset="64" fid="f16" line="58"/>
+    <field name="directory" id="_2718" type="String" fieldid="_2683" offset="128" fid="f16" line="59"/>
+    <field name="base" id="_2719" type="String" fieldid="_2692" offset="192" fid="f16" line="60"/>
+    <field name="cur" id="_2720" type="String" fieldid="_2692" offset="256" fid="f16" line="61"/>
+    <field name="xmlend" id="_2721" type="String" fieldid="_2692" offset="320" fid="f16" line="62"/>
+    <field name="length" id="_2722" type="I32" fieldid="_2636" offset="384" fid="f16" line="63"/>
+    <field name="line" id="_2723" type="I32" fieldid="_2636" offset="416" fid="f16" line="64"/>
+    <field name="col" id="_2724" type="I32" fieldid="_2636" offset="448" fid="f16" line="65"/>
+    <field name="consumed" id="_2725" type="U64" fieldid="_2630" offset="512" fid="f16" line="71"/>
+    <field name="free" id="_2726" type="Pointer[None]" fieldid="_753" offset="576" fid="f16" line="72"/>
+    <field name="encoding" id="_2727" type="String" fieldid="_2692" offset="640" fid="f16" line="73"/>
+    <field name="version" id="_2728" type="String" fieldid="_2692" offset="704" fid="f16" line="74"/>
+    <field name="standalone" id="_2729" type="I32" fieldid="_2636" offset="768" fid="f16" line="75"/>
+    <field name="id" id="_2730" type="I32" fieldid="_2636" offset="800" fid="f16" line="76"/>
+  </struct>
+
+  <struct name="XmlParserCtxt" id="_219" size="6016" align="64" fid="f16" lineno="184">
+    <field name="sax" id="_2733" type="NullablePointer[XmlSAXHandler]" fieldid="_3904" offset="0" fid="f16" line="185"/>
+    <field name="userData" id="_2734" type="Pointer[None]" fieldid="_2640" offset="64" fid="f16" line="186"/>
+    <field name="myDoc" id="_2735" type="NullablePointer[XmlDoc]" fieldid="_330" offset="128" fid="f16" line="187"/>
+    <field name="wellFormed" id="_2736" type="I32" fieldid="_2636" offset="192" fid="f16" line="188"/>
+    <field name="replaceEntities" id="_2737" type="I32" fieldid="_2636" offset="224" fid="f16" line="189"/>
+    <field name="version" id="_2738" type="String" fieldid="_2692" offset="256" fid="f16" line="190"/>
+    <field name="encoding" id="_2739" type="String" fieldid="_2692" offset="320" fid="f16" line="191"/>
+    <field name="standalone" id="_2740" type="I32" fieldid="_2636" offset="384" fid="f16" line="192"/>
+    <field name="html" id="_2741" type="I32" fieldid="_2636" offset="416" fid="f16" line="193"/>
+    <field name="input" id="_2742" type="NullablePointer[XmlParserInput]" fieldid="_218" offset="448" fid="f16" line="199"/>
+    <field name="inputNr" id="_2743" type="I32" fieldid="_2636" offset="512" fid="f16" line="200"/>
+    <field name="inputMax" id="_2744" type="I32" fieldid="_2636" offset="544" fid="f16" line="201"/>
+    <field name="inputTab" id="_2745" type="Array[NullablePointer[XmlParserInput]]" fieldid="_3905" offset="576" fid="f16" line="202"/>
+    <field name="node" id="_2746" type="NullablePointer[XmlNode]" fieldid="_325" offset="640" fid="f16" line="205"/>
+    <field name="nodeNr" id="_2747" type="I32" fieldid="_2636" offset="704" fid="f16" line="206"/>
+    <field name="nodeMax" id="_2748" type="I32" fieldid="_2636" offset="736" fid="f16" line="207"/>
+    <field name="nodeTab" id="_2749" type="Array[NullablePointer[XmlNode]]" fieldid="_3077" offset="768" fid="f16" line="208"/>
+    <field name="record_info" id="_2750" type="I32" fieldid="_2636" offset="832" fid="f16" line="210"/>
+    <field name="node_seq" id="_2751" type="XmlParserNodeInfoSeq" fieldid="_758" offset="896" fid="f16" line="211"/>
+    <field name="errNo" id="_2752" type="I32" fieldid="_2636" offset="1088" fid="f16" line="213"/>
+    <field name="hasExternalSubset" id="_2753" type="I32" fieldid="_2636" offset="1120" fid="f16" line="215"/>
+    <field name="hasPErefs" id="_2754" type="I32" fieldid="_2636" offset="1152" fid="f16" line="216"/>
+    <field name="external" id="_2755" type="I32" fieldid="_2636" offset="1184" fid="f16" line="217"/>
+    <field name="valid" id="_2756" type="I32" fieldid="_2636" offset="1216" fid="f16" line="219"/>
+    <field name="validate" id="_2757" type="I32" fieldid="_2636" offset="1248" fid="f16" line="220"/>
+    <field name="vctxt" id="_2758" type="XmlValidCtxt" fieldid="_650" offset="1280" fid="f16" line="221"/>
+    <field name="instate" id="_2759" type="I32" fieldid="_761" offset="2176" fid="f16" line="223"/>
+    <field name="token" id="_2760" type="I32" fieldid="_2636" offset="2208" fid="f16" line="224"/>
+    <field name="directory" id="_2761" type="String" fieldid="_2628" offset="2240" fid="f16" line="226"/>
+    <field name="name" id="_2762" type="String" fieldid="_2692" offset="2304" fid="f16" line="229"/>
+    <field name="nameNr" id="_2763" type="I32" fieldid="_2636" offset="2368" fid="f16" line="230"/>
+    <field name="nameMax" id="_2764" type="I32" fieldid="_2636" offset="2400" fid="f16" line="231"/>
+    <field name="nameTab" id="_2765" type="Array[String]" fieldid="_2949" offset="2432" fid="f16" line="232"/>
+    <field name="nbChars" id="_2766" type="I64" fieldid="_2637" offset="2496" fid="f16" line="234"/>
+    <field name="checkIndex" id="_2767" type="I64" fieldid="_2637" offset="2560" fid="f16" line="235"/>
+    <field name="keepBlanks" id="_2768" type="I32" fieldid="_2636" offset="2624" fid="f16" line="236"/>
+    <field name="disableSAX" id="_2769" type="I32" fieldid="_2636" offset="2656" fid="f16" line="237"/>
+    <field name="inSubset" id="_2770" type="I32" fieldid="_2636" offset="2688" fid="f16" line="238"/>
+    <field name="intSubName" id="_2771" type="String" fieldid="_2692" offset="2752" fid="f16" line="239"/>
+    <field name="extSubURI" id="_2772" type="String" fieldid="_2691" offset="2816" fid="f16" line="240"/>
+    <field name="extSubSystem" id="_2773" type="String" fieldid="_2691" offset="2880" fid="f16" line="241"/>
+    <field name="space" id="_2774" type="Pointer[I32]" fieldid="_2694" offset="2944" fid="f16" line="244"/>
+    <field name="spaceNr" id="_2775" type="I32" fieldid="_2636" offset="3008" fid="f16" line="245"/>
+    <field name="spaceMax" id="_2776" type="I32" fieldid="_2636" offset="3040" fid="f16" line="246"/>
+    <field name="spaceTab" id="_2777" type="Pointer[I32]" fieldid="_2694" offset="3072" fid="f16" line="247"/>
+    <field name="depth" id="_2778" type="I32" fieldid="_2636" offset="3136" fid="f16" line="249"/>
+    <field name="entity" id="_2779" type="NullablePointer[XmlParserInput]" fieldid="_218" offset="3200" fid="f16" line="250"/>
+    <field name="charset" id="_2780" type="I32" fieldid="_2636" offset="3264" fid="f16" line="251"/>
+    <field name="nodelen" id="_2781" type="I32" fieldid="_2636" offset="3296" fid="f16" line="253"/>
+    <field name="nodemem" id="_2782" type="I32" fieldid="_2636" offset="3328" fid="f16" line="254"/>
+    <field name="pedantic" id="_2783" type="I32" fieldid="_2636" offset="3360" fid="f16" line="255"/>
+    <field name="_private" id="_2784" type="Pointer[None]" fieldid="_2640" offset="3392" fid="f16" line="256"/>
+    <field name="loadsubset" id="_2785" type="I32" fieldid="_2636" offset="3456" fid="f16" line="258"/>
+    <field name="linenumbers" id="_2786" type="I32" fieldid="_2636" offset="3488" fid="f16" line="259"/>
+    <field name="catalogs" id="_2787" type="Pointer[None]" fieldid="_2640" offset="3520" fid="f16" line="260"/>
+    <field name="recovery" id="_2788" type="I32" fieldid="_2636" offset="3584" fid="f16" line="261"/>
+    <field name="progressive" id="_2789" type="I32" fieldid="_2636" offset="3616" fid="f16" line="262"/>
+    <field name="dict" id="_2790" type="NullablePointer[XmlDict]" fieldid="_279" offset="3648" fid="f16" line="263"/>
+    <field name="atts" id="_2791" type="Array[String]" fieldid="_2949" offset="3712" fid="f16" line="264"/>
+    <field name="maxatts" id="_2792" type="I32" fieldid="_2636" offset="3776" fid="f16" line="265"/>
+    <field name="docdict" id="_2793" type="I32" fieldid="_2636" offset="3808" fid="f16" line="266"/>
+    <field name="str_xml" id="_2794" type="String" fieldid="_2692" offset="3840" fid="f16" line="271"/>
+    <field name="str_xmlns" id="_2795" type="String" fieldid="_2692" offset="3904" fid="f16" line="272"/>
+    <field name="str_xml_ns" id="_2796" type="String" fieldid="_2692" offset="3968" fid="f16" line="273"/>
+    <field name="sax2" id="_2797" type="I32" fieldid="_2636" offset="4032" fid="f16" line="278"/>
+    <field name="nsNr" id="_2798" type="I32" fieldid="_2636" offset="4064" fid="f16" line="279"/>
+    <field name="nsMax" id="_2799" type="I32" fieldid="_2636" offset="4096" fid="f16" line="280"/>
+    <field name="nsTab" id="_2800" type="Array[String]" fieldid="_2949" offset="4160" fid="f16" line="281"/>
+    <field name="attallocs" id="_2801" type="Pointer[I32]" fieldid="_2694" offset="4224" fid="f16" line="282"/>
+    <field name="pushTab" id="_2802" type="NullablePointer[Pointer[None]]" fieldid="_3409" offset="4288" fid="f16" line="283"/>
+    <field name="attsDefault" id="_2803" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="4352" fid="f16" line="284"/>
+    <field name="attsSpecial" id="_2804" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="4416" fid="f16" line="285"/>
+    <field name="nsWellFormed" id="_2805" type="I32" fieldid="_2636" offset="4480" fid="f16" line="286"/>
+    <field name="options" id="_2806" type="I32" fieldid="_2636" offset="4512" fid="f16" line="287"/>
+    <field name="dictNames" id="_2807" type="I32" fieldid="_2636" offset="4544" fid="f16" line="292"/>
+    <field name="freeElemsNr" id="_2808" type="I32" fieldid="_2636" offset="4576" fid="f16" line="293"/>
+    <field name="freeElems" id="_2809" type="NullablePointer[XmlNode]" fieldid="_325" offset="4608" fid="f16" line="294"/>
+    <field name="freeAttrsNr" id="_2810" type="I32" fieldid="_2636" offset="4672" fid="f16" line="295"/>
+    <field name="freeAttrs" id="_2811" type="NullablePointer[XmlAttr]" fieldid="_317" offset="4736" fid="f16" line="296"/>
+    <field name="lastError" id="_2812" type="XmlError" fieldid="_563" offset="4800" fid="f16" line="301"/>
+    <field name="parseMode" id="_2813" type="I32" fieldid="_763" offset="5504" fid="f16" line="302"/>
+    <field name="nbentities" id="_2814" type="U64" fieldid="_2630" offset="5568" fid="f16" line="303"/>
+    <field name="sizeentities" id="_2815" type="U64" fieldid="_2630" offset="5632" fid="f16" line="304"/>
+    <field name="nodeInfo" id="_2816" type="NullablePointer[XmlParserNodeInfo]" fieldid="_3163" offset="5696" fid="f16" line="307"/>
+    <field name="nodeInfoNr" id="_2817" type="I32" fieldid="_2636" offset="5760" fid="f16" line="308"/>
+    <field name="nodeInfoMax" id="_2818" type="I32" fieldid="_2636" offset="5792" fid="f16" line="309"/>
+    <field name="nodeInfoTab" id="_2819" type="NullablePointer[XmlParserNodeInfo]" fieldid="_3163" offset="5824" fid="f16" line="310"/>
+    <field name="input_id" id="_2820" type="I32" fieldid="_2636" offset="5888" fid="f16" line="312"/>
+    <field name="sizeentcopy" id="_2821" type="U64" fieldid="_2630" offset="5952" fid="f16" line="313"/>
+  </struct>
+
+  <struct name="XmlSAXLocator" id="_222" size="256" align="64" fid="f16" lineno="321">
+    <field name="getPublicId" id="_2824" type="Pointer[None]" fieldid="_3906" offset="0" fid="f16" line="322"/>
+    <field name="getSystemId" id="_2825" type="Pointer[None]" fieldid="_3906" offset="64" fid="f16" line="323"/>
+    <field name="getLineNumber" id="_2826" type="Pointer[None]" fieldid="_3182" offset="128" fid="f16" line="324"/>
+    <field name="getColumnNumber" id="_2827" type="Pointer[None]" fieldid="_3182" offset="192" fid="f16" line="325"/>
+  </struct>
+
+  <struct name="XmlSAXHandler" id="_225" size="2048" align="64" fid="f16" lineno="719">
+    <field name="internalSubset" id="_2830" type="Pointer[None]" fieldid="_765" offset="0" fid="f16" line="720"/>
+    <field name="isStandalone" id="_2831" type="Pointer[None]" fieldid="_789" offset="64" fid="f16" line="721"/>
+    <field name="hasInternalSubset" id="_2832" type="Pointer[None]" fieldid="_790" offset="128" fid="f16" line="722"/>
+    <field name="hasExternalSubset" id="_2833" type="Pointer[None]" fieldid="_791" offset="192" fid="f16" line="723"/>
+    <field name="resolveEntity" id="_2834" type="Pointer[None]" fieldid="_764" offset="256" fid="f16" line="724"/>
+    <field name="getEntity" id="_2835" type="Pointer[None]" fieldid="_767" offset="320" fid="f16" line="725"/>
+    <field name="entityDecl" id="_2836" type="Pointer[None]" fieldid="_769" offset="384" fid="f16" line="726"/>
+    <field name="notationDecl" id="_2837" type="Pointer[None]" fieldid="_770" offset="448" fid="f16" line="727"/>
+    <field name="attributeDecl" id="_2838" type="Pointer[None]" fieldid="_771" offset="512" fid="f16" line="728"/>
+    <field name="elementDecl" id="_2839" type="Pointer[None]" fieldid="_772" offset="576" fid="f16" line="729"/>
+    <field name="unparsedEntityDecl" id="_2840" type="Pointer[None]" fieldid="_773" offset="640" fid="f16" line="730"/>
+    <field name="setDocumentLocator" id="_2841" type="Pointer[None]" fieldid="_774" offset="704" fid="f16" line="731"/>
+    <field name="startDocument" id="_2842" type="Pointer[None]" fieldid="_775" offset="768" fid="f16" line="732"/>
+    <field name="endDocument" id="_2843" type="Pointer[None]" fieldid="_776" offset="832" fid="f16" line="733"/>
+    <field name="startElement" id="_2844" type="Pointer[None]" fieldid="_777" offset="896" fid="f16" line="734"/>
+    <field name="endElement" id="_2845" type="Pointer[None]" fieldid="_778" offset="960" fid="f16" line="735"/>
+    <field name="reference" id="_2846" type="Pointer[None]" fieldid="_780" offset="1024" fid="f16" line="736"/>
+    <field name="characters" id="_2847" type="Pointer[None]" fieldid="_781" offset="1088" fid="f16" line="737"/>
+    <field name="ignorableWhitespace" id="_2848" type="Pointer[None]" fieldid="_782" offset="1152" fid="f16" line="738"/>
+    <field name="processingInstruction" id="_2849" type="Pointer[None]" fieldid="_783" offset="1216" fid="f16" line="739"/>
+    <field name="comment" id="_2850" type="Pointer[None]" fieldid="_784" offset="1280" fid="f16" line="740"/>
+    <field name="warning" id="_2851" type="Pointer[None]" fieldid="_786" offset="1344" fid="f16" line="741"/>
+    <field name="xmlerror" id="_2852" type="Pointer[None]" fieldid="_787" offset="1408" fid="f16" line="742"/>
+    <field name="fatalError" id="_2853" type="Pointer[None]" fieldid="_788" offset="1472" fid="f16" line="743"/>
+    <field name="getParameterEntity" id="_2854" type="Pointer[None]" fieldid="_768" offset="1536" fid="f16" line="744"/>
+    <field name="cdataBlock" id="_2855" type="Pointer[None]" fieldid="_785" offset="1600" fid="f16" line="745"/>
+    <field name="externalSubset" id="_2856" type="Pointer[None]" fieldid="_766" offset="1664" fid="f16" line="746"/>
+    <field name="initialized" id="_2857" type="U32" fieldid="_2633" offset="1728" fid="f16" line="747"/>
+    <field name="_private" id="_2858" type="Pointer[None]" fieldid="_2640" offset="1792" fid="f16" line="749"/>
+    <field name="startElementNs" id="_2859" type="Pointer[None]" fieldid="_792" offset="1856" fid="f16" line="750"/>
+    <field name="endElementNs" id="_2860" type="Pointer[None]" fieldid="_793" offset="1920" fid="f16" line="751"/>
+    <field name="serror" id="_2861" type="Pointer[None]" fieldid="_568" offset="1984" fid="f16" line="752"/>
+  </struct>
+
+  <struct name="XmlEntity" id="_228" size="1088" align="64" fid="f17" lineno="38">
+    <field name="_private" id="_2864" type="Pointer[None]" fieldid="_2640" offset="0" fid="f17" line="39"/>
+    <field name="xmltype" id="_2865" type="I32" fieldid="_244" offset="64" fid="f17" line="40"/>
+    <field name="name" id="_2866" type="String" fieldid="_2692" offset="128" fid="f17" line="41"/>
+    <field name="children" id="_2867" type="NullablePointer[XmlNode]" fieldid="_3907" offset="192" fid="f17" line="42"/>
+    <field name="last" id="_2868" type="NullablePointer[XmlNode]" fieldid="_3907" offset="256" fid="f17" line="43"/>
+    <field name="parent" id="_2869" type="NullablePointer[XmlDtd]" fieldid="_3908" offset="320" fid="f17" line="44"/>
+    <field name="next" id="_2870" type="NullablePointer[XmlNode]" fieldid="_3907" offset="384" fid="f17" line="45"/>
+    <field name="prev" id="_2871" type="NullablePointer[XmlNode]" fieldid="_3907" offset="448" fid="f17" line="46"/>
+    <field name="doc" id="_2872" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="512" fid="f17" line="47"/>
+    <field name="orig" id="_2873" type="String" fieldid="_2691" offset="576" fid="f17" line="49"/>
+    <field name="content" id="_2874" type="String" fieldid="_2691" offset="640" fid="f17" line="50"/>
+    <field name="length" id="_2875" type="I32" fieldid="_2636" offset="704" fid="f17" line="51"/>
+    <field name="etype" id="_2876" type="I32" fieldid="_733" offset="736" fid="f17" line="52"/>
+    <field name="externalID" id="_2877" type="String" fieldid="_2692" offset="768" fid="f17" line="53"/>
+    <field name="systemID" id="_2878" type="String" fieldid="_2692" offset="832" fid="f17" line="54"/>
+    <field name="nexte" id="_2879" type="NullablePointer[XmlEntity]" fieldid="_3910" offset="896" fid="f17" line="56"/>
+    <field name="uri" id="_2880" type="String" fieldid="_2692" offset="960" fid="f17" line="57"/>
+    <field name="owner" id="_2881" type="I32" fieldid="_2636" offset="1024" fid="f17" line="58"/>
+    <field name="checked" id="_2882" type="I32" fieldid="_2636" offset="1056" fid="f17" line="59"/>
+  </struct>
+
+  <struct name="XmlBuffer" id="_233" size="256" align="64" fid="f15" lineno="91">
+    <field name="content" id="_2886" type="String" fieldid="_2691" offset="0" fid="f15" line="92"/>
+    <field name="xmluse" id="_2887" type="U32" fieldid="_2633" offset="64" fid="f15" line="93"/>
+    <field name="size" id="_2888" type="U32" fieldid="_2633" offset="96" fid="f15" line="94"/>
+    <field name="alloc" id="_2889" type="I32" fieldid="_232" offset="128" fid="f15" line="95"/>
+    <field name="contentIO" id="_2890" type="String" fieldid="_2691" offset="192" fid="f15" line="96"/>
+  </struct>
+
+  <struct name="XmlBuf" id="_236" size="" align="" fid="f15" lineno="105">
+
+  </struct>
+
+  <struct name="XmlNotation" id="_245" size="192" align="64" fid="f15" lineno="194">
+    <field name="name" id="_2897" type="String" fieldid="_2692" offset="0" fid="f15" line="195"/>
+    <field name="publicID" id="_2898" type="String" fieldid="_2692" offset="64" fid="f15" line="196"/>
+    <field name="systemID" id="_2899" type="String" fieldid="_2692" offset="128" fid="f15" line="197"/>
+  </struct>
+
+  <struct name="XmlEnumeration" id="_252" size="128" align="64" fid="f15" lineno="240">
+    <field name="next" id="_2904" type="NullablePointer[XmlEnumeration]" fieldid="_3911" offset="0" fid="f15" line="241"/>
+    <field name="name" id="_2905" type="String" fieldid="_2692" offset="64" fid="f15" line="242"/>
+  </struct>
+
+  <struct name="XmlAttribute" id="_255" size="960" align="64" fid="f15" lineno="253">
+    <field name="_private" id="_2908" type="Pointer[None]" fieldid="_2640" offset="0" fid="f15" line="254"/>
+    <field name="xmltype" id="_2909" type="I32" fieldid="_244" offset="64" fid="f15" line="255"/>
+    <field name="name" id="_2910" type="String" fieldid="_2692" offset="128" fid="f15" line="256"/>
+    <field name="children" id="_2911" type="NullablePointer[XmlNode]" fieldid="_3912" offset="192" fid="f15" line="257"/>
+    <field name="last" id="_2912" type="NullablePointer[XmlNode]" fieldid="_3907" offset="256" fid="f15" line="258"/>
+    <field name="parent" id="_2913" type="NullablePointer[XmlDtd]" fieldid="_3913" offset="320" fid="f15" line="259"/>
+    <field name="next" id="_2914" type="NullablePointer[XmlNode]" fieldid="_3907" offset="384" fid="f15" line="260"/>
+    <field name="prev" id="_2915" type="NullablePointer[XmlNode]" fieldid="_3907" offset="448" fid="f15" line="261"/>
+    <field name="doc" id="_2916" type="NullablePointer[XmlDoc]" fieldid="_3914" offset="512" fid="f15" line="262"/>
+    <field name="nexth" id="_2917" type="NullablePointer[XmlAttribute]" fieldid="_3915" offset="576" fid="f15" line="264"/>
+    <field name="atype" id="_2918" type="I32" fieldid="_249" offset="640" fid="f15" line="265"/>
+    <field name="def" id="_2919" type="I32" fieldid="_251" offset="672" fid="f15" line="266"/>
+    <field name="defaultValue" id="_2920" type="String" fieldid="_2692" offset="704" fid="f15" line="267"/>
+    <field name="tree" id="_2921" type="NullablePointer[XmlEnumeration]" fieldid="_254" offset="768" fid="f15" line="268"/>
+    <field name="prefix" id="_2922" type="String" fieldid="_2692" offset="832" fid="f15" line="269"/>
+    <field name="elem" id="_2923" type="String" fieldid="_2692" offset="896" fid="f15" line="270"/>
+  </struct>
+
+  <struct name="XmlElementContent" id="_262" size="384" align="64" fid="f15" lineno="306">
+    <field name="xmltype" id="_2928" type="I32" fieldid="_259" offset="0" fid="f15" line="307"/>
+    <field name="ocur" id="_2929" type="I32" fieldid="_261" offset="32" fid="f15" line="308"/>
+    <field name="name" id="_2930" type="String" fieldid="_2692" offset="64" fid="f15" line="309"/>
+    <field name="c1" id="_2931" type="NullablePointer[XmlElementContent]" fieldid="_3916" offset="128" fid="f15" line="310"/>
+    <field name="c2" id="_2932" type="NullablePointer[XmlElementContent]" fieldid="_3916" offset="192" fid="f15" line="311"/>
+    <field name="parent" id="_2933" type="NullablePointer[XmlElementContent]" fieldid="_3916" offset="256" fid="f15" line="312"/>
+    <field name="prefix" id="_2934" type="String" fieldid="_2692" offset="320" fid="f15" line="313"/>
+  </struct>
+
+  <struct name="XmlRegexp" id="_267" size="" align="" fid="f18" lineno="28">
+
+  </struct>
+
+  <struct name="XmlRegExecCtxt" id="_270" size="" align="" fid="f18" lineno="36">
+
+  </struct>
+
+  <struct name="Anon" id="_275" size="256" align="128" fid="f19" lineno="19">
+    <field name="__clang_max_align_nonce1" id="_2942" type="I64" fieldid="_3307" offset="0" fid="f19" line="20"/>
+    <field name="__clang_max_align_nonce2" id="_2943" type="F128" fieldid="_3297" offset="128" fid="f19" line="22"/>
+  </struct>
+
+  <struct name="XmlDict" id="_277" size="" align="" fid="f20" lineno="24">
+
+  </struct>
+
+  <struct name="XmlElement" id="_305" size="896" align="64" fid="f15" lineno="346">
+    <field name="_private" id="_2950" type="Pointer[None]" fieldid="_2640" offset="0" fid="f15" line="347"/>
+    <field name="xmltype" id="_2951" type="I32" fieldid="_244" offset="64" fid="f15" line="348"/>
+    <field name="name" id="_2952" type="String" fieldid="_2692" offset="128" fid="f15" line="349"/>
+    <field name="children" id="_2953" type="NullablePointer[XmlNode]" fieldid="_3907" offset="192" fid="f15" line="350"/>
+    <field name="last" id="_2954" type="NullablePointer[XmlNode]" fieldid="_3907" offset="256" fid="f15" line="351"/>
+    <field name="parent" id="_2955" type="NullablePointer[XmlDtd]" fieldid="_3908" offset="320" fid="f15" line="352"/>
+    <field name="next" id="_2956" type="NullablePointer[XmlNode]" fieldid="_3907" offset="384" fid="f15" line="353"/>
+    <field name="prev" id="_2957" type="NullablePointer[XmlNode]" fieldid="_3907" offset="448" fid="f15" line="354"/>
+    <field name="doc" id="_2958" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="512" fid="f15" line="355"/>
+    <field name="etype" id="_2959" type="I32" fieldid="_266" offset="576" fid="f15" line="357"/>
+    <field name="content" id="_2960" type="NullablePointer[XmlElementContent]" fieldid="_264" offset="640" fid="f15" line="358"/>
+    <field name="attributes" id="_2961" type="NullablePointer[XmlAttribute]" fieldid="_257" offset="704" fid="f15" line="359"/>
+    <field name="prefix" id="_2962" type="String" fieldid="_2692" offset="768" fid="f15" line="360"/>
+    <field name="contModel" id="_2963" type="NullablePointer[XmlRegexp]" fieldid="_269" offset="832" fid="f15" line="362"/>
+  </struct>
+
+  <struct name="XmlNs" id="_309" size="384" align="64" fid="f15" lineno="389">
+    <field name="next" id="_2966" type="NullablePointer[XmlNs]" fieldid="_3918" offset="0" fid="f15" line="390"/>
+    <field name="xmltype" id="_2967" type="I32" fieldid="_308" offset="64" fid="f15" line="391"/>
+    <field name="href" id="_2968" type="String" fieldid="_2692" offset="128" fid="f15" line="392"/>
+    <field name="prefix" id="_2969" type="String" fieldid="_2692" offset="192" fid="f15" line="393"/>
+    <field name="_private" id="_2970" type="Pointer[None]" fieldid="_2640" offset="256" fid="f15" line="394"/>
+    <field name="context" id="_2971" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="320" fid="f15" line="395"/>
+  </struct>
+
+  <struct name="XmlDtd" id="_314" size="1024" align="64" fid="f15" lineno="406">
+    <field name="_private" id="_2976" type="Pointer[None]" fieldid="_2640" offset="0" fid="f15" line="407"/>
+    <field name="xmltype" id="_2977" type="I32" fieldid="_244" offset="64" fid="f15" line="408"/>
+    <field name="name" id="_2978" type="String" fieldid="_2692" offset="128" fid="f15" line="409"/>
+    <field name="children" id="_2979" type="NullablePointer[XmlNode]" fieldid="_3907" offset="192" fid="f15" line="410"/>
+    <field name="last" id="_2980" type="NullablePointer[XmlNode]" fieldid="_3907" offset="256" fid="f15" line="411"/>
+    <field name="parent" id="_2981" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="320" fid="f15" line="412"/>
+    <field name="next" id="_2982" type="NullablePointer[XmlNode]" fieldid="_3907" offset="384" fid="f15" line="413"/>
+    <field name="prev" id="_2983" type="NullablePointer[XmlNode]" fieldid="_3907" offset="448" fid="f15" line="414"/>
+    <field name="doc" id="_2984" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="512" fid="f15" line="415"/>
+    <field name="notations" id="_2985" type="Pointer[None]" fieldid="_2640" offset="576" fid="f15" line="418"/>
+    <field name="elements" id="_2986" type="Pointer[None]" fieldid="_2640" offset="640" fid="f15" line="419"/>
+    <field name="attributes" id="_2987" type="Pointer[None]" fieldid="_2640" offset="704" fid="f15" line="420"/>
+    <field name="entities" id="_2988" type="Pointer[None]" fieldid="_2640" offset="768" fid="f15" line="421"/>
+    <field name="externalID" id="_2989" type="String" fieldid="_2692" offset="832" fid="f15" line="422"/>
+    <field name="systemID" id="_2990" type="String" fieldid="_2692" offset="896" fid="f15" line="423"/>
+    <field name="pentities" id="_2991" type="Pointer[None]" fieldid="_2640" offset="960" fid="f15" line="424"/>
+  </struct>
+
+  <struct name="XmlAttr" id="_315" size="768" align="64" fid="f15" lineno="434">
+    <field name="_private" id="_2992" type="Pointer[None]" fieldid="_2640" offset="0" fid="f15" line="435"/>
+    <field name="xmltype" id="_2993" type="I32" fieldid="_244" offset="64" fid="f15" line="436"/>
+    <field name="name" id="_2994" type="String" fieldid="_2692" offset="128" fid="f15" line="437"/>
+    <field name="children" id="_2995" type="NullablePointer[XmlNode]" fieldid="_3907" offset="192" fid="f15" line="438"/>
+    <field name="last" id="_2996" type="NullablePointer[XmlNode]" fieldid="_3907" offset="256" fid="f15" line="439"/>
+    <field name="parent" id="_2997" type="NullablePointer[XmlNode]" fieldid="_3907" offset="320" fid="f15" line="440"/>
+    <field name="next" id="_2998" type="NullablePointer[XmlAttr]" fieldid="_3919" offset="384" fid="f15" line="441"/>
+    <field name="prev" id="_2999" type="NullablePointer[XmlAttr]" fieldid="_3919" offset="448" fid="f15" line="442"/>
+    <field name="doc" id="_3000" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="512" fid="f15" line="443"/>
+    <field name="ns" id="_3001" type="NullablePointer[XmlNs]" fieldid="_2973" offset="576" fid="f15" line="444"/>
+    <field name="atype" id="_3002" type="I32" fieldid="_249" offset="640" fid="f15" line="445"/>
+    <field name="psvi" id="_3003" type="Pointer[None]" fieldid="_2640" offset="704" fid="f15" line="446"/>
+  </struct>
+
+  <struct name="XmlID" id="_318" size="384" align="64" fid="f15" lineno="457">
+    <field name="next" id="_3006" type="NullablePointer[XmlID]" fieldid="_3920" offset="0" fid="f15" line="458"/>
+    <field name="value" id="_3007" type="String" fieldid="_2692" offset="64" fid="f15" line="459"/>
+    <field name="attr" id="_3008" type="NullablePointer[XmlAttr]" fieldid="_317" offset="128" fid="f15" line="460"/>
+    <field name="name" id="_3009" type="String" fieldid="_2692" offset="192" fid="f15" line="461"/>
+    <field name="lineno" id="_3010" type="I32" fieldid="_2636" offset="256" fid="f15" line="462"/>
+    <field name="doc" id="_3011" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="320" fid="f15" line="463"/>
+  </struct>
+
+  <struct name="XmlRef" id="_321" size="320" align="64" fid="f15" lineno="474">
+    <field name="next" id="_3014" type="NullablePointer[XmlRef]" fieldid="_3921" offset="0" fid="f15" line="475"/>
+    <field name="value" id="_3015" type="String" fieldid="_2692" offset="64" fid="f15" line="476"/>
+    <field name="attr" id="_3016" type="NullablePointer[XmlAttr]" fieldid="_317" offset="128" fid="f15" line="477"/>
+    <field name="name" id="_3017" type="String" fieldid="_2692" offset="192" fid="f15" line="478"/>
+    <field name="lineno" id="_3018" type="I32" fieldid="_2636" offset="256" fid="f15" line="479"/>
+  </struct>
+
+  <struct name="XmlNode" id="_326" size="960" align="64" fid="f15" lineno="489">
+    <field name="_private" id="_3023" type="Pointer[None]" fieldid="_2640" offset="0" fid="f15" line="490"/>
+    <field name="xmltype" id="_3024" type="I32" fieldid="_244" offset="64" fid="f15" line="491"/>
+    <field name="name" id="_3025" type="String" fieldid="_2692" offset="128" fid="f15" line="492"/>
+    <field name="children" id="_3026" type="NullablePointer[XmlNode]" fieldid="_3907" offset="192" fid="f15" line="493"/>
+    <field name="last" id="_3027" type="NullablePointer[XmlNode]" fieldid="_3907" offset="256" fid="f15" line="494"/>
+    <field name="parent" id="_3028" type="NullablePointer[XmlNode]" fieldid="_3907" offset="320" fid="f15" line="495"/>
+    <field name="next" id="_3029" type="NullablePointer[XmlNode]" fieldid="_3907" offset="384" fid="f15" line="496"/>
+    <field name="prev" id="_3030" type="NullablePointer[XmlNode]" fieldid="_3907" offset="448" fid="f15" line="497"/>
+    <field name="doc" id="_3031" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="512" fid="f15" line="498"/>
+    <field name="ns" id="_3032" type="NullablePointer[XmlNs]" fieldid="_2973" offset="576" fid="f15" line="501"/>
+    <field name="content" id="_3033" type="String" fieldid="_2691" offset="640" fid="f15" line="502"/>
+    <field name="properties" id="_3034" type="NullablePointer[XmlAttr]" fieldid="_3919" offset="704" fid="f15" line="503"/>
+    <field name="nsDef" id="_3035" type="NullablePointer[XmlNs]" fieldid="_2973" offset="768" fid="f15" line="504"/>
+    <field name="psvi" id="_3036" type="Pointer[None]" fieldid="_2640" offset="832" fid="f15" line="505"/>
+    <field name="line" id="_3037" type="U16" fieldid="_2632" offset="896" fid="f15" line="506"/>
+    <field name="extra" id="_3038" type="U16" fieldid="_2632" offset="912" fid="f15" line="507"/>
+  </struct>
+
+  <struct name="XmlDoc" id="_331" size="1408" align="64" fid="f15" lineno="551">
+    <field name="_private" id="_3042" type="Pointer[None]" fieldid="_2640" offset="0" fid="f15" line="552"/>
+    <field name="xmltype" id="_3043" type="I32" fieldid="_244" offset="64" fid="f15" line="553"/>
+    <field name="name" id="_3044" type="String" fieldid="_2628" offset="128" fid="f15" line="554"/>
+    <field name="children" id="_3045" type="NullablePointer[XmlNode]" fieldid="_3907" offset="192" fid="f15" line="555"/>
+    <field name="last" id="_3046" type="NullablePointer[XmlNode]" fieldid="_3907" offset="256" fid="f15" line="556"/>
+    <field name="parent" id="_3047" type="NullablePointer[XmlNode]" fieldid="_3907" offset="320" fid="f15" line="557"/>
+    <field name="next" id="_3048" type="NullablePointer[XmlNode]" fieldid="_3907" offset="384" fid="f15" line="558"/>
+    <field name="prev" id="_3049" type="NullablePointer[XmlNode]" fieldid="_3907" offset="448" fid="f15" line="559"/>
+    <field name="doc" id="_3050" type="NullablePointer[XmlDoc]" fieldid="_3909" offset="512" fid="f15" line="560"/>
+    <field name="compression" id="_3051" type="I32" fieldid="_2636" offset="576" fid="f15" line="563"/>
+    <field name="standalone" id="_3052" type="I32" fieldid="_2636" offset="608" fid="f15" line="564"/>
+    <field name="intSubset" id="_3053" type="NullablePointer[XmlDtd]" fieldid="_3908" offset="640" fid="f15" line="570"/>
+    <field name="extSubset" id="_3054" type="NullablePointer[XmlDtd]" fieldid="_3908" offset="704" fid="f15" line="571"/>
+    <field name="oldNs" id="_3055" type="NullablePointer[XmlNs]" fieldid="_3918" offset="768" fid="f15" line="572"/>
+    <field name="version" id="_3056" type="String" fieldid="_2692" offset="832" fid="f15" line="573"/>
+    <field name="encoding" id="_3057" type="String" fieldid="_2692" offset="896" fid="f15" line="574"/>
+    <field name="ids" id="_3058" type="Pointer[None]" fieldid="_2640" offset="960" fid="f15" line="575"/>
+    <field name="refs" id="_3059" type="Pointer[None]" fieldid="_2640" offset="1024" fid="f15" line="576"/>
+    <field name="url" id="_3060" type="String" fieldid="_2692" offset="1088" fid="f15" line="577"/>
+    <field name="charset" id="_3061" type="I32" fieldid="_2636" offset="1152" fid="f15" line="578"/>
+    <field name="dict" id="_3062" type="NullablePointer[XmlDict]" fieldid="_3922" offset="1216" fid="f15" line="580"/>
+    <field name="psvi" id="_3063" type="Pointer[None]" fieldid="_2640" offset="1280" fid="f15" line="581"/>
+    <field name="parseFlags" id="_3064" type="I32" fieldid="_2636" offset="1344" fid="f15" line="582"/>
+    <field name="properties" id="_3065" type="I32" fieldid="_2636" offset="1376" fid="f15" line="584"/>
+  </struct>
+
+  <struct name="XmlDOMWrapCtxt" id="_332" size="256" align="64" fid="f15" lineno="613">
+    <field name="_private" id="_3066" type="Pointer[None]" fieldid="_2640" offset="0" fid="f15" line="614"/>
+    <field name="xmltype" id="_3067" type="I32" fieldid="_2636" offset="64" fid="f15" line="619"/>
+    <field name="namespaceMap" id="_3068" type="Pointer[None]" fieldid="_2640" offset="128" fid="f15" line="623"/>
+    <field name="getNsForNodeFunc" id="_3069" type="Pointer[None]" fieldid="_335" offset="192" fid="f15" line="628"/>
+  </struct>
+
+  <struct name="XmlMutex" id="_520" size="" align="" fid="f22" lineno="23">
+
+  </struct>
+
+  <struct name="XmlRMutex" id="_523" size="" align="" fid="f22" lineno="29">
+
+  </struct>
+
+  <struct name="XmlHashTable" id="_526" size="" align="" fid="f23" lineno="21">
+
+  </struct>
+
+  <struct name="XmlError" id="_562" size="704" align="64" fid="f24" lineno="78">
+    <field name="domain" id="_3098" type="I32" fieldid="_2636" offset="0" fid="f24" line="79"/>
+    <field name="code" id="_3099" type="I32" fieldid="_2636" offset="32" fid="f24" line="80"/>
+    <field name="message" id="_3100" type="String" fieldid="_2628" offset="64" fid="f24" line="81"/>
+    <field name="level" id="_3101" type="I32" fieldid="_559" offset="128" fid="f24" line="82"/>
+    <field name="file" id="_3102" type="String" fieldid="_2628" offset="192" fid="f24" line="83"/>
+    <field name="line" id="_3103" type="I32" fieldid="_2636" offset="256" fid="f24" line="84"/>
+    <field name="str1" id="_3104" type="String" fieldid="_2628" offset="320" fid="f24" line="85"/>
+    <field name="str2" id="_3105" type="String" fieldid="_2628" offset="384" fid="f24" line="86"/>
+    <field name="str3" id="_3106" type="String" fieldid="_2628" offset="448" fid="f24" line="87"/>
+    <field name="int1" id="_3107" type="I32" fieldid="_2636" offset="512" fid="f24" line="88"/>
+    <field name="int2" id="_3108" type="I32" fieldid="_2636" offset="544" fid="f24" line="89"/>
+    <field name="ctxt" id="_3109" type="Pointer[None]" fieldid="_2640" offset="576" fid="f24" line="90"/>
+    <field name="node" id="_3110" type="Pointer[None]" fieldid="_2640" offset="640" fid="f24" line="91"/>
+  </struct>
+
+  <struct name="XmlLink" id="_584" size="" align="" fid="f25" lineno="20">
+
+  </struct>
+
+  <struct name="XmlList" id="_587" size="" align="" fid="f25" lineno="23">
+
+  </struct>
+
+  <struct name="XmlAutomata" id="_619" size="" align="" fid="f26" lineno="29">
+
+  </struct>
+
+  <struct name="XmlAutomataState" id="_622" size="" align="" fid="f26" lineno="37">
+
+  </struct>
+
+  <struct name="XmlValidState" id="_644" size="" align="" fid="f27" lineno="28">
+
+  </struct>
+
+  <struct name="XmlValidCtxt" id="_649" size="896" align="64" fid="f27" lineno="82">
+    <field name="userData" id="_3130" type="Pointer[None]" fieldid="_2640" offset="0" fid="f27" line="83"/>
+    <field name="xmlerror" id="_3131" type="Pointer[None]" fieldid="_647" offset="64" fid="f27" line="84"/>
+    <field name="warning" id="_3132" type="Pointer[None]" fieldid="_648" offset="128" fid="f27" line="85"/>
+    <field name="node" id="_3133" type="NullablePointer[XmlNode]" fieldid="_325" offset="192" fid="f27" line="88"/>
+    <field name="nodeNr" id="_3134" type="I32" fieldid="_2636" offset="256" fid="f27" line="89"/>
+    <field name="nodeMax" id="_3135" type="I32" fieldid="_2636" offset="288" fid="f27" line="90"/>
+    <field name="nodeTab" id="_3136" type="Array[NullablePointer[XmlNode]]" fieldid="_3077" offset="320" fid="f27" line="91"/>
+    <field name="finishDtd" id="_3137" type="U32" fieldid="_2633" offset="384" fid="f27" line="93"/>
+    <field name="doc" id="_3138" type="NullablePointer[XmlDoc]" fieldid="_330" offset="448" fid="f27" line="94"/>
+    <field name="valid" id="_3139" type="I32" fieldid="_2636" offset="512" fid="f27" line="95"/>
+    <field name="vstate" id="_3140" type="NullablePointer[XmlValidState]" fieldid="_3129" offset="576" fid="f27" line="98"/>
+    <field name="vstateNr" id="_3141" type="I32" fieldid="_2636" offset="640" fid="f27" line="99"/>
+    <field name="vstateMax" id="_3142" type="I32" fieldid="_2636" offset="672" fid="f27" line="100"/>
+    <field name="vstateTab" id="_3143" type="NullablePointer[XmlValidState]" fieldid="_3129" offset="704" fid="f27" line="101"/>
+    <field name="am" id="_3144" type="NullablePointer[XmlAutomata]" fieldid="_621" offset="768" fid="f27" line="104"/>
+    <field name="state" id="_3145" type="NullablePointer[XmlAutomataState]" fieldid="_624" offset="832" fid="f27" line="105"/>
+  </struct>
+
+  <struct name="XmlParserNodeInfo" id="_754" size="320" align="64" fid="f16" lineno="89">
+    <field name="node" id="_3157" type="NullablePointer[XmlNode]" fieldid="_3938" offset="0" fid="f16" line="90"/>
+    <field name="begin_pos" id="_3158" type="U64" fieldid="_2630" offset="64" fid="f16" line="92"/>
+    <field name="begin_line" id="_3159" type="U64" fieldid="_2630" offset="128" fid="f16" line="93"/>
+    <field name="end_pos" id="_3160" type="U64" fieldid="_2630" offset="192" fid="f16" line="94"/>
+    <field name="end_line" id="_3161" type="U64" fieldid="_2630" offset="256" fid="f16" line="95"/>
+  </struct>
+
+  <struct name="XmlParserNodeInfoSeq" id="_757" size="192" align="64" fid="f16" lineno="100">
+    <field name="maximum" id="_3164" type="U64" fieldid="_2630" offset="0" fid="f16" line="101"/>
+    <field name="length" id="_3165" type="U64" fieldid="_2630" offset="64" fid="f16" line="102"/>
+    <field name="buffer" id="_3166" type="NullablePointer[XmlParserNodeInfo]" fieldid="_3163" offset="128" fid="f16" line="103"/>
+  </struct>
+
+  <struct name="XmlSAXHandlerV1" id="_794" size="1792" align="64" fid="f16" lineno="760">
+    <field name="internalSubset" id="_3184" type="Pointer[None]" fieldid="_765" offset="0" fid="f16" line="761"/>
+    <field name="isStandalone" id="_3185" type="Pointer[None]" fieldid="_789" offset="64" fid="f16" line="762"/>
+    <field name="hasInternalSubset" id="_3186" type="Pointer[None]" fieldid="_790" offset="128" fid="f16" line="763"/>
+    <field name="hasExternalSubset" id="_3187" type="Pointer[None]" fieldid="_791" offset="192" fid="f16" line="764"/>
+    <field name="resolveEntity" id="_3188" type="Pointer[None]" fieldid="_764" offset="256" fid="f16" line="765"/>
+    <field name="getEntity" id="_3189" type="Pointer[None]" fieldid="_767" offset="320" fid="f16" line="766"/>
+    <field name="entityDecl" id="_3190" type="Pointer[None]" fieldid="_769" offset="384" fid="f16" line="767"/>
+    <field name="notationDecl" id="_3191" type="Pointer[None]" fieldid="_770" offset="448" fid="f16" line="768"/>
+    <field name="attributeDecl" id="_3192" type="Pointer[None]" fieldid="_771" offset="512" fid="f16" line="769"/>
+    <field name="elementDecl" id="_3193" type="Pointer[None]" fieldid="_772" offset="576" fid="f16" line="770"/>
+    <field name="unparsedEntityDecl" id="_3194" type="Pointer[None]" fieldid="_773" offset="640" fid="f16" line="771"/>
+    <field name="setDocumentLocator" id="_3195" type="Pointer[None]" fieldid="_774" offset="704" fid="f16" line="772"/>
+    <field name="startDocument" id="_3196" type="Pointer[None]" fieldid="_775" offset="768" fid="f16" line="773"/>
+    <field name="endDocument" id="_3197" type="Pointer[None]" fieldid="_776" offset="832" fid="f16" line="774"/>
+    <field name="startElement" id="_3198" type="Pointer[None]" fieldid="_777" offset="896" fid="f16" line="775"/>
+    <field name="endElement" id="_3199" type="Pointer[None]" fieldid="_778" offset="960" fid="f16" line="776"/>
+    <field name="reference" id="_3200" type="Pointer[None]" fieldid="_780" offset="1024" fid="f16" line="777"/>
+    <field name="characters" id="_3201" type="Pointer[None]" fieldid="_781" offset="1088" fid="f16" line="778"/>
+    <field name="ignorableWhitespace" id="_3202" type="Pointer[None]" fieldid="_782" offset="1152" fid="f16" line="779"/>
+    <field name="processingInstruction" id="_3203" type="Pointer[None]" fieldid="_783" offset="1216" fid="f16" line="780"/>
+    <field name="comment" id="_3204" type="Pointer[None]" fieldid="_784" offset="1280" fid="f16" line="781"/>
+    <field name="warning" id="_3205" type="Pointer[None]" fieldid="_786" offset="1344" fid="f16" line="782"/>
+    <field name="xmlerror" id="_3206" type="Pointer[None]" fieldid="_787" offset="1408" fid="f16" line="783"/>
+    <field name="fatalError" id="_3207" type="Pointer[None]" fieldid="_788" offset="1472" fid="f16" line="784"/>
+    <field name="getParameterEntity" id="_3208" type="Pointer[None]" fieldid="_768" offset="1536" fid="f16" line="785"/>
+    <field name="cdataBlock" id="_3209" type="Pointer[None]" fieldid="_785" offset="1600" fid="f16" line="786"/>
+    <field name="externalSubset" id="_3210" type="Pointer[None]" fieldid="_766" offset="1664" fid="f16" line="787"/>
+    <field name="initialized" id="_3211" type="U32" fieldid="_2633" offset="1728" fid="f16" line="788"/>
+  </struct>
+
+  <struct name="UConverter" id="_848" size="" align="" fid="f37" lineno="93">
+
+  </struct>
+
+  <struct name="Anon" id="_852" size="448" align="64" fid="f37" lineno="194">
+    <field name="size" id="_3226" type="U16" fieldid="_807" offset="0" fid="f37" line="195"/>
+    <field name="flush" id="_3227" type="I8" fieldid="_830" offset="16" fid="f37" line="196"/>
+    <field name="converter" id="_3228" type="NullablePointer[UConverter]" fieldid="_3257" offset="64" fid="f37" line="197"/>
+    <field name="source" id="_3229" type="Pointer[U16]" fieldid="_3217" offset="128" fid="f37" line="198"/>
+    <field name="sourceLimit" id="_3230" type="Pointer[U16]" fieldid="_3217" offset="192" fid="f37" line="199"/>
+    <field name="target" id="_3231" type="String" fieldid="_2628" offset="256" fid="f37" line="200"/>
+    <field name="targetLimit" id="_3232" type="String" fieldid="_2683" offset="320" fid="f37" line="201"/>
+    <field name="offsets" id="_3233" type="Pointer[I32]" fieldid="_3219" offset="384" fid="f37" line="202"/>
+  </struct>
+
+  <struct name="Anon" id="_854" size="448" align="64" fid="f37" lineno="210">
+    <field name="size" id="_3235" type="U16" fieldid="_807" offset="0" fid="f37" line="211"/>
+    <field name="flush" id="_3236" type="I8" fieldid="_830" offset="16" fid="f37" line="212"/>
+    <field name="converter" id="_3237" type="NullablePointer[UConverter]" fieldid="_3257" offset="64" fid="f37" line="213"/>
+    <field name="source" id="_3238" type="String" fieldid="_2683" offset="128" fid="f37" line="214"/>
+    <field name="sourceLimit" id="_3239" type="String" fieldid="_2683" offset="192" fid="f37" line="215"/>
+    <field name="target" id="_3240" type="Pointer[U16]" fieldid="_3260" offset="256" fid="f37" line="216"/>
+    <field name="targetLimit" id="_3241" type="Pointer[U16]" fieldid="_3217" offset="320" fid="f37" line="217"/>
+    <field name="offsets" id="_3242" type="Pointer[I32]" fieldid="_3219" offset="384" fid="f37" line="218"/>
+  </struct>
+
+  <struct name="UEnumeration" id="_864" size="" align="" fid="f38" lineno="41">
+
+  </struct>
+
+  <struct name="USet" id="_873" size="" align="" fid="f39" lineno="68">
+
+  </struct>
+
+  <struct name="Uconvt" id="_946" size="16640" align="64" fid="f40" lineno="134">
+    <field name="uconv" id="_3272" type="NullablePointer[UConverter]" fieldid="_3257" offset="0" fid="f40" line="135"/>
+    <field name="utf8" id="_3273" type="NullablePointer[UConverter]" fieldid="_3257" offset="64" fid="f40" line="136"/>
+    <field name="pivot_buf" id="_3274" type="Pointer[U16]" fieldid="_3956" offset="128" fid="f40" line="137"/>
+    <field name="pivot_source" id="_3275" type="Pointer[U16]" fieldid="_3260" offset="16512" fid="f40" line="138"/>
+    <field name="pivot_target" id="_3276" type="Pointer[U16]" fieldid="_3260" offset="16576" fid="f40" line="139"/>
+  </struct>
+
+  <struct name="XmlCharEncodingHandler" id="_948" size="448" align="64" fid="f40" lineno="146">
+    <field name="name" id="_3278" type="String" fieldid="_2628" offset="0" fid="f40" line="147"/>
+    <field name="input" id="_3279" type="Pointer[None]" fieldid="_944" offset="64" fid="f40" line="148"/>
+    <field name="output" id="_3280" type="Pointer[None]" fieldid="_945" offset="128" fid="f40" line="149"/>
+    <field name="iconv_in" id="_3281" type="Pointer[None]" fieldid="_798" offset="192" fid="f40" line="151"/>
+    <field name="iconv_out" id="_3282" type="Pointer[None]" fieldid="_798" offset="256" fid="f40" line="152"/>
+    <field name="uconv_in" id="_3283" type="NullablePointer[Uconvt]" fieldid="_3957" offset="320" fid="f40" line="155"/>
+    <field name="uconv_out" id="_3284" type="NullablePointer[Uconvt]" fieldid="_3957" offset="384" fid="f40" line="156"/>
+  </struct>
+
+  <struct name="Anon" id="_1110" size="64" align="32" fid="f43" lineno="58">
+    <field name="quot" id="_3298" type="I32" fieldid="_2636" offset="0" fid="f43" line="60"/>
+    <field name="rem" id="_3299" type="I32" fieldid="_2636" offset="32" fid="f43" line="61"/>
+  </struct>
+
+  <struct name="Anon" id="_1112" size="128" align="64" fid="f43" lineno="66">
+    <field name="quot" id="_3301" type="I64" fieldid="_2637" offset="0" fid="f43" line="68"/>
+    <field name="rem" id="_3302" type="I64" fieldid="_2637" offset="64" fid="f43" line="69"/>
+  </struct>
+
+  <struct name="Anon" id="_1114" size="128" align="64" fid="f43" lineno="76">
+    <field name="quot" id="_3304" type="I64" fieldid="_3307" offset="0" fid="f43" line="78"/>
+    <field name="rem" id="_3305" type="I64" fieldid="_3307" offset="64" fid="f43" line="79"/>
+  </struct>
+
+  <struct name="Anon" id="_1169" size="1024" align="64" fid="f51" lineno="5">
+    <field name="__val" id="_3309" type="Pointer[U64]" fieldid="_3962" offset="0" fid="f51" line="7"/>
+  </struct>
+
+  <struct name="Timeval" id="_1172" size="128" align="64" fid="f53" lineno="8">
+    <field name="tv_sec" id="_3311" type="I64" fieldid="_50" offset="0" fid="f53" line="10"/>
+    <field name="tv_usec" id="_3312" type="I64" fieldid="_52" offset="64" fid="f53" line="11"/>
+  </struct>
+
+  <struct name="Timespec" id="_1173" size="128" align="64" fid="f54" lineno="10">
+    <field name="tv_sec" id="_3313" type="I64" fieldid="_50" offset="0" fid="f54" line="12"/>
+    <field name="tv_nsec" id="_3314" type="I64" fieldid="_66" offset="64" fid="f54" line="16"/>
+  </struct>
+
+  <struct name="Anon" id="_1176" size="1024" align="64" fid="f55" lineno="59">
+    <field name="__fds_bits" id="_3315" type="Pointer[I64]" fieldid="_3963" offset="0" fid="f55" line="67"/>
+  </struct>
+
+  <struct name="Pthreadinternallist" id="_1185" size="128" align="64" fid="f56" lineno="49">
+    <field name="__prev" id="_3321" type="NullablePointer[Pthreadinternallist]" fieldid="_3966" offset="0" fid="f56" line="51"/>
+    <field name="__next" id="_3322" type="NullablePointer[Pthreadinternallist]" fieldid="_3966" offset="64" fid="f56" line="52"/>
+  </struct>
+
+  <struct name="Pthreadinternalslist" id="_1187" size="64" align="64" fid="f56" lineno="55">
+    <field name="__next" id="_3324" type="NullablePointer[Pthreadinternalslist]" fieldid="_3967" offset="0" fid="f56" line="57"/>
+  </struct>
+
+  <struct name="Pthreadmutexs" id="_1189" size="320" align="64" fid="f57" lineno="22">
+    <field name="__lock" id="_3326" type="I32" fieldid="_2636" offset="0" fid="f57" line="24"/>
+    <field name="__count" id="_3327" type="U32" fieldid="_2633" offset="32" fid="f57" line="25"/>
+    <field name="__owner" id="_3328" type="I32" fieldid="_2636" offset="64" fid="f57" line="26"/>
+    <field name="__nusers" id="_3329" type="U32" fieldid="_2633" offset="96" fid="f57" line="28"/>
+    <field name="__kind" id="_3330" type="I32" fieldid="_2636" offset="128" fid="f57" line="32"/>
+    <field name="__spins" id="_3331" type="I16" fieldid="_2635" offset="160" fid="f57" line="34"/>
+    <field name="__elision" id="_3332" type="I16" fieldid="_2635" offset="176" fid="f57" line="35"/>
+    <field name="__list" id="_3333" type="Pthreadinternallist" fieldid="_1186" offset="192" fid="f57" line="36"/>
+  </struct>
+
+  <struct name="Pthreadrwlockarcht" id="_1190" size="448" align="64" fid="f58" lineno="23">
+    <field name="__readers" id="_3334" type="U32" fieldid="_2633" offset="0" fid="f58" line="25"/>
+    <field name="__writers" id="_3335" type="U32" fieldid="_2633" offset="32" fid="f58" line="26"/>
+    <field name="__wrphase_futex" id="_3336" type="U32" fieldid="_2633" offset="64" fid="f58" line="27"/>
+    <field name="__writers_futex" id="_3337" type="U32" fieldid="_2633" offset="96" fid="f58" line="28"/>
+    <field name="__pad3" id="_3338" type="U32" fieldid="_2633" offset="128" fid="f58" line="29"/>
+    <field name="__pad4" id="_3339" type="U32" fieldid="_2633" offset="160" fid="f58" line="30"/>
+    <field name="__cur_writer" id="_3340" type="I32" fieldid="_2636" offset="192" fid="f58" line="32"/>
+    <field name="__shared" id="_3341" type="I32" fieldid="_2636" offset="224" fid="f58" line="33"/>
+    <field name="__rwelision" id="_3342" type="I8" fieldid="_2634" offset="256" fid="f58" line="34"/>
+    <field name="__pad1" id="_3343" type="Pointer[U8]" fieldid="_3968" offset="264" fid="f58" line="39"/>
+    <field name="__pad2" id="_3344" type="U64" fieldid="_2630" offset="320" fid="f58" line="42"/>
+    <field name="__flags" id="_3345" type="U32" fieldid="_2633" offset="384" fid="f58" line="45"/>
+  </struct>
+
+  <struct name="Pthreadconds" id="_1191" size="384" align="64" fid="f56" lineno="92">
+    <field name="" id="_3347" type="None" fieldid="_3346" offset="0" fid="f56" line="94"/>
+    <field name="" id="_3351" type="None" fieldid="_3350" offset="64" fid="f56" line="103"/>
+    <field name="__g_refs" id="_3354" type="Pointer[U32]" fieldid="_3975" offset="128" fid="f56" line="112"/>
+    <field name="__g_size" id="_3355" type="Pointer[U32]" fieldid="_3975" offset="192" fid="f56" line="113"/>
+    <field name="__g1_orig_size" id="_3356" type="U32" fieldid="_2633" offset="256" fid="f56" line="114"/>
+    <field name="__wrefs" id="_3357" type="U32" fieldid="_2633" offset="288" fid="f56" line="115"/>
+    <field name="__g_signals" id="_3358" type="Pointer[U32]" fieldid="_3975" offset="320" fid="f56" line="116"/>
+  </struct>
+
+  <struct name="Randomdata" id="_1218" size="384" align="64" fid="f43" lineno="423">
+    <field name="fptr" id="_3389" type="Pointer[I32]" fieldid="_3219" offset="0" fid="f43" line="425"/>
+    <field name="rptr" id="_3390" type="Pointer[I32]" fieldid="_3219" offset="64" fid="f43" line="426"/>
+    <field name="state" id="_3391" type="Pointer[I32]" fieldid="_3219" offset="128" fid="f43" line="427"/>
+    <field name="rand_type" id="_3392" type="I32" fieldid="_2636" offset="192" fid="f43" line="428"/>
+    <field name="rand_deg" id="_3393" type="I32" fieldid="_2636" offset="224" fid="f43" line="429"/>
+    <field name="rand_sep" id="_3394" type="I32" fieldid="_2636" offset="256" fid="f43" line="430"/>
+    <field name="end_ptr" id="_3395" type="Pointer[I32]" fieldid="_3219" offset="320" fid="f43" line="431"/>
+  </struct>
+
+  <struct name="Drand48data" id="_1235" size="192" align="64" fid="f43" lineno="490">
+    <field name="__x" id="_3401" type="Pointer[U16]" fieldid="_3399" offset="0" fid="f43" line="492"/>
+    <field name="__old_x" id="_3402" type="Pointer[U16]" fieldid="_3399" offset="48" fid="f43" line="493"/>
+    <field name="__c" id="_3403" type="U16" fieldid="_2632" offset="96" fid="f43" line="494"/>
+    <field name="__init" id="_3404" type="U16" fieldid="_2632" offset="112" fid="f43" line="495"/>
+    <field name="__a" id="_3405" type="U64" fieldid="_3308" offset="128" fid="f43" line="496"/>
+  </struct>
+
+  <struct name="XlinkHandler" id="_1312" size="192" align="64" fid="f61" lineno="152">
+    <field name="simple" id="_3423" type="Pointer[None]" fieldid="_1309" offset="0" fid="f61" line="153"/>
+    <field name="extended" id="_3424" type="Pointer[None]" fieldid="_1310" offset="64" fid="f61" line="154"/>
+    <field name="set" id="_3425" type="Pointer[None]" fieldid="_1311" offset="128" fid="f61" line="155"/>
+  </struct>
+
+  <struct name="XmlGlobalState" id="_1366" size="7744" align="64" fid="f63" lineno="121">
+    <field name="xmlParserVersion" id="_3431" type="String" fieldid="_2683" offset="0" fid="f63" line="123"/>
+    <field name="xmlDefaultSAXLocator" id="_3432" type="XmlSAXLocator" fieldid="_223" offset="64" fid="f63" line="125"/>
+    <field name="xmlDefaultSAXHandler" id="_3433" type="XmlSAXHandlerV1" fieldid="_795" offset="320" fid="f63" line="126"/>
+    <field name="docbDefaultSAXHandler" id="_3434" type="XmlSAXHandlerV1" fieldid="_795" offset="2112" fid="f63" line="127"/>
+    <field name="htmlDefaultSAXHandler" id="_3435" type="XmlSAXHandlerV1" fieldid="_795" offset="3904" fid="f63" line="128"/>
+    <field name="xmlFree" id="_3436" type="Pointer[None]" fieldid="_496" offset="5696" fid="f63" line="130"/>
+    <field name="xmlMalloc" id="_3437" type="Pointer[None]" fieldid="_497" offset="5760" fid="f63" line="131"/>
+    <field name="xmlMemStrdup" id="_3438" type="Pointer[None]" fieldid="_499" offset="5824" fid="f63" line="132"/>
+    <field name="xmlRealloc" id="_3439" type="Pointer[None]" fieldid="_498" offset="5888" fid="f63" line="133"/>
+    <field name="xmlGenericError" id="_3440" type="Pointer[None]" fieldid="_567" offset="5952" fid="f63" line="135"/>
+    <field name="xmlStructuredError" id="_3441" type="Pointer[None]" fieldid="_568" offset="6016" fid="f63" line="136"/>
+    <field name="xmlGenericErrorContext" id="_3442" type="Pointer[None]" fieldid="_2640" offset="6080" fid="f63" line="137"/>
+    <field name="oldXMLWDcompatibility" id="_3443" type="I32" fieldid="_2636" offset="6144" fid="f63" line="139"/>
+    <field name="xmlBufferAllocScheme" id="_3444" type="I32" fieldid="_232" offset="6176" fid="f63" line="141"/>
+    <field name="xmlDefaultBufferSize" id="_3445" type="I32" fieldid="_2636" offset="6208" fid="f63" line="142"/>
+    <field name="xmlSubstituteEntitiesDefaultValue" id="_3446" type="I32" fieldid="_2636" offset="6240" fid="f63" line="144"/>
+    <field name="xmlDoValidityCheckingDefaultValue" id="_3447" type="I32" fieldid="_2636" offset="6272" fid="f63" line="145"/>
+    <field name="xmlGetWarningsDefaultValue" id="_3448" type="I32" fieldid="_2636" offset="6304" fid="f63" line="146"/>
+    <field name="xmlKeepBlanksDefaultValue" id="_3449" type="I32" fieldid="_2636" offset="6336" fid="f63" line="147"/>
+    <field name="xmlLineNumbersDefaultValue" id="_3450" type="I32" fieldid="_2636" offset="6368" fid="f63" line="148"/>
+    <field name="xmlLoadExtDtdDefaultValue" id="_3451" type="I32" fieldid="_2636" offset="6400" fid="f63" line="149"/>
+    <field name="xmlParserDebugEntities" id="_3452" type="I32" fieldid="_2636" offset="6432" fid="f63" line="150"/>
+    <field name="xmlPedanticParserDefaultValue" id="_3453" type="I32" fieldid="_2636" offset="6464" fid="f63" line="151"/>
+    <field name="xmlSaveNoEmptyTags" id="_3454" type="I32" fieldid="_2636" offset="6496" fid="f63" line="153"/>
+    <field name="xmlIndentTreeOutput" id="_3455" type="I32" fieldid="_2636" offset="6528" fid="f63" line="154"/>
+    <field name="xmlTreeIndentString" id="_3456" type="String" fieldid="_2683" offset="6592" fid="f63" line="155"/>
+    <field name="xmlRegisterNodeDefaultValue" id="_3457" type="Pointer[None]" fieldid="_1364" offset="6656" fid="f63" line="157"/>
+    <field name="xmlDeregisterNodeDefaultValue" id="_3458" type="Pointer[None]" fieldid="_1365" offset="6720" fid="f63" line="158"/>
+    <field name="xmlMallocAtomic" id="_3459" type="Pointer[None]" fieldid="_497" offset="6784" fid="f63" line="160"/>
+    <field name="xmlLastError" id="_3460" type="XmlError" fieldid="_563" offset="6848" fid="f63" line="161"/>
+    <field name="xmlParserInputBufferCreateFilenameValue" id="_3461" type="Pointer[None]" fieldid="_1360" offset="7552" fid="f63" line="163"/>
+    <field name="xmlOutputBufferCreateFilenameValue" id="_3462" type="Pointer[None]" fieldid="_1361" offset="7616" fid="f63" line="164"/>
+    <field name="xmlStructuredErrorContext" id="_3463" type="Pointer[None]" fieldid="_2640" offset="7680" fid="f63" line="166"/>
+  </struct>
+
+  <struct name="XmlCatalog" id="_1443" size="" align="" fid="f64" lineno="63">
+
+  </struct>
+
+  <struct name="XmlChSRange" id="_1482" size="32" align="16" fid="f65" lineno="30">
+    <field name="low" id="_3476" type="U16" fieldid="_2632" offset="0" fid="f65" line="31"/>
+    <field name="high" id="_3477" type="U16" fieldid="_2632" offset="16" fid="f65" line="32"/>
+  </struct>
+
+  <struct name="XmlChLRange" id="_1485" size="64" align="32" fid="f65" lineno="37">
+    <field name="low" id="_3480" type="U32" fieldid="_2633" offset="0" fid="f65" line="38"/>
+    <field name="high" id="_3481" type="U32" fieldid="_2633" offset="32" fid="f65" line="39"/>
+  </struct>
+
+  <struct name="XmlChRangeGroup" id="_1488" size="192" align="64" fid="f65" lineno="44">
+    <field name="nbShortRange" id="_3484" type="I32" fieldid="_2636" offset="0" fid="f65" line="45"/>
+    <field name="nbLongRange" id="_3485" type="I32" fieldid="_2636" offset="32" fid="f65" line="46"/>
+    <field name="shortRange" id="_3486" type="NullablePointer[XmlChSRange]" fieldid="_3996" offset="64" fid="f65" line="47"/>
+    <field name="longRange" id="_3487" type="NullablePointer[XmlChLRange]" fieldid="_3997" offset="128" fid="f65" line="48"/>
+  </struct>
+
+  <struct name="XmlXPathContext" id="_1507" size="3072" align="64" fid="f66" lineno="290">
+    <field name="doc" id="_3492" type="NullablePointer[XmlDoc]" fieldid="_330" offset="0" fid="f66" line="291"/>
+    <field name="node" id="_3493" type="NullablePointer[XmlNode]" fieldid="_325" offset="64" fid="f66" line="292"/>
+    <field name="nb_variables_unused" id="_3494" type="I32" fieldid="_2636" offset="128" fid="f66" line="294"/>
+    <field name="max_variables_unused" id="_3495" type="I32" fieldid="_2636" offset="160" fid="f66" line="295"/>
+    <field name="varHash" id="_3496" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="192" fid="f66" line="296"/>
+    <field name="nb_types" id="_3497" type="I32" fieldid="_2636" offset="256" fid="f66" line="298"/>
+    <field name="max_types" id="_3498" type="I32" fieldid="_2636" offset="288" fid="f66" line="299"/>
+    <field name="types" id="_3499" type="NullablePointer[XmlXPathType]" fieldid="_1526" offset="320" fid="f66" line="300"/>
+    <field name="nb_funcs_unused" id="_3500" type="I32" fieldid="_2636" offset="384" fid="f66" line="302"/>
+    <field name="max_funcs_unused" id="_3501" type="I32" fieldid="_2636" offset="416" fid="f66" line="303"/>
+    <field name="funcHash" id="_3502" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="448" fid="f66" line="304"/>
+    <field name="nb_axis" id="_3503" type="I32" fieldid="_2636" offset="512" fid="f66" line="306"/>
+    <field name="max_axis" id="_3504" type="I32" fieldid="_2636" offset="544" fid="f66" line="307"/>
+    <field name="axis" id="_3505" type="NullablePointer[XmlXPathAxis]" fieldid="_1537" offset="576" fid="f66" line="308"/>
+    <field name="namespaces" id="_3506" type="Array[NullablePointer[XmlNs]]" fieldid="_3076" offset="640" fid="f66" line="311"/>
+    <field name="nsNr" id="_3507" type="I32" fieldid="_2636" offset="704" fid="f66" line="312"/>
+    <field name="user" id="_3508" type="Pointer[None]" fieldid="_2640" offset="768" fid="f66" line="313"/>
+    <field name="contextSize" id="_3509" type="I32" fieldid="_2636" offset="832" fid="f66" line="316"/>
+    <field name="proximityPosition" id="_3510" type="I32" fieldid="_2636" offset="864" fid="f66" line="317"/>
+    <field name="xptr" id="_3511" type="I32" fieldid="_2636" offset="896" fid="f66" line="320"/>
+    <field name="here" id="_3512" type="NullablePointer[XmlNode]" fieldid="_325" offset="960" fid="f66" line="321"/>
+    <field name="origin" id="_3513" type="NullablePointer[XmlNode]" fieldid="_325" offset="1024" fid="f66" line="322"/>
+    <field name="nsHash" id="_3514" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="1088" fid="f66" line="325"/>
+    <field name="varLookupFunc" id="_3515" type="Pointer[None]" fieldid="_1539" offset="1152" fid="f66" line="326"/>
+    <field name="varLookupData" id="_3516" type="Pointer[None]" fieldid="_2640" offset="1216" fid="f66" line="327"/>
+    <field name="extra" id="_3517" type="Pointer[None]" fieldid="_2640" offset="1280" fid="f66" line="330"/>
+    <field name="function" id="_3518" type="String" fieldid="_2692" offset="1344" fid="f66" line="333"/>
+    <field name="functionURI" id="_3519" type="String" fieldid="_2692" offset="1408" fid="f66" line="334"/>
+    <field name="funcLookupFunc" id="_3520" type="Pointer[None]" fieldid="_1540" offset="1472" fid="f66" line="337"/>
+    <field name="funcLookupData" id="_3521" type="Pointer[None]" fieldid="_2640" offset="1536" fid="f66" line="338"/>
+    <field name="tmpNsList" id="_3522" type="Array[NullablePointer[XmlNs]]" fieldid="_3076" offset="1600" fid="f66" line="341"/>
+    <field name="tmpNsNr" id="_3523" type="I32" fieldid="_2636" offset="1664" fid="f66" line="342"/>
+    <field name="userData" id="_3524" type="Pointer[None]" fieldid="_2640" offset="1728" fid="f66" line="345"/>
+    <field name="xmlerror" id="_3525" type="Pointer[None]" fieldid="_568" offset="1792" fid="f66" line="346"/>
+    <field name="lastError" id="_3526" type="XmlError" fieldid="_563" offset="1856" fid="f66" line="347"/>
+    <field name="debugNode" id="_3527" type="NullablePointer[XmlNode]" fieldid="_325" offset="2560" fid="f66" line="348"/>
+    <field name="dict" id="_3528" type="NullablePointer[XmlDict]" fieldid="_279" offset="2624" fid="f66" line="351"/>
+    <field name="flags" id="_3529" type="I32" fieldid="_2636" offset="2688" fid="f66" line="353"/>
+    <field name="cache" id="_3530" type="Pointer[None]" fieldid="_2640" offset="2752" fid="f66" line="356"/>
+    <field name="opLimit" id="_3531" type="U64" fieldid="_2630" offset="2816" fid="f66" line="359"/>
+    <field name="opCount" id="_3532" type="U64" fieldid="_2630" offset="2880" fid="f66" line="360"/>
+    <field name="depth" id="_3533" type="I32" fieldid="_2636" offset="2944" fid="f66" line="361"/>
+    <field name="maxDepth" id="_3534" type="I32" fieldid="_2636" offset="2976" fid="f66" line="362"/>
+    <field name="maxParserDepth" id="_3535" type="I32" fieldid="_2636" offset="3008" fid="f66" line="363"/>
+  </struct>
+
+  <struct name="XmlXPathParserContext" id="_1510" size="704" align="64" fid="f66" lineno="379">
+    <field name="cur" id="_3538" type="String" fieldid="_2692" offset="0" fid="f66" line="380"/>
+    <field name="base" id="_3539" type="String" fieldid="_2692" offset="64" fid="f66" line="381"/>
+    <field name="xmlerror" id="_3540" type="I32" fieldid="_2636" offset="128" fid="f66" line="383"/>
+    <field name="context" id="_3541" type="NullablePointer[XmlXPathContext]" fieldid="_1509" offset="192" fid="f66" line="385"/>
+    <field name="value" id="_3542" type="NullablePointer[XmlXPathObject]" fieldid="_1522" offset="256" fid="f66" line="386"/>
+    <field name="valueNr" id="_3543" type="I32" fieldid="_2636" offset="320" fid="f66" line="387"/>
+    <field name="valueMax" id="_3544" type="I32" fieldid="_2636" offset="352" fid="f66" line="388"/>
+    <field name="valueTab" id="_3545" type="Array[NullablePointer[XmlXPathObject]]" fieldid="_3998" offset="384" fid="f66" line="389"/>
+    <field name="comp" id="_3546" type="NullablePointer[XmlXPathCompExpr]" fieldid="_1543" offset="448" fid="f66" line="391"/>
+    <field name="xptr" id="_3547" type="I32" fieldid="_2636" offset="512" fid="f66" line="392"/>
+    <field name="ancestor" id="_3548" type="NullablePointer[XmlNode]" fieldid="_325" offset="576" fid="f66" line="393"/>
+    <field name="valueFrame" id="_3549" type="I32" fieldid="_2636" offset="640" fid="f66" line="395"/>
+  </struct>
+
+  <struct name="XmlNodeSet" id="_1515" size="128" align="64" fid="f66" lineno="83">
+    <field name="nodeNr" id="_3553" type="I32" fieldid="_2636" offset="0" fid="f66" line="84"/>
+    <field name="nodeMax" id="_3554" type="I32" fieldid="_2636" offset="32" fid="f66" line="85"/>
+    <field name="nodeTab" id="_3555" type="Array[NullablePointer[XmlNode]]" fieldid="_3077" offset="64" fid="f66" line="86"/>
+  </struct>
+
+  <struct name="XmlXPathObject" id="_1520" size="576" align="64" fid="f66" lineno="116">
+    <field name="xmltype" id="_3559" type="I32" fieldid="_1519" offset="0" fid="f66" line="117"/>
+    <field name="nodesetval" id="_3560" type="NullablePointer[XmlNodeSet]" fieldid="_1517" offset="64" fid="f66" line="118"/>
+    <field name="boolval" id="_3561" type="I32" fieldid="_2636" offset="128" fid="f66" line="119"/>
+    <field name="floatval" id="_3562" type="F64" fieldid="_3222" offset="192" fid="f66" line="120"/>
+    <field name="stringval" id="_3563" type="String" fieldid="_2691" offset="256" fid="f66" line="121"/>
+    <field name="user" id="_3564" type="Pointer[None]" fieldid="_2640" offset="320" fid="f66" line="122"/>
+    <field name="index" id="_3565" type="I32" fieldid="_2636" offset="384" fid="f66" line="123"/>
+    <field name="user2" id="_3566" type="Pointer[None]" fieldid="_2640" offset="448" fid="f66" line="124"/>
+    <field name="index2" id="_3567" type="I32" fieldid="_2636" offset="512" fid="f66" line="125"/>
+  </struct>
+
+  <struct name="XmlXPathType" id="_1524" size="128" align="64" fid="f66" lineno="146">
+    <field name="name" id="_3571" type="String" fieldid="_2692" offset="0" fid="f66" line="147"/>
+    <field name="func" id="_3572" type="Pointer[None]" fieldid="_1523" offset="64" fid="f66" line="148"/>
+  </struct>
+
+  <struct name="XmlXPathVariable" id="_1527" size="128" align="64" fid="f66" lineno="157">
+    <field name="name" id="_3575" type="String" fieldid="_2692" offset="0" fid="f66" line="158"/>
+    <field name="value" id="_3576" type="NullablePointer[XmlXPathObject]" fieldid="_1522" offset="64" fid="f66" line="159"/>
+  </struct>
+
+  <struct name="XmlXPathFunct" id="_1531" size="128" align="64" fid="f66" lineno="179">
+    <field name="name" id="_3580" type="String" fieldid="_2692" offset="0" fid="f66" line="180"/>
+    <field name="func" id="_3581" type="Pointer[None]" fieldid="_1530" offset="64" fid="f66" line="181"/>
+  </struct>
+
+  <struct name="XmlXPathAxis" id="_1535" size="128" align="64" fid="f66" lineno="205">
+    <field name="name" id="_3585" type="String" fieldid="_2692" offset="0" fid="f66" line="206"/>
+    <field name="func" id="_3586" type="Pointer[None]" fieldid="_1534" offset="64" fid="f66" line="207"/>
+  </struct>
+
+  <struct name="XmlXPathCompExpr" id="_1541" size="" align="" fid="f66" lineno="370">
+
+  </struct>
+
+  <struct name="XmlShellCtxt" id="_1602" size="448" align="64" fid="f67" lineno="113">
+    <field name="filename" id="_3594" type="String" fieldid="_2628" offset="0" fid="f67" line="114"/>
+    <field name="doc" id="_3595" type="NullablePointer[XmlDoc]" fieldid="_330" offset="64" fid="f67" line="115"/>
+    <field name="node" id="_3596" type="NullablePointer[XmlNode]" fieldid="_325" offset="128" fid="f67" line="116"/>
+    <field name="pctxt" id="_3597" type="NullablePointer[XmlXPathContext]" fieldid="_1509" offset="192" fid="f67" line="117"/>
+    <field name="loaded" id="_3598" type="I32" fieldid="_2636" offset="256" fid="f67" line="118"/>
+    <field name="output" id="_3599" type="NullablePointer[IOFILE]" fieldid="_2682" offset="320" fid="f67" line="119"/>
+    <field name="input" id="_3600" type="Pointer[None]" fieldid="_1601" offset="384" fid="f67" line="120"/>
+  </struct>
+
+  <struct name="HtmlElemDesc" id="_1629" size="512" align="64" fid="f68" lineno="43">
+    <field name="name" id="_3604" type="String" fieldid="_2683" offset="0" fid="f68" line="44"/>
+    <field name="startTag" id="_3605" type="U8" fieldid="_3891" offset="64" fid="f68" line="45"/>
+    <field name="endTag" id="_3606" type="U8" fieldid="_3891" offset="72" fid="f68" line="46"/>
+    <field name="saveEndTag" id="_3607" type="U8" fieldid="_3891" offset="80" fid="f68" line="47"/>
+    <field name="empty" id="_3608" type="U8" fieldid="_3891" offset="88" fid="f68" line="48"/>
+    <field name="depr" id="_3609" type="U8" fieldid="_3891" offset="96" fid="f68" line="49"/>
+    <field name="dtd" id="_3610" type="U8" fieldid="_3891" offset="104" fid="f68" line="50"/>
+    <field name="isinline" id="_3611" type="U8" fieldid="_3891" offset="112" fid="f68" line="51"/>
+    <field name="desc" id="_3612" type="String" fieldid="_2683" offset="128" fid="f68" line="52"/>
+    <field name="subelts" id="_3613" type="Array[String]" fieldid="_3269" offset="192" fid="f68" line="64"/>
+    <field name="defaultsubelt" id="_3614" type="String" fieldid="_2683" offset="256" fid="f68" line="65"/>
+    <field name="attrs_opt" id="_3615" type="Array[String]" fieldid="_3269" offset="320" fid="f68" line="67"/>
+    <field name="attrs_depr" id="_3616" type="Array[String]" fieldid="_3269" offset="384" fid="f68" line="68"/>
+    <field name="attrs_req" id="_3617" type="Array[String]" fieldid="_3269" offset="448" fid="f68" line="69"/>
+  </struct>
+
+  <struct name="HtmlEntityDesc" id="_1632" size="192" align="64" fid="f68" lineno="77">
+    <field name="value" id="_3620" type="U32" fieldid="_2633" offset="0" fid="f68" line="78"/>
+    <field name="name" id="_3621" type="String" fieldid="_2683" offset="64" fid="f68" line="79"/>
+    <field name="desc" id="_3622" type="String" fieldid="_2683" offset="128" fid="f68" line="80"/>
+  </struct>
+
+  <struct name="XmlPattern" id="_1830" size="" align="" fid="f73" lineno="29">
+
+  </struct>
+
+  <struct name="XmlStreamCtxt" id="_1839" size="" align="" fid="f73" lineno="62">
+
+  </struct>
+
+  <struct name="XmlRelaxNG" id="_1853" size="" align="" fid="f74" lineno="23">
+
+  </struct>
+
+  <struct name="XmlRelaxNGParserCtxt" id="_1858" size="" align="" fid="f74" lineno="54">
+
+  </struct>
+
+  <struct name="XmlRelaxNGValidCtxt" id="_1861" size="" align="" fid="f74" lineno="57">
+
+  </struct>
+
+  <struct name="XmlSchemaVal" id="_1935" size="" align="" fid="f76" lineno="136">
+
+  </struct>
+
+  <struct name="XmlSchemaType" id="_1938" size="1792" align="64" fid="f76" lineno="602">
+    <field name="xmltype" id="_3655" type="I32" fieldid="_1932" offset="0" fid="f76" line="603"/>
+    <field name="next" id="_3656" type="NullablePointer[XmlSchemaType]" fieldid="_4009" offset="64" fid="f76" line="604"/>
+    <field name="name" id="_3657" type="String" fieldid="_2692" offset="128" fid="f76" line="605"/>
+    <field name="id" id="_3658" type="String" fieldid="_2692" offset="192" fid="f76" line="606"/>
+    <field name="xmlref" id="_3659" type="String" fieldid="_2692" offset="256" fid="f76" line="607"/>
+    <field name="refNs" id="_3660" type="String" fieldid="_2692" offset="320" fid="f76" line="608"/>
+    <field name="annot" id="_3661" type="NullablePointer[XmlSchemaAnnot]" fieldid="_1946" offset="384" fid="f76" line="609"/>
+    <field name="subtypes" id="_3662" type="NullablePointer[XmlSchemaType]" fieldid="_1940" offset="448" fid="f76" line="610"/>
+    <field name="attributes" id="_3663" type="NullablePointer[XmlSchemaAttribute]" fieldid="_1949" offset="512" fid="f76" line="611"/>
+    <field name="node" id="_3664" type="NullablePointer[XmlNode]" fieldid="_325" offset="576" fid="f76" line="612"/>
+    <field name="minOccurs" id="_3665" type="I32" fieldid="_2636" offset="640" fid="f76" line="613"/>
+    <field name="maxOccurs" id="_3666" type="I32" fieldid="_2636" offset="672" fid="f76" line="614"/>
+    <field name="flags" id="_3667" type="I32" fieldid="_2636" offset="704" fid="f76" line="616"/>
+    <field name="contentType" id="_3668" type="I32" fieldid="_1934" offset="736" fid="f76" line="617"/>
+    <field name="base" id="_3669" type="String" fieldid="_2692" offset="768" fid="f76" line="618"/>
+    <field name="baseNs" id="_3670" type="String" fieldid="_2692" offset="832" fid="f76" line="619"/>
+    <field name="baseType" id="_3671" type="NullablePointer[XmlSchemaType]" fieldid="_1940" offset="896" fid="f76" line="620"/>
+    <field name="facets" id="_3672" type="NullablePointer[XmlSchemaFacet]" fieldid="_1943" offset="960" fid="f76" line="621"/>
+    <field name="redef" id="_3673" type="NullablePointer[XmlSchemaType]" fieldid="_4009" offset="1024" fid="f76" line="622"/>
+    <field name="recurse" id="_3674" type="I32" fieldid="_2636" offset="1088" fid="f76" line="623"/>
+    <field name="attributeUses" id="_3675" type="Array[NullablePointer[XmlSchemaAttributeLink]]" fieldid="_4010" offset="1152" fid="f76" line="624"/>
+    <field name="attributeWildcard" id="_3676" type="NullablePointer[XmlSchemaWildcard]" fieldid="_1958" offset="1216" fid="f76" line="625"/>
+    <field name="builtInType" id="_3677" type="I32" fieldid="_2636" offset="1280" fid="f76" line="626"/>
+    <field name="memberTypes" id="_3678" type="NullablePointer[XmlSchemaTypeLink]" fieldid="_1964" offset="1344" fid="f76" line="627"/>
+    <field name="facetSet" id="_3679" type="NullablePointer[XmlSchemaFacetLink]" fieldid="_1967" offset="1408" fid="f76" line="628"/>
+    <field name="refPrefix" id="_3680" type="String" fieldid="_2692" offset="1472" fid="f76" line="629"/>
+    <field name="contentTypeDef" id="_3681" type="NullablePointer[XmlSchemaType]" fieldid="_1940" offset="1536" fid="f76" line="630"/>
+    <field name="contModel" id="_3682" type="NullablePointer[XmlRegexp]" fieldid="_269" offset="1600" fid="f76" line="632"/>
+    <field name="targetNamespace" id="_3683" type="String" fieldid="_2692" offset="1664" fid="f76" line="633"/>
+    <field name="attrUses" id="_3684" type="Pointer[None]" fieldid="_2640" offset="1728" fid="f76" line="634"/>
+  </struct>
+
+  <struct name="XmlSchemaFacet" id="_1941" size="576" align="64" fid="f76" lineno="823">
+    <field name="xmltype" id="_3687" type="I32" fieldid="_1932" offset="0" fid="f76" line="824"/>
+    <field name="next" id="_3688" type="NullablePointer[XmlSchemaFacet]" fieldid="_4011" offset="64" fid="f76" line="825"/>
+    <field name="value" id="_3689" type="String" fieldid="_2692" offset="128" fid="f76" line="826"/>
+    <field name="id" id="_3690" type="String" fieldid="_2692" offset="192" fid="f76" line="827"/>
+    <field name="annot" id="_3691" type="NullablePointer[XmlSchemaAnnot]" fieldid="_1946" offset="256" fid="f76" line="828"/>
+    <field name="node" id="_3692" type="NullablePointer[XmlNode]" fieldid="_325" offset="320" fid="f76" line="829"/>
+    <field name="fixed" id="_3693" type="I32" fieldid="_2636" offset="384" fid="f76" line="830"/>
+    <field name="whitespace" id="_3694" type="I32" fieldid="_2636" offset="416" fid="f76" line="831"/>
+    <field name="xmlval" id="_3695" type="NullablePointer[XmlSchemaVal]" fieldid="_1937" offset="448" fid="f76" line="832"/>
+    <field name="regexp" id="_3696" type="NullablePointer[XmlRegexp]" fieldid="_269" offset="512" fid="f76" line="833"/>
+  </struct>
+
+  <struct name="XmlSchemaAnnot" id="_1944" size="128" align="64" fid="f76" lineno="150">
+    <field name="next" id="_3699" type="NullablePointer[XmlSchemaAnnot]" fieldid="_4012" offset="0" fid="f76" line="151"/>
+    <field name="content" id="_3700" type="NullablePointer[XmlNode]" fieldid="_325" offset="64" fid="f76" line="152"/>
+  </struct>
+
+  <struct name="XmlSchemaAttribute" id="_1947" size="1216" align="64" fid="f76" lineno="248">
+    <field name="xmltype" id="_3703" type="I32" fieldid="_1932" offset="0" fid="f76" line="249"/>
+    <field name="next" id="_3704" type="NullablePointer[XmlSchemaAttribute]" fieldid="_4013" offset="64" fid="f76" line="250"/>
+    <field name="name" id="_3705" type="String" fieldid="_2692" offset="128" fid="f76" line="251"/>
+    <field name="id" id="_3706" type="String" fieldid="_2692" offset="192" fid="f76" line="252"/>
+    <field name="xmlref" id="_3707" type="String" fieldid="_2692" offset="256" fid="f76" line="253"/>
+    <field name="refNs" id="_3708" type="String" fieldid="_2692" offset="320" fid="f76" line="254"/>
+    <field name="typeName" id="_3709" type="String" fieldid="_2692" offset="384" fid="f76" line="255"/>
+    <field name="typeNs" id="_3710" type="String" fieldid="_2692" offset="448" fid="f76" line="256"/>
+    <field name="annot" id="_3711" type="NullablePointer[XmlSchemaAnnot]" fieldid="_1946" offset="512" fid="f76" line="257"/>
+    <field name="base" id="_3712" type="NullablePointer[XmlSchemaType]" fieldid="_1940" offset="576" fid="f76" line="259"/>
+    <field name="occurs" id="_3713" type="I32" fieldid="_2636" offset="640" fid="f76" line="260"/>
+    <field name="defValue" id="_3714" type="String" fieldid="_2692" offset="704" fid="f76" line="261"/>
+    <field name="subtypes" id="_3715" type="NullablePointer[XmlSchemaType]" fieldid="_1940" offset="768" fid="f76" line="262"/>
+    <field name="node" id="_3716" type="NullablePointer[XmlNode]" fieldid="_325" offset="832" fid="f76" line="263"/>
+    <field name="targetNamespace" id="_3717" type="String" fieldid="_2692" offset="896" fid="f76" line="264"/>
+    <field name="flags" id="_3718" type="I32" fieldid="_2636" offset="960" fid="f76" line="265"/>
+    <field name="refPrefix" id="_3719" type="String" fieldid="_2692" offset="1024" fid="f76" line="266"/>
+    <field name="defVal" id="_3720" type="NullablePointer[XmlSchemaVal]" fieldid="_1937" offset="1088" fid="f76" line="267"/>
+    <field name="refDecl" id="_3721" type="NullablePointer[XmlSchemaAttribute]" fieldid="_1949" offset="1152" fid="f76" line="268"/>
+  </struct>
+
+  <struct name="XmlSchemaAttributeLink" id="_1950" size="128" align="64" fid="f76" lineno="278">
+    <field name="next" id="_3724" type="NullablePointer[XmlSchemaAttributeLink]" fieldid="_4014" offset="0" fid="f76" line="279"/>
+    <field name="attr" id="_3725" type="NullablePointer[XmlSchemaAttribute]" fieldid="_4013" offset="64" fid="f76" line="280"/>
+  </struct>
+
+  <struct name="XmlSchemaWildcardNs" id="_1953" size="128" align="64" fid="f76" lineno="296">
+    <field name="next" id="_3728" type="NullablePointer[XmlSchemaWildcardNs]" fieldid="_4015" offset="0" fid="f76" line="297"/>
+    <field name="value" id="_3729" type="String" fieldid="_2692" offset="64" fid="f76" line="298"/>
+  </struct>
+
+  <struct name="XmlSchemaWildcard" id="_1956" size="576" align="64" fid="f76" lineno="307">
+    <field name="xmltype" id="_3732" type="I32" fieldid="_1932" offset="0" fid="f76" line="308"/>
+    <field name="id" id="_3733" type="String" fieldid="_2692" offset="64" fid="f76" line="309"/>
+    <field name="annot" id="_3734" type="NullablePointer[XmlSchemaAnnot]" fieldid="_1946" offset="128" fid="f76" line="310"/>
+    <field name="node" id="_3735" type="NullablePointer[XmlNode]" fieldid="_325" offset="192" fid="f76" line="311"/>
+    <field name="minOccurs" id="_3736" type="I32" fieldid="_2636" offset="256" fid="f76" line="312"/>
+    <field name="maxOccurs" id="_3737" type="I32" fieldid="_2636" offset="288" fid="f76" line="313"/>
+    <field name="processContents" id="_3738" type="I32" fieldid="_2636" offset="320" fid="f76" line="314"/>
+    <field name="any" id="_3739" type="I32" fieldid="_2636" offset="352" fid="f76" line="315"/>
+    <field name="nsSet" id="_3740" type="NullablePointer[XmlSchemaWildcardNs]" fieldid="_1955" offset="384" fid="f76" line="316"/>
+    <field name="negNsSet" id="_3741" type="NullablePointer[XmlSchemaWildcardNs]" fieldid="_1955" offset="448" fid="f76" line="317"/>
+    <field name="flags" id="_3742" type="I32" fieldid="_2636" offset="512" fid="f76" line="318"/>
+  </struct>
+
+  <struct name="XmlSchemaAttributeGroup" id="_1959" size="960" align="64" fid="f76" lineno="361">
+    <field name="xmltype" id="_3745" type="I32" fieldid="_1932" offset="0" fid="f76" line="362"/>
+    <field name="next" id="_3746" type="NullablePointer[XmlSchemaAttribute]" fieldid="_4013" offset="64" fid="f76" line="363"/>
+    <field name="name" id="_3747" type="String" fieldid="_2692" offset="128" fid="f76" line="364"/>
+    <field name="id" id="_3748" type="String" fieldid="_2692" offset="192" fid="f76" line="365"/>
+    <field name="xmlref" id="_3749" type="String" fieldid="_2692" offset="256" fid="f76" line="366"/>
+    <field name="refNs" id="_3750" type="String" fieldid="_2692" offset="320" fid="f76" line="367"/>
+    <field name="annot" id="_3751" type="NullablePointer[XmlSchemaAnnot]" fieldid="_1946" offset="384" fid="f76" line="368"/>
+    <field name="attributes" id="_3752" type="NullablePointer[XmlSchemaAttribute]" fieldid="_1949" offset="448" fid="f76" line="370"/>
+    <field name="node" id="_3753" type="NullablePointer[XmlNode]" fieldid="_325" offset="512" fid="f76" line="371"/>
+    <field name="flags" id="_3754" type="I32" fieldid="_2636" offset="576" fid="f76" line="372"/>
+    <field name="attributeWildcard" id="_3755" type="NullablePointer[XmlSchemaWildcard]" fieldid="_1958" offset="640" fid="f76" line="373"/>
+    <field name="refPrefix" id="_3756" type="String" fieldid="_2692" offset="704" fid="f76" line="374"/>
+    <field name="refItem" id="_3757" type="NullablePointer[XmlSchemaAttributeGroup]" fieldid="_1961" offset="768" fid="f76" line="375"/>
+    <field name="targetNamespace" id="_3758" type="String" fieldid="_2692" offset="832" fid="f76" line="376"/>
+    <field name="attrUses" id="_3759" type="Pointer[None]" fieldid="_2640" offset="896" fid="f76" line="377"/>
+  </struct>
+
+  <struct name="XmlSchemaTypeLink" id="_1962" size="128" align="64" fid="f76" lineno="387">
+    <field name="next" id="_3762" type="NullablePointer[XmlSchemaTypeLink]" fieldid="_4016" offset="0" fid="f76" line="388"/>
+    <field name="xmltype" id="_3763" type="NullablePointer[XmlSchemaType]" fieldid="_1940" offset="64" fid="f76" line="389"/>
+  </struct>
+
+  <struct name="XmlSchemaFacetLink" id="_1965" size="128" align="64" fid="f76" lineno="398">
+    <field name="next" id="_3766" type="NullablePointer[XmlSchemaFacetLink]" fieldid="_4017" offset="0" fid="f76" line="399"/>
+    <field name="facet" id="_3767" type="NullablePointer[XmlSchemaFacet]" fieldid="_1943" offset="64" fid="f76" line="400"/>
+  </struct>
+
+  <struct name="XmlSchemaElement" id="_1968" size="1600" align="64" fid="f76" lineno="765">
+    <field name="xmltype" id="_3770" type="I32" fieldid="_1932" offset="0" fid="f76" line="766"/>
+    <field name="next" id="_3771" type="NullablePointer[XmlSchemaType]" fieldid="_4009" offset="64" fid="f76" line="767"/>
+    <field name="name" id="_3772" type="String" fieldid="_2692" offset="128" fid="f76" line="768"/>
+    <field name="id" id="_3773" type="String" fieldid="_2692" offset="192" fid="f76" line="769"/>
+    <field name="xmlref" id="_3774" type="String" fieldid="_2692" offset="256" fid="f76" line="770"/>
+    <field name="refNs" id="_3775" type="String" fieldid="_2692" offset="320" fid="f76" line="771"/>
+    <field name="annot" id="_3776" type="NullablePointer[XmlSchemaAnnot]" fieldid="_1946" offset="384" fid="f76" line="772"/>
+    <field name="subtypes" id="_3777" type="NullablePointer[XmlSchemaType]" fieldid="_1940" offset="448" fid="f76" line="773"/>
+    <field name="attributes" id="_3778" type="NullablePointer[XmlSchemaAttribute]" fieldid="_1949" offset="512" fid="f76" line="774"/>
+    <field name="node" id="_3779" type="NullablePointer[XmlNode]" fieldid="_325" offset="576" fid="f76" line="775"/>
+    <field name="minOccurs" id="_3780" type="I32" fieldid="_2636" offset="640" fid="f76" line="776"/>
+    <field name="maxOccurs" id="_3781" type="I32" fieldid="_2636" offset="672" fid="f76" line="777"/>
+    <field name="flags" id="_3782" type="I32" fieldid="_2636" offset="704" fid="f76" line="779"/>
+    <field name="targetNamespace" id="_3783" type="String" fieldid="_2692" offset="768" fid="f76" line="780"/>
+    <field name="namedType" id="_3784" type="String" fieldid="_2692" offset="832" fid="f76" line="781"/>
+    <field name="namedTypeNs" id="_3785" type="String" fieldid="_2692" offset="896" fid="f76" line="782"/>
+    <field name="substGroup" id="_3786" type="String" fieldid="_2692" offset="960" fid="f76" line="783"/>
+    <field name="substGroupNs" id="_3787" type="String" fieldid="_2692" offset="1024" fid="f76" line="784"/>
+    <field name="scope" id="_3788" type="String" fieldid="_2692" offset="1088" fid="f76" line="785"/>
+    <field name="value" id="_3789" type="String" fieldid="_2692" offset="1152" fid="f76" line="786"/>
+    <field name="refDecl" id="_3790" type="NullablePointer[XmlSchemaElement]" fieldid="_4018" offset="1216" fid="f76" line="787"/>
+    <field name="contModel" id="_3791" type="NullablePointer[XmlRegexp]" fieldid="_269" offset="1280" fid="f76" line="789"/>
+    <field name="contentType" id="_3792" type="I32" fieldid="_1934" offset="1344" fid="f76" line="790"/>
+    <field name="refPrefix" id="_3793" type="String" fieldid="_2692" offset="1408" fid="f76" line="791"/>
+    <field name="defVal" id="_3794" type="NullablePointer[XmlSchemaVal]" fieldid="_1937" offset="1472" fid="f76" line="792"/>
+    <field name="idcs" id="_3795" type="Pointer[None]" fieldid="_2640" offset="1536" fid="f76" line="793"/>
+  </struct>
+
+  <struct name="XmlSchemaNotation" id="_1971" size="320" align="64" fid="f76" lineno="841">
+    <field name="xmltype" id="_3798" type="I32" fieldid="_1932" offset="0" fid="f76" line="842"/>
+    <field name="name" id="_3799" type="String" fieldid="_2692" offset="64" fid="f76" line="843"/>
+    <field name="annot" id="_3800" type="NullablePointer[XmlSchemaAnnot]" fieldid="_1946" offset="128" fid="f76" line="844"/>
+    <field name="identifier" id="_3801" type="String" fieldid="_2692" offset="192" fid="f76" line="845"/>
+    <field name="targetNamespace" id="_3802" type="String" fieldid="_2692" offset="256" fid="f76" line="846"/>
+  </struct>
+
+  <struct name="XmlSchema" id="_1974" size="1280" align="64" fid="f76" lineno="923">
+    <field name="name" id="_3805" type="String" fieldid="_2692" offset="0" fid="f76" line="924"/>
+    <field name="targetNamespace" id="_3806" type="String" fieldid="_2692" offset="64" fid="f76" line="925"/>
+    <field name="version" id="_3807" type="String" fieldid="_2692" offset="128" fid="f76" line="926"/>
+    <field name="id" id="_3808" type="String" fieldid="_2692" offset="192" fid="f76" line="927"/>
+    <field name="doc" id="_3809" type="NullablePointer[XmlDoc]" fieldid="_330" offset="256" fid="f76" line="928"/>
+    <field name="annot" id="_3810" type="NullablePointer[XmlSchemaAnnot]" fieldid="_1946" offset="320" fid="f76" line="929"/>
+    <field name="flags" id="_3811" type="I32" fieldid="_2636" offset="384" fid="f76" line="930"/>
+    <field name="typeDecl" id="_3812" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="448" fid="f76" line="932"/>
+    <field name="attrDecl" id="_3813" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="512" fid="f76" line="933"/>
+    <field name="attrgrpDecl" id="_3814" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="576" fid="f76" line="934"/>
+    <field name="elemDecl" id="_3815" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="640" fid="f76" line="935"/>
+    <field name="notaDecl" id="_3816" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="704" fid="f76" line="936"/>
+    <field name="schemasImports" id="_3817" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="768" fid="f76" line="938"/>
+    <field name="_private" id="_3818" type="Pointer[None]" fieldid="_2640" offset="832" fid="f76" line="940"/>
+    <field name="groupDecl" id="_3819" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="896" fid="f76" line="941"/>
+    <field name="dict" id="_3820" type="NullablePointer[XmlDict]" fieldid="_279" offset="960" fid="f76" line="942"/>
+    <field name="includes" id="_3821" type="Pointer[None]" fieldid="_2640" offset="1024" fid="f76" line="943"/>
+    <field name="preserve" id="_3822" type="I32" fieldid="_2636" offset="1088" fid="f76" line="944"/>
+    <field name="counter" id="_3823" type="I32" fieldid="_2636" offset="1120" fid="f76" line="945"/>
+    <field name="idcDef" id="_3824" type="NullablePointer[XmlHashTable]" fieldid="_528" offset="1152" fid="f76" line="946"/>
+    <field name="volatiles" id="_3825" type="Pointer[None]" fieldid="_2640" offset="1216" fid="f76" line="947"/>
+  </struct>
+
+  <struct name="XmlSchematron" id="_1979" size="" align="" fid="f77" lineno="37">
+
+  </struct>
+
+  <struct name="XmlSchematronParserCtxt" id="_1984" size="" align="" fid="f77" lineno="63">
+
+  </struct>
+
+  <struct name="XmlSchematronValidCtxt" id="_1987" size="" align="" fid="f77" lineno="66">
+
+  </struct>
+
+  <struct name="XmlURI" id="_2000" size="704" align="64" fid="f78" lineno="33">
+    <field name="scheme" id="_3833" type="String" fieldid="_2628" offset="0" fid="f78" line="34"/>
+    <field name="opaque" id="_3834" type="String" fieldid="_2628" offset="64" fid="f78" line="35"/>
+    <field name="authority" id="_3835" type="String" fieldid="_2628" offset="128" fid="f78" line="36"/>
+    <field name="server" id="_3836" type="String" fieldid="_2628" offset="192" fid="f78" line="37"/>
+    <field name="user" id="_3837" type="String" fieldid="_2628" offset="256" fid="f78" line="38"/>
+    <field name="port" id="_3838" type="I32" fieldid="_2636" offset="320" fid="f78" line="39"/>
+    <field name="path" id="_3839" type="String" fieldid="_2628" offset="384" fid="f78" line="40"/>
+    <field name="query" id="_3840" type="String" fieldid="_2628" offset="448" fid="f78" line="41"/>
+    <field name="fragment" id="_3841" type="String" fieldid="_2628" offset="512" fid="f78" line="42"/>
+    <field name="cleanup" id="_3842" type="I32" fieldid="_2636" offset="576" fid="f78" line="43"/>
+    <field name="query_raw" id="_3843" type="String" fieldid="_2628" offset="640" fid="f78" line="44"/>
+  </struct>
+
+  <struct name="XmlXIncludeCtxt" id="_2018" size="" align="" fid="f79" lineno="86">
+
+  </struct>
+
+  <struct name="XmlModule" id="_2031" size="" align="" fid="f80" lineno="27">
+
+  </struct>
+
+  <struct name="XmlSchemaParserCtxt" id="_2048" size="" align="" fid="f81" lineno="112">
+
+  </struct>
+
+  <struct name="XmlSchemaValidCtxt" id="_2051" size="" align="" fid="f81" lineno="115">
+
+  </struct>
+
+  <struct name="XmlSchemaSAXPlug" id="_2079" size="" align="" fid="f81" lineno="225">
+
+  </struct>
+
+  <struct name="XmlTextReader" id="_2093" size="" align="" fid="f82" lineno="99">
+
+  </struct>
+
+  <struct name="XmlSaveCtxt" id="_2186" size="" align="" fid="f83" lineno="41">
+
+  </struct>
+
+  <struct name="XmlTextWriter" id="_2401" size="" align="" fid="f86" lineno="26">
+
+  </struct>
+
+  <struct name="XmlLocationSet" id="_2601" size="128" align="64" fid="f88" lineno="36">
+    <field name="locNr" id="_3882" type="I32" fieldid="_2636" offset="0" fid="f88" line="37"/>
+    <field name="locMax" id="_3883" type="I32" fieldid="_2636" offset="32" fid="f88" line="38"/>
+    <field name="locTab" id="_3884" type="Array[NullablePointer[XmlXPathObject]]" fieldid="_3998" offset="64" fid="f88" line="39"/>
+  </struct>
+
+  <struct name="NSConstantStringtag" id="_2627" size="256" align="64" fid="f0" lineno="0">
+    <field name="isa" id="_3887" type="Pointer[I32]" fieldid="_4021" offset="0" fid="" line=""/>
+    <field name="flags" id="_3888" type="I32" fieldid="_2636" offset="64" fid="" line=""/>
+    <field name="str" id="_3889" type="String" fieldid="_2683" offset="128" fid="" line=""/>
+    <field name="length" id="_3890" type="I64" fieldid="_2637" offset="192" fid="" line=""/>
+  </struct>
+
+  <struct name="Valisttag" id="_3892" size="192" align="64" fid="f0" lineno="0">
+    <field name="gp_offset" id="_4022" type="U32" fieldid="_2633" offset="0" fid="" line=""/>
+    <field name="fp_offset" id="_4023" type="U32" fieldid="_2633" offset="32" fid="" line=""/>
+    <field name="overflow_arg_area" id="_4024" type="Pointer[None]" fieldid="_2640" offset="64" fid="" line=""/>
+    <field name="reg_save_area" id="_4025" type="Pointer[None]" fieldid="_2640" offset="128" fid="" line=""/>
+  </struct>
+
+  <struct name="Anon" id="_3970" size="64" align="32" fid="f56" lineno="97">
+    <field name="__low" id="_4045" type="U32" fieldid="_2633" offset="0" fid="f56" line="99"/>
+    <field name="__high" id="_4046" type="U32" fieldid="_2633" offset="32" fid="f56" line="100"/>
+  </struct>
+
+  <struct name="Anon" id="_3973" size="64" align="32" fid="f56" lineno="106">
+    <field name="__low" id="_4048" type="U32" fieldid="_2633" offset="0" fid="f56" line="108"/>
+    <field name="__high" id="_4049" type="U32" fieldid="_2633" offset="32" fid="f56" line="109"/>
+  </struct>
+</structs>
+</castxml2pony>
+

@@ -9,3 +9,8 @@ actor Main
       return
     end
 
+    let ctx: Xml2XPathContext = Xml2XPathContext(xmldoc)
+    if (ctx.is_valid() == false) then
+      env.out.print("We failed in context creation")
+      return
+    end
