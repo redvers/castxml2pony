@@ -349,6 +349,7 @@ actor Main
         end
       end
     end
+    Debug.err(", ".join(structids.values()))
     structids
 
 
@@ -382,6 +383,7 @@ actor Main
     var deps: Map[String, String] = Map[String, String]
 
     for f in ids.values() do
+      Debug.err(f)
       try
         var json: String
         (json, deps) = processStructXML(itypemap, f)?
@@ -412,7 +414,7 @@ actor Main
         structname = ponyStruct(x.name)
         for f in x.members.values() do
           match itypemap.apply(f)?
-          | let y: CXMLField => jsonarray.push("    <field name=\"" + ponyMemberName(y.name) +
+          | let y: CXMLField => jsonarray.push("    <field name=\"_" + ponyMemberName(y.name) +
               "\" id=\"" + y.fieldid +
               "\" type=\"" + y.recurseType(itypemap, f) +
               "\" fieldid=\""+ y.typeid +
@@ -430,7 +432,7 @@ actor Main
     if (structname == "") then
       error
     else
-      ("  <struct name=\""
+      ("  <struct name=\"_"
         + structname +
         "\" id=\"" + id +
         "\" size=\"" + ssize +

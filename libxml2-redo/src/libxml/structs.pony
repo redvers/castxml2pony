@@ -17,16 +17,7 @@
      000416: [FundamentalType(int) size=32]: error  
      000448: [FundamentalType(long unsigned int) size=64]: rawconsumed  
 */
-struct XmlParserInputBuffer
-  var context: Pointer[None] = Pointer[None]
-  var readcallback: Pointer[None] = Pointer[None]
-  var closecallback: Pointer[None] = Pointer[None]
-  var encoder: NullablePointer[XmlCharEncodingHandler] = NullablePointer[XmlCharEncodingHandler].none()
-  var buffer: NullablePointer[XmlBuf] = NullablePointer[XmlBuf].none()
-  var raw: NullablePointer[XmlBuf] = NullablePointer[XmlBuf].none()
-  var compressed: I32 = I32(0)
-  var xmlerror: I32 = I32(0)
-  var rawconsumed: U64 = U64(0)
+struct _XmlParserInputBuffer
 
 
 /*
@@ -45,15 +36,7 @@ struct XmlParserInputBuffer
      000384: [FundamentalType(int) size=32]: written  
      000416: [FundamentalType(int) size=32]: error  
 */
-struct XmlOutputBuffer
-  var context: Pointer[None] = Pointer[None]
-  var writecallback: Pointer[None] = Pointer[None]
-  var closecallback: Pointer[None] = Pointer[None]
-  var encoder: NullablePointer[XmlCharEncodingHandler] = NullablePointer[XmlCharEncodingHandler].none()
-  var buffer: NullablePointer[XmlBuf] = NullablePointer[XmlBuf].none()
-  var conv: NullablePointer[XmlBuf] = NullablePointer[XmlBuf].none()
-  var written: I32 = I32(0)
-  var xmlerror: I32 = I32(0)
+struct _XmlOutputBuffer
 
 
 /*
@@ -79,22 +62,7 @@ struct XmlOutputBuffer
      000768: [FundamentalType(int) size=32]: standalone  
      000800: [FundamentalType(int) size=32]: id  
 */
-struct XmlParserInput
-  var buf: NullablePointer[XmlParserInputBuffer] = NullablePointer[XmlParserInputBuffer].none()
-  var filename: Pointer[U8] = Pointer[U8]
-  var directory: Pointer[U8] = Pointer[U8]
-  var base: Pointer[U8] = Pointer[U8]
-  var cur: Pointer[U8] = Pointer[U8]
-  var xmlend: Pointer[U8] = Pointer[U8]
-  var length: I32 = I32(0)
-  var line: I32 = I32(0)
-  var col: I32 = I32(0)
-  var consumed: U64 = U64(0)
-  var free: Pointer[None] = Pointer[None]
-  var encoding: Pointer[U8] = Pointer[U8]
-  var version: Pointer[U8] = Pointer[U8]
-  var standalone: I32 = I32(0)
-  var id: I32 = I32(0)
+struct _XmlParserInput
 
 
 /*
@@ -194,96 +162,7 @@ struct XmlParserInput
      005888: [FundamentalType(int) size=32]: input_id  
      005952: [FundamentalType(long unsigned int) size=64]: sizeentcopy  
 */
-struct XmlParserCtxt
-  var sax: NullablePointer[XmlSAXHandler] = NullablePointer[XmlSAXHandler].none()
-  var userData: Pointer[None] = Pointer[None]
-  var myDoc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var wellFormed: I32 = I32(0)
-  var replaceEntities: I32 = I32(0)
-  var version: Pointer[U8] = Pointer[U8]
-  var encoding: Pointer[U8] = Pointer[U8]
-  var standalone: I32 = I32(0)
-  var html: I32 = I32(0)
-  var input: NullablePointer[XmlParserInput] = NullablePointer[XmlParserInput].none()
-  var inputNr: I32 = I32(0)
-  var inputMax: I32 = I32(0)
-  var inputTab: Pointer[NullablePointer[XmlParserInput]] = Pointer[NullablePointer[XmlParserInput]]
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var nodeNr: I32 = I32(0)
-  var nodeMax: I32 = I32(0)
-  var nodeTab: Pointer[NullablePointer[XmlNode]] = Pointer[NullablePointer[XmlNode]]
-  var record_info: I32 = I32(0)
-  var node_seq: XmlParserNodeInfoSeq = XmlParserNodeInfoSeq
-  var errNo: I32 = I32(0)
-  var hasExternalSubset: I32 = I32(0)
-  var hasPErefs: I32 = I32(0)
-  var external: I32 = I32(0)
-  var valid: I32 = I32(0)
-  var validate: I32 = I32(0)
-  var vctxt: XmlValidCtxt = XmlValidCtxt
-  var instate: I32 = I32(0)
-  var token: I32 = I32(0)
-  var directory: Pointer[U8] = Pointer[U8]
-  var name: Pointer[U8] = Pointer[U8]
-  var nameNr: I32 = I32(0)
-  var nameMax: I32 = I32(0)
-  var nameTab: Pointer[Pointer[U8]] = Pointer[Pointer[U8]]
-  var nbChars: I64 = I64(0)
-  var checkIndex: I64 = I64(0)
-  var keepBlanks: I32 = I32(0)
-  var disableSAX: I32 = I32(0)
-  var inSubset: I32 = I32(0)
-  var intSubName: Pointer[U8] = Pointer[U8]
-  var extSubURI: Pointer[U8] = Pointer[U8]
-  var extSubSystem: Pointer[U8] = Pointer[U8]
-  var space: Pointer[I32] = Pointer[I32]
-  var spaceNr: I32 = I32(0)
-  var spaceMax: I32 = I32(0)
-  var spaceTab: Pointer[I32] = Pointer[I32]
-  var depth: I32 = I32(0)
-  var entity: NullablePointer[XmlParserInput] = NullablePointer[XmlParserInput].none()
-  var charset: I32 = I32(0)
-  var nodelen: I32 = I32(0)
-  var nodemem: I32 = I32(0)
-  var pedantic: I32 = I32(0)
-  var _private: Pointer[None] = Pointer[None]
-  var loadsubset: I32 = I32(0)
-  var linenumbers: I32 = I32(0)
-  var catalogs: Pointer[None] = Pointer[None]
-  var recovery: I32 = I32(0)
-  var progressive: I32 = I32(0)
-  var dict: NullablePointer[XmlDict] = NullablePointer[XmlDict].none()
-  var atts: Pointer[Pointer[U8]] = Pointer[Pointer[U8]]
-  var maxatts: I32 = I32(0)
-  var docdict: I32 = I32(0)
-  var str_xml: Pointer[U8] = Pointer[U8]
-  var str_xmlns: Pointer[U8] = Pointer[U8]
-  var str_xml_ns: Pointer[U8] = Pointer[U8]
-  var sax2: I32 = I32(0)
-  var nsNr: I32 = I32(0)
-  var nsMax: I32 = I32(0)
-  var nsTab: Pointer[Pointer[U8]] = Pointer[Pointer[U8]]
-  var attallocs: Pointer[I32] = Pointer[I32]
-  var pushTab: NullablePointer[Pointer[None]] = NullablePointer[Pointer[None]].none()
-  var attsDefault: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var attsSpecial: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var nsWellFormed: I32 = I32(0)
-  var options: I32 = I32(0)
-  var dictNames: I32 = I32(0)
-  var freeElemsNr: I32 = I32(0)
-  var freeElems: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var freeAttrsNr: I32 = I32(0)
-  var freeAttrs: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
-  var lastError: XmlError = XmlError
-  var parseMode: I32 = I32(0)
-  var nbentities: U64 = U64(0)
-  var sizeentities: U64 = U64(0)
-  var nodeInfo: NullablePointer[XmlParserNodeInfo] = NullablePointer[XmlParserNodeInfo].none()
-  var nodeInfoNr: I32 = I32(0)
-  var nodeInfoMax: I32 = I32(0)
-  var nodeInfoTab: NullablePointer[XmlParserNodeInfo] = NullablePointer[XmlParserNodeInfo].none()
-  var input_id: I32 = I32(0)
-  var sizeentcopy: U64 = U64(0)
+struct _XmlParserCtxt
 
 
 /*
@@ -298,11 +177,7 @@ struct XmlParserCtxt
      000128: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: getLineNumber  
      000192: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: getColumnNumber  
 */
-struct XmlSAXLocator
-  var getPublicId: Pointer[None] = Pointer[None]
-  var getSystemId: Pointer[None] = Pointer[None]
-  var getLineNumber: Pointer[None] = Pointer[None]
-  var getColumnNumber: Pointer[None] = Pointer[None]
+struct _XmlSAXLocator
 
 
 /*
@@ -345,39 +220,7 @@ struct XmlSAXLocator
      001920: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: endElementNs  
      001984: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: serror  
 */
-struct XmlSAXHandler
-  var internalSubset: Pointer[None] = Pointer[None]
-  var isStandalone: Pointer[None] = Pointer[None]
-  var hasInternalSubset: Pointer[None] = Pointer[None]
-  var hasExternalSubset: Pointer[None] = Pointer[None]
-  var resolveEntity: Pointer[None] = Pointer[None]
-  var getEntity: Pointer[None] = Pointer[None]
-  var entityDecl: Pointer[None] = Pointer[None]
-  var notationDecl: Pointer[None] = Pointer[None]
-  var attributeDecl: Pointer[None] = Pointer[None]
-  var elementDecl: Pointer[None] = Pointer[None]
-  var unparsedEntityDecl: Pointer[None] = Pointer[None]
-  var setDocumentLocator: Pointer[None] = Pointer[None]
-  var startDocument: Pointer[None] = Pointer[None]
-  var endDocument: Pointer[None] = Pointer[None]
-  var startElement: Pointer[None] = Pointer[None]
-  var endElement: Pointer[None] = Pointer[None]
-  var reference: Pointer[None] = Pointer[None]
-  var characters: Pointer[None] = Pointer[None]
-  var ignorableWhitespace: Pointer[None] = Pointer[None]
-  var processingInstruction: Pointer[None] = Pointer[None]
-  var comment: Pointer[None] = Pointer[None]
-  var warning: Pointer[None] = Pointer[None]
-  var xmlerror: Pointer[None] = Pointer[None]
-  var fatalError: Pointer[None] = Pointer[None]
-  var getParameterEntity: Pointer[None] = Pointer[None]
-  var cdataBlock: Pointer[None] = Pointer[None]
-  var externalSubset: Pointer[None] = Pointer[None]
-  var initialized: U32 = U32(0)
-  var _private: Pointer[None] = Pointer[None]
-  var startElementNs: Pointer[None] = Pointer[None]
-  var endElementNs: Pointer[None] = Pointer[None]
-  var serror: Pointer[None] = Pointer[None]
+struct _XmlSAXHandler
 
 
 /*
@@ -407,26 +250,7 @@ struct XmlSAXHandler
      001024: [FundamentalType(int) size=32]: owner  
      001056: [FundamentalType(int) size=32]: checked  
 */
-struct XmlEntity
-  var _private: Pointer[None] = Pointer[None]
-  var xmltype: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var children: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var last: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var parent: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
-  var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var orig: Pointer[U8] = Pointer[U8]
-  var content: Pointer[U8] = Pointer[U8]
-  var length: I32 = I32(0)
-  var etype: I32 = I32(0)
-  var externalID: Pointer[U8] = Pointer[U8]
-  var systemID: Pointer[U8] = Pointer[U8]
-  var nexte: NullablePointer[XmlEntity] = NullablePointer[XmlEntity].none()
-  var uri: Pointer[U8] = Pointer[U8]
-  var owner: I32 = I32(0)
-  var checked: I32 = I32(0)
+struct _XmlEntity
 
 
 /*
@@ -442,12 +266,7 @@ struct XmlEntity
      000128: [Enumeration size=32,fid: f15]: alloc  
      000192: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: contentIO  
 */
-struct XmlBuffer
-  var content: Pointer[U8] = Pointer[U8]
-  var xmluse: U32 = U32(0)
-  var size: U32 = U32(0)
-  var alloc: I32 = I32(0)
-  var contentIO: Pointer[U8] = Pointer[U8]
+struct _XmlBuffer
 
 
 /*
@@ -458,7 +277,7 @@ struct XmlBuffer
 
   Fields (Offset in bits):
 */
-struct XmlBuf
+struct _XmlBuf
 
 
 /*
@@ -472,10 +291,7 @@ struct XmlBuf
      000064: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: PublicID  
      000128: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: SystemID  
 */
-struct XmlNotation
-  var name: Pointer[U8] = Pointer[U8]
-  var publicID: Pointer[U8] = Pointer[U8]
-  var systemID: Pointer[U8] = Pointer[U8]
+struct _XmlNotation
 
 
 /*
@@ -488,9 +304,7 @@ struct XmlNotation
      000000: [PointerType size=64]->[Struct size=128,fid: f15]: next  
      000064: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: name  
 */
-struct XmlEnumeration
-  var next: NullablePointer[XmlEnumeration] = NullablePointer[XmlEnumeration].none()
-  var name: Pointer[U8] = Pointer[U8]
+struct _XmlEnumeration
 
 
 /*
@@ -517,23 +331,7 @@ struct XmlEnumeration
      000832: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: prefix  
      000896: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: elem  
 */
-struct XmlAttribute
-  var _private: Pointer[None] = Pointer[None]
-  var xmltype: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var children: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var last: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var parent: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
-  var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var nexth: NullablePointer[XmlAttribute] = NullablePointer[XmlAttribute].none()
-  var atype: I32 = I32(0)
-  var def: I32 = I32(0)
-  var defaultValue: Pointer[U8] = Pointer[U8]
-  var tree: NullablePointer[XmlEnumeration] = NullablePointer[XmlEnumeration].none()
-  var prefix: Pointer[U8] = Pointer[U8]
-  var elem: Pointer[U8] = Pointer[U8]
+struct _XmlAttribute
 
 
 /*
@@ -551,14 +349,7 @@ struct XmlAttribute
      000256: [PointerType size=64]->[Struct size=384,fid: f15]: parent  
      000320: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: prefix  
 */
-struct XmlElementContent
-  var xmltype: I32 = I32(0)
-  var ocur: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var c1: NullablePointer[XmlElementContent] = NullablePointer[XmlElementContent].none()
-  var c2: NullablePointer[XmlElementContent] = NullablePointer[XmlElementContent].none()
-  var parent: NullablePointer[XmlElementContent] = NullablePointer[XmlElementContent].none()
-  var prefix: Pointer[U8] = Pointer[U8]
+struct _XmlElementContent
 
 
 /*
@@ -569,7 +360,7 @@ struct XmlElementContent
 
   Fields (Offset in bits):
 */
-struct XmlRegexp
+struct _XmlRegexp
 
 
 /*
@@ -580,7 +371,7 @@ struct XmlRegexp
 
   Fields (Offset in bits):
 */
-struct XmlRegExecCtxt
+struct _XmlRegExecCtxt
 
 
 /*
@@ -591,7 +382,7 @@ struct XmlRegExecCtxt
 
   Fields (Offset in bits):
 */
-struct XmlDict
+struct _XmlDict
 
 
 /*
@@ -616,21 +407,7 @@ struct XmlDict
      000768: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: prefix  
      000832: [PointerType size=64]->[Struct size=,fid: f18]: contModel  
 */
-struct XmlElement
-  var _private: Pointer[None] = Pointer[None]
-  var xmltype: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var children: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var last: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var parent: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
-  var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var etype: I32 = I32(0)
-  var content: NullablePointer[XmlElementContent] = NullablePointer[XmlElementContent].none()
-  var attributes: NullablePointer[XmlAttribute] = NullablePointer[XmlAttribute].none()
-  var prefix: Pointer[U8] = Pointer[U8]
-  var contModel: NullablePointer[XmlRegexp] = NullablePointer[XmlRegexp].none()
+struct _XmlElement
 
 
 /*
@@ -647,13 +424,7 @@ struct XmlElement
      000256: [PointerType size=64]->[FundamentalType(void) size=0]: _private  
      000320: [PointerType size=64]->[Struct size=1408,fid: f15]: context  
 */
-struct XmlNs
-  var next: NullablePointer[XmlNs] = NullablePointer[XmlNs].none()
-  var xmltype: I32 = I32(0)
-  var href: Pointer[U8] = Pointer[U8]
-  var prefix: Pointer[U8] = Pointer[U8]
-  var _private: Pointer[None] = Pointer[None]
-  var context: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
+struct _XmlNs
 
 
 /*
@@ -680,23 +451,7 @@ struct XmlNs
      000896: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: SystemID  
      000960: [PointerType size=64]->[FundamentalType(void) size=0]: pentities  
 */
-struct XmlDtd
-  var _private: Pointer[None] = Pointer[None]
-  var xmltype: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var children: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var last: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var parent: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var notations: Pointer[None] = Pointer[None]
-  var elements: Pointer[None] = Pointer[None]
-  var attributes: Pointer[None] = Pointer[None]
-  var entities: Pointer[None] = Pointer[None]
-  var externalID: Pointer[U8] = Pointer[U8]
-  var systemID: Pointer[U8] = Pointer[U8]
-  var pentities: Pointer[None] = Pointer[None]
+struct _XmlDtd
 
 
 /*
@@ -719,19 +474,7 @@ struct XmlDtd
      000640: [Enumeration size=32,fid: f15]: atype  
      000704: [PointerType size=64]->[FundamentalType(void) size=0]: psvi  
 */
-struct XmlAttr
-  var _private: Pointer[None] = Pointer[None]
-  var xmltype: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var children: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var last: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var parent: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var next: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
-  var prev: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var ns: NullablePointer[XmlNs] = NullablePointer[XmlNs].none()
-  var atype: I32 = I32(0)
-  var psvi: Pointer[None] = Pointer[None]
+struct _XmlAttr
 
 
 /*
@@ -748,13 +491,7 @@ struct XmlAttr
      000256: [FundamentalType(int) size=32]: lineno  
      000320: [PointerType size=64]->[Struct size=1408,fid: f15]: doc  
 */
-struct XmlID
-  var next: NullablePointer[XmlID] = NullablePointer[XmlID].none()
-  var value: Pointer[U8] = Pointer[U8]
-  var attr: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
-  var name: Pointer[U8] = Pointer[U8]
-  var lineno: I32 = I32(0)
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
+struct _XmlID
 
 
 /*
@@ -770,12 +507,7 @@ struct XmlID
      000192: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: name  
      000256: [FundamentalType(int) size=32]: lineno  
 */
-struct XmlRef
-  var next: NullablePointer[XmlRef] = NullablePointer[XmlRef].none()
-  var value: Pointer[U8] = Pointer[U8]
-  var attr: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
-  var name: Pointer[U8] = Pointer[U8]
-  var lineno: I32 = I32(0)
+struct _XmlRef
 
 
 /*
@@ -802,23 +534,7 @@ struct XmlRef
      000896: [FundamentalType(short unsigned int) size=16]: line  
      000912: [FundamentalType(short unsigned int) size=16]: extra  
 */
-struct XmlNode
-  var _private: Pointer[None] = Pointer[None]
-  var xmltype: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var children: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var last: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var parent: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var ns: NullablePointer[XmlNs] = NullablePointer[XmlNs].none()
-  var content: Pointer[U8] = Pointer[U8]
-  var properties: NullablePointer[XmlAttr] = NullablePointer[XmlAttr].none()
-  var nsDef: NullablePointer[XmlNs] = NullablePointer[XmlNs].none()
-  var psvi: Pointer[None] = Pointer[None]
-  var line: U16 = U16(0)
-  var extra: U16 = U16(0)
+struct _XmlNode
 
 
 /*
@@ -853,31 +569,7 @@ struct XmlNode
      001344: [FundamentalType(int) size=32]: parseFlags  
      001376: [FundamentalType(int) size=32]: properties  
 */
-struct XmlDocS
-  var _private: Pointer[None] = Pointer[None]
-  var xmltype: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var children: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var last: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var parent: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var next: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var prev: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var compression: I32 = I32(0)
-  var standalone: I32 = I32(0)
-  var intSubset: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
-  var extSubset: NullablePointer[XmlDtd] = NullablePointer[XmlDtd].none()
-  var oldNs: NullablePointer[XmlNs] = NullablePointer[XmlNs].none()
-  var version: Pointer[U8] = Pointer[U8]
-  var encoding: Pointer[U8] = Pointer[U8]
-  var ids: Pointer[None] = Pointer[None]
-  var refs: Pointer[None] = Pointer[None]
-  var url: Pointer[U8] = Pointer[U8]
-  var charset: I32 = I32(0)
-  var dict: NullablePointer[XmlDict] = NullablePointer[XmlDict].none()
-  var psvi: Pointer[None] = Pointer[None]
-  var parseFlags: I32 = I32(0)
-  var properties: I32 = I32(0)
+struct _XmlDoc
 
 
 /*
@@ -892,11 +584,7 @@ struct XmlDocS
      000128: [PointerType size=64]->[FundamentalType(void) size=0]: namespaceMap  
      000192: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: getNsForNodeFunc  
 */
-struct XmlDOMWrapCtxt
-  var _private: Pointer[None] = Pointer[None]
-  var xmltype: I32 = I32(0)
-  var namespaceMap: Pointer[None] = Pointer[None]
-  var getNsForNodeFunc: Pointer[None] = Pointer[None]
+struct _XmlDOMWrapCtxt
 
 
 /*
@@ -907,7 +595,7 @@ struct XmlDOMWrapCtxt
 
   Fields (Offset in bits):
 */
-struct XmlMutex
+struct _XmlMutex
 
 
 /*
@@ -918,7 +606,7 @@ struct XmlMutex
 
   Fields (Offset in bits):
 */
-struct XmlRMutex
+struct _XmlRMutex
 
 
 /*
@@ -929,7 +617,7 @@ struct XmlRMutex
 
   Fields (Offset in bits):
 */
-struct XmlHashTable
+struct _XmlHashTable
 
 
 /*
@@ -953,20 +641,7 @@ struct XmlHashTable
      000576: [PointerType size=64]->[FundamentalType(void) size=0]: ctxt  
      000640: [PointerType size=64]->[FundamentalType(void) size=0]: node  
 */
-struct XmlError
-  var domain: I32 = I32(0)
-  var code: I32 = I32(0)
-  var message: Pointer[U8] = Pointer[U8]
-  var level: I32 = I32(0)
-  var file: Pointer[U8] = Pointer[U8]
-  var line: I32 = I32(0)
-  var str1: Pointer[U8] = Pointer[U8]
-  var str2: Pointer[U8] = Pointer[U8]
-  var str3: Pointer[U8] = Pointer[U8]
-  var int1: I32 = I32(0)
-  var int2: I32 = I32(0)
-  var ctxt: Pointer[None] = Pointer[None]
-  var node: Pointer[None] = Pointer[None]
+struct _XmlError
 
 
 /*
@@ -977,7 +652,7 @@ struct XmlError
 
   Fields (Offset in bits):
 */
-struct XmlLink
+struct _XmlLink
 
 
 /*
@@ -988,7 +663,7 @@ struct XmlLink
 
   Fields (Offset in bits):
 */
-struct XmlList
+struct _XmlList
 
 
 /*
@@ -999,7 +674,7 @@ struct XmlList
 
   Fields (Offset in bits):
 */
-struct XmlAutomata
+struct _XmlAutomata
 
 
 /*
@@ -1010,7 +685,7 @@ struct XmlAutomata
 
   Fields (Offset in bits):
 */
-struct XmlAutomataState
+struct _XmlAutomataState
 
 
 /*
@@ -1021,7 +696,7 @@ struct XmlAutomataState
 
   Fields (Offset in bits):
 */
-struct XmlValidState
+struct _XmlValidState
 
 
 /*
@@ -1048,23 +723,7 @@ struct XmlValidState
      000768: [PointerType size=64]->[Struct size=,fid: f26]: am  
      000832: [PointerType size=64]->[Struct size=,fid: f26]: state  
 */
-struct XmlValidCtxt
-  var userData: Pointer[None] = Pointer[None]
-  var xmlerror: Pointer[None] = Pointer[None]
-  var warning: Pointer[None] = Pointer[None]
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var nodeNr: I32 = I32(0)
-  var nodeMax: I32 = I32(0)
-  var nodeTab: Pointer[NullablePointer[XmlNode]] = Pointer[NullablePointer[XmlNode]]
-  var finishDtd: U32 = U32(0)
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var valid: I32 = I32(0)
-  var vstate: NullablePointer[XmlValidState] = NullablePointer[XmlValidState].none()
-  var vstateNr: I32 = I32(0)
-  var vstateMax: I32 = I32(0)
-  var vstateTab: NullablePointer[XmlValidState] = NullablePointer[XmlValidState].none()
-  var am: NullablePointer[XmlAutomata] = NullablePointer[XmlAutomata].none()
-  var state: NullablePointer[XmlAutomataState] = NullablePointer[XmlAutomataState].none()
+struct _XmlValidCtxt
 
 
 /*
@@ -1080,12 +739,7 @@ struct XmlValidCtxt
      000192: [FundamentalType(long unsigned int) size=64]: end_pos  
      000256: [FundamentalType(long unsigned int) size=64]: end_line  
 */
-struct XmlParserNodeInfo
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var begin_pos: U64 = U64(0)
-  var begin_line: U64 = U64(0)
-  var end_pos: U64 = U64(0)
-  var end_line: U64 = U64(0)
+struct _XmlParserNodeInfo
 
 
 /*
@@ -1099,10 +753,7 @@ struct XmlParserNodeInfo
      000064: [FundamentalType(long unsigned int) size=64]: length  
      000128: [PointerType size=64]->[Struct size=320,fid: f16]: buffer  
 */
-struct XmlParserNodeInfoSeq
-  var maximum: U64 = U64(0)
-  var length: U64 = U64(0)
-  var buffer: NullablePointer[XmlParserNodeInfo] = NullablePointer[XmlParserNodeInfo].none()
+struct _XmlParserNodeInfoSeq
 
 
 /*
@@ -1141,35 +792,7 @@ struct XmlParserNodeInfoSeq
      001664: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: externalSubset  
      001728: [FundamentalType(unsigned int) size=32]: initialized  
 */
-struct XmlSAXHandlerV1
-  var internalSubset: Pointer[None] = Pointer[None]
-  var isStandalone: Pointer[None] = Pointer[None]
-  var hasInternalSubset: Pointer[None] = Pointer[None]
-  var hasExternalSubset: Pointer[None] = Pointer[None]
-  var resolveEntity: Pointer[None] = Pointer[None]
-  var getEntity: Pointer[None] = Pointer[None]
-  var entityDecl: Pointer[None] = Pointer[None]
-  var notationDecl: Pointer[None] = Pointer[None]
-  var attributeDecl: Pointer[None] = Pointer[None]
-  var elementDecl: Pointer[None] = Pointer[None]
-  var unparsedEntityDecl: Pointer[None] = Pointer[None]
-  var setDocumentLocator: Pointer[None] = Pointer[None]
-  var startDocument: Pointer[None] = Pointer[None]
-  var endDocument: Pointer[None] = Pointer[None]
-  var startElement: Pointer[None] = Pointer[None]
-  var endElement: Pointer[None] = Pointer[None]
-  var reference: Pointer[None] = Pointer[None]
-  var characters: Pointer[None] = Pointer[None]
-  var ignorableWhitespace: Pointer[None] = Pointer[None]
-  var processingInstruction: Pointer[None] = Pointer[None]
-  var comment: Pointer[None] = Pointer[None]
-  var warning: Pointer[None] = Pointer[None]
-  var xmlerror: Pointer[None] = Pointer[None]
-  var fatalError: Pointer[None] = Pointer[None]
-  var getParameterEntity: Pointer[None] = Pointer[None]
-  var cdataBlock: Pointer[None] = Pointer[None]
-  var externalSubset: Pointer[None] = Pointer[None]
-  var initialized: U32 = U32(0)
+struct _XmlSAXHandlerV1
 
 
 /*
@@ -1187,7 +810,7 @@ struct XmlSAXHandlerV1
      000320: [PointerType size=64]->[Struct size=16640,fid: f40]: uconv_in  
      000384: [PointerType size=64]->[Struct size=16640,fid: f40]: uconv_out  
 */
-struct XmlCharEncodingHandler
+struct _XmlCharEncodingHandler
 
 
 /*
@@ -1201,10 +824,7 @@ struct XmlCharEncodingHandler
      000064: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: extended  
      000128: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: set  
 */
-struct XlinkHandler
-  var simple: Pointer[None] = Pointer[None]
-  var extended: Pointer[None] = Pointer[None]
-  var set: Pointer[None] = Pointer[None]
+struct _XlinkHandler
 
 
 /*
@@ -1248,40 +868,7 @@ struct XlinkHandler
      007616: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: xmlOutputBufferCreateFilenameValue  
      007680: [PointerType size=64]->[FundamentalType(void) size=0]: xmlStructuredErrorContext  
 */
-struct XmlGlobalState
-  var xmlParserVersion: Pointer[U8] = Pointer[U8]
-  var xmlDefaultSAXLocator: XmlSAXLocator = XmlSAXLocator
-  var xmlDefaultSAXHandler: XmlSAXHandlerV1 = XmlSAXHandlerV1
-  var docbDefaultSAXHandler: XmlSAXHandlerV1 = XmlSAXHandlerV1
-  var htmlDefaultSAXHandler: XmlSAXHandlerV1 = XmlSAXHandlerV1
-  var xmlFree: Pointer[None] = Pointer[None]
-  var xmlMalloc: Pointer[None] = Pointer[None]
-  var xmlMemStrdup: Pointer[None] = Pointer[None]
-  var xmlRealloc: Pointer[None] = Pointer[None]
-  var xmlGenericError: Pointer[None] = Pointer[None]
-  var xmlStructuredError: Pointer[None] = Pointer[None]
-  var xmlGenericErrorContext: Pointer[None] = Pointer[None]
-  var oldXMLWDcompatibility: I32 = I32(0)
-  var xmlBufferAllocScheme: I32 = I32(0)
-  var xmlDefaultBufferSize: I32 = I32(0)
-  var xmlSubstituteEntitiesDefaultValue: I32 = I32(0)
-  var xmlDoValidityCheckingDefaultValue: I32 = I32(0)
-  var xmlGetWarningsDefaultValue: I32 = I32(0)
-  var xmlKeepBlanksDefaultValue: I32 = I32(0)
-  var xmlLineNumbersDefaultValue: I32 = I32(0)
-  var xmlLoadExtDtdDefaultValue: I32 = I32(0)
-  var xmlParserDebugEntities: I32 = I32(0)
-  var xmlPedanticParserDefaultValue: I32 = I32(0)
-  var xmlSaveNoEmptyTags: I32 = I32(0)
-  var xmlIndentTreeOutput: I32 = I32(0)
-  var xmlTreeIndentString: Pointer[U8] = Pointer[U8]
-  var xmlRegisterNodeDefaultValue: Pointer[None] = Pointer[None]
-  var xmlDeregisterNodeDefaultValue: Pointer[None] = Pointer[None]
-  var xmlMallocAtomic: Pointer[None] = Pointer[None]
-  var xmlLastError: XmlError = XmlError
-  var xmlParserInputBufferCreateFilenameValue: Pointer[None] = Pointer[None]
-  var xmlOutputBufferCreateFilenameValue: Pointer[None] = Pointer[None]
-  var xmlStructuredErrorContext: Pointer[None] = Pointer[None]
+struct _XmlGlobalState
 
 
 /*
@@ -1292,7 +879,7 @@ struct XmlGlobalState
 
   Fields (Offset in bits):
 */
-struct XmlCatalog
+struct _XmlCatalog
 
 
 /*
@@ -1305,9 +892,7 @@ struct XmlCatalog
      000000: [FundamentalType(short unsigned int) size=16]: low  
      000016: [FundamentalType(short unsigned int) size=16]: high  
 */
-struct XmlChSRange
-  var low: U16 = U16(0)
-  var high: U16 = U16(0)
+struct _XmlChSRange
 
 
 /*
@@ -1320,9 +905,7 @@ struct XmlChSRange
      000000: [FundamentalType(unsigned int) size=32]: low  
      000032: [FundamentalType(unsigned int) size=32]: high  
 */
-struct XmlChLRange
-  var low: U32 = U32(0)
-  var high: U32 = U32(0)
+struct _XmlChLRange
 
 
 /*
@@ -1337,11 +920,7 @@ struct XmlChLRange
      000064: [PointerType size=64]->[Struct size=32,fid: f65]: shortRange  
      000128: [PointerType size=64]->[Struct size=64,fid: f65]: longRange  
 */
-struct XmlChRangeGroup
-  var nbShortRange: I32 = I32(0)
-  var nbLongRange: I32 = I32(0)
-  var shortRange: NullablePointer[XmlChSRange] = NullablePointer[XmlChSRange].none()
-  var longRange: NullablePointer[XmlChLRange] = NullablePointer[XmlChLRange].none()
+struct _XmlChRangeGroup
 
 
 /*
@@ -1396,51 +975,7 @@ struct XmlChRangeGroup
      002976: [FundamentalType(int) size=32]: maxDepth  
      003008: [FundamentalType(int) size=32]: maxParserDepth  
 */
-struct XmlXPathContext
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var nb_variables_unused: I32 = I32(0)
-  var max_variables_unused: I32 = I32(0)
-  var varHash: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var nb_types: I32 = I32(0)
-  var max_types: I32 = I32(0)
-  var types: NullablePointer[XmlXPathType] = NullablePointer[XmlXPathType].none()
-  var nb_funcs_unused: I32 = I32(0)
-  var max_funcs_unused: I32 = I32(0)
-  var funcHash: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var nb_axis: I32 = I32(0)
-  var max_axis: I32 = I32(0)
-  var axis: NullablePointer[XmlXPathAxis] = NullablePointer[XmlXPathAxis].none()
-  var namespaces: Pointer[NullablePointer[XmlNs]] = Pointer[NullablePointer[XmlNs]]
-  var nsNr: I32 = I32(0)
-  var user: Pointer[None] = Pointer[None]
-  var contextSize: I32 = I32(0)
-  var proximityPosition: I32 = I32(0)
-  var xptr: I32 = I32(0)
-  var here: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var origin: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var nsHash: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var varLookupFunc: Pointer[None] = Pointer[None]
-  var varLookupData: Pointer[None] = Pointer[None]
-  var extra: Pointer[None] = Pointer[None]
-  var function: Pointer[U8] = Pointer[U8]
-  var functionURI: Pointer[U8] = Pointer[U8]
-  var funcLookupFunc: Pointer[None] = Pointer[None]
-  var funcLookupData: Pointer[None] = Pointer[None]
-  var tmpNsList: Pointer[NullablePointer[XmlNs]] = Pointer[NullablePointer[XmlNs]]
-  var tmpNsNr: I32 = I32(0)
-  var userData: Pointer[None] = Pointer[None]
-  var xmlerror: Pointer[None] = Pointer[None]
-  var lastError: XmlError = XmlError
-  var debugNode: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var dict: NullablePointer[XmlDict] = NullablePointer[XmlDict].none()
-  var flags: I32 = I32(0)
-  var cache: Pointer[None] = Pointer[None]
-  var opLimit: U64 = U64(0)
-  var opCount: U64 = U64(0)
-  var depth: I32 = I32(0)
-  var maxDepth: I32 = I32(0)
-  var maxParserDepth: I32 = I32(0)
+struct _XmlXPathContext
 
 
 /*
@@ -1463,19 +998,7 @@ struct XmlXPathContext
      000576: [PointerType size=64]->[Struct size=960,fid: f15]: ancestor  
      000640: [FundamentalType(int) size=32]: valueFrame  
 */
-struct XmlXPathParserContext
-  var cur: Pointer[U8] = Pointer[U8]
-  var base: Pointer[U8] = Pointer[U8]
-  var xmlerror: I32 = I32(0)
-  var context: NullablePointer[XmlXPathContext] = NullablePointer[XmlXPathContext].none()
-  var value: NullablePointer[XmlXPathObject] = NullablePointer[XmlXPathObject].none()
-  var valueNr: I32 = I32(0)
-  var valueMax: I32 = I32(0)
-  var valueTab: Pointer[NullablePointer[XmlXPathObject]] = Pointer[NullablePointer[XmlXPathObject]]
-  var comp: NullablePointer[XmlXPathCompExpr] = NullablePointer[XmlXPathCompExpr].none()
-  var xptr: I32 = I32(0)
-  var ancestor: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var valueFrame: I32 = I32(0)
+struct _XmlXPathParserContext
 
 
 /*
@@ -1489,10 +1012,7 @@ struct XmlXPathParserContext
      000032: [FundamentalType(int) size=32]: nodeMax  
      000064: [PointerType size=64]->[PointerType size=64]->[Struct size=960,fid: f15]: nodeTab  
 */
-struct XmlNodeSet
-  var nodeNr: I32 = I32(0)
-  var nodeMax: I32 = I32(0)
-  var nodeTab: Pointer[NullablePointer[XmlNode]] = Pointer[NullablePointer[XmlNode]]
+struct _XmlNodeSet
 
 
 /*
@@ -1512,16 +1032,7 @@ struct XmlNodeSet
      000448: [PointerType size=64]->[FundamentalType(void) size=0]: user2  
      000512: [FundamentalType(int) size=32]: index2  
 */
-struct XmlXPathObject
-  var xmltype: I32 = I32(0)
-  var nodesetval: NullablePointer[XmlNodeSet] = NullablePointer[XmlNodeSet].none()
-  var boolval: I32 = I32(0)
-  var floatval: F64 = F64(0)
-  var stringval: Pointer[U8] = Pointer[U8]
-  var user: Pointer[None] = Pointer[None]
-  var index: I32 = I32(0)
-  var user2: Pointer[None] = Pointer[None]
-  var index2: I32 = I32(0)
+struct _XmlXPathObject
 
 
 /*
@@ -1534,9 +1045,7 @@ struct XmlXPathObject
      000000: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: name  
      000064: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: func  
 */
-struct XmlXPathType
-  var name: Pointer[U8] = Pointer[U8]
-  var func: Pointer[None] = Pointer[None]
+struct _XmlXPathType
 
 
 /*
@@ -1549,9 +1058,7 @@ struct XmlXPathType
      000000: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: name  
      000064: [PointerType size=64]->[Struct size=576,fid: f66]: value  
 */
-struct XmlXPathVariable
-  var name: Pointer[U8] = Pointer[U8]
-  var value: NullablePointer[XmlXPathObject] = NullablePointer[XmlXPathObject].none()
+struct _XmlXPathVariable
 
 
 /*
@@ -1564,9 +1071,7 @@ struct XmlXPathVariable
      000000: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: name  
      000064: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: func  
 */
-struct XmlXPathFunct
-  var name: Pointer[U8] = Pointer[U8]
-  var func: Pointer[None] = Pointer[None]
+struct _XmlXPathFunct
 
 
 /*
@@ -1579,9 +1084,7 @@ struct XmlXPathFunct
      000000: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: name  
      000064: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: func  
 */
-struct XmlXPathAxis
-  var name: Pointer[U8] = Pointer[U8]
-  var func: Pointer[None] = Pointer[None]
+struct _XmlXPathAxis
 
 
 /*
@@ -1592,7 +1095,7 @@ struct XmlXPathAxis
 
   Fields (Offset in bits):
 */
-struct XmlXPathCompExpr
+struct _XmlXPathCompExpr
 
 
 /*
@@ -1610,7 +1113,7 @@ struct XmlXPathCompExpr
      000320: [PointerType size=64]->[Struct size=1728,fid: f7]: output  
      000384: [PointerType size=64]->[FunctionType] -- WRITE MANUALLY: input  
 */
-struct XmlShellCtxt
+struct _XmlShellCtxt
 
 
 /*
@@ -1635,21 +1138,7 @@ struct XmlShellCtxt
      000384: [PointerType size=64]->[PointerType size=64]->[FundamentalType(char) size=8]: attrs_depr  
      000448: [PointerType size=64]->[PointerType size=64]->[FundamentalType(char) size=8]: attrs_req  
 */
-struct HtmlElemDesc
-  var name: Pointer[U8] = Pointer[U8]
-  var startTag: U8 = U8(0)
-  var endTag: U8 = U8(0)
-  var saveEndTag: U8 = U8(0)
-  var empty: U8 = U8(0)
-  var depr: U8 = U8(0)
-  var dtd: U8 = U8(0)
-  var isinline: U8 = U8(0)
-  var desc: Pointer[U8] = Pointer[U8]
-  var subelts: Pointer[Pointer[U8]] = Pointer[Pointer[U8]]
-  var defaultsubelt: Pointer[U8] = Pointer[U8]
-  var attrs_opt: Pointer[Pointer[U8]] = Pointer[Pointer[U8]]
-  var attrs_depr: Pointer[Pointer[U8]] = Pointer[Pointer[U8]]
-  var attrs_req: Pointer[Pointer[U8]] = Pointer[Pointer[U8]]
+struct _HtmlElemDesc
 
 
 /*
@@ -1663,10 +1152,7 @@ struct HtmlElemDesc
      000064: [PointerType size=64]->[FundamentalType(char) size=8]: name  
      000128: [PointerType size=64]->[FundamentalType(char) size=8]: desc  
 */
-struct HtmlEntityDesc
-  var value: U32 = U32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var desc: Pointer[U8] = Pointer[U8]
+struct _HtmlEntityDesc
 
 
 /*
@@ -1677,7 +1163,7 @@ struct HtmlEntityDesc
 
   Fields (Offset in bits):
 */
-struct XmlPattern
+struct _XmlPattern
 
 
 /*
@@ -1688,7 +1174,7 @@ struct XmlPattern
 
   Fields (Offset in bits):
 */
-struct XmlStreamCtxt
+struct _XmlStreamCtxt
 
 
 /*
@@ -1699,7 +1185,7 @@ struct XmlStreamCtxt
 
   Fields (Offset in bits):
 */
-struct XmlRelaxNG
+struct _XmlRelaxNG
 
 
 /*
@@ -1710,7 +1196,7 @@ struct XmlRelaxNG
 
   Fields (Offset in bits):
 */
-struct XmlRelaxNGParserCtxt
+struct _XmlRelaxNGParserCtxt
 
 
 /*
@@ -1721,7 +1207,7 @@ struct XmlRelaxNGParserCtxt
 
   Fields (Offset in bits):
 */
-struct XmlRelaxNGValidCtxt
+struct _XmlRelaxNGValidCtxt
 
 
 /*
@@ -1732,7 +1218,7 @@ struct XmlRelaxNGValidCtxt
 
   Fields (Offset in bits):
 */
-struct XmlSchemaVal
+struct _XmlSchemaVal
 
 
 /*
@@ -1773,37 +1259,7 @@ struct XmlSchemaVal
      001664: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: targetNamespace  
      001728: [PointerType size=64]->[FundamentalType(void) size=0]: attrUses  
 */
-struct XmlSchemaType
-  var xmltype: I32 = I32(0)
-  var next: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var name: Pointer[U8] = Pointer[U8]
-  var id: Pointer[U8] = Pointer[U8]
-  var xmlref: Pointer[U8] = Pointer[U8]
-  var refNs: Pointer[U8] = Pointer[U8]
-  var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var subtypes: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var attributes: NullablePointer[XmlSchemaAttribute] = NullablePointer[XmlSchemaAttribute].none()
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var minOccurs: I32 = I32(0)
-  var maxOccurs: I32 = I32(0)
-  var flags: I32 = I32(0)
-  var contentType: I32 = I32(0)
-  var base: Pointer[U8] = Pointer[U8]
-  var baseNs: Pointer[U8] = Pointer[U8]
-  var baseType: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var facets: NullablePointer[XmlSchemaFacet] = NullablePointer[XmlSchemaFacet].none()
-  var redef: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var recurse: I32 = I32(0)
-  var attributeUses: Pointer[NullablePointer[XmlSchemaAttributeLink]] = Pointer[NullablePointer[XmlSchemaAttributeLink]]
-  var attributeWildcard: NullablePointer[XmlSchemaWildcard] = NullablePointer[XmlSchemaWildcard].none()
-  var builtInType: I32 = I32(0)
-  var memberTypes: NullablePointer[XmlSchemaTypeLink] = NullablePointer[XmlSchemaTypeLink].none()
-  var facetSet: NullablePointer[XmlSchemaFacetLink] = NullablePointer[XmlSchemaFacetLink].none()
-  var refPrefix: Pointer[U8] = Pointer[U8]
-  var contentTypeDef: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var contModel: NullablePointer[XmlRegexp] = NullablePointer[XmlRegexp].none()
-  var targetNamespace: Pointer[U8] = Pointer[U8]
-  var attrUses: Pointer[None] = Pointer[None]
+struct _XmlSchemaType
 
 
 /*
@@ -1824,17 +1280,7 @@ struct XmlSchemaType
      000448: [PointerType size=64]->[Struct size=,fid: f76]: val  
      000512: [PointerType size=64]->[Struct size=,fid: f18]: regexp  
 */
-struct XmlSchemaFacet
-  var xmltype: I32 = I32(0)
-  var next: NullablePointer[XmlSchemaFacet] = NullablePointer[XmlSchemaFacet].none()
-  var value: Pointer[U8] = Pointer[U8]
-  var id: Pointer[U8] = Pointer[U8]
-  var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var fixed: I32 = I32(0)
-  var whitespace: I32 = I32(0)
-  var xmlval: NullablePointer[XmlSchemaVal] = NullablePointer[XmlSchemaVal].none()
-  var regexp: NullablePointer[XmlRegexp] = NullablePointer[XmlRegexp].none()
+struct _XmlSchemaFacet
 
 
 /*
@@ -1847,9 +1293,7 @@ struct XmlSchemaFacet
      000000: [PointerType size=64]->[Struct size=128,fid: f76]: next  
      000064: [PointerType size=64]->[Struct size=960,fid: f15]: content  
 */
-struct XmlSchemaAnnot
-  var next: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var content: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
+struct _XmlSchemaAnnot
 
 
 /*
@@ -1879,26 +1323,7 @@ struct XmlSchemaAnnot
      001088: [PointerType size=64]->[Struct size=,fid: f76]: defVal  
      001152: [PointerType size=64]->[Struct size=1216,fid: f76]: refDecl  
 */
-struct XmlSchemaAttribute
-  var xmltype: I32 = I32(0)
-  var next: NullablePointer[XmlSchemaAttribute] = NullablePointer[XmlSchemaAttribute].none()
-  var name: Pointer[U8] = Pointer[U8]
-  var id: Pointer[U8] = Pointer[U8]
-  var xmlref: Pointer[U8] = Pointer[U8]
-  var refNs: Pointer[U8] = Pointer[U8]
-  var typeName: Pointer[U8] = Pointer[U8]
-  var typeNs: Pointer[U8] = Pointer[U8]
-  var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var base: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var occurs: I32 = I32(0)
-  var defValue: Pointer[U8] = Pointer[U8]
-  var subtypes: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var targetNamespace: Pointer[U8] = Pointer[U8]
-  var flags: I32 = I32(0)
-  var refPrefix: Pointer[U8] = Pointer[U8]
-  var defVal: NullablePointer[XmlSchemaVal] = NullablePointer[XmlSchemaVal].none()
-  var refDecl: NullablePointer[XmlSchemaAttribute] = NullablePointer[XmlSchemaAttribute].none()
+struct _XmlSchemaAttribute
 
 
 /*
@@ -1911,9 +1336,7 @@ struct XmlSchemaAttribute
      000000: [PointerType size=64]->[Struct size=128,fid: f76]: next  
      000064: [PointerType size=64]->[Struct size=1216,fid: f76]: attr  
 */
-struct XmlSchemaAttributeLink
-  var next: NullablePointer[XmlSchemaAttributeLink] = NullablePointer[XmlSchemaAttributeLink].none()
-  var attr: NullablePointer[XmlSchemaAttribute] = NullablePointer[XmlSchemaAttribute].none()
+struct _XmlSchemaAttributeLink
 
 
 /*
@@ -1926,9 +1349,7 @@ struct XmlSchemaAttributeLink
      000000: [PointerType size=64]->[Struct size=128,fid: f76]: next  
      000064: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: value  
 */
-struct XmlSchemaWildcardNs
-  var next: NullablePointer[XmlSchemaWildcardNs] = NullablePointer[XmlSchemaWildcardNs].none()
-  var value: Pointer[U8] = Pointer[U8]
+struct _XmlSchemaWildcardNs
 
 
 /*
@@ -1950,18 +1371,7 @@ struct XmlSchemaWildcardNs
      000448: [PointerType size=64]->[Struct size=128,fid: f76]: negNsSet  
      000512: [FundamentalType(int) size=32]: flags  
 */
-struct XmlSchemaWildcard
-  var xmltype: I32 = I32(0)
-  var id: Pointer[U8] = Pointer[U8]
-  var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var minOccurs: I32 = I32(0)
-  var maxOccurs: I32 = I32(0)
-  var processContents: I32 = I32(0)
-  var any: I32 = I32(0)
-  var nsSet: NullablePointer[XmlSchemaWildcardNs] = NullablePointer[XmlSchemaWildcardNs].none()
-  var negNsSet: NullablePointer[XmlSchemaWildcardNs] = NullablePointer[XmlSchemaWildcardNs].none()
-  var flags: I32 = I32(0)
+struct _XmlSchemaWildcard
 
 
 /*
@@ -1987,22 +1397,7 @@ struct XmlSchemaWildcard
      000832: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: targetNamespace  
      000896: [PointerType size=64]->[FundamentalType(void) size=0]: attrUses  
 */
-struct XmlSchemaAttributeGroup
-  var xmltype: I32 = I32(0)
-  var next: NullablePointer[XmlSchemaAttribute] = NullablePointer[XmlSchemaAttribute].none()
-  var name: Pointer[U8] = Pointer[U8]
-  var id: Pointer[U8] = Pointer[U8]
-  var xmlref: Pointer[U8] = Pointer[U8]
-  var refNs: Pointer[U8] = Pointer[U8]
-  var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var attributes: NullablePointer[XmlSchemaAttribute] = NullablePointer[XmlSchemaAttribute].none()
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var flags: I32 = I32(0)
-  var attributeWildcard: NullablePointer[XmlSchemaWildcard] = NullablePointer[XmlSchemaWildcard].none()
-  var refPrefix: Pointer[U8] = Pointer[U8]
-  var refItem: NullablePointer[XmlSchemaAttributeGroup] = NullablePointer[XmlSchemaAttributeGroup].none()
-  var targetNamespace: Pointer[U8] = Pointer[U8]
-  var attrUses: Pointer[None] = Pointer[None]
+struct _XmlSchemaAttributeGroup
 
 
 /*
@@ -2015,9 +1410,7 @@ struct XmlSchemaAttributeGroup
      000000: [PointerType size=64]->[Struct size=128,fid: f76]: next  
      000064: [PointerType size=64]->[Struct size=1792,fid: f76]: type  
 */
-struct XmlSchemaTypeLink
-  var next: NullablePointer[XmlSchemaTypeLink] = NullablePointer[XmlSchemaTypeLink].none()
-  var xmltype: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
+struct _XmlSchemaTypeLink
 
 
 /*
@@ -2030,9 +1423,7 @@ struct XmlSchemaTypeLink
      000000: [PointerType size=64]->[Struct size=128,fid: f76]: next  
      000064: [PointerType size=64]->[Struct size=576,fid: f76]: facet  
 */
-struct XmlSchemaFacetLink
-  var next: NullablePointer[XmlSchemaFacetLink] = NullablePointer[XmlSchemaFacetLink].none()
-  var facet: NullablePointer[XmlSchemaFacet] = NullablePointer[XmlSchemaFacet].none()
+struct _XmlSchemaFacetLink
 
 
 /*
@@ -2069,33 +1460,7 @@ struct XmlSchemaFacetLink
      001472: [PointerType size=64]->[Struct size=,fid: f76]: defVal  
      001536: [PointerType size=64]->[FundamentalType(void) size=0]: idcs  
 */
-struct XmlSchemaElement
-  var xmltype: I32 = I32(0)
-  var next: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var name: Pointer[U8] = Pointer[U8]
-  var id: Pointer[U8] = Pointer[U8]
-  var xmlref: Pointer[U8] = Pointer[U8]
-  var refNs: Pointer[U8] = Pointer[U8]
-  var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var subtypes: NullablePointer[XmlSchemaType] = NullablePointer[XmlSchemaType].none()
-  var attributes: NullablePointer[XmlSchemaAttribute] = NullablePointer[XmlSchemaAttribute].none()
-  var node: NullablePointer[XmlNode] = NullablePointer[XmlNode].none()
-  var minOccurs: I32 = I32(0)
-  var maxOccurs: I32 = I32(0)
-  var flags: I32 = I32(0)
-  var targetNamespace: Pointer[U8] = Pointer[U8]
-  var namedType: Pointer[U8] = Pointer[U8]
-  var namedTypeNs: Pointer[U8] = Pointer[U8]
-  var substGroup: Pointer[U8] = Pointer[U8]
-  var substGroupNs: Pointer[U8] = Pointer[U8]
-  var scope: Pointer[U8] = Pointer[U8]
-  var value: Pointer[U8] = Pointer[U8]
-  var refDecl: NullablePointer[XmlSchemaElement] = NullablePointer[XmlSchemaElement].none()
-  var contModel: NullablePointer[XmlRegexp] = NullablePointer[XmlRegexp].none()
-  var contentType: I32 = I32(0)
-  var refPrefix: Pointer[U8] = Pointer[U8]
-  var defVal: NullablePointer[XmlSchemaVal] = NullablePointer[XmlSchemaVal].none()
-  var idcs: Pointer[None] = Pointer[None]
+struct _XmlSchemaElement
 
 
 /*
@@ -2111,12 +1476,7 @@ struct XmlSchemaElement
      000192: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: identifier  
      000256: [PointerType size=64]->[FundamentalType(unsigned char) size=8]: targetNamespace  
 */
-struct XmlSchemaNotation
-  var xmltype: I32 = I32(0)
-  var name: Pointer[U8] = Pointer[U8]
-  var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var identifier: Pointer[U8] = Pointer[U8]
-  var targetNamespace: Pointer[U8] = Pointer[U8]
+struct _XmlSchemaNotation
 
 
 /*
@@ -2148,28 +1508,7 @@ struct XmlSchemaNotation
      001152: [PointerType size=64]->[Struct size=,fid: f23]: idcDef  
      001216: [PointerType size=64]->[FundamentalType(void) size=0]: volatiles  
 */
-struct XmlSchema
-  var name: Pointer[U8] = Pointer[U8]
-  var targetNamespace: Pointer[U8] = Pointer[U8]
-  var version: Pointer[U8] = Pointer[U8]
-  var id: Pointer[U8] = Pointer[U8]
-  var doc: NullablePointer[XmlDocS] = NullablePointer[XmlDocS].none()
-  var annot: NullablePointer[XmlSchemaAnnot] = NullablePointer[XmlSchemaAnnot].none()
-  var flags: I32 = I32(0)
-  var typeDecl: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var attrDecl: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var attrgrpDecl: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var elemDecl: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var notaDecl: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var schemasImports: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var _private: Pointer[None] = Pointer[None]
-  var groupDecl: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var dict: NullablePointer[XmlDict] = NullablePointer[XmlDict].none()
-  var includes: Pointer[None] = Pointer[None]
-  var preserve: I32 = I32(0)
-  var counter: I32 = I32(0)
-  var idcDef: NullablePointer[XmlHashTable] = NullablePointer[XmlHashTable].none()
-  var volatiles: Pointer[None] = Pointer[None]
+struct _XmlSchema
 
 
 /*
@@ -2180,7 +1519,7 @@ struct XmlSchema
 
   Fields (Offset in bits):
 */
-struct XmlSchematron
+struct _XmlSchematron
 
 
 /*
@@ -2191,7 +1530,7 @@ struct XmlSchematron
 
   Fields (Offset in bits):
 */
-struct XmlSchematronParserCtxt
+struct _XmlSchematronParserCtxt
 
 
 /*
@@ -2202,7 +1541,7 @@ struct XmlSchematronParserCtxt
 
   Fields (Offset in bits):
 */
-struct XmlSchematronValidCtxt
+struct _XmlSchematronValidCtxt
 
 
 /*
@@ -2224,18 +1563,7 @@ struct XmlSchematronValidCtxt
      000576: [FundamentalType(int) size=32]: cleanup  
      000640: [PointerType size=64]->[FundamentalType(char) size=8]: query_raw  
 */
-struct XmlURI
-  var scheme: Pointer[U8] = Pointer[U8]
-  var opaque: Pointer[U8] = Pointer[U8]
-  var authority: Pointer[U8] = Pointer[U8]
-  var server: Pointer[U8] = Pointer[U8]
-  var user: Pointer[U8] = Pointer[U8]
-  var port: I32 = I32(0)
-  var path: Pointer[U8] = Pointer[U8]
-  var query: Pointer[U8] = Pointer[U8]
-  var fragment: Pointer[U8] = Pointer[U8]
-  var cleanup: I32 = I32(0)
-  var query_raw: Pointer[U8] = Pointer[U8]
+struct _XmlURI
 
 
 /*
@@ -2246,7 +1574,7 @@ struct XmlURI
 
   Fields (Offset in bits):
 */
-struct XmlXIncludeCtxt
+struct _XmlXIncludeCtxt
 
 
 /*
@@ -2257,7 +1585,7 @@ struct XmlXIncludeCtxt
 
   Fields (Offset in bits):
 */
-struct XmlModule
+struct _XmlModule
 
 
 /*
@@ -2268,7 +1596,7 @@ struct XmlModule
 
   Fields (Offset in bits):
 */
-struct XmlSchemaParserCtxt
+struct _XmlSchemaParserCtxt
 
 
 /*
@@ -2279,7 +1607,7 @@ struct XmlSchemaParserCtxt
 
   Fields (Offset in bits):
 */
-struct XmlSchemaValidCtxt
+struct _XmlSchemaValidCtxt
 
 
 /*
@@ -2290,7 +1618,7 @@ struct XmlSchemaValidCtxt
 
   Fields (Offset in bits):
 */
-struct XmlSchemaSAXPlug
+struct _XmlSchemaSAXPlug
 
 
 /*
@@ -2301,7 +1629,7 @@ struct XmlSchemaSAXPlug
 
   Fields (Offset in bits):
 */
-struct XmlTextReader
+struct _XmlTextReader
 
 
 /*
@@ -2312,7 +1640,7 @@ struct XmlTextReader
 
   Fields (Offset in bits):
 */
-struct XmlSaveCtxt
+struct _XmlSaveCtxt
 
 
 /*
@@ -2323,7 +1651,7 @@ struct XmlSaveCtxt
 
   Fields (Offset in bits):
 */
-struct XmlTextWriter
+struct _XmlTextWriter
 
 
 /*
@@ -2337,7 +1665,4 @@ struct XmlTextWriter
      000032: [FundamentalType(int) size=32]: locMax  
      000064: [PointerType size=64]->[PointerType size=64]->[Struct size=576,fid: f66]: locTab  
 */
-struct XmlLocationSet
-  var locNr: I32 = I32(0)
-  var locMax: I32 = I32(0)
-  var locTab: Pointer[NullablePointer[XmlXPathObject]] = Pointer[NullablePointer[XmlXPathObject]]
+struct _XmlLocationSet

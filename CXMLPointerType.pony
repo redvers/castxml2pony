@@ -49,7 +49,7 @@ class CXMLPointerType
         Debug.out("PASSBACK: " + cxmltype + id + " " + ponytype)
 			 	return ponytype
       elseif (ponytype.substring(0,15) == "NullablePointer") then
-        ponytype = "Array[" + ponytype + "]"
+        ponytype = "Pointer[" + ponytype + "]"
         return ponytype
       else
           ponytype = "NullablePointer[" + ponytype + "]"

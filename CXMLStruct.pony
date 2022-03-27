@@ -26,6 +26,7 @@ class CXMLStruct
     members = xml2node.getProp("members").split()
 
     if (name == "") then name = "Anon" end
+    name = "_" + xml2node.getProp("name")
     if (xml2node.getProp("incomplete") == "1") then incomplete = true end
 
   fun ref recurseType(itypemap: Map[String, CXMLCastType], id: String): String =>
@@ -41,7 +42,7 @@ class CXMLStruct
     t.replace("_", "")
     (var f: String iso, var r: String iso) = t.clone().chop(USize(1))
     f.upper_in_place()
-    f.clone() + r.clone()
+    "_" + f.clone() + r.clone()
 
   fun ponyMemberName(text: String val): String =>
     var t: String iso = text.clone()
