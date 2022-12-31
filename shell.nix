@@ -1,16 +1,18 @@
 with import <nixpkgs> {} ;
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    enlightenment.efl
+    libressl_3_5
+    sqlite
+    libpcap
     saxon-he
-    glfw
-    clang_9
-    llvm_9
-    lldb_9
-    saxon-he
-    gobject-introspection
+#    jq
+#    mkdocs
+#    cmake
+#    libpcap
+#    ponyc
+#    pony-corral
+#    stdenv
     castxml
-    libffi
     file
     pkg-config
     libzip
@@ -18,13 +20,21 @@ pkgs.mkShell {
     erlang
     SDL2
     cairo
-    glib
-    gtk3
-    libxslt
-    saxon
-    gtk4
-    vulkan-loader
-    vulkan-headers
+    libsodium
+    libllvm
+#    gobject-introspection
+#    glib
+#    gtk4
+#    elixir
+#    erlang
+#    lldb_7
+#    atk
+#    gnum4
+#    gnome3.libsoup
+#    castxml
+#    pcre
+#    gnome3.gtkhtml
+#    enchant
 #    gnome3.webkitgtk
     libxml2
 #    protobufc

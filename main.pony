@@ -432,7 +432,7 @@ actor Main
     if (structname == "") then
       error
     else
-      ("  <struct name=\"_"
+      ("  <struct name=\""
         + structname +
         "\" id=\"" + id +
         "\" size=\"" + ssize +
@@ -622,7 +622,8 @@ actor Main
                    "structtype=\"" + f + "\" " +
                    "structdef=\"" + f + "(0)\" " +
                    "argtype=\"" + f + "\" " +
-                   "rvtype=\"" + f + "\"/>"
+                   "rvtype=\"" + f + "\" " +
+                   "decl=\"  var \"/>"
                   )
       elseif (f.substring(0,15) == "NullablePointer") then
       deprefs.push("<typedef name=\"" + f + "\" " +
@@ -632,7 +633,8 @@ actor Main
                    "structtype=\"" + f + "\" " +
                    "structdef=\"" + f + ".none()\" " +
                    "argtype=\"" + f + " tag\" " +
-                   "rvtype=\"" + f + "\"/>"
+                   "rvtype=\"" + f + "\" " +
+                   "decl=\"  var \"/>"
                   )
       elseif (f.substring(0,7) == "Pointer") then
       deprefs.push("<typedef name=\"" + f + "\" " +
@@ -642,7 +644,8 @@ actor Main
                    "structtype=\"" + f + "\" " +
                    "structdef=\"" + f + "\" " +
                    "argtype=\"" + f + " tag\" " +
-                   "rvtype=\"" + f + "\"/>"
+                   "rvtype=\"" + f + "\" " +
+                   "decl=\"  var \"/>"
                   )
       else
       deprefs.push("<typedef name=\"" + f + "\" " +
@@ -652,7 +655,8 @@ actor Main
                    "structtype=\"" + f + "\" " +
                    "structdef=\"" + f + "\" " +
                    "argtype=\"" + f + " tag\" " +
-                   "rvtype=\"" + f + "\"/>"
+                   "rvtype=\"" + f + "\" " +
+                   "decl=\"  embed \"/>"
                   )
       end
     end

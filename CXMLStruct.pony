@@ -42,7 +42,7 @@ class CXMLStruct
     t.replace("_", "")
     (var f: String iso, var r: String iso) = t.clone().chop(USize(1))
     f.upper_in_place()
-    "_" + f.clone() + r.clone()
+    "" + f.clone() + r.clone()
 
   fun ponyMemberName(text: String val): String =>
     var t: String iso = text.clone()
